@@ -1,0 +1,39 @@
+[
+  {
+    "fixture": "tobu_normal.xml",
+    "url": "https://www.tobu.co.jp/file/trainop/trainop.xml",
+    "original_sha256": "bb7e62de38d2097841a1daf5cb74dfba23e8cf2557c33a85b56ede071c5d9bf4",
+    "fixture_sha256": "bb7e62de38d2097841a1daf5cb74dfba23e8cf2557c33a85b56ede071c5d9bf4",
+    "fetched_at_utc": "2026-11-02T02:30:25.035664+00:00"
+  },
+  {
+    "fixture": "tobu_page.html",
+    "url": "https://www.tobu.co.jp/service_status/",
+    "original_sha256": "212c3cc73b53084288dda88bcc040f3e012bc03499f7c9295e3078554fe4aa93",
+    "fixture_sha256": "42cc4670a63d2af237f92988e0d975dcf89c5c6b900cb414c48ebdf0fcb0b54a",
+    "fetched_at_utc": "2026-11-02T02:27:49.746021+00:00"
+  },
+  {
+    "fixture": "tobu_official_script.js",
+    "url": "https://www.tobu.co.jp/_assets/js/bundle.js",
+    "original_sha256": "db247826ba14ef35604787f7be594082b452676c6f4967cfa70aad654b52c2b8",
+    "fixture_sha256": "e1c82229de004133967e57c55048f84e0f31633ed0557955aeadb41db36cac37",
+    "fetched_at_utc": "2026-11-02T02:29:30.017075+00:00"
+  },
+  {
+    "fixture": "tobu_20240816070042.xml",
+    "url": "https://www.tobu.co.jp/file/trainop/trainop.xml?dt=1348090380000",
+    "archive_url": "https://web.archive.org/web/20240816070042id_/https://www.tobu.co.jp/file/trainop/trainop.xml?dt=1348090380000",
+    "capture_time_utc": "2024-08-16T07:00:42+00:00",
+    "original_sha256": "d174320b2f960f99c56feab39e569c05541e7ab8c8bd2c6e99166d763cdc8c2c",
+    "fixture_sha256": "d174320b2f960f99c56feab39e569c05541e7ab8c8bd2c6e99166d763cdc8c2c"
+  },
+  {
+    "fixture": "tobu_20240827122946.xml",
+    "url": "https://www.tobu.co.jp/file/trainop/trainop.xml?dt=1440540660000",
+    "archive_url": "https://web.archive.org/web/20240827122946id_/https://www.tobu.co.jp/file/trainop/trainop.xml?dt=1440540660000",
+    "capture_time_utc": "2024-08-27T12:29:46+00:00",
+    "original_sha256": "29e7baa0982040534ce9861477deb6924608542a7d8c12281dd742fedbc0c5fb",
+    "fixture_sha256": "29e7baa0982040534ce9861477deb6924608542a7d8c12281dd742fedbc0c5fb"
+  }
+]

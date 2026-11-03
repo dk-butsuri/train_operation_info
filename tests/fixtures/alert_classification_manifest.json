@@ -1,0 +1,8 @@
+{
+  "file": "jrw_announcements_20261102.json",
+  "source_url": "https://trafficinfo.westjr.co.jp/api/v1/trafficinfo.json",
+  "retrieved_at_utc": "2026-11-02T05:19:40.157769Z",
+  "raw_sha256": "e3ee67493bc5b322fbf959ff44f80b25e5db692d3bcec8d9df89d92971050929",
+  "fixture_sha256": "e3ee67493bc5b322fbf959ff44f80b25e5db692d3bcec8d9df89d92971050929",
+  "extraction": "Unmodified decoded HTTP response bytes from live comparison capture; no edited labels or times."
+}

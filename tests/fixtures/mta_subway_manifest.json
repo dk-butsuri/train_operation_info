@@ -1,0 +1,28 @@
+[
+  {
+    "fixture": "mta_subway_alerts_20261103033316.pb",
+    "url": "https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/camsys%2Fsubway-alerts",
+    "captured_at": "2026-11-03T03:33:16+00:00",
+    "original_sha256": "2b323e5b723d6f97be01ce185c7c62a790b9e5b2e92319c28016ff7a330aa378",
+    "fixture_sha256": "2b323e5b723d6f97be01ce185c7c62a790b9e5b2e92319c28016ff7a330aa378",
+    "method": "HTTP GET (curl, no API key); original response bytes, no transformation",
+    "content_type": "application/x-protobuf",
+    "feed_header_timestamp": "2026-11-03T03:02:19+00:00",
+    "entities": 180,
+    "planned_work_entities": 178,
+    "unplanned_entities": ["lmm:alert:274643:26 (F, G)", "lmm:alert:274645:29 (B, Q)"]
+  },
+  {
+    "fixture": "mta_subway_alerts_20261103045354.pb",
+    "url": "https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/camsys%2Fsubway-alerts",
+    "captured_at": "2026-11-03T04:53:54+00:00",
+    "original_sha256": "1e0439229c708d4352a25f5689f86c673d6a0f2ab0275227117471e874f57bcb",
+    "fixture_sha256": "1e0439229c708d4352a25f5689f86c673d6a0f2ab0275227117471e874f57bcb",
+    "method": "HTTP GET (curl, no API key); original response bytes, no transformation",
+    "content_type": "application/x-protobuf",
+    "feed_header_timestamp": "2026-11-03T04:46:35+00:00",
+    "entities": 181,
+    "planned_work_entities": 178,
+    "unplanned_entities": ["lmm:alert:274645:26 (Q)", "lmm:alert:274654:26 (3)", "lmm:alert:274655:26 (E)"]
+  }
+]

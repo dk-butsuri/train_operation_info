@@ -1,0 +1,85 @@
+[
+  {
+    "url": "https://www.mm21railway.co.jp/service/",
+    "retrieved_at": "2026-11-02T05:35:27.487219+00:00",
+    "sha256": "3eefdea75acf3c431649c28d82c59c34f12d0665a756b187f7c51d79b28f208d",
+    "path": "reports\\minatomirai_page.txt",
+    "fixture": "minatomirai_normal.html",
+    "fixture_sha256": "5387fd50214806af00b5425d0a5af231029acc29f274bbf34b51001ed7d44fbe",
+    "transformation": "BeautifulSoup html.parser; serialize .service_information to UTF-8 with final newline"
+  },
+  {
+    "url": "https://www.mm21railway.co.jp/info/sitepolicy.html",
+    "retrieved_at": "2026-11-02T05:35:27.499749+00:00",
+    "sha256": "69e9370c268ff253816f9d7fe242b4f89926982d5d104bc6769cec5d5745c812",
+    "path": "reports\\minatomirai_policy.txt"
+  },
+  {
+    "url": "https://www.mm21railway.co.jp/common/js/common.js",
+    "retrieved_at": "2026-11-02T05:35:27.483383+00:00",
+    "sha256": "09d33a320b96e2ddbe1685ed0d9ed81a46fd3fce8f9b8b1eb36aa668d731556a",
+    "path": "reports\\minatomirai_common.txt"
+  },
+  {
+    "url": "https://www.mm21railway.co.jp/service/css/index.css",
+    "retrieved_at": "2026-11-02T05:35:27.477413+00:00",
+    "sha256": "40510a49a9dcbef23ad81c0bcb227a3dc39a7f0dc0dc10e4cf077ad8e0c545fe",
+    "path": "reports\\minatomirai_css.txt"
+  },
+  {
+    "url": "https://web.archive.org/cdx/search/cdx?url=www.mm21railway.co.jp/service/&output=json&filter=statuscode:200&collapse=digest",
+    "retrieved_at": "2026-11-02T05:35:27.915634+00:00",
+    "sha256": "f844f82ee6b479b06e8c8e89e65ba91dbee982dee19986357f69cfcf477c403a",
+    "path": "reports\\minatomirai_cdx.txt"
+  },
+  {
+    "url": "https://web.archive.org/web/20160920120337id_/http://www.mm21railway.co.jp/service/",
+    "archive_timestamp_utc": "20160920120337",
+    "retrieved_at": "2026-11-02T05:35:44.818199+00:00",
+    "sha256": "a0d971024577dd875612091138078b54f5a1c9aa54ca874065e317d801e04d91",
+    "path": "reports\\minatomirai_20160920120337.html",
+    "fixture": "minatomirai_20160920120337.html",
+    "fixture_sha256": "259fa091b743eb4211c51b4de496839aaf2191169451bb1bd840b3e7bdfa6784",
+    "transformation": "BeautifulSoup html.parser; serialize .service_information to UTF-8 with final newline"
+  },
+  {
+    "url": "https://web.archive.org/web/20180122144419id_/http://www.mm21railway.co.jp/service/",
+    "archive_timestamp_utc": "20180122144419",
+    "retrieved_at": "2026-11-02T05:35:47.117083+00:00",
+    "sha256": "8bee004b8fbc965d9185d324186d6924cfef0e619fcb6b523f5a6d3ade005497",
+    "path": "reports\\minatomirai_20180122144419.html",
+    "fixture": "minatomirai_20180122144419.html",
+    "fixture_sha256": "b6e193128af27dbf3186694c584f18572477a2d044aab5ac82d17a752b00b4b2",
+    "transformation": "BeautifulSoup html.parser; serialize .service_information to UTF-8 with final newline"
+  },
+  {
+    "url": "https://web.archive.org/web/20191011232736id_/http://www.mm21railway.co.jp/service/",
+    "archive_timestamp_utc": "20191011232736",
+    "retrieved_at": "2026-11-02T05:35:45.349507+00:00",
+    "sha256": "de9ae70f4f5811163e7daad00d8b0e7014132b0fd335f3d13ee719595efb9e30",
+    "path": "reports\\minatomirai_20191011232736.html",
+    "fixture": "minatomirai_20191011232736.html",
+    "fixture_sha256": "29c7efb3bc67b42f2159e6f0823ce8d76624378cb4f1fbce53f1961a6ff7008e",
+    "transformation": "BeautifulSoup html.parser; serialize .service_information to UTF-8 with final newline"
+  },
+  {
+    "url": "https://web.archive.org/web/20191012171120id_/http://www.mm21railway.co.jp/service/",
+    "archive_timestamp_utc": "20191012171120",
+    "retrieved_at": "2026-11-02T05:35:46.023377+00:00",
+    "sha256": "dcbcb7c914cdd0ed826470bf38aecf4fb6da07e6cd0374ab3c5deba5a73951ee",
+    "path": "reports\\minatomirai_20191012171120.html",
+    "fixture": "minatomirai_20191012171120.html",
+    "fixture_sha256": "f541abf732c909cfebe4afa9f08362ef426795db6a8600f429329e28ff910487",
+    "transformation": "BeautifulSoup html.parser; serialize .service_information to UTF-8 with final newline"
+  },
+  {
+    "url": "https://web.archive.org/web/20221216085310id_/http://www.mm21railway.co.jp/service/",
+    "archive_timestamp_utc": "20221216085310",
+    "retrieved_at": "2026-11-02T05:35:47.730843+00:00",
+    "sha256": "d869c279b5b058a9341aed1e1af179e4e2d97d4e7b6071a4cd1adf8ceedce954",
+    "path": "reports\\minatomirai_20221216085310.html",
+    "fixture": "minatomirai_20221216085310.html",
+    "fixture_sha256": "751287fc533ab38c6e5c4c81f1fe877190ff78c489cf0cb609b28e0311b6fcc2",
+    "transformation": "BeautifulSoup html.parser; serialize .service_information to UTF-8 with final newline"
+  }
+]

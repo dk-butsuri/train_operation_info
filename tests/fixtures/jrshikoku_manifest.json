@@ -1,0 +1,52 @@
+[
+  {
+    "file": "jrshikoku_normal.html",
+    "source_url": "https://www.jr-shikoku.co.jp/info/index.html",
+    "replay_url": null,
+    "archive_timestamp_utc": null,
+    "retrieved_at_utc": "2026-11-02T02:16:23.729930+00:00",
+    "raw_sha256": "31dd5b14b952415ec12ef7194ad833ebeac0771e22bba04f5c7e3488e6a98e60",
+    "fixture_sha256": "b6338af1c46abea3573277ea8d26e2aea7a872c944198fe6f874dd4f854c68d6",
+    "extraction": "BeautifulSoup html.parser: serialize .delay_status, .mapbase, .delay_info as UTF-8, with doctype and meta charset."
+  },
+  {
+    "file": "jrshikoku_20250216210138.html",
+    "source_url": "https://www.jr-shikoku.co.jp/info/index.html",
+    "replay_url": "https://web.archive.org/web/20250216210138id_/https://www.jr-shikoku.co.jp/info/index.html",
+    "archive_timestamp_utc": "2025-02-16T21:01:38+00:00",
+    "retrieved_at_utc": "2026-11-02T02:17:02.687662+00:00",
+    "raw_sha256": "6da4608ac101d240c0ce67ae621355854f9d8990e450b39e75d315ab9f1c79a4",
+    "fixture_sha256": "270e277fcb7d63d3cabc7699d37e6cc24a78a122bdc8a7b110826dbf74da3ee5",
+    "extraction": "BeautifulSoup html.parser: serialize .delay_status, .mapbase, .delay_info as UTF-8, with doctype and meta charset."
+  },
+  {
+    "file": "jrshikoku_20260712052626.html",
+    "source_url": "https://www.jr-shikoku.co.jp/info/index.html",
+    "replay_url": "https://web.archive.org/web/20260712052626id_/https://www.jr-shikoku.co.jp/info/index.html",
+    "archive_timestamp_utc": "2026-07-12T05:26:26+00:00",
+    "retrieved_at_utc": "2026-11-02T02:17:04.285123+00:00",
+    "raw_sha256": "64114d7ba88af8b86390d4c36cac73b81f5a69a4d85a75d84f2576ce61c5adca",
+    "fixture_sha256": "52a37c4a8958de44c6b7c137af83d8cdf5514fdf25abb14fca30abf2063fff6e",
+    "extraction": "BeautifulSoup html.parser: serialize .delay_status, .mapbase, .delay_info as UTF-8, with doctype and meta charset."
+  },
+  {
+    "file": "jrshikoku_20240621132151.html",
+    "source_url": "https://www.jr-shikoku.co.jp/info/index.html",
+    "replay_url": "https://web.archive.org/web/20240621132151id_/https://www.jr-shikoku.co.jp/info/index.html",
+    "archive_timestamp_utc": "2024-06-21T13:21:51+00:00",
+    "retrieved_at_utc": "2026-11-02T02:17:00.207869+00:00",
+    "raw_sha256": "07e587a6955834aafe2dc82e42679c3a409914519f86b8aa8aa7efbb904fba01",
+    "fixture_sha256": "7437d9522d6b1810a420ed6385a383349b52d7d4beb6cddbe7e0747b8a6ef0dd",
+    "extraction": "BeautifulSoup html.parser: serialize .delay_status, .mapbase, .delay_info as UTF-8, with doctype and meta charset."
+  },
+  {
+    "file": "jrshikoku_20260116145742.html",
+    "source_url": "https://www.jr-shikoku.co.jp/info/index.html",
+    "replay_url": "https://web.archive.org/web/20260116145742id_/https://www.jr-shikoku.co.jp/info/index.html",
+    "archive_timestamp_utc": "2026-01-16T14:57:42+00:00",
+    "retrieved_at_utc": "2026-11-02T02:17:03.907254+00:00",
+    "raw_sha256": "059714b9652de4e48b8daf1c9bfeee3fbe2fec888b34bee9e28d5fb3b8760baf",
+    "fixture_sha256": "6ee2d82417148e081c665653bf715f9f70a082464b70a5db9fecb39e92c3f2d8",
+    "extraction": "BeautifulSoup html.parser: serialize .delay_status, .mapbase, .delay_info as UTF-8, with doctype and meta charset."
+  }
+]

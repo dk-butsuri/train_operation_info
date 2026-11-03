@@ -1,0 +1,106 @@
+[
+  {
+    "url": "https://www.transilien.com/api/traffic/line/RER_C?lang=fr",
+    "fetched_at": "2026-11-03T03:37:16.343447+00:00",
+    "sha256": "db8dba36df376b08e23eb6d583742f5737bcf5354e28dbb9d774d7358505ee86",
+    "fixture": "transilien_rer_c.json"
+  },
+  {
+    "url": "https://www.transilien.com/api/traffic/line/RER_D?lang=fr",
+    "fetched_at": "2026-11-03T03:37:17.646528+00:00",
+    "sha256": "0c25bd78356d470137731dac85400b866476bb9ba488b7a06f34a1251d46b4c6",
+    "fixture": "transilien_rer_d.json"
+  },
+  {
+    "url": "https://www.transilien.com/api/traffic/line/RER_E?lang=fr",
+    "fetched_at": "2026-11-03T03:37:16.326042+00:00",
+    "sha256": "e0f024e7c91d860f5a80b546aba81c29b9127ddde836e5013549fb410d81e4a8",
+    "fixture": "transilien_rer_e.json"
+  },
+  {
+    "url": "https://www.transilien.com/api/traffic/line/LIGNE_H?lang=fr",
+    "fetched_at": "2026-11-03T03:37:17.601302+00:00",
+    "sha256": "8c75f7bbd80091d2196120a135112e80d734816c15de4faa57ca5d80a541af6d",
+    "fixture": "transilien_ligne_h.json"
+  },
+  {
+    "url": "https://www.transilien.com/api/traffic/line/LIGNE_J?lang=fr",
+    "fetched_at": "2026-11-03T03:37:18.232910+00:00",
+    "sha256": "5cec6c6a1725066e575ffddd08c85acdbb081e6458dd610226875193283cf159",
+    "fixture": "transilien_ligne_j.json"
+  },
+  {
+    "url": "https://www.transilien.com/api/traffic/line/LIGNE_K?lang=fr",
+    "fetched_at": "2026-11-03T03:37:18.334392+00:00",
+    "sha256": "3f0f7d34f329d9a05238bcec82768ff8d7b72ca368b566faa4f7ff649c685ed1",
+    "fixture": "transilien_ligne_k.json"
+  },
+  {
+    "url": "https://www.transilien.com/api/traffic/line/LIGNE_L?lang=fr",
+    "fetched_at": "2026-11-03T03:37:18.799844+00:00",
+    "sha256": "643b6139efae0fc527dbf323a8709958ec715f42fe3f8b3fa28c63dfe3f59b70",
+    "fixture": "transilien_ligne_l.json"
+  },
+  {
+    "url": "https://www.transilien.com/api/traffic/line/LIGNE_N?lang=fr",
+    "fetched_at": "2026-11-03T03:37:19.885683+00:00",
+    "sha256": "b644dc3b8cb34f38340a11bbe969532a23f3b43503bb87a4a2cff173a1653254",
+    "fixture": "transilien_ligne_n.json"
+  },
+  {
+    "url": "https://www.transilien.com/api/traffic/line/LIGNE_P?lang=fr",
+    "fetched_at": "2026-11-03T03:37:20.201893+00:00",
+    "sha256": "cb3debfe1ef81cc2450b4a85ce1f168ab55a29ba9f13f1ec3009b3e4f39adbf8",
+    "fixture": "transilien_ligne_p.json"
+  },
+  {
+    "url": "https://www.transilien.com/api/traffic/line/LIGNE_R?lang=fr",
+    "fetched_at": "2026-11-03T03:37:19.565160+00:00",
+    "sha256": "91a508dd7bb2dcd0665f7622ea657c96694529e21eb1f992b503b2f03118e9cf",
+    "fixture": "transilien_ligne_r.json"
+  },
+  {
+    "url": "https://www.transilien.com/api/traffic/line/LIGNE_U?lang=fr",
+    "fetched_at": "2026-11-03T03:37:20.709964+00:00",
+    "sha256": "ad53393c723bbf975bf340ee473ebc606f56e4f2ea1e66c739a5e5f38996c7dd",
+    "fixture": "transilien_ligne_u.json"
+  },
+  {
+    "url": "https://www.transilien.com/api/traffic/line/LIGNE_V?lang=fr",
+    "fetched_at": "2026-11-03T03:37:20.771897+00:00",
+    "sha256": "96b9b03798eed37954ca939e450d56b0b285b64917465da436098c5e37787d1c",
+    "fixture": "transilien_ligne_v.json"
+  },
+  {
+    "url": "https://www.transilien.com/api/traffic/infos",
+    "fetched_at": "2026-11-03T03:37:59.080653+00:00",
+    "sha256": "af28d2bf75d11df0ac00e20951f6064578aadfc697534640ec777af2d4052979",
+    "fixture": "transilien_summary.json",
+    "fixture_sha256": "af28d2bf75d11df0ac00e20951f6064578aadfc697534640ec777af2d4052979",
+    "extraction": "Unmodified HTTP response bytes."
+  },
+  {
+    "url": "https://www.transilien.com/tricharte/js/component-traffic-info.bundle.js?v=52612",
+    "fetched_at": "2026-11-03T03:37:59.860317+00:00",
+    "sha256": "7e44195072df9ed95e271c083b72155fa45003450a891434f9a8efb0413ba26c",
+    "fixture": "transilien_public_script.js",
+    "fixture_sha256": "1775589c5dde1e4672099afd696e0bd54b9b499c46ddf51957556f0dd72ff0b7",
+    "extraction": "Noncontiguous unmodified substrings of official JS around API URLs, current-list display, severity icon labels and MISSING_CURRENT checks; separators added."
+  },
+  {
+    "url": "https://www.transilien.com/fr/page-editoriale/conditions-generales-dutilisation",
+    "fetched_at": "2026-11-03T03:38:01.234788+00:00",
+    "sha256": "1dbce956b51ea4236daa2513ec700d622431239528eeebedcf32712caec016f6",
+    "fixture": "transilien_terms.txt",
+    "fixture_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "extraction": "BeautifulSoup visible-text extraction of intellectual-property paragraph (first 1200 characters)."
+  },
+  {
+    "url": "https://www.transilien.com/fr",
+    "fetched_at": "2026-11-03T03:38:02.236035+00:00",
+    "sha256": "538db1da9e69a62f0c5266b53a70d023e3b6d5a904cb4049244fa690be67d288",
+    "fixture": "transilien_home.html",
+    "fixture_sha256": "6319a045abb45234411382d5d9d2accf8dd5bfcf2bf93e9831b033be8470097b",
+    "extraction": "Serialized traffic-info-app mount point and its official component script tag only."
+  }
+]

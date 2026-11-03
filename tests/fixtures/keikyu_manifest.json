@@ -1,0 +1,51 @@
+[
+  {
+    "name": "normal",
+    "source_url": "https://unkou.keikyu.co.jp/",
+    "final_url": "https://unkou.keikyu.co.jp/",
+    "status_code": 200,
+    "retrieved_at": "2026-11-03T03:35:05.991921+00:00",
+    "original_sha256": "8d691644b9279a158f2c7a0131ce2da1193225c09c220c790f127e1b0c13c1c0",
+    "path": "reports/keikyu_live_page.html",
+    "fixture": "keikyu_normal.html",
+    "fixture_sha256": "12794416b054ffeb2e260de04b3829fb2fc4f24362868345e2147f921e8ef059",
+    "capture_utc": null,
+    "extraction": "Manually copied the h1.heading_title element and the single dl.index_unit block (dt update timestamp, dd message, trailing empty dd) verbatim from the live response; unrelated navigation/footer markup removed."
+  },
+  {
+    "name": "delay_20220713030847",
+    "source_url": "http://unkou.keikyu.co.jp/",
+    "final_url": "https://web.archive.org/web/20220713030847id_/https://unkou.keikyu.co.jp/",
+    "status_code": 200,
+    "retrieved_at": "2026-11-03T03:41:00+00:00",
+    "capture_utc": "20220713030847",
+    "original_sha256": "8a8086137f0e65f3b93390564d6542451e265cad9640ffd43f0e7bd8f8456031",
+    "path": "reports/keikyu_wayback/20220713030847.html",
+    "fixture": "keikyu_20220713030847.html",
+    "fixture_sha256": "d3de7bc0a5236df9dcd82ce668e4e080a9db6f717510af0de78097574ef3369c",
+    "extraction": "Manually copied the h1.heading_title element and the single dl.index_unit block verbatim (delay prose plus a 【遅延】 detail paragraph, trailing empty dd); unrelated navigation/footer markup removed."
+  },
+  {
+    "name": "suspension_20250730013943",
+    "source_url": "https://unkou.keikyu.co.jp/",
+    "final_url": "https://web.archive.org/web/20250730013943id_/https://unkou.keikyu.co.jp/",
+    "status_code": 200,
+    "retrieved_at": "2026-11-03T03:41:05+00:00",
+    "capture_utc": "20250730013943",
+    "original_sha256": "0cac25eb5fc5d37bd7a988d0c0013870adf49199821bcffdbd91f40107c291b6",
+    "path": "reports/keikyu_wayback/20250730013943.html",
+    "fixture": "keikyu_20250730013943.html",
+    "fixture_sha256": "3a39768b2170583fefd7aca91c10db32618877c9f63f607858bce6c4cc2a0fab",
+    "extraction": "Manually copied the h1.heading_title element and the single dl.index_unit block verbatim (tsunami-warning suspension prose naming two sections only, trailing empty dd); unrelated navigation/footer markup removed."
+  },
+  {
+    "name": "general_terms",
+    "source_url": "https://www.keikyu.co.jp/website-guide.html",
+    "final_url": "https://www.keikyu.co.jp/website-guide.html",
+    "status_code": 200,
+    "retrieved_at": "2026-11-03T03:45:36.656796+00:00",
+    "original_sha256": "187e17c7ecc05d9da833a690d5498f8abd985bbb054245f137474fe566306ef8",
+    "path": "reports/keikyu_terms.html",
+    "capture_utc": null
+  }
+]

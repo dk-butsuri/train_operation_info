@@ -1,0 +1,51 @@
+{
+  "retrieved_date_utc": "2026-11-02",
+  "items": [
+    {
+      "fixture": "keisei_normal.html",
+      "source": "https://www.keisei.co.jp/traininfo/index.php",
+      "original_sha256": "dd14eb9e7c0e4525d9220cdb427ef757749831e6474156a35f1c3a8655cbc8c6",
+      "fixture_sha256": "3aecb7a1bd4418962e8d89cebca41409fa27ac84f27b3350be91cd3869c97872"
+    },
+    {
+      "fixture": "keisei_20260415104003.html",
+      "source": "https://web.archive.org/web/20260415104003id_/https://www.keisei.co.jp/traininfo/index.php",
+      "original_sha256": "2a264241b17ebe9004c7ccddd7d30b79f0f75977a44c53b5d07394a0b076e019",
+      "fixture_sha256": "d9af776be06f91c6989093b881bad8ed08cd3365cc37a2e7651d13e7ba2027ae"
+    },
+    {
+      "fixture": "keisei_20260516001941.html",
+      "source": "https://web.archive.org/web/20260516001941id_/https://www.keisei.co.jp/traininfo/index.php",
+      "original_sha256": "f0fa44e88fd54ae0d4abb6287bd72f0ed5d9d2ef388511d5e122f4d24c924e1d",
+      "fixture_sha256": "309936798e6eb7b9aacfba14972b4bc0d1572f9b744ee02cc00e46f8ccb19b90"
+    },
+    {
+      "fixture": "keisei_20260813101347.html",
+      "source": "https://web.archive.org/web/20260813101347id_/https://www.keisei.co.jp/traininfo/index.php",
+      "original_sha256": "18476c77fecd7874230b1c4f3fb5b16d1a1f4fda79730c373b6cdc14523ee55b",
+      "fixture_sha256": "7619969caee4d8e9b66058945d7187030dd6eb85d3d56dc94c0e3269f7ef8445"
+    },
+    {
+      "fixture": "keisei_20261016114304.html",
+      "source": "https://web.archive.org/web/20261016114304id_/https://www.keisei.co.jp/traininfo/index.php",
+      "original_sha256": "d6a054d7ef2b57481f0bd3b1b11089e14307455ec76cbae863597b59c4a0421d",
+      "fixture_sha256": "198b468bd9db68320b8fa196a794ab38e47553ebbb6239c6533333d6e7e97d25"
+    },
+    {
+      "fixture": "keisei_20260903013656.html",
+      "source": "https://web.archive.org/web/20260903013656id_/https://www.keisei.co.jp/traininfo/index.php",
+      "original_sha256": "b1a4e1c95fc7047eab9bf4851fb9f6295bd5de4cf373fd7b99f852ca8382049d",
+      "fixture_sha256": "4450a6a074701d7a18c377fbb651cc69a1b920cbc51425537defa8ed9980d71c"
+    },
+    {
+      "fixture": "keisei_notice.js",
+      "source": "https://www.keisei.co.jp/traininfo/data/notice.js",
+      "original_sha256": "e35d0f31184b54a305fda08accfed04ccd7a612ae27bf266c9a5b52c6edf3f88"
+    },
+    {
+      "fixture": "keisei_kccmod.js",
+      "source": "https://www.keisei.co.jp/traininfo/data/kccmod.js",
+      "original_sha256": "d454b972c33488c32911517da5c9054e9ed1b8056941188e987565ddfb373362"
+    }
+  ]
+}

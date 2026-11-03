@@ -1,0 +1,53 @@
+{
+  "investigation": "Public official HTML/JavaScript/RSS inspection and unmodified archived official HTML",
+  "documents": [
+    {
+      "source_url": "https://www.unsereoebb.at/verkehrsmeldungen",
+      "retrieved_at_utc": "2026-11-03T03:35:41.849971+00:00",
+      "original_sha256": "bdcc974bcb4041438ffacbe92d94dd8e60672d73adb5efe2c348c42eb69da465",
+      "fixture": "obb_no_incidents_20261103.html",
+      "fixture_sha256": "4c7934996848e3fddf7821392ceaff48dc2aeb9ffbb615911ff6c3bee18fd085",
+      "extraction": "BeautifulSoup html.parser serialization of main; removed images, SVG, traffic footers, supplementary link sections, traffic image containers, social share and modal elements. All item types, headers, text descriptions, dates and modified labels retained."
+    },
+    {
+      "source_url": "https://www.unsereoebb.at/.resources/rcg-2019/themes/js/site.min~2026-10-27-13-29-25-000~cache.js",
+      "retrieved_at_utc": "2026-11-03T03:36:09.833277+00:00",
+      "original_sha256": "5bda4d28bc7d527d74cacd51365503c2c7305bbd4344aca661c65108f4f88a61",
+      "fixture": "obb_filter_script.js",
+      "fixture_sha256": "e8b1966c9c0398ff1e41ef68d2379e71f61decef1431e254ae823a6d5386edca",
+      "extraction": "Unchanged substring from class te{ through immediately before class se{: HTML type/state filtering, no-results rendering and official RSS URL generation."
+    },
+    {
+      "source_url": "https://holding.oebb.at/de/nutzungsbedingungen",
+      "retrieved_at_utc": "2026-11-03T03:36:08.163456+00:00",
+      "original_sha256": "2a856f648bc86af76d3621272f4f3b35fb228327cec3f276cf32e79257864c7d",
+      "extraction": "Reviewed section 3; no fixture saved."
+    },
+    {
+      "source_url": "https://www.unsereoebb.at/verkehrsmeldungen~type=streckeninfo~.xml",
+      "retrieved_at_utc": "2026-11-03T03:36:44.424826+00:00",
+      "original_sha256": "603be8a1e0cc3f81e9ae547b1addd81c4026f9038166d59d630c288c784164d4",
+      "extraction": "Reviewed unmodified empty incident-only channel as independent corroboration. Not consumed by provider; no fixture saved."
+    },
+    {
+      "source_url": "https://www.unsereoebb.at/de/verkehrsmeldungen",
+      "archive_url": "https://web.archive.org/web/20260314200213id_/https://www.unsereoebb.at/de/verkehrsmeldungen",
+      "captured_at_utc": "2026-03-14T20:02:13+00:00",
+      "retrieved_at_utc": "2026-11-03T03:38:24.800271+00:00",
+      "original_sha256": "6bec92fdebfbd273118827237f8711f5161c9845e8756b25d63e400b5ba7f5be",
+      "fixture": "obb_20260314200213.html",
+      "fixture_sha256": "7b646d3df9d86a1986bdbe460764f8034730fe6cf21a67cd7fb7611d90410b32",
+      "extraction": "BeautifulSoup html.parser serialization of main; removed images, SVG, traffic footers, supplementary link sections, traffic image containers, social share and modal elements. All item types, headers, text descriptions, dates and modified labels retained."
+    },
+    {
+      "source_url": "https://www.unsereoebb.at/de/verkehrsmeldungen",
+      "archive_url": "https://web.archive.org/web/20260717055055id_/https://www.unsereoebb.at/de/verkehrsmeldungen",
+      "captured_at_utc": "2026-07-17T05:50:55+00:00",
+      "retrieved_at_utc": "2026-11-03T03:38:26.255009+00:00",
+      "original_sha256": "21fd841dd303a5e87601178c19166013905f3d2b68ac6a58fa89246dbf7c9dd9",
+      "fixture": "obb_20260717055055.html",
+      "fixture_sha256": "2b677016f9f92d6a91d988e55e6630356997af938382050ac83b6a231cabce57",
+      "extraction": "BeautifulSoup html.parser serialization of main; removed images, SVG, traffic footers, supplementary link sections, traffic image containers, social share and modal elements. All item types, headers, text descriptions, dates and modified labels retained."
+    }
+  ]
+}

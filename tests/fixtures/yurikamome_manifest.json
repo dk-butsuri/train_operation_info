@@ -1,0 +1,42 @@
+[
+  {
+    "fixture": "yurikamome_normal.html",
+    "source_url": "https://cms-2.yurikamome.co.jp/api/operation/",
+    "archive_url": null,
+    "archive_timestamp_utc": null,
+    "fetched_at_utc": "2026-11-02T02:27:49.453941+00:00",
+    "extraction": "Unmodified response bytes",
+    "original_sha256": "c98640799ef5917853ab97e695313f17317c3200aad3ce8a8f03d1a91567582d",
+    "fixture_sha256": "c98640799ef5917853ab97e695313f17317c3200aad3ce8a8f03d1a91567582d"
+  },
+  {
+    "fixture": "yurikamome_20191003184453.html",
+    "source_url": "https://cms-2.yurikamome.co.jp/api/operation/",
+    "archive_url": "https://web.archive.org/web/20191003184453id_/https://cms-2.yurikamome.co.jp/api/operation/",
+    "archive_timestamp_utc": "2019-10-03T18:44:53+00:00",
+    "fetched_at_utc": "2026-11-02T02:28:05.807835+00:00",
+    "extraction": "Unmodified response bytes",
+    "original_sha256": "985aecf4f7f174b27c5d04a5a83c1e3bb2d2fc47836645a25cba8f240a73e878",
+    "fixture_sha256": "985aecf4f7f174b27c5d04a5a83c1e3bb2d2fc47836645a25cba8f240a73e878"
+  },
+  {
+    "fixture": "yurikamome_operation_script.js",
+    "source_url": "https://www.yurikamome.co.jp/assets/js/common.js?date=190718",
+    "fetched_at_utc": "2026-11-02T02:27:26.033267+00:00",
+    "extraction": "UTF-8 substring from the Japanese-language branch through the operation AJAX handler; stops before the delay-certificate list handler. Other script content omitted.",
+    "original_sha256": "fc7c0da788168b19d10d87ade90e19671dbfe422fc73348ab17483de73fad3cc",
+    "fixture_sha256": "85be890ba86b80503279c4af3265ce3ade787de295e1d33502fa292565495081"
+  },
+  {
+    "source_url": "https://www.yurikamome.co.jp/ride-guidance/operation.html",
+    "fetched_at_utc": "2026-11-02T02:27:13.329530+00:00",
+    "original_sha256": "54c1cfc147e7dbcdf28478c17b8162268e39c33e8fa7089d4468620699782235",
+    "extraction": "Reviewed only; no fixture copied"
+  },
+  {
+    "source_url": "https://www.yurikamome.co.jp/utility/policy.html",
+    "fetched_at_utc": "2026-11-02T02:27:26.074780+00:00",
+    "original_sha256": "7f55f17040fb1619db14dcd5aad5fb5c42d29fc4aacdb2bd87b1b3e781e75545",
+    "extraction": "Reviewed only; no fixture copied"
+  }
+]

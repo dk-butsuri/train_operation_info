@@ -1,0 +1,64 @@
+[
+  {
+    "file": "tokyo_metro_normal.json",
+    "url": "https://www.tokyometro.jp/library/common/operation/status.json",
+    "retrieved_at": "2026-11-02T05:27:23.777172+00:00",
+    "original_sha256": "59522f57366a1a275d0462e72c53bcd7228396b404affdf064520bd42ed36317",
+    "fixture_sha256": "4e0e2bae4cf0b95a4e149bba2f6052ac45f46c3911ff8244c51b7a8e5fb12820",
+    "extraction": "Retain jp only; values unchanged, JSON reserialized as UTF-8."
+  },
+  {
+    "file": "tokyo_metro_history_ginza.json",
+    "url": "https://www.tokyometro.jp/library/common/operation/history/ginza.json",
+    "retrieved_at": "2026-11-02T05:27:39.870943+00:00",
+    "original_sha256": "8d8c057faf8b135667b47601d6a10e2c3697fd8c032cda386102d0eb5aedb2f3",
+    "fixture_sha256": "e2dcbb79168bdcfed197745329e0b34764779b3c8148c68e2c286055f044a7b2",
+    "extraction": "Retain first entry for each distinct heading/normal text, preserving entry values and order. Evidence only, not a current status response."
+  },
+  {
+    "file": "tokyo_metro_history_touzai.json",
+    "url": "https://www.tokyometro.jp/library/common/operation/history/touzai.json",
+    "retrieved_at": "2026-11-02T05:27:39.889628+00:00",
+    "original_sha256": "6f981c09452d060847cfab36bf450db58f014d941297c753f98194c6cfe64309",
+    "fixture_sha256": "7c89ecdaecc6228c365d39e6ddc50c96343619d022364d257ddc5bb659dc0da8",
+    "extraction": "Retain first entry for each distinct heading/normal text, preserving entry values and order. Evidence only, not a current status response."
+  },
+  {
+    "file": "tokyo_metro_common.js",
+    "url": "https://www.tokyometro.jp/library/common/js/common.js",
+    "retrieved_at": "2026-11-02T05:27:10.652905+00:00",
+    "original_sha256": "ca95e170d4e7cc272c87fd41182d7e2883c2d8e06460c04dc0110804cf58fe5c",
+    "fixture_sha256": "212f3dda4c4a0ce4b7165e78e97f20ad46d8efd029fd9071f74afdbcb0255f96",
+    "extraction": "common.js lines 1642-1833 (status fetch and rendering); other scripts unchanged."
+  },
+  {
+    "file": "tokyo_metro_unkou_script.js",
+    "url": "https://www.tokyometro.jp/library/unkou/js/common.js",
+    "retrieved_at": "2026-11-02T05:27:23.874685+00:00",
+    "original_sha256": "ddb5ed76c87285f67f3717b2825ce740f57712e6a42b89bbc078dfa07703b8fe",
+    "fixture_sha256": "ddb5ed76c87285f67f3717b2825ce740f57712e6a42b89bbc078dfa07703b8fe",
+    "extraction": "Unmodified public JavaScript; evidence only."
+  },
+  {
+    "file": "tokyo_metro_history_script.js",
+    "url": "https://www.tokyometro.jp/library/unkou/js/operation_history.js",
+    "retrieved_at": "2026-11-02T05:27:23.908193+00:00",
+    "original_sha256": "2ed99beca0551abaea115407aadb6d3a422534edbc0e903056e179c69498de4e",
+    "fixture_sha256": "2ed99beca0551abaea115407aadb6d3a422534edbc0e903056e179c69498de4e",
+    "extraction": "Unmodified public JavaScript; evidence only."
+  },
+  {
+    "file": null,
+    "url": "https://www.tokyometro.jp/unkou/history/ginza.html",
+    "retrieved_at": "2026-11-02T05:27:10.742455+00:00",
+    "original_sha256": "93a0af7c0f7a9d93357c5c16e6d105184cdd6aab6ac957eae34bd5e6392d2a84",
+    "extraction": "Reviewed full HTML; original retained under reports/, not a runtime fixture."
+  },
+  {
+    "file": null,
+    "url": "https://www.tokyometro.jp/terms/index.html",
+    "retrieved_at": "2026-11-02T05:26:48.944384+00:00",
+    "original_sha256": "f4e851ed60375d523d29194a4e0bf217cf39cad5586ebe787acab2b4ab6cf228",
+    "extraction": "Reviewed full HTML; original retained under reports/, not a runtime fixture."
+  }
+]

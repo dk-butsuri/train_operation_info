@@ -1,0 +1,45 @@
+{
+  "retrieved_date_utc": "2026-11-03",
+  "items": [
+    {
+      "fixture": "seibu_normal.xml",
+      "source": "https://www.seiburailway.jp/api/v1/travelinfo/raw/IDS2Web.xml",
+      "captured_at_utc": "2026-11-03T03:47:02Z",
+      "note": "Unmodified live response, no-incident state (dif/tif/plf all=\"0\", info/txt empty, chk=0). The source regenerates this document periodically even while normal: a re-check at 2026-11-03T05:01:19Z returned the same all-zero content with a newer <time>, confirming <time> is the document's own generation timestamp, not request time frozen forever and not derived from a real incident alone.",
+      "original_sha256": "b017006f5397c1b7d8bf8e67800f2c222bbecb879976eaac8b80ed67fd115709",
+      "fixture_sha256": "b017006f5397c1b7d8bf8e67800f2c222bbecb879976eaac8b80ed67fd115709"
+    },
+    {
+      "fixture": "seibu_script_excerpt.js",
+      "source": "https://www.seiburailway.jp/assets/js/script.js",
+      "captured_at_utc": "2026-11-03T04:01:00Z",
+      "note": "Exact UTF-8 substring (lines 505-750 of the downloaded file) covering the railwaysInfo():{getXml, getLine, getTxt} functions that parse IDS2Web.xml's dif/lif/sts and info/txt and apply the stop/caution CSS distinction.",
+      "original_sha256": "47a2c6dcdc1c6d2c86510f456b7a1ee7df69239ade38952409eeb6624482261d",
+      "fixture_sha256": "43e406bfad116f997e21e27aec89613e0b69abc7fa97bac98e2d83a2985057a9"
+    },
+    {
+      "fixture": "seibu_core_excerpt.js",
+      "source": "https://www.seiburailway.jp/assets/js/seiburailways.core.js",
+      "captured_at_utc": "2026-11-03T04:01:00Z",
+      "note": "Complete unmodified file (1268 bytes). operation() fetches /api/v1/servicestatus.jsonp and renders only IDS2Web[].plf.pld[].lang_ja as a banner placed before .js-railwaysInfo, confirming plf/pld is a separate long-term/important-notice channel from dif.",
+      "original_sha256": "882f6bf701c1b2ac57617cd903c60e753259ffa9a9c0109f490dd3d02f867b65",
+      "fixture_sha256": "882f6bf701c1b2ac57617cd903c60e753259ffa9a9c0109f490dd3d02f867b65"
+    },
+    {
+      "fixture": "seibu_home_widget_excerpt.html",
+      "source": "https://www.seiburailway.jp/",
+      "captured_at_utc": "2026-11-03T04:01:00Z",
+      "note": "DOM excerpt (lines 673-716 of the downloaded file) of .js-railwaysInfo, including the static .js-railwaysInfoLine list of the twelve official line names matched against dif/lif/lin/nm.",
+      "original_sha256": "762acd0b1de5c898837273fc967e65c6dfd0d5c5e085da0c491e8efc4c76af45",
+      "fixture_sha256": "7172e0ae03f0f01ba1b3ad2fecbfbc608ca3ab76f9b88c17523ce5fa73baa12c"
+    },
+    {
+      "fixture": "seibu_servicestatus_jsonp.txt",
+      "source": "https://www.seiburailway.jp/api/v1/servicestatus.jsonp",
+      "captured_at_utc": "2026-11-03T04:02:00Z",
+      "note": "Unmodified live JSONP response (not requested by the provider). Has no dif/tif fields at all, only plf.pld (empty here), confirming it is a different, narrower payload than IDS2Web.xml and is not a substitute for it.",
+      "original_sha256": "3e06d96b7f08bcb3b3b10be5996793327e30523de796837655b50d7e38426b16",
+      "fixture_sha256": "3e06d96b7f08bcb3b3b10be5996793327e30523de796837655b50d7e38426b16"
+    }
+  ]
+}

@@ -1,0 +1,242 @@
+[
+  {
+    "file": "em.html",
+    "url": "https://top.meitetsu.co.jp/em/",
+    "final_url": "https://top.meitetsu.co.jp/em/",
+    "retrieved_at": "2026-11-02T15:38:30.197132+00:00",
+    "sha256": "01eef4c4beac1cbfdbf4d09686427d3bf2de6bb0094a51af43f442981c881779",
+    "fixture": "meitetsu_normal.html",
+    "fixture_sha256": "7e74d6fdff259f9819d7a1a4842ac6ab51adb46cab02bdaf6a6c6aff8e13c0c2",
+    "processing": "BeautifulSoup html.parser serializes #wrapHeader and #wrapContents; map/navigation removed; UTF-8 wrapper; no service-text changes."
+  },
+  {
+    "file": "policy.html",
+    "url": "https://www.meitetsu.co.jp/site_policy/index.html",
+    "final_url": "https://www.meitetsu.co.jp/site_policy/index.html",
+    "retrieved_at": "2026-11-02T15:38:31.538184+00:00",
+    "sha256": "46ca7d1686d527080d7904c6b3593b5facd8ed6d32993766856d4ba4ae0a1ea9"
+  },
+  {
+    "file": "tokudashi.js",
+    "url": "https://top.meitetsu.co.jp/em/js/tokudashi.js",
+    "final_url": "https://top.meitetsu.co.jp/em/js/tokudashi.js",
+    "retrieved_at": "2026-11-02T15:38:44.096276+00:00",
+    "sha256": "9051e9b2831c341af92aa291844232395d69813dc87f9082c584a9b92e5e7309"
+  },
+  {
+    "file": "cdx.json",
+    "url": "https://web.archive.org/cdx/search/cdx?url=top.meitetsu.co.jp/em/&output=json&filter=statuscode:200&collapse=digest&filter=mimetype:text/html",
+    "final_url": "https://web.archive.org/cdx/search/cdx?url=top.meitetsu.co.jp/em/&output=json&filter=statuscode:200&collapse=digest&filter=mimetype:text/html",
+    "retrieved_at": "2026-11-02T15:38:47.179231+00:00",
+    "sha256": "4b153efe9820d747b381986e51fcdfb384e735ed74ea961deaf0757c14271fa6"
+  },
+  {
+    "file": "train_notice.html",
+    "url": "https://top.meitetsu.co.jp/em/train_notice.html",
+    "final_url": "https://top.meitetsu.co.jp/em/train_notice.html",
+    "retrieved_at": "2026-11-02T15:39:04.780218+00:00",
+    "sha256": "1c7208c2c080724f210fa2e37724bcdcaf6201e64f3ef688a4557807f1dc8c22"
+  },
+  {
+    "file": "basic.css",
+    "url": "https://top.meitetsu.co.jp/em/css/basic.css?20211001",
+    "final_url": "https://top.meitetsu.co.jp/em/css/basic.css?20211001",
+    "retrieved_at": "2026-11-02T15:39:05.107282+00:00",
+    "sha256": "a2aeb50d1ee4c7eb0f1c4408911deaca4205857a90a020f09a44b37d86cccefa"
+  },
+  {
+    "file": "tokudashi.html",
+    "url": "https://top.meitetsu.co.jp/tokudashi/tokudashi.html",
+    "final_url": "https://top.meitetsu.co.jp/tokudashi/tokudashi.html",
+    "retrieved_at": "2026-11-02T15:39:05.457013+00:00",
+    "sha256": "f1945cd6c19e56b3c1c78943ef5ec18116907a4ca1efc40a57d48ab1db7adfc5"
+  },
+  {
+    "file": "em_20260215000323.html",
+    "url": "https://web.archive.org/web/20260215000323id_/https://top.meitetsu.co.jp/em/",
+    "final_url": "https://web.archive.org/web/20260215000323id_/https://top.meitetsu.co.jp/em/",
+    "retrieved_at": "2026-11-02T15:39:20.250834+00:00",
+    "sha256": "232628bd567900ff3081c0396c3f63dac232cee811b7ec7fee918982ef9f6a4d"
+  },
+  {
+    "file": "em_20260315214045.html",
+    "url": "https://web.archive.org/web/20260315214045id_/https://top.meitetsu.co.jp/em/",
+    "final_url": "https://web.archive.org/web/20260315214045id_/https://top.meitetsu.co.jp/em/",
+    "retrieved_at": "2026-11-02T15:39:20.641126+00:00",
+    "sha256": "ccfe42270f9a327a76d0e17879f3a7424c4804860d2981682469308f0d5dc052"
+  },
+  {
+    "file": "em_20260420214921.html",
+    "url": "https://web.archive.org/web/20260420214921id_/https://top.meitetsu.co.jp/em/",
+    "final_url": "https://web.archive.org/web/20260420214921id_/https://top.meitetsu.co.jp/em/",
+    "retrieved_at": "2026-11-02T15:39:20.227061+00:00",
+    "sha256": "01eef4c4beac1cbfdbf4d09686427d3bf2de6bb0094a51af43f442981c881779"
+  },
+  {
+    "file": "em_20260807040734.html",
+    "url": "https://web.archive.org/web/20260807040734id_/https://top.meitetsu.co.jp/em/",
+    "final_url": "https://web.archive.org/web/20260807040734id_/https://top.meitetsu.co.jp/em/",
+    "retrieved_at": "2026-11-02T15:39:20.011889+00:00",
+    "sha256": "01eef4c4beac1cbfdbf4d09686427d3bf2de6bb0094a51af43f442981c881779"
+  },
+  {
+    "file": "em_20230816075632.html",
+    "url": "https://web.archive.org/web/20230816075632id_/https://top.meitetsu.co.jp/em/",
+    "final_url": "https://web.archive.org/web/20230816075632id_/https://top.meitetsu.co.jp/em/",
+    "retrieved_at": "2026-11-02T15:39:21.463317+00:00",
+    "sha256": "232628bd567900ff3081c0396c3f63dac232cee811b7ec7fee918982ef9f6a4d",
+    "fixture": "meitetsu_20230816075632.html",
+    "fixture_sha256": "a4265a5da8e40fc125174f7b0443fcee65f4fb8eae79f72e661a3f06104c13ac",
+    "processing": "BeautifulSoup html.parser serializes #wrapHeader and #wrapContents; map/navigation removed; UTF-8 wrapper; no service-text changes.",
+    "capture_utc": "20230816075632"
+  },
+  {
+    "url": "https://web.archive.org/cdx/search/cdx?url=top.meitetsu.co.jp/em/*&output=json&filter=statuscode:200&collapse=urlkey&filter=mimetype:text/html",
+    "error": "Server error '503 Service Unavailable' for url 'https://web.archive.org/cdx/search/cdx?url=top.meitetsu.co.jp/em/*&output=json&filter=statuscode:200&collapse=urlkey&filter=mimetype:text/html'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503"
+  },
+  {
+    "file": "cdx_old.json",
+    "url": "https://web.archive.org/cdx/search/cdx?url=top.meitetsu.co.jp/em/traininfo.asp&output=json&filter=statuscode:200&collapse=digest",
+    "final_url": "https://web.archive.org/cdx/search/cdx?url=top.meitetsu.co.jp/em/traininfo.asp&output=json&filter=statuscode:200&collapse=digest",
+    "retrieved_at": "2026-11-02T15:39:36.706895+00:00",
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  {
+    "url": "https://web.archive.org/cdx/search/cdx?url=top.meitetsu.co.jp/em/&matchType=prefix&output=json&filter=statuscode:200&collapse=urlkey&from=2024",
+    "error": "The read operation timed out"
+  },
+  {
+    "url": "https://web.archive.org/cdx/search/cdx?url=top.meitetsu.co.jp/em/ryokaku/&matchType=prefix&output=json&filter=statuscode:200&collapse=urlkey",
+    "error": "[WinError 10061] 対象のコンピューターによって拒否されたため、接続できませんでした。"
+  },
+  {
+    "url": "https://web.archive.org/cdx/search/cdx?url=top.meitetsu.co.jp/em/&output=json&filter=statuscode:302&collapse=digest&from=2021",
+    "error": "[WinError 10061] 対象のコンピューターによって拒否されたため、接続できませんでした。"
+  },
+  {
+    "url": "https://web.archive.org/cdx/search/cdx?url=top.meitetsu.co.jp/em/ryokaku/&matchType=prefix&output=json&filter=statuscode:200&from=2026&collapse=digest&limit=30",
+    "error": "Server error '503 Service Unavailable' for url 'https://web.archive.org/cdx/search/cdx?url=top.meitetsu.co.jp/em/ryokaku/&matchType=prefix&output=json&filter=statuscode:200&from=2026&collapse=digest&limit=30'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503"
+  },
+  {
+    "url": "https://top.meitetsu.co.jp/em/ryokaku/format3.html",
+    "error": "Client error '404 Not Found' for url 'https://top.meitetsu.co.jp/em/ryokaku/format3.html'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404"
+  },
+  {
+    "file": "formats.json",
+    "url": "https://web.archive.org/cdx/search/cdx?url=top.meitetsu.co.jp%2Fem%2Fryokaku%2Fformat%2A&output=json&filter=statuscode%3A200&collapse=urlkey",
+    "final_url": "https://web.archive.org/cdx/search/cdx?url=top.meitetsu.co.jp%2Fem%2Fryokaku%2Fformat%2A&output=json&filter=statuscode%3A200&collapse=urlkey",
+    "retrieved_at": "2026-11-02T15:42:09.699176+00:00",
+    "sha256": "b736e547cc7d47731417b214096f9aa90efcaa588ddb9093ccf4c9f0d6620183"
+  },
+  {
+    "file": "format3_cdx.json",
+    "url": "https://web.archive.org/cdx/search/cdx?url=top.meitetsu.co.jp%2Fem%2Fryokaku%2Fformat3.html&output=json&filter=statuscode%3A200&collapse=digest&from=2021",
+    "retrieved_at": "2026-11-02T15:42:19.295195+00:00",
+    "sha256": "def2d2b3e2de60e46061eb49845cef765af2a338892501d5e32400e7b88959bb"
+  },
+  {
+    "file": "format3_20260208081057.html",
+    "url": "https://web.archive.org/web/20260208081057id_/https://top.meitetsu.co.jp/em/ryokaku/format3.html",
+    "final_url": "https://web.archive.org/web/20260208081057id_/https://top.meitetsu.co.jp/em/ryokaku/format3.html",
+    "retrieved_at": "2026-11-02T15:42:33.840406+00:00",
+    "sha256": "2da081e242ac874947a0c6d366fa470b3c5d9935030c8c214ef3ecddacac470f",
+    "fixture": "meitetsu_20260208081057.html",
+    "fixture_sha256": "4d465081c4c5b2cc6be219dafe604de586ae2018cdb4b15b4caf807183298398",
+    "processing": "BeautifulSoup html.parser serializes #wrapHeader and #wrapContents; map/navigation removed; UTF-8 wrapper; no service-text changes.",
+    "capture_utc": "20260208081057"
+  },
+  {
+    "file": "format3_20250904000806.html",
+    "url": "https://web.archive.org/web/20250904000806id_/https://top.meitetsu.co.jp/em/ryokaku/format3.html",
+    "final_url": "https://web.archive.org/web/20250904000806id_/https://top.meitetsu.co.jp/em/ryokaku/format3.html",
+    "retrieved_at": "2026-11-02T15:42:33.768308+00:00",
+    "sha256": "47ed3c62845d1aacc3e1a4fff65fc39ae7d36be13b9a5330bbf3b8751c952c47"
+  },
+  {
+    "file": "format3_20240831065722.html",
+    "url": "https://web.archive.org/web/20240831065722id_/https://top.meitetsu.co.jp/em/ryokaku/format3.html",
+    "final_url": "https://web.archive.org/web/20240831065722id_/https://top.meitetsu.co.jp/em/ryokaku/format3.html",
+    "retrieved_at": "2026-11-02T15:42:33.819674+00:00",
+    "sha256": "4a2c62a0e30b06198524eb600b748498ce0a6bbeda7531760580ce072121622c",
+    "fixture": "meitetsu_20240831065722.html",
+    "fixture_sha256": "dd8ad1789854a30b6c975ced85d34ad491290b9dadf8d93457bd039e8a29b9fd",
+    "processing": "BeautifulSoup html.parser serializes #wrapHeader and #wrapContents; map/navigation removed; UTF-8 wrapper; no service-text changes.",
+    "capture_utc": "20240831065722"
+  },
+  {
+    "file": "format3_20230815094730.html",
+    "url": "https://web.archive.org/web/20230815094730id_/https://top.meitetsu.co.jp/em/ryokaku/format3.html",
+    "final_url": "https://web.archive.org/web/20230815094730id_/https://top.meitetsu.co.jp/em/ryokaku/format3.html",
+    "retrieved_at": "2026-11-02T15:42:33.922547+00:00",
+    "sha256": "61a5b95dab452a34a0d379801ee66794c8e39af95f913ed96eec29c4d22f8009",
+    "fixture": "meitetsu_20230815094730.html",
+    "fixture_sha256": "b710d8732135daeb72e97c554cd61d40f9c404c2afdcf728da1bb45c3ed65dc7",
+    "processing": "BeautifulSoup html.parser serializes #wrapHeader and #wrapContents; map/navigation removed; UTF-8 wrapper; no service-text changes.",
+    "capture_utc": "20230815094730"
+  },
+  {
+    "file": "format3_20260908095207.html",
+    "url": "https://web.archive.org/web/20260908095207id_/https://top.meitetsu.co.jp/em/ryokaku/format3.html",
+    "final_url": "https://web.archive.org/web/20260908095207id_/https://top.meitetsu.co.jp/em/ryokaku/format3.html",
+    "retrieved_at": "2026-11-02T15:43:48.227826+00:00",
+    "sha256": "0f6d4c2d101f394326059e75e862ef9a022173084f88173d3963c1722d789a69",
+    "fixture": "meitetsu_20260908095207.html",
+    "fixture_sha256": "26d5fc4dbcfd33e849a487cf408bd8de5e3195898aaa2cb6d6e4e0f1cd66bd5d",
+    "processing": "BeautifulSoup html.parser serializes #wrapHeader and #wrapContents; map/navigation removed; UTF-8 wrapper; no service-text changes.",
+    "capture_utc": "20260908095207"
+  },
+  {
+    "file": "format3_20220918035311.html",
+    "url": "https://web.archive.org/web/20220918035311id_/https://top.meitetsu.co.jp/em/ryokaku/format3.html",
+    "final_url": "https://web.archive.org/web/20220918035311id_/https://top.meitetsu.co.jp/em/ryokaku/format3.html",
+    "retrieved_at": "2026-11-02T15:43:49.375936+00:00",
+    "sha256": "3191be6d2ba3a1904a2d9be94ed5c5a93026a4d0368ea818d7f55105e81830df",
+    "fixture": "meitetsu_20220918035311.html",
+    "fixture_sha256": "2c2b6f775504ec7c74cb860bb358c35283adbd4588c54d16dd76a951383e22c1",
+    "processing": "BeautifulSoup html.parser serializes #wrapHeader and #wrapContents; map/navigation removed; UTF-8 wrapper; no service-text changes.",
+    "capture_utc": "20220918035311"
+  },
+  {
+    "file": "format3_20230629031545.html",
+    "url": "https://web.archive.org/web/20230629031545id_/https://top.meitetsu.co.jp/em/ryokaku/format3.html",
+    "final_url": "https://web.archive.org/web/20230629031545id_/https://top.meitetsu.co.jp/em/ryokaku/format3.html",
+    "retrieved_at": "2026-11-02T15:43:48.644561+00:00",
+    "sha256": "8115a27e341fbb26be0f6f3216ea66c5b04a7fdfd5e8d4cdb244f556f33f5280"
+  },
+  {
+    "file": "basic.css",
+    "url": "https://top.meitetsu.co.jp/em/css/basic.css?20211001",
+    "retrieved_at": "2026-11-02T15:39:05.107282+00:00",
+    "sha256": "a2aeb50d1ee4c7eb0f1c4408911deaca4205857a90a020f09a44b37d86cccefa",
+    "fixture": "meitetsu_status.css",
+    "fixture_sha256": "ff4fc3be05f37d11c495fa9645398f1c4528bd16640bea187e48e9a97ba1caa1",
+    "processing": "status_css"
+  },
+  {
+    "file": "em.html",
+    "url": "https://top.meitetsu.co.jp/em/",
+    "retrieved_at": "2026-11-02T15:38:30.197132+00:00",
+    "sha256": "01eef4c4beac1cbfdbf4d09686427d3bf2de6bb0094a51af43f442981c881779",
+    "fixture": "meitetsu_normal_script.js",
+    "fixture_sha256": "c249712d5034ad978a7b87fc484384a37ae7bde55c4b5688abb10124eaca7296",
+    "processing": "inline_script"
+  },
+  {
+    "file": "format3_20260208081057.html",
+    "url": "https://web.archive.org/web/20260208081057id_/https://top.meitetsu.co.jp/em/ryokaku/format3.html",
+    "retrieved_at": "2026-11-02T15:42:33.840406+00:00",
+    "sha256": "2da081e242ac874947a0c6d366fa470b3c5d9935030c8c214ef3ecddacac470f",
+    "fixture": "meitetsu_abnormal_script.js",
+    "fixture_sha256": "206055a72b8e9bdce51930a19e6f80a939ce5bfa260ddf0717db5d24db7c161e",
+    "processing": "inline_script"
+  },
+  {
+    "file": "tokudashi.js",
+    "url": "https://top.meitetsu.co.jp/em/js/tokudashi.js",
+    "retrieved_at": "2026-11-02T15:38:44.096276+00:00",
+    "sha256": "9051e9b2831c341af92aa291844232395d69813dc87f9082c584a9b92e5e7309",
+    "fixture": "meitetsu_tokudashi.js",
+    "fixture_sha256": "9051e9b2831c341af92aa291844232395d69813dc87f9082c584a9b92e5e7309",
+    "processing": "unchanged"
+  }
+]

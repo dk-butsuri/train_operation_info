@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+.mypy_cache/
+.pytest_cache/
+.venv/
+build/
+dist/
+*.egg-info/
+snapshots/
+.pytest_tmp_*/
+# Local investigation artifacts, including copied third-party pages and scripts.
+reports/
+# Captured third-party pages, scripts and API responses stay local; only provenance
+# records (*.md) and manifests are committed. Tests needing a missing capture are skipped.
+tests/fixtures/*
+!tests/fixtures/*.md
+!tests/fixtures/*_manifest.json

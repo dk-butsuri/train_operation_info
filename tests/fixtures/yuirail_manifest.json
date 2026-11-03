@@ -1,0 +1,70 @@
+[
+  {
+    "fixture": "yuirail_normal.json",
+    "source_url": "https://www.yui-rail.co.jp/common/json/data/operation_info.json",
+    "archive_url": null,
+    "archive_timestamp_utc": null,
+    "fetched_at_utc": "2026-11-02T15:39:26.527807+00:00",
+    "extraction": "Unmodified response bytes",
+    "original_sha256": "4ee5a39440cfd1f6cb7691e8b37b736683f155aa1a334ee81dc8fba26916b41c",
+    "fixture_sha256": "4ee5a39440cfd1f6cb7691e8b37b736683f155aa1a334ee81dc8fba26916b41c"
+  },
+  {
+    "fixture": "yuirail_20260326033336.json",
+    "source_url": "https://www.yui-rail.co.jp/common/json/data/operation_info.json?t=1774489574264",
+    "archive_url": "https://web.archive.org/web/20260326033336id_/https://www.yui-rail.co.jp/common/json/data/operation_info.json?t=1774489574264",
+    "archive_timestamp_utc": "2026-03-26T03:33:36+00:00",
+    "fetched_at_utc": "2026-11-02T15:39:26.527807+00:00",
+    "extraction": "Wayback stored the gzip-compressed response body; the fixture is that body after Content-Encoding decompression, otherwise unmodified",
+    "original_sha256": "64b6d898dc07bf08437fc47fec9e8b2f63728a80f51a6d527e3b3b6e2b182b1d",
+    "fixture_sha256": "64b6d898dc07bf08437fc47fec9e8b2f63728a80f51a6d527e3b3b6e2b182b1d"
+  },
+  {
+    "fixture": "yuirail_20260601101306.json",
+    "source_url": "https://www.yui-rail.co.jp/common/json/data/operation_info.json?t=1780308786441",
+    "archive_url": "https://web.archive.org/web/20260601101306id_/https://www.yui-rail.co.jp/common/json/data/operation_info.json?t=1780308786441",
+    "archive_timestamp_utc": "2026-06-01T10:13:06+00:00",
+    "fetched_at_utc": "2026-11-02T15:39:26.527807+00:00",
+    "extraction": "Wayback stored the gzip-compressed response body; the fixture is that body after Content-Encoding decompression, otherwise unmodified",
+    "original_sha256": "175fcbf4c5e8ffec02593179aa5929c0770f839a25a428ea9c5251ed1108ecc6",
+    "fixture_sha256": "b343442260a96374af2a2c2bcd0b33fe83969c0c635be70893c9bacfbbb34f62"
+  },
+  {
+    "fixture": "yuirail_20260806220615.json",
+    "source_url": "https://www.yui-rail.co.jp/common/json/data/operation_info.json?t=1786053975048",
+    "archive_url": "https://web.archive.org/web/20260806220615id_/https://www.yui-rail.co.jp/common/json/data/operation_info.json?t=1786053975048",
+    "archive_timestamp_utc": "2026-08-06T22:06:15+00:00",
+    "fetched_at_utc": "2026-11-02T15:39:26.527807+00:00",
+    "extraction": "Wayback stored the gzip-compressed response body; the fixture is that body after Content-Encoding decompression, otherwise unmodified",
+    "original_sha256": "eb8a3fa3d0d6051e41c9063f36ba3b7250cab6138be329792789925d2efc24af",
+    "fixture_sha256": "19aec946f7aaad00029892cee1001761a1632261ebf7ffded864996056770453"
+  },
+  {
+    "fixture": "yuirail_20260825141333.json",
+    "source_url": "https://www.yui-rail.co.jp/common/json/data/operation_info.json?t=1787667213808",
+    "archive_url": "https://web.archive.org/web/20260825141333id_/https://www.yui-rail.co.jp/common/json/data/operation_info.json?t=1787667213808",
+    "archive_timestamp_utc": "2026-08-25T14:13:33+00:00",
+    "fetched_at_utc": "2026-11-02T15:39:26.527807+00:00",
+    "extraction": "Wayback stored the gzip-compressed response body; the fixture is that body after Content-Encoding decompression, otherwise unmodified",
+    "original_sha256": "69f54acd4a2e520826c86afe3d83c3b9f01ce77f581c1a3e4bca1ecaff97b339",
+    "fixture_sha256": "27af3618376344187f8f56a415ab2ad878c12c13018310a796f4ed38ba6b1fb0"
+  },
+  {
+    "source_url": "https://www.yui-rail.co.jp/",
+    "fetched_at_utc": "2026-11-02T15:39:26.846254+00:00",
+    "original_sha256": "8302cfd4bdaded3f5f75300df4c74cdf925067a5e0e4bbe83ed58bf7eed9f61a",
+    "extraction": "Reviewed only; no fixture copied"
+  },
+  {
+    "source_url": "https://www.yui-rail.co.jp/common/js/layout.min.js",
+    "fetched_at_utc": "2026-11-02T15:39:27.015763+00:00",
+    "original_sha256": "3ecf98d732b7a9196710c0726aa4505234fc2beee5c8d323c6f51eb67d6c3228",
+    "extraction": "Reviewed only; no fixture copied"
+  },
+  {
+    "source_url": "https://www.yui-rail.co.jp/policy/",
+    "fetched_at_utc": "2026-11-02T15:39:27.241025+00:00",
+    "original_sha256": "225cf53d0d6129b609e3746cc4203e300cca8e55cce5ae6d7031c0d953cd9230",
+    "extraction": "Reviewed only; no fixture copied"
+  }
+]

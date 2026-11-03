@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#000000">
+  <title>鉄道運行監視システム / MAGI</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="masthead">
+    <h1>鉄道運行監視</h1>
+    <div class="header-clock"><time id="clock">--:--:--</time><span id="date"></span></div>
+    <div class="controls">
+      <div class="mode-switch" aria-label="データモード"><button id="live" aria-pressed="true">実データ</button><button id="demo" aria-pressed="false">演習</button></div>
+      <label class="auto-label"><input id="auto" type="checkbox">自動更新 60秒</label>
+      <button id="refresh" class="primary">情報更新</button>
+    </div>
+  </header>
+  <main>
+    <div id="notice" role="status" aria-live="polite" hidden></div>
+    <section class="overview" aria-label="MAGI 運行状況の総合判定">
+      <div class="system-readout">
+        <h2 class="display-heading">運行監視</h2>
+        <dl><dt>取得元</dt><dd id="source-summary">取得待機</dd><dt>監視路線</dt><dd id="line-summary">—</dd><dt>表示</dt><dd id="mode-indicator">準備中</dd></dl>
+        <p id="mode-description">公開されている運行情報</p>
+      </div>
+      <div class="magi" aria-label="上：平常路線、左下：要確認路線、右下：取得元">
+        <svg class="magi-wiring" viewBox="0 0 800 400" aria-hidden="true">
+          <path d="M400 230V328 M320 340H480 M288 270L350 308 M512 270L450 308"/>
+          <polygon id="service-shape" points="286,8 514,8 514,170 452,232 348,232 286,170"/>
+          <polygon id="alert-shape" points="28,202 230,202 320,292 320,392 28,392"/>
+          <polygon id="source-shape" points="570,202 772,202 772,392 480,392 480,292"/>
+        </svg>
+        <button class="core core-top" id="service-core" title="平常運転の路線を表示">
+          <span class="core-name">BALTHASAR·2</span><span class="core-label">平常運転</span><strong id="service-value">—</strong><span id="service-verdict" class="core-verdict">未取得</span>
+        </button>
+        <button class="core core-left" id="alert-core" title="確認が必要な路線を表示">
+          <span class="core-name">CASPER·3</span><span class="core-label">要確認路線</span><strong id="alert-value">—</strong><span id="alert-verdict" class="core-verdict">未取得</span>
+        </button>
+        <div class="magi-label" aria-hidden="true">MAGI</div>
+        <button class="core core-right" id="source-core" title="取得元の通信エラーを表示">
+          <span class="core-name">MELCHIOR·1</span><span class="core-label">取得成功</span><strong id="source-value">—</strong><span id="source-verdict" class="core-verdict">未取得</span>
+        </button>
+      </div>
+      <div class="verdict-block">
+        <h2 class="display-heading">判 定</h2>
+        <strong id="overall-verdict" class="verdict-stamp" aria-live="polite">待機中</strong>
+        <p id="verdict-description">情報を取得してください</p>
+        <dl class="incident-counts"><dt>運休・見合わせ</dt><dd id="suspended-count">—</dd><dt>遅延・運行案内</dt><dd id="delayed-count">—</dd><dt>不明・未取得</dt><dd id="unknown-count">—</dd></dl>
+      </div>
+      <div class="overview-footer"><span id="coverage">監視対象を確認中</span><span id="last-checked">最終取得 —</span></div>
+    </section>
+    <div class="workspace">
+      <section class="network" aria-labelledby="network-title">
+        <div class="section-heading"><h2 id="network-title">路線状況</h2><span id="visible-count"></span></div>
+        <div class="view-tabs" aria-label="表示する路線"><button data-view="attention" aria-pressed="true">要確認 <span id="attention-count">—</span></button><button data-view="all" aria-pressed="false">全路線 <span id="all-count">—</span></button><button data-view="errors" aria-pressed="false">通信エラー <span id="error-count">—</span></button></div>
+        <div class="filters">
+          <input id="search" type="search" placeholder="路線名・会社名で検索" aria-label="路線を検索">
+          <select id="provider-filter" aria-label="取得元で絞り込み"><option value="">すべての取得元</option></select>
+          <select id="status-filter" aria-label="状態で絞り込み"><option value="">すべての状態</option><option value="affected">運行への影響あり</option><option value="normal">平常</option><option value="unknown">不明・未取得</option><option value="error">取得エラー</option></select>
+        </div>
+        <div class="table-heading" aria-hidden="true"><span>路線</span><span>運行状況</span><span>案内</span><span>取得時刻</span></div>
+        <div id="lines" class="lines"></div>
+        <p class="list-help">路線を選択すると詳細を表示します。取得失敗時は前回値を表示します。</p>
+      </section>
+      <aside class="inspector" aria-labelledby="inspector-title">
+        <div class="section-heading"><h2 id="inspector-title">路線詳細</h2><span>選択した路線の取得内容</span></div>
+        <div id="detail"><p class="empty">路線を選択してください。</p></div>
+      </aside>
+    </div>
+    <details class="event-section"><summary>通信ログ・データ保存 <span id="log-status">取得待機</span></summary><div class="event-actions"><button id="export">全データをJSONで保存</button></div><div id="events"></div></details>
+  </main>
+  <footer><span>MAGI / 鉄道運行情報ビジュアライザ</span><span>運行判断は公式案内を確認してください。</span><span id="latency">取得待機</span></footer>
+</body>
+</html>

@@ -1,0 +1,101 @@
+[
+  {
+    "file": "odakyu_status.json",
+    "url": "https://d6oynijiy33tb.cloudfront.net/service/status_detail",
+    "fetched_at": "2026-11-02T15:38:38.632513+00:00",
+    "status": 200,
+    "sha256": "8ed04dcc7f35f3556d6058acb8913f3f5428780608876c6400e6dcb4957e1327",
+    "fixture": "odakyu_normal.json",
+    "transformation": "none"
+  },
+  {
+    "file": "odakyu_20250710071411.json",
+    "url": "https://web.archive.org/web/20250710071411id_/https://d6oynijiy33tb.cloudfront.net/service/status_detail",
+    "fetched_at": "2026-11-02T15:38:41.971509+00:00",
+    "status": 200,
+    "sha256": "ab7e0bd48a215590d436d676d1dc089717c34dd03603e0f511b67dba0a53a3d3",
+    "fixture": "odakyu_20250710071411.json",
+    "transformation": "none"
+  },
+  {
+    "file": "odakyu_20250730090750.json",
+    "url": "https://web.archive.org/web/20250730090750id_/https://d6oynijiy33tb.cloudfront.net/service/status_detail",
+    "fetched_at": "2026-11-02T15:38:39.397804+00:00",
+    "status": 200,
+    "sha256": "059dc0437b156f88058d81d399a47141ddeec609f72d686794f021ec9c4286fd",
+    "fixture": "odakyu_20250730090750.json",
+    "transformation": "none"
+  },
+  {
+    "file": "odakyu_20251022121602.json",
+    "url": "https://web.archive.org/web/20251022121602id_/https://d6oynijiy33tb.cloudfront.net/service/status_detail",
+    "fetched_at": "2026-11-02T15:38:39.368044+00:00",
+    "status": 200,
+    "sha256": "8ed04dcc7f35f3556d6058acb8913f3f5428780608876c6400e6dcb4957e1327",
+    "fixture": "odakyu_20251022121602.json",
+    "transformation": "none"
+  },
+  {
+    "file": "odakyu_20251124012021.json",
+    "url": "https://web.archive.org/web/20251124012021id_/https://d6oynijiy33tb.cloudfront.net/service/status_detail",
+    "fetched_at": "2026-11-02T15:38:39.460346+00:00",
+    "status": 200,
+    "sha256": "1c6c01c9a6453c3a31ef6c57542fc271bef0a3761aa37262a3e8dd4de5a97767",
+    "fixture": "odakyu_20251124012021.json",
+    "transformation": "none"
+  },
+  {
+    "file": "odakyu_20251126033118.json",
+    "url": "https://web.archive.org/web/20251126033118id_/https://d6oynijiy33tb.cloudfront.net/service/status_detail",
+    "fetched_at": "2026-11-02T15:38:39.740199+00:00",
+    "status": 200,
+    "sha256": "79e95e39a5eafb604bcc75c24d1c9424bbd3f70caa9488dad1499a04b027233f",
+    "fixture": "odakyu_20251126033118.json",
+    "transformation": "none"
+  },
+  {
+    "file": "odakyu_20260128234609.json",
+    "url": "https://web.archive.org/web/20260128234609id_/https://d6oynijiy33tb.cloudfront.net/service/status_detail",
+    "fetched_at": "2026-11-02T15:38:39.587163+00:00",
+    "status": 200,
+    "sha256": "6ac975be9b7c00911f5d8911b73e43d209281b55a7d696f568b25f54c792f472",
+    "fixture": "odakyu_20260128234609.json",
+    "transformation": "none"
+  },
+  {
+    "file": "odakyu_20260728134022.json",
+    "url": "https://web.archive.org/web/20260728134022id_/https://d6oynijiy33tb.cloudfront.net/service/status_detail",
+    "fetched_at": "2026-11-02T15:38:39.442862+00:00",
+    "status": 200,
+    "sha256": "8d3139e4918dd77d5d0323e15e40ad2f8a850a6500223460cc1a6263755320af",
+    "fixture": "odakyu_20260728134022.json",
+    "transformation": "none"
+  },
+  {
+    "file": "odakyu_20261014200025.json",
+    "url": "https://web.archive.org/web/20261014200025id_/https://d6oynijiy33tb.cloudfront.net/service/status_detail",
+    "fetched_at": "2026-11-02T15:38:41.673341+00:00",
+    "status": 200,
+    "sha256": "8ed04dcc7f35f3556d6058acb8913f3f5428780608876c6400e6dcb4957e1327",
+    "fixture": "odakyu_20261014200025.json",
+    "transformation": "none"
+  },
+  {
+    "file": "odakyu_page.html",
+    "url": "https://traininfo.odakyu-rt.jp/train_status",
+    "fetched_date_utc": "2026-11-02",
+    "sha256": "07998e744ee4b6f085824d5a39f636011b4d90c016c25e35b06a07b3f857c498",
+    "fixture": "odakyu_page.html",
+    "fixture_sha256": "07998e744ee4b6f085824d5a39f636011b4d90c016c25e35b06a07b3f857c498",
+    "transformation": "none"
+  },
+  {
+    "file": "odakyu_app.js",
+    "url": "https://traininfo.odakyu-rt.jp/assets/index-yuMM9dEt.js",
+    "fetched_date_utc": "2026-11-02",
+    "sha256": "3dcf5cdc1343ed237f65751c2cd8ac528c7ed5e9010114b4cf628c3ffa5e2f8b",
+    "fixture": "odakyu_app_excerpt.js",
+    "fixture_sha256": "bc337fcda44013ee1498477079899f57e2c9e6f5b879ac496562fed720520a7b",
+    "transformation": "Unchanged substrings: Axios configuration, JP route cards, following components through Ef (before O6)."
+  }
+]

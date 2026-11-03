@@ -1,0 +1,174 @@
+[
+  {
+    "name": "css",
+    "source_url": "https://service.twr.co.jp/service_info/import_page.css",
+    "final_url": "https://service.twr.co.jp/service_info/import_page.css",
+    "status_code": 200,
+    "retrieved_at": "2026-11-02T05:52:14.698758+00:00",
+    "original_sha256": "a809830a155cdcd0dff1f631af913d39c0b1a54bd051cda920cb24843c4c2f3f",
+    "path": "reports\\rinkai_css.html"
+  },
+  {
+    "name": "top_js",
+    "source_url": "https://service.twr.co.jp/service_info/top.js",
+    "final_url": "https://service.twr.co.jp/rinkai/public/top?lang=ja",
+    "status_code": 200,
+    "retrieved_at": "2026-11-02T05:52:14.785412+00:00",
+    "original_sha256": "3a358edce2b0c22f88c14bc6a08e6324b26ea4a4db2f36981e276a3ba30d0647",
+    "path": "reports\\rinkai_top_js.html"
+  },
+  {
+    "name": "page",
+    "source_url": "https://service.twr.co.jp/rinkai/public/information?lang=ja",
+    "final_url": "https://service.twr.co.jp/rinkai/public/information?lang=ja",
+    "status_code": 200,
+    "retrieved_at": "2026-11-02T05:52:14.809157+00:00",
+    "original_sha256": "2f38473978c5ca9810199fa70165b88cdcdf792079c5f2a2d0df013713f81a48",
+    "path": "reports\\rinkai_page.html",
+    "fixture": "rinkai_normal.html",
+    "fixture_sha256": "146266318d5831b47ac5ab1118a71452e3f9a935116f89409f78a686b0ef92f4",
+    "extraction": "BeautifulSoup html.parser .contBody serialization to UTF-8; original status/date text unchanged; includes header, page clock, service notice and policy."
+  },
+  {
+    "name": "legacy",
+    "source_url": "https://service.twr.co.jp/service_info/information.html",
+    "final_url": "https://service.twr.co.jp/rinkai/public/information?lang=ja",
+    "status_code": 200,
+    "retrieved_at": "2026-11-02T05:52:14.816186+00:00",
+    "original_sha256": "2f38473978c5ca9810199fa70165b88cdcdf792079c5f2a2d0df013713f81a48",
+    "path": "reports\\rinkai_legacy.html"
+  },
+  {
+    "name": "policy",
+    "source_url": "https://www.twr.co.jp/about/tabid/197/Default.aspx",
+    "final_url": "https://www.twr.co.jp/about/tabid/197/Default.aspx",
+    "status_code": 200,
+    "retrieved_at": "2026-11-02T05:52:15.263408+00:00",
+    "original_sha256": "ab7055d7015a1e0f9847a102a744b47660750f00ed6f7238aa925e9479a6bfdf",
+    "path": "reports\\rinkai_policy.html"
+  },
+  {
+    "name": "cdx_legacy",
+    "source_url": "https://web.archive.org/cdx/search/cdx?url=service.twr.co.jp/service_info/information.html&output=json&filter=statuscode:200&collapse=digest",
+    "final_url": "https://web.archive.org/cdx/search/cdx?url=service.twr.co.jp/service_info/information.html&output=json&filter=statuscode:200&collapse=digest",
+    "status_code": 200,
+    "retrieved_at": "2026-11-02T05:52:15.912057+00:00",
+    "original_sha256": "d485d79e3f87fdd162aaaaf6269a49435a79492f41b78cc4201d6ce574924872",
+    "path": "reports\\rinkai_cdx_legacy.html"
+  },
+  {
+    "name": "cdx_page",
+    "source_url": "https://web.archive.org/cdx/search/cdx?url=service.twr.co.jp/rinkai/public/information&matchType=prefix&output=json&filter=statuscode:200&collapse=digest",
+    "final_url": "https://web.archive.org/cdx/search/cdx?url=service.twr.co.jp/rinkai/public/information&matchType=prefix&output=json&filter=statuscode:200&collapse=digest",
+    "status_code": 200,
+    "retrieved_at": "2026-11-02T05:52:25.321179+00:00",
+    "original_sha256": "cccc3d093c95eabc4239be782e6d7c4e19946c4a5fdc8df6794c7e3045b883a5",
+    "path": "reports\\rinkai_cdx_page.html"
+  },
+  {
+    "source_url": "http://service.twr.co.jp/service_info/information.html",
+    "archive_url": "https://web.archive.org/web/20180122093824id_/http://service.twr.co.jp/service_info/information.html",
+    "archive_timestamp_utc": "20180122093824",
+    "retrieved_at": "2026-11-02T05:53:04.559674+00:00",
+    "original_sha256": "b21f822d1abee5e6e168b859e7aad7fa714e711fc312c0b008e5b77546418625",
+    "path": "reports\\rinkai_20180122093824.html",
+    "fixture": "rinkai_20180122093824.html",
+    "fixture_sha256": "f927a168f75094e5d2c412fa3dbdbdf8495369651cec5b0f247b4ddad567c399",
+    "extraction": "BeautifulSoup html.parser .contBody serialization to UTF-8; original status/date text unchanged; includes header, page clock, service notice and policy."
+  },
+  {
+    "source_url": "http://service.twr.co.jp/service_info/information.html",
+    "archive_url": "https://web.archive.org/web/20180904125255id_/http://service.twr.co.jp/service_info/information.html",
+    "archive_timestamp_utc": "20180904125255",
+    "retrieved_at": "2026-11-02T05:53:04.556852+00:00",
+    "original_sha256": "f3dda84ef72e5719caa034709856d2e526ecb57dcd5d9069722812d6d0c77373",
+    "path": "reports\\rinkai_20180904125255.html",
+    "fixture": "rinkai_20180904125255.html",
+    "fixture_sha256": "d111ca4c79de0c7fa846d43154acc8d7ac5a99da495670a6e1caefb48ba4befc",
+    "extraction": "BeautifulSoup html.parser .contBody serialization to UTF-8; original status/date text unchanged; includes header, page clock, service notice and policy."
+  },
+  {
+    "source_url": "https://service.twr.co.jp/service_info/information.html",
+    "archive_url": "https://web.archive.org/web/20191012171221id_/https://service.twr.co.jp/service_info/information.html",
+    "archive_timestamp_utc": "20191012171221",
+    "retrieved_at": "2026-11-02T05:53:04.815320+00:00",
+    "original_sha256": "4d4e0520b86d45ce76e3076ba56bdcda3dee5f8df81f65c0116897af43fdd58c",
+    "path": "reports\\rinkai_20191012171221.html",
+    "fixture": "rinkai_20191012171221.html",
+    "fixture_sha256": "05ec7570a4180c3d7e1c3f7eaf6933de4ed6923287aade8d6351fafbd7a9c318",
+    "extraction": "BeautifulSoup html.parser .contBody serialization to UTF-8; original status/date text unchanged; includes header, page clock, service notice and policy."
+  },
+  {
+    "source_url": "https://service.twr.co.jp/service_info/information.html",
+    "archive_url": "https://web.archive.org/web/20201101035346id_/https://service.twr.co.jp/service_info/information.html",
+    "archive_timestamp_utc": "20201101035346",
+    "retrieved_at": "2026-11-02T05:53:05.114847+00:00",
+    "original_sha256": "963f5cd095e1fcde87cca0fe19cb0c90fe8d4087b368a1dadd1474b7b400ef69",
+    "path": "reports\\rinkai_20201101035346.html"
+  },
+  {
+    "source_url": "https://service.twr.co.jp/rinkai/public/information?lang=ja",
+    "archive_url": "https://web.archive.org/web/20220401102647id_/https://service.twr.co.jp/rinkai/public/information?lang=ja",
+    "archive_timestamp_utc": "20220401102647",
+    "retrieved_at": "2026-11-02T05:53:05.409333+00:00",
+    "original_sha256": "f4906a216389bb1a40ce35efecfda4dc0d953c10ca4449926ecaa7831b6d8adc",
+    "path": "reports\\rinkai_20220401102647.html"
+  },
+  {
+    "source_url": "https://service.twr.co.jp/rinkai/public/information?lang=ja",
+    "archive_url": "https://web.archive.org/web/20220825002322id_/https://service.twr.co.jp/rinkai/public/information?lang=ja",
+    "archive_timestamp_utc": "20220825002322",
+    "retrieved_at": "2026-11-02T05:53:06.463805+00:00",
+    "original_sha256": "a966b0ca74af7fabc30804df542f6ad8df6828a60267e02ca8db749d1c8ecf29",
+    "path": "reports\\rinkai_20220825002322.html",
+    "fixture": "rinkai_20220825002322.html",
+    "fixture_sha256": "1e349ac871c160918f8a1c194d26047ff0ff596a4f04a09aa2af4b35e14bad3c",
+    "extraction": "BeautifulSoup html.parser .contBody serialization to UTF-8; original status/date text unchanged; includes header, page clock, service notice and policy."
+  },
+  {
+    "source_url": "https://service.twr.co.jp/rinkai/public/information?lang=ja",
+    "archive_url": "https://web.archive.org/web/20220825005348id_/https://service.twr.co.jp/rinkai/public/information?lang=ja",
+    "archive_timestamp_utc": "20220825005348",
+    "retrieved_at": "2026-11-02T05:53:05.856447+00:00",
+    "original_sha256": "3b0f18aa0f8d2a289d9000f33ed79bafb9569f923325b74a4ef2abc56762532b",
+    "path": "reports\\rinkai_20220825005348.html",
+    "fixture": "rinkai_20220825005348.html",
+    "fixture_sha256": "e92ef4cc34a9bbd60925add555311cb1b1349110719a461260c8ead2ed3af5ae",
+    "extraction": "BeautifulSoup html.parser .contBody serialization to UTF-8; original status/date text unchanged; includes header, page clock, service notice and policy."
+  },
+  {
+    "source_url": "https://service.twr.co.jp/rinkai/public/information?lang=ja",
+    "archive_url": "https://web.archive.org/web/20220921135804id_/https://service.twr.co.jp/rinkai/public/information?lang=ja",
+    "archive_timestamp_utc": "20220921135804",
+    "retrieved_at": "2026-11-02T05:53:06.587231+00:00",
+    "original_sha256": "46c919997974826f3d8eb5b195843f47fc90b476855c059b44aa015785c00492",
+    "path": "reports\\rinkai_20220921135804.html"
+  },
+  {
+    "source_url": "https://service.twr.co.jp/rinkai/public/information?lang=ja",
+    "archive_url": "https://web.archive.org/web/20220921141944id_/https://service.twr.co.jp/rinkai/public/information?lang=ja",
+    "archive_timestamp_utc": "20220921141944",
+    "retrieved_at": "2026-11-02T05:53:06.702495+00:00",
+    "original_sha256": "b74d84bd9684e5fd9bd82e68f3b212874d8f9aa32e32a692195a124bed2f000d",
+    "path": "reports\\rinkai_20220921141944.html"
+  },
+  {
+    "source_url": "https://service.twr.co.jp/rinkai/public/information?lang=ja",
+    "archive_url": "https://web.archive.org/web/20220926105254id_/https://service.twr.co.jp/rinkai/public/information?lang=ja",
+    "archive_timestamp_utc": "20220926105254",
+    "retrieved_at": "2026-11-02T05:53:07.567498+00:00",
+    "original_sha256": "dc765209fb10bac5ffa70fc4850ca4f9443749a780ff74767156079e7cd5171f",
+    "path": "reports\\rinkai_20220926105254.html",
+    "fixture": "rinkai_20220926105254.html",
+    "fixture_sha256": "ffd0509291fe2844c87980a944015d6ad50af0c4643ac626708d504cc6d1fe13",
+    "extraction": "BeautifulSoup html.parser .contBody serialization to UTF-8; original status/date text unchanged; includes header, page clock, service notice and policy."
+  },
+  {
+    "source_url": "https://service.twr.co.jp/rinkai/public/information?lang=ja",
+    "archive_url": "https://web.archive.org/web/20260611095139id_/https://service.twr.co.jp/rinkai/public/information?lang=ja",
+    "archive_timestamp_utc": "20260611095139",
+    "retrieved_at": "2026-11-02T05:53:07.547918+00:00",
+    "original_sha256": "43dd5f2da171e554e277868ae83c39408a0d8868a727d826af7658d33e95c2fa",
+    "path": "reports\\rinkai_20260611095139.html"
+  }
+]

@@ -1,0 +1,266 @@
+[
+  {
+    "name": "live",
+    "source_url": "https://www.hakonenavi.jp/transportation/",
+    "final_url": "https://www.hakonenavi.jp/transportation/",
+    "status_code": 200,
+    "retrieved_at": "2026-11-02T15:51:55.689771+00:00",
+    "original_sha256": "4897d9e11912a42a4701d275b8db0625db2d73e977b028c156961f7d21aac07e",
+    "path": "reports\\hakone_tozan\\live.html",
+    "fixture": "hakone_tozan_normal.html",
+    "fixture_sha256": "0145ed52d073583ac6a6713bcf669c2ad8b152abfe9298ba72965f61a4b4b518",
+    "capture_utc": null,
+    "extraction": "BeautifulSoup html.parser serializes .operation, removes only .operation_map; UTF-8 wrapper; state/detail text unchanged, other modes and congestion retained."
+  },
+  {
+    "name": "script",
+    "source_url": "https://www.hakonenavi.jp/assets/js/script.js?v=1784599900",
+    "final_url": "https://www.hakonenavi.jp/assets/js/script.js?v=1784599900",
+    "status_code": 200,
+    "retrieved_at": "2026-11-02T15:51:55.281678+00:00",
+    "original_sha256": "884a1ea58ee64409d176fdd26df4f9929d8a4618a28b0b091a184c84eeeca9ce",
+    "path": "reports\\hakone_tozan\\script.html"
+  },
+  {
+    "name": "policy",
+    "source_url": "https://www.hakonenavi.jp/policy/",
+    "final_url": "https://www.hakonenavi.jp/policy/",
+    "status_code": 200,
+    "retrieved_at": "2026-11-02T15:51:55.396318+00:00",
+    "original_sha256": "4c39a276416cbe83bb5bb424cb9f5f4e9793b1f849e28291f0580a2eda4bc388",
+    "path": "reports\\hakone_tozan\\policy.html"
+  },
+  {
+    "name": "route",
+    "source_url": "https://www.hakonenavi.jp/hakone-tozan/",
+    "final_url": "https://www.hakonenavi.jp/hakone-tozan/",
+    "status_code": 200,
+    "retrieved_at": "2026-11-02T15:51:55.965869+00:00",
+    "original_sha256": "51dedc032102895f33355f2e478b5606d89e5b7afd996948eac846c973491c83",
+    "path": "reports\\hakone_tozan\\route.html"
+  },
+  {
+    "name": "20230326061457",
+    "source_url": "https://web.archive.org/web/20230326061457id_/https://www.hakonenavi.jp/transportation/",
+    "final_url": "https://web.archive.org/web/20230326061457id_/https://www.hakonenavi.jp/transportation/",
+    "status_code": 200,
+    "retrieved_at": "2026-11-02T15:51:57.397797+00:00",
+    "original_sha256": "9721f74f9c8600a4e03a6b077b7a59abfc92603e698b269aa24700730833068f",
+    "path": "reports\\hakone_tozan\\20230326061457.html",
+    "fixture": "hakone_tozan_20230326061457.html",
+    "fixture_sha256": "5c955f9d3a653db72de9ab7049c9623be379dafb1fd3854b7e5a495720603bf2",
+    "capture_utc": "20230326061457",
+    "extraction": "BeautifulSoup html.parser serializes .operation, removes only .operation_map; UTF-8 wrapper; state/detail text unchanged, other modes and congestion retained."
+  },
+  {
+    "name": "20230606145553",
+    "source_url": "https://web.archive.org/web/20230606145553id_/https://www.hakonenavi.jp/transportation/",
+    "final_url": "https://web.archive.org/web/20230606145553id_/https://www.hakonenavi.jp/transportation/",
+    "status_code": 200,
+    "retrieved_at": "2026-11-02T15:51:57.030815+00:00",
+    "original_sha256": "d3835aa989e01ee55b584f16d4c6f3b60fbc543948ad415b54048b48b222c5bd",
+    "path": "reports\\hakone_tozan\\20230606145553.html"
+  },
+  {
+    "name": "20240824212842",
+    "source_url": "https://web.archive.org/web/20240824212842id_/https://www.hakonenavi.jp/transportation/",
+    "final_url": "https://web.archive.org/web/20240824212842id_/https://www.hakonenavi.jp/transportation/",
+    "status_code": 200,
+    "retrieved_at": "2026-11-02T15:51:57.372201+00:00",
+    "original_sha256": "ee9bf436d5ced71c5dcfd9208eb9225660e40b1471faf494a5f347dd88b26d4d",
+    "path": "reports\\hakone_tozan\\20240824212842.html"
+  },
+  {
+    "name": "20240904130150",
+    "source_url": "https://web.archive.org/web/20240904130150id_/https://www.hakonenavi.jp/transportation/",
+    "final_url": "https://web.archive.org/web/20240904130150id_/https://www.hakonenavi.jp/transportation/",
+    "status_code": 200,
+    "retrieved_at": "2026-11-02T15:51:56.683015+00:00",
+    "original_sha256": "502955942d8e9f16cb4597151b463dd80d4465a5f8746cd5f67729b6ee03d61b",
+    "path": "reports\\hakone_tozan\\20240904130150.html"
+  },
+  {
+    "name": "20250321040309",
+    "source_url": "https://web.archive.org/web/20250321040309id_/https://www.hakonenavi.jp/transportation/",
+    "final_url": "https://web.archive.org/web/20250321040309id_/https://www.hakonenavi.jp/transportation/",
+    "status_code": 200,
+    "retrieved_at": "2026-11-02T15:51:57.500314+00:00",
+    "original_sha256": "ef8558a7bab07f9c60559738ac4f88a5dd22e3ddc15fb807b90721a00cbc7045",
+    "path": "reports\\hakone_tozan\\20250321040309.html",
+    "fixture": "hakone_tozan_20250321040309.html",
+    "fixture_sha256": "2688f19c2c9eeede4aa6ac3f0b5da5d7b6368917315cf4827e4102cfc6f1792c",
+    "capture_utc": "20250321040309",
+    "extraction": "BeautifulSoup html.parser serializes .operation, removes only .operation_map; UTF-8 wrapper; state/detail text unchanged, other modes and congestion retained."
+  },
+  {
+    "name": "20250808050634",
+    "source_url": "https://web.archive.org/web/20250808050634id_/https://www.hakonenavi.jp/transportation/",
+    "final_url": "https://web.archive.org/web/20250808050634id_/https://www.hakonenavi.jp/transportation/",
+    "status_code": 200,
+    "retrieved_at": "2026-11-02T15:51:57.207877+00:00",
+    "original_sha256": "298b9532dfa379986ea51e82010d5d406484b9cb8cc39825f61bc17b9726a438",
+    "path": "reports\\hakone_tozan\\20250808050634.html"
+  },
+  {
+    "name": "20250913075603",
+    "source_url": "https://web.archive.org/web/20250913075603id_/https://www.hakonenavi.jp/transportation/",
+    "final_url": "https://web.archive.org/web/20250913075603id_/https://www.hakonenavi.jp/transportation/",
+    "status_code": 200,
+    "retrieved_at": "2026-11-02T15:51:56.170812+00:00",
+    "original_sha256": "cca4ea8bde193d3b9a04cfcb84213d43966984587d86b45a92a89f69c5ab3750",
+    "path": "reports\\hakone_tozan\\20250913075603.html"
+  },
+  {
+    "name": "20251112054202",
+    "source_url": "https://web.archive.org/web/20251112054202id_/https://www.hakonenavi.jp/transportation/",
+    "final_url": "https://web.archive.org/web/20251112054202id_/https://www.hakonenavi.jp/transportation/",
+    "status_code": 200,
+    "retrieved_at": "2026-11-02T15:51:56.984222+00:00",
+    "original_sha256": "c847ae15386bb0344d4bf0d8a7d64d314b1f3097d016e72d5e4766d6ebf06871",
+    "path": "reports\\hakone_tozan\\20251112054202.html"
+  },
+  {
+    "name": "20260208142500",
+    "source_url": "https://web.archive.org/web/20260208142500id_/https://www.hakonenavi.jp/transportation/",
+    "final_url": "https://web.archive.org/web/20260208142500id_/https://www.hakonenavi.jp/transportation/",
+    "status_code": 200,
+    "retrieved_at": "2026-11-02T15:51:57.296755+00:00",
+    "original_sha256": "cbac9ad770843afbd56dc853eb885d274e77b45dc5c8dc912b970563a3b6ed28",
+    "path": "reports\\hakone_tozan\\20260208142500.html",
+    "fixture": "hakone_tozan_20260208142500.html",
+    "fixture_sha256": "e81f3165bef97425fc6cd35d1e0ac0ece912d1f014d0ead2266990f543a21694",
+    "capture_utc": "20260208142500",
+    "extraction": "BeautifulSoup html.parser serializes .operation, removes only .operation_map; UTF-8 wrapper; state/detail text unchanged, other modes and congestion retained."
+  },
+  {
+    "name": "20191019095417",
+    "source_url": "https://web.archive.org/web/20191019095417id_/https://www.hakonenavi.jp/transportation/",
+    "final_url": "https://web.archive.org/web/20191019095417id_/https://www.hakonenavi.jp/transportation/",
+    "status_code": 200,
+    "retrieved_at": "2026-11-02T15:52:40.514039+00:00",
+    "original_sha256": "1a0342fa34503d6d7917c8514ff42b110a0b18427c229e68d21ccf97be1bcc71",
+    "path": "reports\\hakone_tozan\\20191019095417.html"
+  },
+  {
+    "name": "20191118050015",
+    "source_url": "https://web.archive.org/web/20191118050015id_/https://www.hakonenavi.jp/transportation/",
+    "final_url": "https://web.archive.org/web/20191118050015id_/https://www.hakonenavi.jp/transportation/",
+    "status_code": 200,
+    "retrieved_at": "2026-11-02T15:52:40.086463+00:00",
+    "original_sha256": "278cc5bd8e21b0bed03bb3d44fa0d84b4e5f3a24c2ffa70023e9eb590da85d41",
+    "path": "reports\\hakone_tozan\\20191118050015.html"
+  },
+  {
+    "name": "20191214011408",
+    "source_url": "https://web.archive.org/web/20191214011408id_/https://www.hakonenavi.jp/transportation/",
+    "final_url": "https://web.archive.org/web/20191214011408id_/https://www.hakonenavi.jp/transportation/",
+    "status_code": 200,
+    "retrieved_at": "2026-11-02T15:52:42.375613+00:00",
+    "original_sha256": "30751aac31d9d53b243ad7db436080ea61145403aa21dd8d9d15b2a5a683d9a1",
+    "path": "reports\\hakone_tozan\\20191214011408.html"
+  },
+  {
+    "name": "20200401233055",
+    "source_url": "https://web.archive.org/web/20200401233055id_/https://www.hakonenavi.jp/transportation/",
+    "final_url": "https://web.archive.org/web/20200401233055id_/https://www.hakonenavi.jp/transportation/",
+    "status_code": 200,
+    "retrieved_at": "2026-11-02T15:52:40.436476+00:00",
+    "original_sha256": "3209d031c16f9d1059eeed7593381a50a69bd85c8bbfcecd3298337e96423aca",
+    "path": "reports\\hakone_tozan\\20200401233055.html"
+  },
+  {
+    "name": "20200716163557",
+    "source_url": "https://web.archive.org/web/20200716163557id_/https://www.hakonenavi.jp/transportation/",
+    "final_url": "https://web.archive.org/web/20200716170934id_/https://www.hakonenavi.jp/transportation/",
+    "status_code": 200,
+    "retrieved_at": "2026-11-02T15:52:48.525291+00:00",
+    "original_sha256": "0bdd7e31c033a857fe6213025903c130c9fdb5bb2375b5df50b1fd90e78eef07",
+    "path": "reports\\hakone_tozan\\20200716163557.html"
+  },
+  {
+    "name": "20200919060806",
+    "source_url": "https://web.archive.org/web/20200919060806id_/https://www.hakonenavi.jp/transportation/",
+    "final_url": "https://web.archive.org/web/20200919060806id_/https://www.hakonenavi.jp/transportation/",
+    "status_code": 200,
+    "retrieved_at": "2026-11-02T15:52:41.957788+00:00",
+    "original_sha256": "05836eededf7c88d3c7170958824e53ffcdb0d7561a73a713fba7a751bb0474c",
+    "path": "reports\\hakone_tozan\\20200919060806.html"
+  },
+  {
+    "name": "20210708033131",
+    "source_url": "https://web.archive.org/web/20210708033131id_/https://www.hakonenavi.jp/transportation/",
+    "final_url": "https://web.archive.org/web/20210708033131id_/https://www.hakonenavi.jp/transportation/",
+    "status_code": 200,
+    "retrieved_at": "2026-11-02T15:52:42.688557+00:00",
+    "original_sha256": "2ab8c73048654fbee340c2228d88deb497a4da0e327aa233d198d3eb888c8389",
+    "path": "reports\\hakone_tozan\\20210708033131.html"
+  },
+  {
+    "name": "20210124025904",
+    "source_url": "https://web.archive.org/web/20210124025904id_/https://www.hakonenavi.jp/transportation/",
+    "error": "All connection attempts failed"
+  },
+  {
+    "name": "20210128090612",
+    "source_url": "https://web.archive.org/web/20210128090612id_/https://www.hakonenavi.jp/transportation/",
+    "error": "All connection attempts failed"
+  },
+  {
+    "name": "20210518042540",
+    "source_url": "https://web.archive.org/web/20210518042540id_/https://www.hakonenavi.jp/transportation/",
+    "error": "All connection attempts failed"
+  },
+  {
+    "name": "20220514010015",
+    "source_url": "https://web.archive.org/web/20220514010015id_/https://www.hakonenavi.jp/transportation/",
+    "error": "All connection attempts failed"
+  },
+  {
+    "name": "20220820055252",
+    "source_url": "https://web.archive.org/web/20220820055252id_/https://www.hakonenavi.jp/transportation/",
+    "error": "All connection attempts failed"
+  },
+  {
+    "name": "20230512114406",
+    "source_url": "https://web.archive.org/web/20230512114406id_/https://www.hakonenavi.jp/transportation/",
+    "final_url": "https://web.archive.org/web/20230512114406id_/https://www.hakonenavi.jp/transportation/",
+    "status_code": 200,
+    "retrieved_at": "2026-11-02T15:53:53.752666+00:00",
+    "original_sha256": "dce57a860282f56e3d68023b1b0a2f3599f57df978c976ecd29e93959eaa5f32",
+    "path": "reports\\hakone_tozan\\20230512114406.html"
+  },
+  {
+    "name": "20230822084358",
+    "source_url": "https://web.archive.org/web/20230822084358id_/https://www.hakonenavi.jp/transportation/",
+    "error": "All connection attempts failed"
+  },
+  {
+    "name": "20240619172850",
+    "source_url": "https://web.archive.org/web/20240619172850id_/https://www.hakonenavi.jp/transportation/",
+    "error": "All connection attempts failed"
+  },
+  {
+    "name": "20250523125342",
+    "source_url": "https://web.archive.org/web/20250523125342id_/https://www.hakonenavi.jp/transportation/",
+    "error": "All connection attempts failed"
+  },
+  {
+    "name": "20250622085432",
+    "source_url": "https://web.archive.org/web/20250622085432id_/https://www.hakonenavi.jp/transportation/",
+    "error": "All connection attempts failed"
+  },
+  {
+    "name": "20260310095200",
+    "source_url": "https://web.archive.org/web/20260310095200id_/https://www.hakonenavi.jp/transportation/",
+    "final_url": "https://web.archive.org/web/20260310095200id_/https://www.hakonenavi.jp/transportation/",
+    "status_code": 200,
+    "retrieved_at": "2026-11-02T15:53:53.551452+00:00",
+    "original_sha256": "26fc463ddc4e5aa4d4ac06a12f6e3a97c3f5e25effc1f6c3c88cafc8508871eb",
+    "path": "reports\\hakone_tozan\\20260310095200.html"
+  },
+  {
+    "name": "20260618213458",
+    "source_url": "https://web.archive.org/web/20260618213458id_/https://www.hakonenavi.jp/transportation/",
+    "error": "All connection attempts failed"
+  }
+]

@@ -1,0 +1,38 @@
+name: 取得の停止・変更の依頼（取得元の方向け）
+description: 本ライブラリによる取得の停止や変更を依頼します。
+title: "[停止・変更の依頼] "
+labels: ["removal-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ご連絡ありがとうございます。原則として7日以内に、該当Providerを既定の取得対象から外し、次のリリースで削除または修正します。
+        この内容は公開されます。個人情報は記載しないでください。
+  - type: input
+    id: organization
+    attributes:
+      label: 事業者・組織名
+    validations:
+      required: true
+  - type: input
+    id: provider
+    attributes:
+      label: 対象（Provider名または取得先URL）
+      placeholder: 例：tokyu、https://www.example.co.jp/unkou/
+    validations:
+      required: true
+  - type: dropdown
+    id: request
+    attributes:
+      label: ご依頼の内容
+      options:
+        - 取得を停止してほしい
+        - 取得間隔・取得方法を変更してほしい
+        - その他
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: 詳細
+      description: 理由や、変更をご希望の場合はその内容をご記入ください（任意）。

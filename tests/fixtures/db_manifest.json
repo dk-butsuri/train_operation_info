@@ -1,0 +1,63 @@
+{
+  "investigation": "Live official public HTML/JavaScript and abnormal JSON; no archive used. Retrieval times from the local write completion timestamp of saved raw responses.",
+  "sources": [
+    {
+      "fixture": "db_page.html",
+      "source_url": "https://verkehrslage.bahnhof.de/de/region/DB_Fernverkehr",
+      "retrieved_at_utc": "2026-11-03T03:35:52.777571+00:00",
+      "original_sha256": "47102d4ae70fe3a56e01eb03c61e20a8e5a6a08189cf4583041157b5cc79361d",
+      "fixture_sha256": "61e05a629669287a9a41707cadbf98dbbfb4ba88d933f9bcc1c8670c5e9bcb5a",
+      "transformation": "Extracted public Nuxt risApiUrl/risApiKey assignment only; public key replaced with fixture-public-key. Other page content and unrelated configuration omitted."
+    },
+    {
+      "fixture": "db_listing.json",
+      "source_url": "https://verkehrslage.bahnhof.de/api/views/disruptions?channels=AwarenessBlitzbox%2CTrafficReport&organisationalUnitNames=DB_Fernverkehr&from=2026-11-03T00%3A00%3A00%2B01%3A00&to=2026-11-03T23%3A59%3A59.999%2B01%3A00&limit=100&offset=0",
+      "retrieved_at_utc": "2026-11-03T03:37:24.145716+00:00",
+      "original_sha256": "6ee5be7f68fed93a464912b11fc6ca110437b7e5b255b6f136844b98d87a3850",
+      "fixture_sha256": "bbd782614d9b9c9b961960087af5273b40ad280bbe13cedd5f755b354ddcf289",
+      "transformation": "JSON projection: all 70 objects and pagination fields retained; identity, parent identity, organisation/channels, effect, cause and expiry fields retained. Other fields omitted; values unchanged."
+    },
+    {
+      "fixture": "db_message_berlin.json",
+      "source_url": "https://verkehrslage.bahnhof.de/api/views/message?id=493b1167-9762-49df-a8f3-35b7dabe487e&locale=DE",
+      "retrieved_at_utc": "2026-11-03T03:38:50.482253+00:00",
+      "original_sha256": "bba06f7f748bb698395e6b32e505b55cb6351d87325a4fcb763866d59d066403",
+      "fixture_sha256": "bba06f7f748bb698395e6b32e505b55cb6351d87325a4fcb763866d59d066403",
+      "transformation": "Unmodified response bytes."
+    },
+    {
+      "fixture": "db_message_wuppertal.json",
+      "source_url": "https://verkehrslage.bahnhof.de/api/views/message?id=c1d91fe2-8cac-4287-bf5c-2d391039b910&locale=DE",
+      "retrieved_at_utc": "2026-11-03T03:38:51.300623+00:00",
+      "original_sha256": "a595d4bb3be5b385d879839bfc34713ca74b79f7774bbe0d051f992e2ef7045f",
+      "fixture_sha256": "a595d4bb3be5b385d879839bfc34713ca74b79f7774bbe0d051f992e2ef7045f",
+      "transformation": "Unmodified response bytes."
+    },
+    {
+      "fixture": "db_CVs5M6ee.js",
+      "source_url": "https://verkehrslage.bahnhof.de/_nuxt/CVs5M6ee.js",
+      "retrieved_at_utc": "2026-11-03T03:36:05.239317+00:00",
+      "original_sha256": "a7825588eda32e795a04445c188382f3cea923b2e019c0ee1e1f8d73fc38d610",
+      "fixture_sha256": "707a277471a3f60d4e7e6b764d1589eafb894254cd74efa33ec4f9f96dc4a04a",
+      "transformation": "Concatenated verbatim excerpts around named functions; each excerpt ends after the recorded number of characters and can end mid-function. No renaming or semantic edits."
+    },
+    {
+      "fixture": "db_Dhqahhbt.js",
+      "source_url": "https://verkehrslage.bahnhof.de/_nuxt/Dhqahhbt.js",
+      "retrieved_at_utc": "2026-11-03T03:36:04.922799+00:00",
+      "original_sha256": "ab9acf88eef81bd3ce42e1d3d0edde7d707de482f03c847c865ed0f902d27d57",
+      "fixture_sha256": "d57472bdfb238c920e1642c48c9ad8d9be1402ed017c4f2773671dae4e630049",
+      "transformation": "Concatenated verbatim excerpts around named functions; each excerpt ends after the recorded number of characters and can end mid-function. No renaming or semantic edits."
+    }
+  ],
+  "additional_review": {
+    "url": "https://verkehrslage.bahnhof.de/de/impressum",
+    "retrieved_at_utc": "2026-11-03T03:37:51.151658+00:00",
+    "original_sha256": "5727b95be560e0f87295c0e38626e26874ade67360ac736b023c7c3e485b07c3"
+  },
+  "message_aliases": {
+    "89ae83a0-740d-3e50-92d6-184c6d472c71": "db_message_berlin.json",
+    "15bee9d8-282e-370b-8a97-682ab0f3f37a": "db_message_wuppertal.json"
+  },
+  "alias_evidence": "All four message endpoints were fetched; each parent/child pair had byte-identical responses. The files retain one copy per pair."
+}

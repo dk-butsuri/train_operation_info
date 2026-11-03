@@ -1,0 +1,18 @@
+[
+  {
+    "url": "https://www.kotsu.metro.tokyo.jp/subway/schedule/index.html",
+    "retrieved_at_utc": "2026-11-02T05:38:05.725719+00:00",
+    "original_sha256": "96df11e4474a9634f51a82e18a7b41d6d7eb86d007f39f0a388bcc43622e9b45",
+    "fixture": "tests/fixtures/toei_normal.html",
+    "fixture_sha256": "4a289589a2d3bbb2ad0a24dde2c869cad63f455e3d61f5009dc622e73d73118d",
+    "transformation": "BeautifulSoup html.parser serialization of #js-operationInfo and #main-body inside a minimal UTF-8 HTML document"
+  },
+  {
+    "url": "https://www.kotsu.metro.tokyo.jp/common/scripts/main.js?v=2026101901",
+    "retrieved_at_utc": "2026-11-02T05:38:23.237490+00:00",
+    "original_sha256": "20739c7b8aaffb422f278f39f7514feccf34626ef5d8939b0b6fc1c1ba4103c8",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected script; raw response is in reports, no runtime fixture"
+  }
+]

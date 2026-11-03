@@ -1,0 +1,30 @@
+[
+  {
+    "area": "kanto",
+    "url": "https://traininfo.jreast.co.jp/train_info/kanto.aspx",
+    "fetched_at": "2026-11-02T02:12:12.210098+00:00",
+    "original_sha256": "582fc75da4d93ce4c1216cc3c8523eb2ebd752f6a78add07fbf0e6d04afea14c",
+    "fixture_sha256": "71eb68929908a9efdf17b1a9128e999d5634d3647175b8e036b985e7175a4863"
+  },
+  {
+    "area": "tohoku",
+    "url": "https://traininfo.jreast.co.jp/train_info/tohoku.aspx",
+    "fetched_at": "2026-11-02T02:12:12.271238+00:00",
+    "original_sha256": "d5d205efc41397fceb28448a75560fe555b3e3ae1d84048c73d2333b40cb8239",
+    "fixture_sha256": "83fdea3ea582c1893795058f735cd3ef0c95542f9d269c237a5ab45489128121"
+  },
+  {
+    "area": "shinetsu",
+    "url": "https://traininfo.jreast.co.jp/train_info/shinetsu.aspx",
+    "fetched_at": "2026-11-02T02:12:12.250918+00:00",
+    "original_sha256": "af7dfaf614a3cb6f84a992679d69d70a78231239e1667ef46e749acbc62b2e07",
+    "fixture_sha256": "236b12842ed4af79c33393e65e84b66e496ae5c7bcad95dae0941cea6bfa16af"
+  },
+  {
+    "area": "shinkansen",
+    "url": "https://traininfo.jreast.co.jp/train_info/shinkansen.aspx",
+    "fetched_at": "2026-11-02T02:12:12.263143+00:00",
+    "original_sha256": "d2e0eadb1ae86a93b4e7df90430aff180853b866f14ea8f958ee024ca288b562",
+    "fixture_sha256": "4d0ceb0fe950d26fb31ed93db896f6fd80f88738d4325967fb969ae8d9118384"
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "fixture": "jrhokkaido_area_02.json",
+    "url": "https://www3.jrhokkaido.co.jp/webunkou/json/area/area_02.json",
+    "captured_at": "2026-11-03T03:40:36.825635+00:00",
+    "original_sha256": "772fffbf4d6bd9e7a86900328a622a9b4d06c8dfc05a1c1fc05d945865693f0b",
+    "fixture_sha256": "772fffbf4d6bd9e7a86900328a622a9b4d06c8dfc05a1c1fc05d945865693f0b",
+    "method": "HTTP GET Chrome-like User-Agent; original decoded response bytes (incl. UTF-8 BOM), no transformation",
+    "content_type": "application/json",
+    "note": "道央エリア (doo). Real capture: all senku NORMAL (code 0), express ALERT (code 1, out of scope, not used)."
+  },
+  {
+    "fixture": "jrhokkaido_area_03.json",
+    "url": "https://www3.jrhokkaido.co.jp/webunkou/json/area/area_03.json",
+    "captured_at": "2026-11-03T03:40:36.868720+00:00",
+    "original_sha256": "d022956144b3f778b5d17f6decb24ccfbec4a4cd1f6bf3ff3108e437005b1f6a",
+    "fixture_sha256": "d022956144b3f778b5d17f6decb24ccfbec4a4cd1f6bf3ff3108e437005b1f6a",
+    "method": "HTTP GET Chrome-like User-Agent; original decoded response bytes (incl. UTF-8 BOM), no transformation",
+    "content_type": "application/json",
+    "note": "道南エリア (donan). Real capture: all senku NORMAL (code 0)."
+  },
+  {
+    "fixture": "jrhokkaido_area_04.json",
+    "url": "https://www3.jrhokkaido.co.jp/webunkou/json/area/area_04.json",
+    "captured_at": "2026-11-03T03:40:36.892060+00:00",
+    "original_sha256": "2dfc3a2a53c878ed666baa1492f500f30f9c4276a0a3b08cba1e2eb4c52dcdd4",
+    "fixture_sha256": "2dfc3a2a53c878ed666baa1492f500f30f9c4276a0a3b08cba1e2eb4c52dcdd4",
+    "method": "HTTP GET Chrome-like User-Agent; original decoded response bytes (incl. UTF-8 BOM), no transformation",
+    "content_type": "application/json",
+    "note": "道北エリア (dohoku). Real capture: soya (宗谷線) ALERT (code 1) both today and tomorrow, a genuine suspension between 音威子府 and 稚内 caused by a train/bear collision on 2026-10-30; notice time 2026-11-02T15:39+09:00 captured verbatim in gaikyo[0]."
+  },
+  {
+    "fixture": "jrhokkaido_area_05.json",
+    "url": "https://www3.jrhokkaido.co.jp/webunkou/json/area/area_05.json",
+    "captured_at": "2026-11-03T03:40:36.940291+00:00",
+    "original_sha256": "d022956144b3f778b5d17f6decb24ccfbec4a4cd1f6bf3ff3108e437005b1f6a",
+    "fixture_sha256": "d022956144b3f778b5d17f6decb24ccfbec4a4cd1f6bf3ff3108e437005b1f6a",
+    "method": "HTTP GET Chrome-like User-Agent; original decoded response bytes (incl. UTF-8 BOM), no transformation",
+    "content_type": "application/json",
+    "note": "道東エリア (doto). Real capture: all senku NORMAL (code 0). Byte-identical to area_03.json at capture time (both areas had no notices and the shared placeholder gaikyo entry)."
+  }
+]

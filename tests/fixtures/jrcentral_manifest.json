@@ -1,0 +1,114 @@
+[
+  {
+    "fixture": "jrcentral_operation.json",
+    "url": "https://traininfo.jr-central.co.jp/zairaisen/data/trainInfo/json/unkou.json",
+    "retrieved_at": "2026-11-02T15:43:06.474737+00:00",
+    "original_sha256": "98fb6c1e47c393569abd0e19ce257a0cec33396cc3b250110d73b76bea0413f1",
+    "fixture_sha256": "98fb6c1e47c393569abd0e19ce257a0cec33396cc3b250110d73b76bea0413f1",
+    "extraction": "none; exact response bytes"
+  },
+  {
+    "fixture": "jrcentral_service.json",
+    "url": "https://traininfo.jr-central.co.jp/zairaisen/data/hp_service_jotai_kanri.json",
+    "retrieved_at": "2026-11-02T15:43:06.458371+00:00",
+    "original_sha256": "02001c53babafabb206f25b7797c3c115f5d8b8e0cd6b106ed1b0c19ca445b0c",
+    "fixture_sha256": "02001c53babafabb206f25b7797c3c115f5d8b8e0cd6b106ed1b0c19ca445b0c",
+    "extraction": "none; exact response bytes"
+  },
+  {
+    "fixture": "jrcentral_lines.json",
+    "url": "https://traininfo.jr-central.co.jp/zairaisen/data/hp_senku_master_ja.json",
+    "retrieved_at": "2026-11-02T15:43:06.457848+00:00",
+    "original_sha256": "339d07766e0bc2993d9500b51b8b245390cb6ac1776f6a8fc2c5187d61adffe3",
+    "fixture_sha256": "339d07766e0bc2993d9500b51b8b245390cb6ac1776f6a8fc2c5187d61adffe3",
+    "extraction": "none; exact response bytes"
+  },
+  {
+    "fixture": "jrcentral_locale.json",
+    "url": "https://traininfo.jr-central.co.jp/zairaisen/data/locales/ja/hp_koteimoji_master.json",
+    "retrieved_at": "2026-11-02T15:43:06.457817+00:00",
+    "original_sha256": "8b7c2b68345580387778b6b2ba658df4e5cd7ce66fb001477ba34158c0029eb5",
+    "fixture_sha256": "8b7c2b68345580387778b6b2ba658df4e5cd7ce66fb001477ba34158c0029eb5",
+    "extraction": "none; exact response bytes"
+  },
+  {
+    "fixture": "jrcentral_status.js",
+    "url": "https://traininfo.jr-central.co.jp/zairaisen/js/status.js?v=1.0.0",
+    "retrieved_at": "2026-11-02T15:43:06.457045+00:00",
+    "original_sha256": "3779e6da4f571806d5a2cc60c63a462b50fdf7777dfdd459164653f1150c9fb0",
+    "fixture_sha256": "3779e6da4f571806d5a2cc60c63a462b50fdf7777dfdd459164653f1150c9fb0",
+    "extraction": "none; exact response bytes"
+  },
+  {
+    "fixture": "jrcentral_contents.js",
+    "url": "https://traininfo.jr-central.co.jp/zairaisen/js/contents.js?v=1.0.0",
+    "retrieved_at": "2026-11-02T15:43:06.457611+00:00",
+    "original_sha256": "aad3bb7effa787fc3220759ebd43f4e7d9eadf7de09ac27c0ba2cfd6353c2b8e",
+    "fixture_sha256": "aad3bb7effa787fc3220759ebd43f4e7d9eadf7de09ac27c0ba2cfd6353c2b8e",
+    "extraction": "none; exact response bytes"
+  },
+  {
+    "fixture": "jrcentral_index.js",
+    "url": "https://traininfo.jr-central.co.jp/zairaisen/js/index.js?v=1.0.6",
+    "retrieved_at": "2026-11-02T15:43:06.925507+00:00",
+    "original_sha256": "32b01b6d5b5e3f7f6b2df2c8f724ae5d8764718988371ae1924a1e586ee47daf",
+    "fixture_sha256": "32b01b6d5b5e3f7f6b2df2c8f724ae5d8764718988371ae1924a1e586ee47daf",
+    "extraction": "none; exact response bytes"
+  },
+  {
+    "fixture": "jrcentral_common.js",
+    "url": "https://traininfo.jr-central.co.jp/zairaisen/js/common.js?v=1.0.1",
+    "retrieved_at": "2026-11-02T15:43:06.961978+00:00",
+    "original_sha256": "79bb3166d0c1ed03f2791527fab6b73b940f8e8e703a20c63cf82ad7db83a510",
+    "fixture_sha256": "79bb3166d0c1ed03f2791527fab6b73b940f8e8e703a20c63cf82ad7db83a510",
+    "extraction": "none; exact response bytes"
+  },
+  {
+    "fixture": "jrcentral_train_information.js",
+    "url": "https://traininfo.jr-central.co.jp/zairaisen/js/train_information.js?v=1.0.0",
+    "retrieved_at": "2026-11-02T15:43:06.947214+00:00",
+    "original_sha256": "29e37fc793eece9ba4705b1d58fac964e81a637410693032463a876e29c2030b",
+    "fixture_sha256": "29e37fc793eece9ba4705b1d58fac964e81a637410693032463a876e29c2030b",
+    "extraction": "none; exact response bytes"
+  },
+  {
+    "fixture": "jrcentral_policy.html",
+    "url": "https://jr-central.co.jp/policy/",
+    "retrieved_at": "2026-11-02T15:43:07.116206+00:00",
+    "original_sha256": "06ee2709e4d481ccf305e205d78fe75a914c07a1d0828f0c0986fe3661a4000f",
+    "fixture_sha256": "06ee2709e4d481ccf305e205d78fe75a914c07a1d0828f0c0986fe3661a4000f",
+    "extraction": "none; exact response bytes"
+  },
+  {
+    "fixture": "jrcentral_history_60741.json",
+    "url": "https://traininfo.jr-central.co.jp/zairaisen/data/trainInfo/history/0000000000060741/unkou.json",
+    "retrieved_at": "2026-11-02T15:43:20.494391+00:00",
+    "original_sha256": "38fe555007959d6432a68fab24fe3879a2cd03f1c7b6c470f60e1a3e015efd40",
+    "fixture_sha256": "38fe555007959d6432a68fab24fe3879a2cd03f1c7b6c470f60e1a3e015efd40",
+    "extraction": "none; exact response bytes"
+  },
+  {
+    "fixture": "jrcentral_history_60740.json",
+    "url": "https://traininfo.jr-central.co.jp/zairaisen/data/trainInfo/history/0000000000060740/unkou.json",
+    "retrieved_at": "2026-11-02T15:43:20.839382+00:00",
+    "original_sha256": "5c66c8bfce1fdaadb38607537f6d920760c8e9fd396a88403ce1cb6c12a0e033",
+    "fixture_sha256": "5c66c8bfce1fdaadb38607537f6d920760c8e9fd396a88403ce1cb6c12a0e033",
+    "extraction": "none; exact response bytes"
+  },
+  {
+    "fixture": "jrcentral_history_60739.json",
+    "url": "https://traininfo.jr-central.co.jp/zairaisen/data/trainInfo/history/0000000000060739/unkou.json",
+    "retrieved_at": "2026-11-02T15:43:21.154974+00:00",
+    "original_sha256": "c07d69dc314e1fdea11506b988c6909ba39d295ef1511d726f78d5a0f2ffc8ed",
+    "fixture_sha256": "c07d69dc314e1fdea11506b988c6909ba39d295ef1511d726f78d5a0f2ffc8ed",
+    "extraction": "none; exact response bytes"
+  },
+  {
+    "fixture": "jrcentral_normal.json",
+    "url": "https://traininfo.jr-central.co.jp/zairaisen/data/trainInfo/json/unkou.json",
+    "retrieved_at": "2026-11-02T15:49:24.246930+00:00",
+    "original_sha256": "a493e05e43f57c33dbe2f92d8f18fcd9f2aa4d0babae652dabde3e4fc3947c01",
+    "fixture_sha256": "a493e05e43f57c33dbe2f92d8f18fcd9f2aa4d0babae652dabde3e4fc3947c01",
+    "extraction": "none; exact response bytes"
+  }
+]

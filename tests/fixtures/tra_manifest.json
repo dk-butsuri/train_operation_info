@@ -1,0 +1,102 @@
+[
+  {
+    "file": "tra_normal.html",
+    "url": "https://www.railway.gov.tw/tra-tip-web/tip/tip007/tip711/blockList",
+    "archive_url": null,
+    "archive_timestamp_utc": null,
+    "retrieved_date_utc": "2026-11-02",
+    "original_sha256": "8b1a3b9218adb93ee8c71a28ac8cf346093693edda8bb5a017a4571b81aaf6ee",
+    "fixture_sha256": "693935e451320688a6d90126ec85d0e6ab5179a9e9a8cab99f9efb248d81339a",
+    "extraction": "BeautifulSoup html.parser: serialize #content direct p elements and complete .operation-list; wrap in div#content; no text or state edits"
+  },
+  {
+    "file": "tra_20240213061449.html",
+    "url": "https://www.railway.gov.tw/tra-tip-web/tip/tip007/tip711/blockList",
+    "archive_url": "https://web.archive.org/web/20240213061449id_/https://www.railway.gov.tw/tra-tip-web/tip/tip007/tip711/blockList",
+    "archive_timestamp_utc": "2024-02-13T06:14:49+00:00",
+    "retrieved_date_utc": "2026-11-02",
+    "original_sha256": "b1ceb38e7de1279cb8d0b10c3efe800c69af17b5c01a0be1234b8074bfdd89ee",
+    "fixture_sha256": "9a5de1ca694bea75af8428f35921802a21d6e531d494f8e07bb8b5a082702ca2",
+    "extraction": "BeautifulSoup html.parser: serialize #content direct p elements and complete .operation-list; wrap in div#content; no text or state edits"
+  },
+  {
+    "file": "tra_20240403013943.html",
+    "url": "https://www.railway.gov.tw/tra-tip-web/tip/tip007/tip711/blockList",
+    "archive_url": "https://web.archive.org/web/20240403013943id_/https://www.railway.gov.tw/tra-tip-web/tip/tip007/tip711/blockList",
+    "archive_timestamp_utc": "2024-04-03T01:39:43+00:00",
+    "retrieved_date_utc": "2026-11-02",
+    "original_sha256": "92866216529f1f7aa9a0cdde3a185b192ef76e303052632329f64a54f1e635be",
+    "fixture_sha256": "6bd4c6f562c488c0a7f8a5be7236a2ad2cfa7d32464800cf82daf14b7f07dc43",
+    "extraction": "BeautifulSoup html.parser: serialize #content direct p elements and complete .operation-list; wrap in div#content; no text or state edits"
+  },
+  {
+    "file": "tra_20240804153201.html",
+    "url": "https://www.railway.gov.tw/tra-tip-web/tip/tip007/tip711/blockList",
+    "archive_url": "https://web.archive.org/web/20240804153201id_/https://www.railway.gov.tw/tra-tip-web/tip/tip007/tip711/blockList",
+    "archive_timestamp_utc": "2024-08-04T15:32:01+00:00",
+    "retrieved_date_utc": "2026-11-02",
+    "original_sha256": "350d0c450d6181de1c489f11c6949f400af9f9e71dcdda4c98f31280a1e0942b",
+    "fixture_sha256": "b7aaf573928b30a5e600cca5d061fca0bd2c44a2c0da040a02578f33a0e11aec",
+    "extraction": "BeautifulSoup html.parser: serialize #content direct p elements and complete .operation-list; wrap in div#content; no text or state edits"
+  },
+  {
+    "file": "tra_20241004110527.html",
+    "url": "https://www.railway.gov.tw/tra-tip-web/tip/tip007/tip711/blockList",
+    "archive_url": "https://web.archive.org/web/20241004110527id_/https://www.railway.gov.tw/tra-tip-web/tip/tip007/tip711/blockList",
+    "archive_timestamp_utc": "2024-10-04T11:05:27+00:00",
+    "retrieved_date_utc": "2026-11-02",
+    "original_sha256": "5db5a79a15f53ec4932adf644429ef9ccb4f8c056fb137e56499d0a17c136c3b",
+    "fixture_sha256": "7ba1ce1dfd8e88a1805de3b135c92a37775597b1b17744e8997a0c95b969f87e",
+    "extraction": "BeautifulSoup html.parser: serialize #content direct p elements and complete .operation-list; wrap in div#content; no text or state edits"
+  },
+  {
+    "file": "tra_20241117082659.html",
+    "url": "https://www.railway.gov.tw/tra-tip-web/tip/tip007/tip711/blockList",
+    "archive_url": "https://web.archive.org/web/20241117082659id_/https://www.railway.gov.tw/tra-tip-web/tip/tip007/tip711/blockList",
+    "archive_timestamp_utc": "2024-11-17T08:26:59+00:00",
+    "retrieved_date_utc": "2026-11-02",
+    "original_sha256": "e05c00408b4218e54afd27888290bc31ce10a8eaea88559a1646b02b91b6a984",
+    "fixture_sha256": "c43a63560a4bb60ba22ca669dec2c2c213ce12388d06cd5a2d1132d0af07655f",
+    "extraction": "BeautifulSoup html.parser: serialize #content direct p elements and complete .operation-list; wrap in div#content; no text or state edits"
+  },
+  {
+    "file": "tra_20250310054809.html",
+    "url": "https://www.railway.gov.tw/tra-tip-web/tip/tip007/tip711/blockList",
+    "archive_url": "https://web.archive.org/web/20250310054809id_/https://www.railway.gov.tw/tra-tip-web/tip/tip007/tip711/blockList",
+    "archive_timestamp_utc": "2025-03-10T05:48:09+00:00",
+    "retrieved_date_utc": "2026-11-02",
+    "original_sha256": "2d04bb6669eefd0692005a373399b51d2323de5c08539a71cf0f3bea3a24353d",
+    "fixture_sha256": "c1c02e421bddd517f8d84bb4ade9b68786eaed2b4f6b2a73276c14f57544369d",
+    "extraction": "BeautifulSoup html.parser: serialize #content direct p elements and complete .operation-list; wrap in div#content; no text or state edits"
+  },
+  {
+    "file": "tra_20250707021531.html",
+    "url": "https://www.railway.gov.tw/tra-tip-web/tip/tip007/tip711/blockList",
+    "archive_url": "https://web.archive.org/web/20250707021531id_/https://www.railway.gov.tw/tra-tip-web/tip/tip007/tip711/blockList",
+    "archive_timestamp_utc": "2025-07-07T02:15:31+00:00",
+    "retrieved_date_utc": "2026-11-02",
+    "original_sha256": "c8b9adb4f8bed4019b002f14b5bd2030a912d21b58d544bde623de51df07db17",
+    "fixture_sha256": "42575afb99b5567c6e6d2e4ad4485ec53baf2afe00aa46737f17f2571a283f09",
+    "extraction": "BeautifulSoup html.parser: serialize #content direct p elements and complete .operation-list; wrap in div#content; no text or state edits"
+  },
+  {
+    "file": "tra_20250813015801.html",
+    "url": "https://www.railway.gov.tw/tra-tip-web/tip/tip007/tip711/blockList",
+    "archive_url": "https://web.archive.org/web/20250813015801id_/https://www.railway.gov.tw/tra-tip-web/tip/tip007/tip711/blockList",
+    "archive_timestamp_utc": "2025-08-13T01:58:01+00:00",
+    "retrieved_date_utc": "2026-11-02",
+    "original_sha256": "e674a12423c9fcce1996cbb7d586f9c188e401ea64b223f27b2393b97954a343",
+    "fixture_sha256": "a04bc302d170797b57a91848e69f7259c6efd43e8c657e52541178eeed2f120c",
+    "extraction": "BeautifulSoup html.parser: serialize #content direct p elements and complete .operation-list; wrap in div#content; no text or state edits"
+  },
+  {
+    "file": "tra_20260702152705.html",
+    "url": "https://www.railway.gov.tw/tra-tip-web/tip/tip007/tip711/blockList",
+    "archive_url": "https://web.archive.org/web/20260702152705id_/https://www.railway.gov.tw/tra-tip-web/tip/tip007/tip711/blockList",
+    "archive_timestamp_utc": "2026-07-02T15:27:05+00:00",
+    "retrieved_date_utc": "2026-11-02",
+    "original_sha256": "ce9eb3f38fb66346e7242c6b04a43ed8aca38050f0e33419a4d2acfaa723a8bf",
+    "fixture_sha256": "0d20d39db15af588eb9750a87361e004b5674815f714adb1ec7402405c7b31c8",
+    "extraction": "BeautifulSoup html.parser: serialize #content direct p elements and complete .operation-list; wrap in div#content; no text or state edits"
+  }
+]

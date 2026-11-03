@@ -1,0 +1,8 @@
+{
+  "source_url": "https://www.mytransport.sg/etc/designs/ltagov/custom/map/script.js",
+  "retrieved_at_utc": "2026-11-02T15:17:11.107592+00:00",
+  "raw_sha256": "b7375ce244c65af18ef62d63d10c700b39da0a6c848fc3376390bf2062a4aa47",
+  "fixture": "mrt_message_script.js",
+  "fixture_sha256": "21e306d68b37e91d634492c1f09985340e550d4bb6d0564952f9fb4e19dcc294",
+  "extraction": "Unmodified UTF-8 source lines 424-574; only the surrounding source was omitted."
+}

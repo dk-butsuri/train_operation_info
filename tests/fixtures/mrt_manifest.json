@@ -1,0 +1,23 @@
+{
+  "captured_at": "2026-11-02T15:15:25.430700+00:00",
+  "responses": [
+    {
+      "fixture": "mrt_normal_with_unscoped_message.json",
+      "url": "https://www.mytransport.sg/content/ltagov/en/map/train/jcr:content/left-menu/ltaDatamallAPI.ltaDatamallAPI.POST.html",
+      "method": "POST",
+      "form": {
+        "serviceName": "LTAGOVTrainServiceAlerts",
+        "param": ""
+      },
+      "sha256": "6006b6dd0149bee41cf5d8c4e6196c8e313c0ae95ec32d0ed22b1ff5e2d34956",
+      "extraction": "Unmodified response bytes."
+    },
+    {
+      "fixture": "mrt_message_filter.js",
+      "url": "https://www.mytransport.sg/etc/designs/ltagov/custom/map/script.js",
+      "method": "GET",
+      "sha256": "b7375ce244c65af18ef62d63d10c700b39da0a6c848fc3376390bf2062a4aa47",
+      "extraction": "Lines 424-459 and 535-538 of original script; decoded with httpx, saved as UTF-8."
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+[
+  {
+    "fixture": "tosaden_normal.html",
+    "source_url": "https://www.tosaden.co.jp/info/service.php?ID=1",
+    "retrieved_at": "2026-11-02T05:47:07.018430+00:00",
+    "original_encoding": "utf-8",
+    "original_sha256": "79c1f6306677fd8cc5349488bc6eeb482204856c39b258dc45ffd5322a6461e3",
+    "fixture_sha256": "66d7fd3a3614159324635145209f041ba725249ef1f9327e8aaf26ee4de51278",
+    "capture_timestamp_utc": null,
+    "extraction": "BeautifulSoup html.parser; h2.tit_train and #main_a; UTF-8 serialization, no text edits"
+  },
+  {
+    "fixture": "tosaden_20220918071853.html",
+    "source_url": "https://web.archive.org/web/20220918071853id_/https://www.tosaden.co.jp/info/service.php?ID=1",
+    "retrieved_at": "2026-11-02T05:47:57.495005+00:00",
+    "original_encoding": "euc-jp",
+    "original_sha256": "6e341a338f11285df0bb892670791bbdba9aa7eb4a5c650f38a22ac543127782",
+    "fixture_sha256": "5182749f91bc29a4792959e95cc174eb191412caea50b98dc02de28066f23477",
+    "capture_timestamp_utc": "20220918071853",
+    "extraction": "BeautifulSoup html.parser; h2.tit_train and #main_a; UTF-8 serialization, no text edits"
+  },
+  {
+    "fixture": "tosaden_20230602090407.html",
+    "source_url": "https://web.archive.org/web/20230602090407id_/https://www.tosaden.co.jp/info/service.php?ID=1",
+    "retrieved_at": "2026-11-02T05:47:57.088214+00:00",
+    "original_encoding": "euc-jp",
+    "original_sha256": "207ef1279f66bf52382cb7482f8a6f824ddd8a844811400f32408d374a8a2cbe",
+    "fixture_sha256": "a6891788cc78239a27b1cde427c8240447d65e33a50858c716b81a95de8570a4",
+    "capture_timestamp_utc": "20230602090407",
+    "extraction": "BeautifulSoup html.parser; h2.tit_train and #main_a; UTF-8 serialization, no text edits"
+  },
+  {
+    "evidence": "site policy",
+    "name": "policy",
+    "url": "https://www.tosaden.co.jp/info/sitepolicy.php",
+    "retrieved_at": "2026-11-02T05:47:07.395296+00:00",
+    "sha256": "84e8cb001010bb577f6230426f79685be1ebeea2562b2b4f6bffa219a53bdc24"
+  },
+  {
+    "evidence": "public JavaScript",
+    "url": "https://www.tosaden.co.jp/ssi/js/fn.js",
+    "retrieved_at": "2026-11-02T05:47:41.802267+00:00",
+    "sha256": "e608c7a686659f2b998b0b02c6ff5a4c494e07a219ff83ccde2e3c10a0beb021"
+  }
+]

@@ -1,0 +1,101 @@
+[
+  {
+    "fixture": "jrkyushu_script.js",
+    "url": "https://www.jrkyushu.co.jp/trains/info/js/script.js",
+    "captured_at": "2026-11-02T15:52:31.772195+00:00",
+    "original_sha256": "fe081016986bfaafc37e0a88c6c2d12c68f0695531736d790e5697ab1cb0c8d3",
+    "fixture_sha256": "fe081016986bfaafc37e0a88c6c2d12c68f0695531736d790e5697ab1cb0c8d3",
+    "method": "HTTP GET Mozilla/5.0; original decoded response bytes, no transformation",
+    "content_type": "text/javascript"
+  },
+  {
+    "fixture": "jrkyushu_IDS2Web.xml",
+    "url": "https://www.jrkyushu.co.jp/trains/info/data/IDS2Web.xml",
+    "captured_at": "2026-11-02T15:52:31.820475+00:00",
+    "original_sha256": "b400af4af2f8d31f11ebff1e7e4a84a63b6263c1ca73e90afe427d430a55f14a",
+    "fixture_sha256": "b400af4af2f8d31f11ebff1e7e4a84a63b6263c1ca73e90afe427d430a55f14a",
+    "method": "HTTP GET Mozilla/5.0; original decoded response bytes, no transformation",
+    "content_type": "text/xml"
+  },
+  {
+    "fixture": "jrkyushu_fukhok.txt",
+    "url": "https://www.jrkyushu.co.jp/trains/info/data/fukhok.txt",
+    "captured_at": "2026-11-02T15:52:31.821042+00:00",
+    "original_sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+    "fixture_sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+    "method": "HTTP GET Mozilla/5.0; original decoded response bytes, no transformation",
+    "content_type": "text/plain; charset=UTF-8"
+  },
+  {
+    "fixture": "jrkyushu_oita.txt",
+    "url": "https://www.jrkyushu.co.jp/trains/info/data/oita.txt",
+    "captured_at": "2026-11-02T15:52:31.821557+00:00",
+    "original_sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+    "fixture_sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+    "method": "HTTP GET Mozilla/5.0; original decoded response bytes, no transformation",
+    "content_type": "text/plain; charset=UTF-8"
+  },
+  {
+    "fixture": "jrkyushu_sagnag.txt",
+    "url": "https://www.jrkyushu.co.jp/trains/info/data/sagnag.txt",
+    "captured_at": "2026-11-02T15:52:31.822011+00:00",
+    "original_sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+    "fixture_sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+    "method": "HTTP GET Mozilla/5.0; original decoded response bytes, no transformation",
+    "content_type": "text/plain; charset=UTF-8"
+  },
+  {
+    "fixture": "jrkyushu_kuma.txt",
+    "url": "https://www.jrkyushu.co.jp/trains/info/data/kuma.txt",
+    "captured_at": "2026-11-02T15:52:31.822466+00:00",
+    "original_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+    "fixture_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+    "method": "HTTP GET Mozilla/5.0; original decoded response bytes, no transformation",
+    "content_type": "text/plain; charset=UTF-8"
+  },
+  {
+    "fixture": "jrkyushu_miya.txt",
+    "url": "https://www.jrkyushu.co.jp/trains/info/data/miya.txt",
+    "captured_at": "2026-11-02T15:52:31.822883+00:00",
+    "original_sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+    "fixture_sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+    "method": "HTTP GET Mozilla/5.0; original decoded response bytes, no transformation",
+    "content_type": "text/plain; charset=UTF-8"
+  },
+  {
+    "fixture": "jrkyushu_kago.txt",
+    "url": "https://www.jrkyushu.co.jp/trains/info/data/kago.txt",
+    "captured_at": "2026-11-02T15:52:31.823392+00:00",
+    "original_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+    "fixture_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+    "method": "HTTP GET Mozilla/5.0; original decoded response bytes, no transformation",
+    "content_type": "text/plain; charset=UTF-8"
+  },
+  {
+    "fixture": "jrkyushu_shin.txt",
+    "url": "https://www.jrkyushu.co.jp/trains/info/data/shin.txt",
+    "captured_at": "2026-11-02T15:52:31.823929+00:00",
+    "original_sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+    "fixture_sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+    "method": "HTTP GET Mozilla/5.0; original decoded response bytes, no transformation",
+    "content_type": "text/plain; charset=UTF-8"
+  },
+  {
+    "fixture": "jrkyushu_nishi.txt",
+    "url": "https://www.jrkyushu.co.jp/trains/info/data/nishi.txt",
+    "captured_at": "2026-11-02T15:52:31.824366+00:00",
+    "original_sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+    "fixture_sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+    "method": "HTTP GET Mozilla/5.0; original decoded response bytes, no transformation",
+    "content_type": "text/plain; charset=UTF-8"
+  },
+  {
+    "fixture": "jrkyushu_info_mid.html",
+    "url": "https://www.jrkyushu.co.jp/trains/info/inc/info_mid.html",
+    "captured_at": "2026-11-02T15:52:31.825396+00:00",
+    "original_sha256": "2a3d73f91897e54fd3a62f7f9d714d2851ad73a413d318d77a957e9c9366ba4f",
+    "fixture_sha256": "2a3d73f91897e54fd3a62f7f9d714d2851ad73a413d318d77a957e9c9366ba4f",
+    "method": "HTTP GET Mozilla/5.0; original decoded response bytes, no transformation",
+    "content_type": "text/html; charset=UTF-8"
+  }
+]

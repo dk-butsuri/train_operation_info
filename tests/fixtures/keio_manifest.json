@@ -1,0 +1,29 @@
+{
+  "retrieved_date_utc": "2026-11-03",
+  "items": [
+    {
+      "fixture": "keio_normal.xml",
+      "source": "https://www.keio.co.jp/_system/_unkou/unkouInformation.xml",
+      "captured_at_utc": "2026-11-03T03:40:56Z",
+      "original_sha256": "cf5facde81c995e12ee7eb0884cc2610b4380ec9f575a5c6a8e967f619cbd8a0",
+      "fixture_sha256": "cf5facde81c995e12ee7eb0884cc2610b4380ec9f575a5c6a8e967f619cbd8a0",
+      "note": "Live GET, no extraction. emergency=false, body unchanged."
+    },
+    {
+      "fixture": "keio_20190909043234.xml",
+      "source": "https://web.archive.org/web/20190909043234id_/https://www.keio.co.jp/_system/_unkou/unkouInformation.xml",
+      "captured_at_utc": "2019-09-09T04:32:34Z",
+      "original_sha256": "72bb71ec76ba260243634a5f9f917392b2f67c5e7e407b882b54b3b5df03732f",
+      "fixture_sha256": "72bb71ec76ba260243634a5f9f917392b2f67c5e7e407b882b54b3b5df03732f",
+      "note": "Unmodified Wayback replay bytes (Shift_JIS, emergency=true). CPython's expat-based xml.etree cannot decode a multi-byte encoding declared in the XML prolog, so feeding these exact bytes to the provider raises ParseError; see KEIO.md."
+    },
+    {
+      "fixture": "keio_20190909043234_utf8.xml",
+      "source": "https://web.archive.org/web/20190909043234id_/https://www.keio.co.jp/_system/_unkou/unkouInformation.xml",
+      "captured_at_utc": "2019-09-09T04:32:34Z",
+      "original_sha256": "72bb71ec76ba260243634a5f9f917392b2f67c5e7e407b882b54b3b5df03732f",
+      "fixture_sha256": "df6f8f20ad665d22f52149eb88cb8cfebb7f08cb2586efc2f5c776c442ec0402",
+      "note": "Synthetic transcoding of the same real capture: decoded as Shift_JIS then re-encoded as UTF-8 (prolog's encoding attribute updated to match); no character, tag, or value was changed. Used only to exercise the current UTF-8-era parser against this real incident's text, since the original bytes are not decodable by xml.etree."
+    }
+  ]
+}
