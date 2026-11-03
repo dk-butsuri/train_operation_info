@@ -276,6 +276,9 @@ class SnapshotProvider(AlertProvider):
             raise FetchError(f"Could not fetch {self.provider_id} official status") from exc
         except (ValidationError, XMLParseError, ValueError) as exc:
             raise ParseError(f"Invalid {self.provider_id} source data: {exc}") from exc
+        allowed = self.metadata.statuses | {LineStatus.UNKNOWN}
+        if undeclared := {line.status for line in lines} - allowed:
+            raise ParseError(f"{self.provider_id} produced undeclared statuses: {undeclared}")
         return lines
 
     async def _request(

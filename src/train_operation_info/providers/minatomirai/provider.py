@@ -69,6 +69,7 @@ _METADATA: Final = ProviderMetadata(
         "delays of 10 minutes or more or suspensions, including anticipated "
         "disruption, and warns that published information may differ from service."
     ),
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.DELAYED, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat("2026-11-02T05:35:27+00:00"),
 )
 

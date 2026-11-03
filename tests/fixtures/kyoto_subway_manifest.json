@@ -1,0 +1,83 @@
+[
+  {
+    "url": "https://www.city.kyoto.lg.jp/kotsu/",
+    "retrieved_at": "2026-11-03T15:57:53.749704+00:00",
+    "sha256": "326e7e2921e19ed4ce260eb8dfbe42cc075e4ef6875f1ad18c885f7db83dd4bc",
+    "filename": "homepage.html",
+    "fixture": "kyoto_subway_normal.html",
+    "fixture_sha256": "326e7e2921e19ed4ce260eb8dfbe42cc075e4ef6875f1ad18c885f7db83dd4bc",
+    "transformation": "None; complete unmodified response bytes, stored locally only"
+  },
+  {
+    "url": "https://www.city.kyoto.lg.jp/main/css/img/onload_ku_top.js?20260729",
+    "retrieved_at": "2026-11-03T15:58:44.704691+00:00",
+    "sha256": "ddfcdd0a11f2415141c47b7b1696165dab377e6eb5d4da2c1fb8601e7f9f67a1",
+    "filename": "onload.js"
+  },
+  {
+    "url": "https://web.archive.org/cdx/search/cdx?url=www.city.kyoto.lg.jp/kotsu/&output=json&filter=statuscode:200&filter=mimetype:text/html&collapse=timestamp:6&filter=timestamp:202[456].*&fl=timestamp,original",
+    "retrieved_at": "2026-11-03T15:58:58.665174+00:00",
+    "sha256": "8a2249d0ad3fbf07954a2fc973422e0dd7608cd841980eb0ae14d18d66a1b6cd",
+    "filename": "cdx.json"
+  },
+  {
+    "url": "https://www.city.kyoto.lg.jp/kotsu/category/166-0-0-0-0-0-0-0-0-0.html",
+    "retrieved_at": "2026-11-03T15:59:16.729059+00:00",
+    "sha256": "c47243e4f82205797a25c3107714d155ca4ce8293dd9efdee555605b14be3951",
+    "filename": "subway.html"
+  },
+  {
+    "url": "https://www.city.kyoto.lg.jp/main/site_policy/0000000005.html",
+    "retrieved_at": "2026-11-03T15:59:20.895016+00:00",
+    "sha256": "6b6dc40144d0b3a7e65f5684fd678ddc6a21b224ac00bbebfbdc3fa1b7985d0d",
+    "filename": "terms.html"
+  },
+  {
+    "url": "https://web.archive.org/web/20251031085732id_/https://www.city.kyoto.lg.jp/kotsu/",
+    "retrieved_at": "2026-11-03T15:59:35.945114+00:00",
+    "sha256": "0c6b44d14cad9a5bf92c536af7ea5bf583f8f7e739b5aa5fe1ef6fc07eb249cc",
+    "filename": "archive_20251031085732.html"
+  },
+  {
+    "url": "https://web.archive.org/web/20250802110421id_/https://www.city.kyoto.lg.jp/kotsu/",
+    "retrieved_at": "2026-11-03T15:59:35.960634+00:00",
+    "sha256": "ac58ca4455e1bd54fbf29b49f89c7dcbe50f5a16e670e92761a0aee724d13d37",
+    "filename": "archive_20250802110421.html"
+  },
+  {
+    "url": "https://web.archive.org/cdx/search/cdx?url=www.city.kyoto.lg.jp/kotsu/&output=json&filter=statuscode:200&filter=mimetype:text/html&collapse=timestamp:8&from=20240827&to=20240831&fl=timestamp,original",
+    "retrieved_at": "2026-11-03T16:00:05.087875+00:00",
+    "sha256": "6a5435b387c0b436ec32b46997763e4a7c2c0f3765d6509fa8a703f7a4c6c0bf",
+    "filename": "cdx_typhoon.json"
+  },
+  {
+    "url": "https://web.archive.org/web/20240827141354id_/https://www.city.kyoto.lg.jp/kotsu/",
+    "retrieved_at": "2026-11-03T16:00:17.312599+00:00",
+    "sha256": "541d8516343128be77c4312d3d33dd8a2d1211dc2a1979f94ca84f2b837323d3",
+    "filename": "archive_20240827141354.html"
+  },
+  {
+    "url": "https://web.archive.org/cdx/search/cdx?url=www.city.kyoto.lg.jp/kotsu/&output=json&filter=statuscode:200&filter=mimetype:text/html&collapse=timestamp:8&from=20230814&to=20230816&fl=timestamp,original",
+    "retrieved_at": "2026-11-03T16:01:10.825571+00:00",
+    "sha256": "dbcb89a36bdfbdef053840bc51aba9933976aea9a45d93279a2ef2658494b62c",
+    "filename": "cdx_202308.json"
+  },
+  {
+    "url": "https://web.archive.org/web/20230815040858id_/https://www.city.kyoto.lg.jp/kotsu/",
+    "retrieved_at": "2026-11-03T16:01:25.612461+00:00",
+    "sha256": "ea04a9e2192632e8505ec1532a6e360b4525ba9ae1cfe9162a6ce53d4486d782",
+    "filename": "archive_20230815040858.html",
+    "fixture": "kyoto_subway_notice_20230815040858.html",
+    "fixture_sha256": "ea04a9e2192632e8505ec1532a6e360b4525ba9ae1cfe9162a6ce53d4486d782",
+    "transformation": "None; complete unmodified response bytes, stored locally only"
+  },
+  {
+    "url": "https://web.archive.org/web/20230816075536id_/https://www.city.kyoto.lg.jp/kotsu/",
+    "retrieved_at": "2026-11-03T16:01:27.237714+00:00",
+    "sha256": "607032e75dc45d95a190b761236cea6d530e7bcabee9d5af7f1dccd104b6d9f6",
+    "filename": "archive_20230816075536.html",
+    "fixture": "kyoto_subway_cleared_20230816075536.html",
+    "fixture_sha256": "607032e75dc45d95a190b761236cea6d530e7bcabee9d5af7f1dccd104b6d9f6",
+    "transformation": "None; complete unmodified response bytes, stored locally only"
+  }
+]

@@ -80,6 +80,7 @@ _METADATA: Final = ProviderMetadata(
         "next day's plans, and the company may change or stop publishing it "
         "without prior notice."
     ),
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat("2026-11-02T15:39:27+00:00"),
 )
 

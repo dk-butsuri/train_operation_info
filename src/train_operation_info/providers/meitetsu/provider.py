@@ -97,6 +97,7 @@ _METADATA: Final = ProviderMetadata(
         "anticipated disruption. Separate important announcements, transport "
         "arrangements, maps and linked articles are outside this provider's scope."
     ),
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.SUSPENDED, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat("2026-11-02T15:38:31.538184+00:00"),
 )
 

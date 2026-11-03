@@ -80,6 +80,7 @@ _METADATA: Final = ProviderMetadata(
     "general site reuse terms were located in the inspected navigation. "
     "The source reports delays of approximately 15 minutes or more, including "
     "expected delays; NORMAL refers to that publication threshold.",
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.DELAYED, LineStatus.SUSPENDED, LineStatus.PARTIAL_SUSPENSION, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat("2026-11-02T02:20:00+00:00"),
 )
 

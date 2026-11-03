@@ -392,6 +392,13 @@ original/fixture hashes and synthetic-test limits are documented in
 構造的に分離されたplf/pld（重要なお知らせ）の除外根拠、実データ／合成テストの区別は
 [SEIBU.md](SEIBU.md) と [seibu_manifest.json](seibu_manifest.json) を参照。
 
+# 京都市営地下鉄
+
+公式トップのライブHTML・公開JavaScript・公開方法の説明・利用条件と、Wayback保存HTMLを調査。
+2023-08-15の実際の緊急情報、翌日の掲載終了、ライブの空欄を無加工のローカルfixtureで検証します。
+路線・影響・日時を本文から推測しない範囲、保存URL・UTC取得日時・SHA-256、合成テストの区別は
+[KYOTO_SUBWAY.md](KYOTO_SUBWAY.md) と [kyoto_subway_manifest.json](kyoto_subway_manifest.json) を参照。
+
 # JR北海道
 
 公式エリア別JSON（道央・道南・道北・道東）をライブ取得した無加工の応答（UTF-8 BOM付き）。
@@ -399,3 +406,19 @@ original/fixture hashes and synthetic-test limits are documented in
 取得できた。表示JavaScript・掲載単位名称一覧・利用上の注意ページも確認済み。出典URL、UTC取得
 日時、原本とfixtureのSHA-256、線区IDと共通路線IDの対応根拠、未確認／合成テストの区別は
 [JRHOKKAIDO.md](JRHOKKAIDO.md) と [jrhokkaido_manifest.json](jrhokkaido_manifest.json) を参照。
+
+# 札幌市営地下鉄
+
+公式の現在ページ（3路線の平常表示）をライブ取得し、`#tmp_contents` を抽出しました。
+公式履歴・公開JavaScript・CSSも調査し、異常時の現在ページの形式は未確認です。
+取得元・UTC取得日時・原本とfixtureのSHA-256・実データと合成テストの区別は
+[SAPPORO_SUBWAY.md](SAPPORO_SUBWAY.md) と
+[sapporo_subway_manifest.json](sapporo_subway_manifest.json) を参照。
+
+
+# 名古屋市営地下鉄
+
+公式JSONの平常応答、公開HTML・JavaScript、利用条件、Wayback CDXの空の結果を取得。
+URL・UTC取得日時・SHA-256・状態コードの根拠・共通IDの再利用・未確認範囲は
+[NAGOYA_SUBWAY.md](NAGOYA_SUBWAY.md) と
+[nagoya_subway_manifest.json](nagoya_subway_manifest.json) を参照。

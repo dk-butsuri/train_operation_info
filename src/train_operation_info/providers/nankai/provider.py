@@ -81,6 +81,7 @@ _METADATA: Final = ProviderMetadata(
     additional_terms_urls=(HttpUrl(_URL),),
     usage_permission=UsagePermission.PERMISSION_REQUIRED,
     usage_note="The service page prohibits unapproved republication, copying and processing into electronic media. General site terms also prohibit unapproved secondary use. No reuse licence was found.",
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.DELAYED, LineStatus.SUSPENDED, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat("2026-11-01T14:53:09+00:00"),
 )
 

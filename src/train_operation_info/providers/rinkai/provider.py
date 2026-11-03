@@ -85,6 +85,7 @@ _METADATA: Final = ProviderMetadata(
         "from actual operation and covers 30-minute/anticipated delays, JR through-"
         "service cancellation and suspended operation. Separate news is not fetched."
     ),
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat("2026-11-02T05:52:15.263408+00:00"),
 )
 

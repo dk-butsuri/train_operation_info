@@ -78,6 +78,7 @@ _METADATA: Final = ProviderMetadata(
         "retrieved; linked news, vehicle-specific and long-term notices are outside "
         "this provider's scope. NORMAL is not evidence of their absence."
     ),
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat("2026-11-02T05:47:07.395296+00:00"),
 )
 

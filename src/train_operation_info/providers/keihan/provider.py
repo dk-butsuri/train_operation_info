@@ -68,6 +68,7 @@ _METADATA: Final = ProviderMetadata(
     additional_terms_urls=(HttpUrl('https://www.keihan.co.jp/traffic/information/'), ),
     usage_permission=UsagePermission.PERMISSION_REQUIRED,
     usage_note='The service page prohibits unapproved duplication, republication and sale. General terms separately discuss statutory private use and prohibit business use without approval; a service-specific reuse grant was not found.',
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.DELAYED, LineStatus.SUSPENDED, LineStatus.PARTIAL_SUSPENSION}),
     reviewed_at=datetime.fromisoformat('2026-11-01T14:36:42.593050+00:00'),
 )
 

@@ -1,0 +1,86 @@
+[
+  {
+    "fixture": "nagoya_subway_page.html",
+    "url": "https://www.kotsu.city.nagoya.jp/rp/emergency/",
+    "retrieved_at": "2026-11-03T15:58:41.236778+00:00",
+    "retrieval_time_basis": "UTC download completion (file write time)",
+    "method": "GET",
+    "user_agent": "train_operation_info (+https://github.com/dk-butsuri/train_operation_info)",
+    "status": 200,
+    "original_sha256": "083421038e22af9434abffe7a57b54d44be2181bc95df0c9e88c48c3c7f4ffea",
+    "fixture_sha256": "083421038e22af9434abffe7a57b54d44be2181bc95df0c9e88c48c3c7f4ffea",
+    "extraction": "None; unmodified HTTP response body"
+  },
+  {
+    "fixture": "nagoya_subway_traffic.js",
+    "url": "https://www.kotsu.city.nagoya.jp/rp/Jassets/js/common/traffic_info_for_top.js",
+    "retrieved_at": "2026-11-03T15:58:53.233524+00:00",
+    "retrieval_time_basis": "UTC download completion (file write time)",
+    "method": "GET",
+    "user_agent": "train_operation_info (+https://github.com/dk-butsuri/train_operation_info)",
+    "status": 200,
+    "original_sha256": "a09c645d899c1c0418109eb4beb6d1d023830490eca6bc968f6a594631dbe8b8",
+    "fixture_sha256": "a09c645d899c1c0418109eb4beb6d1d023830490eca6bc968f6a594631dbe8b8",
+    "extraction": "None; unmodified HTTP response body"
+  },
+  {
+    "fixture": "nagoya_subway_emergency.js",
+    "url": "https://www.kotsu.city.nagoya.jp/rp/Jassets/js/emergency/emergency.js",
+    "retrieved_at": "2026-11-03T15:58:53.233524+00:00",
+    "retrieval_time_basis": "UTC download completion (file write time)",
+    "method": "GET",
+    "user_agent": "train_operation_info (+https://github.com/dk-butsuri/train_operation_info)",
+    "status": 200,
+    "original_sha256": "272678c79edb855f55510fa80a4dae86659778c2c879a53658c21b545f66d655",
+    "fixture_sha256": "272678c79edb855f55510fa80a4dae86659778c2c879a53658c21b545f66d655",
+    "extraction": "None; unmodified HTTP response body"
+  },
+  {
+    "fixture": "nagoya_subway_common.js",
+    "url": "https://www.kotsu.city.nagoya.jp/rp/Jassets/js/common/common.js",
+    "retrieved_at": "2026-11-03T15:59:49.830086+00:00",
+    "retrieval_time_basis": "UTC download completion (file write time)",
+    "method": "GET",
+    "user_agent": "train_operation_info (+https://github.com/dk-butsuri/train_operation_info)",
+    "status": 200,
+    "original_sha256": "7a28d186d58bcf65f1460f17ce029057998d992b2402c4e36ae0a34ee1eff2cf",
+    "fixture_sha256": "7a28d186d58bcf65f1460f17ce029057998d992b2402c4e36ae0a34ee1eff2cf",
+    "extraction": "None; unmodified HTTP response body"
+  },
+  {
+    "fixture": "nagoya_subway_normal.json",
+    "url": "https://www.kotsu.city.nagoya.jp/datas/latest_traffic.json",
+    "retrieved_at": "2026-11-03T15:59:09.761157+00:00",
+    "retrieval_time_basis": "UTC download completion (file write time)",
+    "method": "GET",
+    "user_agent": "train_operation_info (+https://github.com/dk-butsuri/train_operation_info)",
+    "status": 200,
+    "original_sha256": "5da6ce8c0e8e2700820dbde0988ce705fbcd60ea62997ab4d08974104bebbb26",
+    "fixture_sha256": "5da6ce8c0e8e2700820dbde0988ce705fbcd60ea62997ab4d08974104bebbb26",
+    "extraction": "None; unmodified HTTP response body"
+  },
+  {
+    "fixture": "nagoya_subway_terms.html",
+    "url": "https://www.kotsu.city.nagoya.jp/rp/WEBSITE/trp0000834.htm",
+    "retrieved_at": "2026-11-03T16:03:33.504404+00:00",
+    "retrieval_time_basis": "UTC download completion (file write time)",
+    "method": "GET",
+    "user_agent": "train_operation_info (+https://github.com/dk-butsuri/train_operation_info)",
+    "status": 200,
+    "original_sha256": "3c6e44969b6f624084d53b2a5bece882dc48844fb161afcb17638455f6bd0e60",
+    "fixture_sha256": "3c6e44969b6f624084d53b2a5bece882dc48844fb161afcb17638455f6bd0e60",
+    "extraction": "None; unmodified HTTP response body"
+  },
+  {
+    "fixture": "nagoya_subway_cdx.json",
+    "url": "https://web.archive.org/cdx/search/cdx?url=www.kotsu.city.nagoya.jp/datas/latest_traffic.json&output=json&filter=statuscode:200&collapse=timestamp:6",
+    "retrieved_at": "2026-11-03T15:59:51.761042+00:00",
+    "retrieval_time_basis": "UTC download completion (file write time)",
+    "method": "GET",
+    "user_agent": "train_operation_info (+https://github.com/dk-butsuri/train_operation_info)",
+    "status": 200,
+    "original_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "fixture_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "extraction": "None; unmodified HTTP response body"
+  }
+]

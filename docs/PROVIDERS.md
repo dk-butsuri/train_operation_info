@@ -114,6 +114,25 @@ XMLの案内ありなら `ALERT` とします。
 取得範囲、出典・ハッシュ、利用条件の確認範囲は [JRKYUSHU.md](../tests/fixtures/JRKYUSHU.md) を参照してください。
 再利用条件は未確認のため `UNSPECIFIED` としています。
 
+## 日本：北海道（地下鉄）
+
+### 札幌市営地下鉄
+
+```python
+tracker = Tracker(enabled_providers=("sapporo_subway",))
+await tracker.refresh()
+print(tracker.sapporo_subway.namboku.status)
+print(tracker.sapporo_subway.tozai.alerts)
+print(tracker.sapporo_subway.toho.status)
+```
+
+`Tracker()` の既定の取得対象です。`python -m examples.sapporo_subway` で取得例を実行できます。
+[公式運行情報](https://operationstatus.city.sapporo.jp/unkojoho/) の南北線・東西線・東豊線の路線別案内を取得し、Yahooと既存の共通路線IDを共有します。取得結果は独立しています。
+
+確認済みの平常文「現在、10分以上の遅れは発生していません。」との完全一致だけを `NORMAL` とします。それ以外は路線別の案内原文を保持した `UNKNOWN` です。公式履歴では遅れ・復旧を確認しましたが、現在ページの異常時の状態語彙は未確認で、本文や履歴ラベルから遅延・運休を推測しません。追加本文がある場合も平常扱いせず保持します。`updated_at=None`、`timing=UNKNOWN` です。欠損・重複等の解析失敗や通信失敗時は前回値を保持します。
+
+掲載基準は10分以上の遅れとその見込みです。履歴・遅延証明書・市電・翻訳・別枠のお知らせは取得しません。路線欄で構造的に分離できない案内は原文のまま保持します。平常は実応答、異常・復旧・構造破損は合成テストです。調査根拠・未確認範囲・ハッシュは [SAPPORO_SUBWAY.md](../tests/fixtures/SAPPORO_SUBWAY.md) を参照してください。利用条件メタデータは `PERMISSION_REQUIRED` です。
+
 ## 日本：関東
 
 ### 東武鉄道
@@ -585,6 +604,41 @@ GTFS-realtimeの解析は共通モジュール `providers/gtfs_rt.py` が行い�
 
 ## 集約サイト（明示指定時のみ）
 
+### 京都市営地下鉄
+
+```python
+tracker = Tracker(enabled_providers=("kyoto_subway",))
+await tracker.refresh()
+print(tracker.kyoto_subway.karasuma.status)
+print(tracker.kyoto_subway.tozai.status)
+print(tracker.kyoto_subway.alerts)
+```
+
+取得元IDは `kyoto_subway`、クラスは `KyotoSubwayProvider` です。
+`Tracker()` の既定の取得対象に含まれ、`python -m examples.kyoto_subway` で単独取得できます。
+烏丸線・東西線はYahooと同じ共通路線ID・運行会社を使用し、取得状態は独立しています。
+
+[京都市交通局トップ](https://www.city.kyoto.lg.jp/kotsu/)の緊急情報欄だけを取得します。
+[公式説明](https://www.city.kyoto.lg.jp/kotsu/category/166-0-0-0-0-0-0-0-0-0.html)では、
+地下鉄ダイヤの乱れ等をこの欄に掲載するとしています。欄のマーカー間が空、または確認済みの
+明示的な掲載なし表示なら `NORMAL`。これはこの欄に掲載がないという意味で、全運行の平常を保証しません。
+
+緊急情報には市バス・災害等も混在し、路線別の状態・影響を示す専用項目がないため、
+掲載ありは両路線とも `UNKNOWN`、アラートの `affected_line_ids=()` とします。
+本文の路線名・運休表現から対象や運休種別を推測しません。案内は本文とリンク先URLを保持し、
+Provider/Trackerの `alerts` では一件に集約します。`delay_lines` / `affected_lines` ではなく
+`alerts` / `unknown_lines` で参照してください。
+
+`updated_at=None`、`timing=UNKNOWN`、`active_from=None`、`active_until=None` です。
+年のない日付見出しから更新時刻を作りません。通常のお知らせ欄・長期案内・臨時便等は構造で除外し、
+リンク先本文、時刻表、市バス接近情報、遅延証明書は取得しません。生HTTP記録には対象外の欄も含まれます。
+必須構造の欠損・重複・順序異常や通信失敗時は前回の完全なスナップショットを保持します。
+
+ライブの空欄、2023年8月の実際の緊急情報と翌日の掲載終了表示を保存HTMLで検証します。
+個別路線の遅延・運休分類は未確認で、本文の否定・予告・復旧、未知の表示、構造破損は合成テストです。
+出典・ハッシュ・検証範囲は [KYOTO_SUBWAY.md](../tests/fixtures/KYOTO_SUBWAY.md) を参照してください。
+利用条件メタデータは市の著作権方針に基づく `PERMISSION_REQUIRED` です。
+
 ### Yahoo!鉄道情報
 
 Yahooは `Tracker()` の既定の取得対象に含めません。利用条件の記録は取得前にも `tracker.yahoo.metadata` で確認でき、`enabled_providers` に `"yahoo"` を明示した場合だけTrackerから通信します。`examples.all_providers` も既定の取得元を使うためYahooには通信しません。
@@ -614,3 +668,34 @@ print(tracker.delay_lines)
 `Line.source_line_names` に実際に取得した区間名を保持します。地域選択により同一路線の一部区間が未取得の場合、路線全体を平常とはせず `UNKNOWN` を残します。京阪本線・中之島線の合算項目、近鉄山田線・鳥羽線・志摩線の合算項目は `GROUP` とし、個別路線と区別します。阪急の各本線も、公式Providerの3系統全体とは別IDです。
 
 掲載時刻は日本時間で、年を省略した表記は取得日時から補います。掲載時刻がない通常表示は `updated_at=None` です。本文から運休を推測せず、詳細の現在の状態ラベルを使います。実際の遅延・運転見合わせ・復旧のデータと、未確認・合成ケースの区別は [tests/fixtures/YAHOO.md](../tests/fixtures/YAHOO.md) に記録しています。
+
+
+## 名古屋市営地下鉄
+
+```python
+tracker = Tracker(enabled_providers=("nagoya_subway",))
+await tracker.refresh()
+print(tracker.nagoya_subway.higashiyama.status)
+print(tracker.nagoya_subway.meijo_meiko.alerts)
+```
+
+`Tracker()` の既定の取得対象に含まれます。`python -m examples.nagoya_subway` でも確認できます。
+属性は `higashiyama`、`meijo_meiko`、`tsurumai`、`sakuradori`、`kamiiida` です。
+[公式運行情報](https://www.kotsu.city.nagoya.jp/rp/emergency/)のJSONを取得します。
+6路線を5系統で掲載し、名城線・名港線は一つの `M_LINE` です。
+Yahooの既存共通IDを再利用し、個別路線へ分割しません。
+
+公開JavaScriptの専用コードを根拠に、`N_T_ICO` と完全一致の `平常運行` は `NORMAL`、
+`W_T_ICO` は `DELAYED`、`E_T_ICO` は `SUSPENDED`、`C_T_ICO` は `ALERT` とします。
+`N_T_ICO` でもタイトルが異なれば `ALERT`、未知コードは `UNKNOWN` です。
+全スロットの非平常案内を保持し、平常項目で別の障害を消しません。
+タイトル・本文・区間・理由を保持し、自由記述から状態を推定しません。
+
+市バスは対象外ですが、HTTP生応答記録には含まれます。長期案内を分離する専用項目は
+確認できず、本文で除外しません。公式の情報提供は10分以上の遅延が見込まれる場合等で、
+`NORMAL` はその範囲内です。適用時期は `UNKNOWN`、適用期間はNoneです。
+`create_datetime` の路線更新時刻としての意味が未確認なので `updated_at=None` とします。
+
+ライブ取得は平常JSONのみで、異常時・複数案内・復旧のテストは合成です。
+出典・ハッシュ・未確認範囲は [NAGOYA_SUBWAY.md](../tests/fixtures/NAGOYA_SUBWAY.md) を参照。
+無断転載・複製を禁止する公式規約に基づき、メタデータは `PERMISSION_REQUIRED` です。

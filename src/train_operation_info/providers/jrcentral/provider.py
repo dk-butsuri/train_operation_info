@@ -86,6 +86,7 @@ _METADATA: Final = ProviderMetadata(
     additional_terms_urls=(HttpUrl(_BASE + "faq.html"),),
     usage_permission=UsagePermission.PERMISSION_REQUIRED,
     usage_note="The website policy prohibits unapproved reproduction, modification, reuse and public transmission except where permitted by copyright law. The service FAQ separately prohibits unauthorized reproduction/copying. No reuse licence was found. Conventional notices cover roughly 10-minute delays and anticipated delays; separate notices and express services are outside this provider's scope.",
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.DELAYED, LineStatus.SUSPENDED, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat("2026-11-02T15:43:07.116206+00:00"),
 )
 

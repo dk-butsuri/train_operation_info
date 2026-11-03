@@ -76,6 +76,7 @@ _METADATA: Final = ProviderMetadata(
     additional_terms_urls=(HttpUrl("https://www.jr-shikoku.co.jp/site_policy/jrshikoku_sitepolicy.pdf"), HttpUrl(_URL)),
     usage_permission=UsagePermission.PERMISSION_REQUIRED,
     usage_note="Site policy section 1 prohibits unapproved copying, transcription, distribution, translation and modification. Service notices cover delays of roughly 30 minutes or more and cancellations, including anticipated events. No reuse licence was found.",
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat("2026-11-02T02:17:23+00:00"),
 )
 

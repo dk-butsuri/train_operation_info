@@ -22,10 +22,12 @@ from train_operation_info.snapshots import SnapshotCapture, SnapshotReplayTransp
 
 _FIXTURES = Path(__file__).parent / "fixtures"
 _FILES = {
+    "kyoto_subway": "kyoto_subway_notice_20230815040858.html",
     "obb": "obb_20260717055055.html",
     "tra": "tra_20250707021531.html",
     "hakone_tozan": "hakone_tozan_20260208142500.html",
     "meitetsu": "meitetsu_20260908095207.html",
+    "nagoya_subway": "nagoya_subway_normal.json",
     "osaka_metro": "20240829220436.html", "jrw": "jrw_api_20261001234249.json",
     "jrshikoku": "jrshikoku_20260712052626.html", "hankyu": "hankyu_20250722023635.html",
     "hanshin": "hanshin_20240830120316.html", "nankai": "nankai_20250806220111.html",
@@ -37,6 +39,7 @@ _FILES = {
     "tokyo_metro": "tokyo_metro_normal.json",
     "minatomirai": "minatomirai_20180122144419.html",
     "toei": "toei_normal.html",
+    "sapporo_subway": "sapporo_subway_normal.html",
     "tosaden": "tosaden_20220918071853.html",
     "rinkai": "rinkai_20220825002322.html",
     "keikyu": "keikyu_20220713030847.html",

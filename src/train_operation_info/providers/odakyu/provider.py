@@ -71,6 +71,7 @@ _METADATA: Final = ProviderMetadata(
     "The policy names odakyu.jp; separate API reuse permission was not found. "
     "This metadata grants no reuse licence. The operation page reports delays of "
     "10 minutes or more, including expected delays, and disclaims timeliness.",
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.DELAYED, LineStatus.SUSPENDED, LineStatus.PARTIAL_SUSPENSION, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat("2026-11-02T15:38:38+00:00"),
 )
 

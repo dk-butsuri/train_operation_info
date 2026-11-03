@@ -78,6 +78,7 @@ _METADATA: Final = ProviderMetadata(
     "allowed by law; other copying, modification, redistribution and public "
     "display require prior permission. This is not a public-signage licence. "
     "The operation page publishes delays of 15 minutes or more and suspensions.",
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.SUSPENDED, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat("2026-11-02T02:12:22+00:00"),
 )
 

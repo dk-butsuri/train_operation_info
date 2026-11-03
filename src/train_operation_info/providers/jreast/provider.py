@@ -70,6 +70,7 @@ _METADATA: Final = ProviderMetadata(
     usage_note="The general site terms restrict copying, processing, transmission "
     "and secondary use. The service page describes the publication threshold "
     "and accuracy limitations. Public availability is not a reuse licence.",
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.DELAYED, LineStatus.SUSPENDED, LineStatus.PARTIAL_SUSPENSION, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat("2026-11-02T02:15:00+00:00"),
 )
 

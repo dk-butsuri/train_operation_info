@@ -43,7 +43,7 @@ from pydantic import HttpUrl
 
 from train_operation_info.exceptions import ParseError
 from train_operation_info.models import (
-    LINE_CATALOG, DataFormat, Line, LineId, ProviderId, ProviderMetadata,
+    LINE_CATALOG, DataFormat, Line, LineId, LineStatus, ProviderId, ProviderMetadata,
     SourceEndpoint, UsagePermission,
 )
 from ..base import SnapshotProvider
@@ -101,6 +101,7 @@ _METADATA: Final = ProviderMetadata(
         "excluding planned work and selecting English text are presentation choices "
         "whose compatibility with the no-modification clause is not confirmed by MTA."
     ),
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.DELAYED, LineStatus.SUSPENDED, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat("2026-11-03T03:40:00+00:00"),
 )
 

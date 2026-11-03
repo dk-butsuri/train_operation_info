@@ -42,6 +42,7 @@ _METADATA: Final = ProviderMetadata(
     additional_terms_urls=(),
     usage_permission=UsagePermission.PERMISSION_REQUIRED,
     usage_note='The copyright section prohibits copying or republication in other media without permission. No separate private or commercial data reuse grant was found.',
+    statuses=frozenset({LineStatus.NORMAL}),
     reviewed_at=datetime.fromisoformat('2026-11-01T14:36:42.593050+00:00'),
 )
 

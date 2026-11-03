@@ -67,6 +67,7 @@ _METADATA: Final = ProviderMetadata(
         "quotation or republication. No separate service-status reuse grant was "
         "found on the status page. Public availability does not grant reuse rights."
     ),
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.DELAYED, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat("2026-11-01T15:07:17+00:00"),
 )
 

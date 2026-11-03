@@ -84,6 +84,7 @@ _METADATA: Final = ProviderMetadata(
         "notice requires authorization or fair use for protected content; the "
         "website-wide open-data statement supplies the express reuse grant."
     ),
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.DELAYED, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat("2026-11-02T15:56:56+00:00"),
 )
 

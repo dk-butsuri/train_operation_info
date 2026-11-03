@@ -77,6 +77,7 @@ _METADATA: Final = ProviderMetadata(
         "Only editorial incident notices are covered; no train-level service "
         "or all-network punctuality guarantee."
     ),
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat("2026-11-03T03:36:08.163456+00:00"),
 )
 

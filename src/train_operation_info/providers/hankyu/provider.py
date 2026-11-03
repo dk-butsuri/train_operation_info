@@ -44,6 +44,7 @@ _METADATA: Final = ProviderMetadata(
     additional_terms_urls=(),
     usage_permission=UsagePermission.PRIVATE_USE_ONLY,
     usage_note='The site reserves uses allowed by law and requires prior permission beyond that range. This category records that statutory exception, not a separate licence for public signage or automated reuse.',
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.DELAYED, LineStatus.SUSPENDED, LineStatus.PARTIAL_SUSPENSION, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat('2026-11-01T14:36:42.593050+00:00'),
 )
 

@@ -85,6 +85,7 @@ _METADATA: Final = ProviderMetadata(
         "inquiry. It also restricts saving and reusing the information. No blanket private-use "
         "or commercial data licence is claimed by this provider."
     ),
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.DELAYED, LineStatus.SUSPENDED, LineStatus.PARTIAL_SUSPENSION, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat("2026-11-01T15:18:41+00:00"),
 )
 

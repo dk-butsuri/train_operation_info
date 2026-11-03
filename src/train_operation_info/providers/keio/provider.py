@@ -81,6 +81,7 @@ _METADATA: Final = ProviderMetadata(
         "roughly 15-minute delay threshold and disclaims the accuracy and "
         "timeliness of the published information."
     ),
+    statuses=frozenset({LineStatus.NORMAL}),
     reviewed_at=datetime.fromisoformat("2026-11-03T04:30:00+00:00"),
 )
 

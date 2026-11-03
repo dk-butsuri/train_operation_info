@@ -97,6 +97,7 @@ _METADATA: Final = ProviderMetadata(
         "date, excluding the dedicated CONSTRUCTION category; DB Regio and "
         "S-Bahn listings and construction notices are outside this provider."
     ),
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat("2026-11-03T03:37:51.151658+00:00"),
 )
 

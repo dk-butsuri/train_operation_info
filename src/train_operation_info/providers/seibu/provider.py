@@ -121,6 +121,7 @@ _METADATA: Final = ProviderMetadata(
         "reuse grant was found. The page states a publication threshold of "
         "15 minutes or more of delay."
     ),
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.SUSPENDED, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat("2026-11-03T03:46:31+00:00"),
 )
 

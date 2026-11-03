@@ -62,6 +62,7 @@ _METADATA: Final = ProviderMetadata(
     usage_note="Both general site terms and the operation page require permission "
     "for uses beyond statutory personal private use. This records the reserved "
     "private-use exception, not a licence for public signage or automated reuse.",
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.DELAYED, LineStatus.SUSPENDED, LineStatus.PARTIAL_SUSPENSION, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat("2026-11-01T14:57:00+00:00"),
 )
 

@@ -78,6 +78,7 @@ _METADATA: Final = ProviderMetadata(
         "materials; it does not imply endorsement. This provider reads public "
         "website HTML, not the separate membership API."
     ),
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.DELAYED, LineStatus.PARTIAL_SUSPENSION}),
     reviewed_at=datetime.fromisoformat("2026-11-01T15:02:02+00:00"),
 )
 

@@ -1,0 +1,34 @@
+[
+  {
+    "url": "https://operationstatus.city.sapporo.jp/unkojoho/",
+    "retrieved_at_utc": "2026-11-03T15:58:17.016565+00:00",
+    "original_sha256": "3d50aef62c0a233d6e3c7e2cea4693b43742f632b2fa572024f979e1913c01b3",
+    "fixture": "tests/fixtures/sapporo_subway_normal.html",
+    "fixture_sha256": "431264b795f6a2e2cfa76fd7ba408d593b32267b86b0d3bb30131f31a282a47d",
+    "transformation": "BeautifulSoup html.parser serialization of #tmp_contents in a minimal UTF-8 document"
+  },
+  {
+    "url": "https://operationstatus.city.sapporo.jp/unkojoho/rireki_all.html",
+    "retrieved_at_utc": "2026-11-03T15:58:34.998108+00:00",
+    "original_sha256": "d43581e7792a71d11819fda058a27d25bd954953365ee5a30a774e8e4b72c280",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  },
+  {
+    "url": "https://operationstatus.city.sapporo.jp/shared/site_st/js/st_jsset.js",
+    "retrieved_at_utc": "2026-11-03T15:58:35.124850+00:00",
+    "original_sha256": "b43c3235ced66bfec791bc0b78a1d55784b9b18c2632c3404e0e825ce4fdb8a0",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  },
+  {
+    "url": "https://operationstatus.city.sapporo.jp/shared/site_st/style/unkojoho.css",
+    "retrieved_at_utc": "2026-11-03T15:58:35.236804+00:00",
+    "original_sha256": "2b40ae9d04aabc34aab0085b39c3c133bed25113a2e084f212a067d0b74018ba",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  }
+]

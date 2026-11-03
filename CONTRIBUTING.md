@@ -190,6 +190,7 @@ Provider間の比較では共通路線ID、取得範囲、専用状態、実際�
 | `additional_terms_urls` | 運行情報固有の条件など、追加で確認した公式URL |
 | `usage_permission` | `PRIVATE_USE_ONLY` / `UNSPECIFIED` / `COMMERCIAL_ALLOWED` / `PERMISSION_REQUIRED` |
 | `usage_note` | 分類の根拠、留保される範囲、帰属表示などの条件 |
+| `statuses` | `_fetch_lines()` が返し得る `LineStatus` の `frozenset`。`UNKNOWN` は含めず、`NORMAL` は必ず含める |
 | `reviewed_at` | 実際に条件を確認した日時。タイムゾーン付きの固定値 |
 
 `SourceEndpoint` には `url`、`method: Literal["GET", "POST"]`、`format: DataFormat`、`is_template`、`description` を設定します。`DataFormat` は `HTML`・`XML`・`JSON`・`JAVASCRIPT`・`TEXT`（プレーンテキスト）・`PROTOBUF`（GTFS-realtime等）です。GTFS-realtimeのフィードは共通の `providers/gtfs_rt.py` で解析し、フィードごとのProviderにURL・規約・`route_id` 対応表・取得範囲を定義します。人向けページとHTTP取得先を分け、`_fetch_lines()` が実際に使う取得先を全て宣言してください。調査で閲覧しただけのURLを含めません。固定URLには完全なURLを、実行時に決まるURLには `{filename}` 等を含むURLと `is_template=True` を指定し、決定方法・条件・POSTデータ等を `description` に記録します。
@@ -206,6 +207,14 @@ endpoints = (
 ```
 
 `tests/test_metadata.py` に形式の期待値、`tests/test_snapshots.py` に全取得先を通るfixtureを追加します。保存した実リクエストとメタデータの宣言が一致することも確認対象です。
+
+`statuses` には、取得元の専用状態からコード上で導出できる状態を全て宣言します。`japanese_status()` のような共通のラベル対応表を通す場合は、その対応表が返し得る状態をすべて含めます。`combined_status()` は空の入力に `NORMAL` を返すので注意してください。`UNKNOWN` は取得前・未知の表示として全Providerで返り得るため宣言しません。宣言にない状態を解析した場合、`refresh()` は `ParseError` を送出して直前の結果を保持します。そのため、状態ごとのテストを書けば宣言の漏れは検出されます。一方、宣言が多すぎても検出されないため、実際に返さない状態は含めないでください。宣言はREADME（英語版・日本語版）の状態の分類能力の表と一致させます。食い違うと `tests/test_metadata.py` が失敗します。
+
+```python
+from train_operation_info.models import LineStatus
+
+statuses = frozenset({LineStatus.NORMAL, LineStatus.ALERT})  # 遅延・運休を区別しない取得元
+```
 
 `PRIVATE_USE_ONLY` は私的使用等の法定範囲を留保する記載、`UNSPECIFIED` は再利用条件の明記を確認できない場合です。無断再利用を制限する記載がある場合は `PERMISSION_REQUIRED` として、無記載と区別します。商用可は明示的な根拠がある場合だけ記録します。
 
@@ -254,7 +263,7 @@ python -m pytest
 
 `tests/fixtures/` に保存データがない環境（リポジトリをcloneした直後など）では、そのデータを読むテストは失敗せずスキップされます。スキップ理由は `python -m pytest -rs` で確認できます。Providerを変更したときは、保存データがそろった環境で全テストを実行してください。
 
-実際の公式サイトへの取得は、オフラインテストとは分けてサンプルから確認します。最後にREADMEの対応Provider表と [docs/PROVIDERS.md](docs/PROVIDERS.md) へ対応範囲・アクセス例・取得できない情報を追記してください。
+実際の公式サイトへの取得は、オフラインテストとは分けてサンプルから確認します。最後にREADMEの対応Provider表・状態の分類能力の表（英語版・日本語版）と [docs/PROVIDERS.md](docs/PROVIDERS.md) へ対応範囲・アクセス例・取得できない情報を追記してください。
 
 ## 貢献のライセンスと署名
 

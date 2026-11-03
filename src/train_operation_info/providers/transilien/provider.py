@@ -89,6 +89,7 @@ _METADATA: Final = ProviderMetadata(
         "This provider covers only SNCF Transilien RER C/D/E and trains H/J/K/L/N/P/R/U/V, "
         "not nationwide SNCF, RER A/B or other operators."
     ),
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.DELAYED, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat("2026-11-03T03:38:01.234788+00:00"),
 )
 

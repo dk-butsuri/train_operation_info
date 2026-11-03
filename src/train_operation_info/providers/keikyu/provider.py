@@ -119,6 +119,7 @@ _METADATA: Final = ProviderMetadata(
         "own publication threshold: roughly 10-minute delays/suspensions, network-wide, "
         "that are occurring or anticipated."
     ),
+    statuses=frozenset({LineStatus.NORMAL}),
     reviewed_at=datetime.fromisoformat("2026-11-03T03:45:36.656796+00:00"),
 )
 

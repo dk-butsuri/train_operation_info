@@ -72,6 +72,7 @@ _METADATA: Final = ProviderMetadata(
     "requires approval for business use. The service page publishes actual or "
     "expected delays of 30 minutes or more; NORMAL refers to that threshold. "
     "No separate service-specific reuse grant was found.",
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat("2026-11-02T02:30:00+00:00"),
 )
 

@@ -72,6 +72,7 @@ _METADATA: Final = ProviderMetadata(
         "item is parsed; separate news, global advisories and other transport modes "
         "are outside the parsed scope, though present in the recorded HTTP body."
     ),
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat("2026-11-02T15:51:55.396318+00:00"),
 )
 

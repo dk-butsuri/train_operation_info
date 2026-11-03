@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 NAME = "train_operation_info"
-DESCRIPTION = "Typed railway service alerts from 38 official sources, without guessing"
+DESCRIPTION = "Typed railway service alerts from 41 official sources, without guessing"
 AUTHOR = "dk-butsuri"
 VERSION = "1.0.0"
 INSTALL_REQUIRES = [

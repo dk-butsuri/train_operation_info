@@ -99,6 +99,8 @@ class ProviderMetadata(_Model):
     additional_terms_urls: tuple[HttpUrl, ...] = ()
     usage_permission: UsagePermission
     usage_note: str
+    # Statuses this provider can derive from its source; UNKNOWN is always possible.
+    statuses: frozenset[LineStatus]
     reviewed_at: AwareDatetime
 
 

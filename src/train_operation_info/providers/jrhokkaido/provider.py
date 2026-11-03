@@ -312,6 +312,7 @@ _METADATA: Final = ProviderMetadata(
         "copying, or reprocessing into electronic media "
         "(\"この情報を無断転載、複写または電磁媒体等に加工することを禁じます\")."
     ),
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat("2026-11-03T02:30:00+00:00"),
 )
 

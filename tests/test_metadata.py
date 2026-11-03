@@ -1,12 +1,18 @@
 """Human-facing pages and machine request endpoints have independent metadata."""
 
+import asyncio
+import itertools
+from pathlib import Path
 from typing import get_args
 
+import httpx
 import pytest
 from pydantic import ValidationError
 
 from train_operation_info import ProviderName, Tracker
-from train_operation_info.models import DataFormat, ProviderMetadata, SourceEndpoint
+from train_operation_info.exceptions import ParseError
+from train_operation_info.models import DataFormat, Line, LineStatus, ProviderMetadata, SourceEndpoint
+from train_operation_info.providers.osaka_monorail import OsakaMonorailProvider
 
 
 @pytest.mark.parametrize("provider_name", get_args(ProviderName))
@@ -19,11 +25,14 @@ def test_every_provider_declares_its_consumed_data_formats(provider_name: Provid
         "tra": {DataFormat.HTML},
         "hakone_tozan": {DataFormat.HTML},
         "meitetsu": {DataFormat.HTML},
+        "sapporo_subway": {DataFormat.HTML},
+        "nagoya_subway": {DataFormat.JSON},
         "jrw": {DataFormat.JSON},
         "jrcentral": {DataFormat.JSON},
         "jrhokkaido": {DataFormat.JSON},
         "jrkyushu": {DataFormat.XML},
         "tokyo_metro": {DataFormat.JSON},
+        "kyoto_subway": {DataFormat.HTML},
         "yuirail": {DataFormat.JSON},
         "tokyu": {DataFormat.JSON},
         "odakyu": {DataFormat.HTML, DataFormat.JAVASCRIPT, DataFormat.JSON},
@@ -80,3 +89,45 @@ def test_empty_or_missing_endpoint_list_is_rejected() -> None:
     del data["endpoints"]
     with pytest.raises(ValidationError):
         ProviderMetadata.model_validate(data)
+
+
+_STATUS_COLUMNS = (
+    LineStatus.NORMAL, LineStatus.DELAYED, LineStatus.SUSPENDED,
+    LineStatus.PARTIAL_SUSPENSION, LineStatus.ALERT,
+)
+
+
+@pytest.mark.parametrize("readme", ["README.md", "README.ja.md"])
+def test_readme_status_table_matches_declared_statuses(readme: str) -> None:
+    text = (Path(__file__).parents[1] / readme).read_text(encoding="utf-8")
+    header = "| `provider_id` | " + " | ".join(f"`{s.name}`" for s in _STATUS_COLUMNS) + " |"
+    assert text.count(header) == 1
+    rows = text.split(header)[1].split("\n")[2:]
+    table: dict[str, frozenset[LineStatus]] = {}
+    for row in itertools.takewhile(lambda r: r.startswith("| `"), rows):
+        name, *cells = (cell.strip() for cell in row.strip("|").split("|"))
+        table[name.strip("`")] = frozenset(s for s, cell in zip(_STATUS_COLUMNS, cells, strict=True) if cell == "✓")
+    tracker = Tracker(enabled_providers=())
+    assert table == {
+        name: getattr(tracker, name).metadata.statuses for name in get_args(ProviderName)
+    }
+
+
+@pytest.mark.parametrize("provider_name", get_args(ProviderName))
+def test_unknown_is_implicit_and_never_declared(provider_name: ProviderName) -> None:
+    statuses = getattr(Tracker(enabled_providers=()), provider_name).metadata.statuses
+    assert LineStatus.UNKNOWN not in statuses
+    assert LineStatus.NORMAL in statuses
+
+
+def test_undeclared_status_is_a_parse_error_and_keeps_snapshot() -> None:
+    class _Delayed(OsakaMonorailProvider):
+        async def _fetch_lines(self, client: httpx.AsyncClient) -> tuple[Line, ...]:
+            return tuple(line.model_copy(update={"status": LineStatus.DELAYED}) for line in self.lines)
+
+    provider = _Delayed(client=httpx.AsyncClient())
+    assert LineStatus.DELAYED not in provider.metadata.statuses
+    before = provider.lines
+    with pytest.raises(ParseError, match="undeclared"):
+        asyncio.run(provider.refresh())
+    assert provider.lines == before

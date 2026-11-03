@@ -67,6 +67,7 @@ _METADATA: Final = ProviderMetadata(
     additional_terms_urls=(HttpUrl(_URL + "inc/info_mid.html"),),
     usage_permission=UsagePermission.UNSPECIFIED,
     usage_note="No general reuse licence or restriction applicable to this public feed was found in the reviewed official pages. The notice page states a disclaimer and a publication threshold of anticipated delays over 15 minutes affecting multiple trains. Train Navi, Web membership, JQ CARD and social media rules concern separate services and are not treated as feed terms. Coverage is limited to the XML; the structurally separate long-term closure flags, disaster/construction notices and PDFs are excluded. UNSPECIFIED is not a grant of reuse permission.",
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat("2026-11-02T15:55:00+00:00"),
 )
 

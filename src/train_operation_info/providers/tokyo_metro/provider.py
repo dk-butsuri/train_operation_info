@@ -82,6 +82,7 @@ _METADATA: Final = ProviderMetadata(
     "and republication with altered formatting. No commercial reuse grant was "
     "found. The current page publishes actual or expected delays of five minutes "
     "or more and warns that its information may differ from actual operation.",
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.DELAYED, LineStatus.SUSPENDED, LineStatus.PARTIAL_SUSPENSION, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat("2026-11-02T05:32:16+00:00"),
 )
 

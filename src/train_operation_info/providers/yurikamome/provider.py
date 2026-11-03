@@ -85,6 +85,7 @@ _METADATA: Final = ProviderMetadata(
         "of roughly 15 minutes or more, including anticipated delays, and warns "
         "that its information may differ from actual service."
     ),
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.DELAYED, LineStatus.SUSPENDED, LineStatus.PARTIAL_SUSPENSION, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat("2026-11-02T02:28:35+00:00"),
 )
 

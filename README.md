@@ -6,7 +6,7 @@
 ![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)
 ![Typed](https://img.shields.io/badge/typing-mypy%20strict-informational.svg)
 
-**Railway service alerts from 38 official sources, in one typed Python API — and it never guesses.**
+**Railway service alerts from 41 official sources, in one typed Python API — and it never guesses.**
 
 ```python
 tracker = Tracker()
@@ -18,7 +18,7 @@ print(tracker.osaka_metro.midosuji.status)  # e.g. LineStatus.DELAYED
 
 ## Why
 
-- **38 sources, one model.** 29 Japanese operators (all six JR companies, Tokyo Metro, Toei, the major private railways in Tokyo, Nagoya and Osaka, and more), plus Taiwan, Singapore, Germany, France, Austria and New York. Every source returns the same `Line` and `ServiceAlert` models.
+- **41 sources, one model.** 32 Japanese operators (all six JR companies, Tokyo Metro, Toei, the major private railways in Tokyo, Nagoya and Osaka, and more), plus Taiwan, Singapore, Germany, France, Austria and New York. Every source returns the same `Line` and `ServiceAlert` models.
 - **It never guesses.** A status is mapped only when the source's specification, public code or captured responses prove the mapping. Anything unconfirmed stays `UNKNOWN`, with the original text kept. A failed fetch is never shown as "normal".
 - **Typed to the bottom.** Strict, frozen Pydantic models, timezone-aware datetimes, explicit attributes for every line (`tracker.jreast.yamanote`), checked with `mypy --strict`. Ships `py.typed`.
 - **A good citizen.** Requests identify the library, never impersonate a browser, and respect a built-in per-source rate limit. Each source's terms of use are recorded in its metadata.
@@ -66,8 +66,9 @@ python -m examples.visualizer --demo   # open http://127.0.0.1:8765
 | Region | Sources (`provider_id`) |
 | --- | --- |
 | Japan — JR | JR Hokkaido (`jrhokkaido`), JR East (`jreast`), JR Central (`jrcentral`), JR West (`jrw`), JR Shikoku (`jrshikoku`), JR Kyushu (`jrkyushu`) |
+| Japan — Hokkaido | Sapporo Municipal Subway (`sapporo_subway`) |
 | Japan — Kanto | Tokyo Metro (`tokyo_metro`), Toei Subway (`toei`), Tobu (`tobu`), Seibu (`seibu`), Keisei (`keisei`), Keio (`keio`), Odakyu (`odakyu`) — opt-in, Tokyu (`tokyu`), Keikyu (`keikyu`), Minatomirai Line (`minatomirai`), Hakone Tozan (`hakone_tozan`), Yurikamome (`yurikamome`), Rinkai Line (`rinkai`) |
-| Japan — Chubu / Kansai | Meitetsu (`meitetsu`), Kintetsu (`kintetsu`), Nankai (`nankai`), Hanshin (`hanshin`), Keihan (`keihan`), Hankyu (`hankyu`), Osaka Monorail (`osaka_monorail`), Osaka Metro (`osaka_metro`) |
+| Japan — Chubu / Kansai | Nagoya Municipal Subway (`nagoya_subway`), Meitetsu (`meitetsu`), Kintetsu (`kintetsu`), Nankai (`nankai`), Hanshin (`hanshin`), Keihan (`keihan`), Hankyu (`hankyu`), Osaka Monorail (`osaka_monorail`), Osaka Metro (`osaka_metro`), Kyoto City Subway (`kyoto_subway`) |
 | Japan — Shikoku / Okinawa | Tosaden Kotsu (`tosaden`), Yui Rail (`yuirail`) |
 | Taiwan | Taiwan Railway (`tra`), Taiwan High Speed Rail (`thsr`), Taipei Metro (`taipei_metro`) |
 | Singapore | MRT/LRT (`singapore_mrt`) |
@@ -87,6 +88,57 @@ Each source covers what its official page publishes, and no more. For per-line a
 | `PARTIAL_SUSPENSION` | Partial cancellation or short-turn operation |
 | `ALERT` | A notice whose exact impact the source does not specify |
 | `UNKNOWN` | Not fetched yet, or a display the library cannot confirm (raw text kept) |
+
+Sources differ in which statuses they can tell apart. A source without a ✓ never returns that status: Tobu reports a delay as `ALERT`, not `DELAYED`, and Keio reports anything but normal service as `UNKNOWN`. `UNKNOWN` is possible everywhere and is omitted. The same set is available at runtime as `provider.metadata.statuses`.
+
+<details>
+<summary>Statuses each source can return</summary>
+
+| `provider_id` | `NORMAL` | `DELAYED` | `SUSPENDED` | `PARTIAL_SUSPENSION` | `ALERT` |
+| --- | :-: | :-: | :-: | :-: | :-: |
+| `jrhokkaido` | ✓ |  |  |  | ✓ |
+| `jreast` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `jrcentral` | ✓ | ✓ | ✓ |  | ✓ |
+| `jrw` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `jrshikoku` | ✓ |  |  |  | ✓ |
+| `jrkyushu` | ✓ |  |  |  | ✓ |
+| `sapporo_subway` | ✓ |  |  |  |  |
+| `tokyo_metro` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `toei` | ✓ |  |  |  | ✓ |
+| `tobu` | ✓ |  |  |  | ✓ |
+| `seibu` | ✓ |  | ✓ |  | ✓ |
+| `keisei` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `keio` | ✓ |  |  |  |  |
+| `odakyu` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `tokyu` | ✓ |  | ✓ |  | ✓ |
+| `keikyu` | ✓ |  |  |  |  |
+| `minatomirai` | ✓ | ✓ |  |  | ✓ |
+| `hakone_tozan` | ✓ |  |  |  | ✓ |
+| `yurikamome` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `rinkai` | ✓ |  |  |  | ✓ |
+| `nagoya_subway` | ✓ | ✓ | ✓ |  | ✓ |
+| `meitetsu` | ✓ |  | ✓ |  | ✓ |
+| `kintetsu` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `nankai` | ✓ | ✓ | ✓ |  | ✓ |
+| `hanshin` | ✓ |  |  |  |  |
+| `keihan` | ✓ | ✓ | ✓ | ✓ |  |
+| `hankyu` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `osaka_monorail` | ✓ |  |  |  |  |
+| `osaka_metro` | ✓ | ✓ | ✓ |  |  |
+| `kyoto_subway` | ✓ |  |  |  |  |
+| `tosaden` | ✓ |  |  |  | ✓ |
+| `yuirail` | ✓ |  |  |  | ✓ |
+| `tra` | ✓ | ✓ |  |  | ✓ |
+| `thsr` | ✓ | ✓ |  |  | ✓ |
+| `taipei_metro` | ✓ | ✓ |  | ✓ |  |
+| `singapore_mrt` | ✓ |  |  |  | ✓ |
+| `db` | ✓ |  |  |  | ✓ |
+| `transilien` | ✓ | ✓ |  |  | ✓ |
+| `obb` | ✓ |  |  |  | ✓ |
+| `mta_subway` | ✓ | ✓ | ✓ |  | ✓ |
+| `yahoo` | ✓ | ✓ | ✓ | ✓ | ✓ |
+
+</details>
 
 - **Aggregates**: `tracker.delay_lines`, `tracker.affected_lines`, `tracker.unknown_lines`, `tracker.alerts`, `tracker.active_alerts`.
 - **Failures**: a source that cannot be fetched raises `FetchError`; a changed page raises `ParseError`. `tracker.refresh()` updates every selected source, then raises `RefreshError` listing the failures. Failed sources keep their previous snapshot — show their age using `fetched_at`, and never treat a failure as normal service.

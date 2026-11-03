@@ -43,6 +43,7 @@ _METADATA: Final = ProviderMetadata(
     additional_terms_urls=(HttpUrl('https://subway.osakametro.co.jp/guide/subway_information.php'), HttpUrl('https://subway.osakametro.co.jp/guide/page/readme_46_pc.php/1000'), ),
     usage_permission=UsagePermission.PERMISSION_REQUIRED,
     usage_note='The operation page prohibits unapproved secondary use. General site terms separately reserve statutory exceptions including private copying and quotation; this metadata does not resolve an individual use case.',
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.DELAYED, LineStatus.SUSPENDED}),
     reviewed_at=datetime.fromisoformat('2026-11-01T14:36:42.593050+00:00'),
 )
 

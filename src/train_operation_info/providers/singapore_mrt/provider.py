@@ -83,6 +83,7 @@ _METADATA: Final = ProviderMetadata(
     additional_terms_urls=(),
     usage_permission=UsagePermission.PERMISSION_REQUIRED,
     usage_note='LTA website terms require prior written permission for reproduction and distribution except where otherwise provided. Availability of the website endpoint is not a DataMall commercial reuse licence.',
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat('2026-11-01T14:36:42.593050+00:00'),
 )
 

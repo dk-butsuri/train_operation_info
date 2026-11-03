@@ -132,6 +132,7 @@ _METADATA: Final = ProviderMetadata(
     additional_terms_urls=(HttpUrl('https://trafficinfo.westjr.co.jp/static-pages/readme.html'), HttpUrl('https://www.westjr.co.jp/guide/'), ),
     usage_permission=UsagePermission.PERMISSION_REQUIRED,
     usage_note='The service overview prohibits unapproved republication, copying and processing into electronic media. The environment/links page is not a commercial data licence.',
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.DELAYED, LineStatus.SUSPENDED, LineStatus.PARTIAL_SUSPENSION, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat('2026-11-01T14:36:42.593050+00:00'),
 )
 

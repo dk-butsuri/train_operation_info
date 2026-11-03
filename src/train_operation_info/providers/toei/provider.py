@@ -64,6 +64,7 @@ _METADATA: Final = ProviderMetadata(
         "This is not a public-signage licence. Information is published for delays "
         "of 15 minutes or more, including anticipated delays."
     ),
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat("2026-11-02T05:40:02+00:00"),
 )
 

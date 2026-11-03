@@ -44,6 +44,7 @@ _METADATA: Final = ProviderMetadata(
     additional_terms_urls=(),
     usage_permission=UsagePermission.PRIVATE_USE_ONLY,
     usage_note='Section 4 reserves the legally permitted range and requires prior consent for uses beyond it. This is not a commercial reuse licence or a finding that a particular signage use is private use.',
+    statuses=frozenset({LineStatus.NORMAL}),
     reviewed_at=datetime.fromisoformat('2026-11-01T14:36:42.593050+00:00'),
 )
 

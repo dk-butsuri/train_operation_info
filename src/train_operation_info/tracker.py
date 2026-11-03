@@ -26,15 +26,18 @@ from train_operation_info.providers.keikyu import KeikyuProvider
 from train_operation_info.providers.keio import KeioProvider
 from train_operation_info.providers.keisei import KeiseiProvider
 from train_operation_info.providers.kintetsu import KintetsuProvider
+from train_operation_info.providers.kyoto_subway import KyotoSubwayProvider
 from train_operation_info.providers.meitetsu import MeitetsuProvider
 from train_operation_info.providers.minatomirai import MinatomiraiProvider
 from train_operation_info.providers.mta_subway import MtaSubwayProvider
+from train_operation_info.providers.nagoya_subway import NagoyaSubwayProvider
 from train_operation_info.providers.nankai import NankaiProvider
 from train_operation_info.providers.odakyu import OdakyuProvider
 from train_operation_info.providers.obb import ObbProvider
 from train_operation_info.providers.osaka_metro import OsakaMetroProvider
 from train_operation_info.providers.osaka_monorail import OsakaMonorailProvider
 from train_operation_info.providers.rinkai import RinkaiProvider
+from train_operation_info.providers.sapporo_subway import SapporoSubwayProvider
 from train_operation_info.providers.seibu import SeibuProvider
 from train_operation_info.providers.singapore_mrt import SingaporeMrtProvider
 from train_operation_info.providers.taipei_metro import TaipeiMetroProvider
@@ -55,8 +58,8 @@ from train_operation_info.providers.yurikamome import YurikamomeProvider
 ProviderName: TypeAlias = Literal[
     "db", "obb", "transilien",
     "hakone_tozan", "hankyu", "hanshin", "jrcentral", "jreast", "jrhokkaido", "jrkyushu", "jrshikoku",
-    "jrw", "keihan", "keikyu", "keio", "keisei", "kintetsu", "meitetsu", "minatomirai", "nankai", "odakyu",
-    "osaka_metro", "osaka_monorail", "rinkai", "seibu", "tobu", "toei", "tokyo_metro", "tokyu",
+    "jrw", "keihan", "keikyu", "keio", "keisei", "kintetsu", "kyoto_subway", "meitetsu", "minatomirai", "nagoya_subway", "nankai", "odakyu",
+    "osaka_metro", "osaka_monorail", "rinkai", "sapporo_subway", "seibu", "tobu", "toei", "tokyo_metro", "tokyu",
     "tosaden", "yahoo", "yuirail", "yurikamome",
     "singapore_mrt", "taipei_metro", "thsr", "tra",
     "mta_subway",
@@ -126,13 +129,16 @@ class Tracker:
     keio = _Slot(KeioProvider)
     keisei = _Slot(KeiseiProvider)
     kintetsu = _Slot(KintetsuProvider)
+    kyoto_subway = _Slot(KyotoSubwayProvider)
     meitetsu = _Slot(MeitetsuProvider)
     minatomirai = _Slot(MinatomiraiProvider)
+    nagoya_subway = _Slot(NagoyaSubwayProvider)
     nankai = _Slot(NankaiProvider)
     odakyu = _Slot(OdakyuProvider)
     osaka_metro = _Slot(OsakaMetroProvider)
     osaka_monorail = _Slot(OsakaMonorailProvider)
     rinkai = _Slot(RinkaiProvider)
+    sapporo_subway = _Slot(SapporoSubwayProvider)
     seibu = _Slot(SeibuProvider)
     tobu = _Slot(TobuProvider)
     toei = _Slot(ToeiProvider)

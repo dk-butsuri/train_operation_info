@@ -10,7 +10,7 @@
 
 > **非公式ライブラリです。** 各鉄道事業者・情報提供元とは関係がなく、承認も受けていません。運行情報の権利は各取得元に帰属します。利用前に [免責事項](#免責事項) と [責任ある利用](#責任ある利用) を確認してください。
 
-- 国内外38の取得元に対応し、国・地域を限定せずProviderを追加できます。
+- 国内外41の取得元に対応し、国・地域を限定せずProviderを追加できます。
 - 共通モデルはPydanticのstrict・frozenなモデルで、公開APIはmypy strictで検証しています。`py.typed` を同梱しています。
 - アドホックで不確実な推論をしません。取得元の仕様・公開コード・保存応答で裏付けた対応だけを採用し、未確認の値は `UNKNOWN` として原文ごと保持します。詳細は [判定方針](https://github.com/dk-butsuri/train_operation_info/blob/main/CONTRIBUTING.md#全provider共通の判定方針) を参照してください。
 - 取得元ごとのレート制限、HTTP応答の保存とオフライン再生、ローカルの監視画面を備えています。
@@ -101,8 +101,10 @@ asyncio.run(main())
 | 箱根登山鉄道 | `tracker.hakone_tozan.main` | 小田原～強羅の1路線。箱根ナビ公式HTMLの路線別状態と案内原文 |
 | 東京メトロ | `tracker.tokyo_metro.ginza`、`tracker.tokyo_metro.tozai` | 公式JSONの9路線。路線別の状態・本文・影響区間・原因 |
 | 都営地下鉄 | `tracker.toei.asakusa`、`tracker.toei.oedo` | 公式HTMLの地下鉄4路線。状態・案内本文 |
+| 札幌市営地下鉄 | `tracker.sapporo_subway.namboku`、`tracker.sapporo_subway.tozai`、`tracker.sapporo_subway.toho` | 公式HTMLの3路線。10分以上の遅れなしの平常表示と未分類の案内原文 |
 | ゆりかもめ | `tracker.yurikamome.main` | 新橋～豊洲の1路線。公式運行情報の状態・本文・配信日時 |
 | りんかい線 | `tracker.rinkai.main` | 大崎～新木場の1路線。公式運行情報の案内本文・明示された更新日時 |
+| 名古屋市営地下鉄 | `tracker.nagoya_subway.higashiyama`、`tracker.nagoya_subway.meijo_meiko` | 公式JSONの5系統（名城線・名港線は合算）。状態コード・全案内の本文・区間・理由。市バスは対象外 |
 | 名古屋鉄道（名鉄） | `tracker.meitetsu.nagoya_main`、`tracker.meitetsu.inuyama` | 公式HTMLの路線・区間別の見合わせ、遅延・一部運休、案内本文。既存共通IDの16掲載単位 |
 | 近鉄 | `tracker.kintetsu.osaka`、`tracker.kintetsu.nara`、`tracker.kintetsu.kyoto` | 本線・支線・ケーブルの23路線。公式運行情報の状況・原因・詳細リンク |
 | 南海電鉄 | `tracker.nankai.main`、`tracker.nankai.koya`、`tracker.nankai.semboku` | 本線・支線・高野山ケーブル・泉北線の10路線・区間 |
@@ -111,6 +113,7 @@ asyncio.run(main())
 | 阪急 | `tracker.hankyu.kobe`、`tracker.hankyu.kyoto` | 公式発表の神戸線・宝塚線・京都線の3系統 |
 | 大阪モノレール | `tracker.osaka_monorail.main`、`tracker.osaka_monorail.saito` | 2路線。公式トップの全体サマリー |
 | 大阪メトロ | `tracker.osaka_metro.midosuji` | 地下鉄8路線・ニュートラム |
+| 京都市営地下鉄 | `tracker.kyoto_subway.karasuma`、`tracker.kyoto_subway.tozai` | 公式トップの緊急情報欄。掲載なし／対象・影響未特定の案内。Yahooと共通路線IDを使用 |
 | とさでん交通 | `tracker.tosaden.main` | 路面電車全体の1掲載単位。公式の運行状況本文・台風等の案内 |
 | ゆいレール（沖縄都市モノレール） | `tracker.yuirail.main` | 那覇空港～てだこ浦西の1路線。公式トップの運行情報テキスト |
 
@@ -167,6 +170,56 @@ except RefreshError as exc:
 ```
 
 複数Providerを選んだ場合の `tracker.lines`・`delay_lines` 等は、各取得元の結果を連結します。同じ `LineId` の結果でも `provider_id` と状態は独立しており、自動的な優先順位付けやYahooへの切り替えは行いません。
+
+## 状態の分類能力
+
+取得元の専用状態欄から区別できる `LineStatus` はProviderごとに異なります。✓ のない状態はそのProviderからは返りません。たとえば東武鉄道の遅延は `DELAYED` ではなく `ALERT`、京王電鉄の平常以外の表示は `UNKNOWN` になります。`DELAYED` を返さないProviderでは `delay_lines` が常に空になるため、`affected_lines`・`unknown_lines` と `alerts` を参照してください。
+
+`UNKNOWN`（取得前・未知の表示）はすべてのProviderで返り得るため省略しています。同じ内容は実行時に `provider.metadata.statuses` で参照できます。宣言にない状態を解析した場合は `ParseError` とし、直前の結果を保持します。
+
+| `provider_id` | `NORMAL` | `DELAYED` | `SUSPENDED` | `PARTIAL_SUSPENSION` | `ALERT` |
+| --- | :-: | :-: | :-: | :-: | :-: |
+| `jrhokkaido` | ✓ |  |  |  | ✓ |
+| `jreast` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `jrcentral` | ✓ | ✓ | ✓ |  | ✓ |
+| `jrw` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `jrshikoku` | ✓ |  |  |  | ✓ |
+| `jrkyushu` | ✓ |  |  |  | ✓ |
+| `sapporo_subway` | ✓ |  |  |  |  |
+| `tokyo_metro` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `toei` | ✓ |  |  |  | ✓ |
+| `tobu` | ✓ |  |  |  | ✓ |
+| `seibu` | ✓ |  | ✓ |  | ✓ |
+| `keisei` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `keio` | ✓ |  |  |  |  |
+| `odakyu` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `tokyu` | ✓ |  | ✓ |  | ✓ |
+| `keikyu` | ✓ |  |  |  |  |
+| `minatomirai` | ✓ | ✓ |  |  | ✓ |
+| `hakone_tozan` | ✓ |  |  |  | ✓ |
+| `yurikamome` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `rinkai` | ✓ |  |  |  | ✓ |
+| `nagoya_subway` | ✓ | ✓ | ✓ |  | ✓ |
+| `meitetsu` | ✓ |  | ✓ |  | ✓ |
+| `kintetsu` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `nankai` | ✓ | ✓ | ✓ |  | ✓ |
+| `hanshin` | ✓ |  |  |  |  |
+| `keihan` | ✓ | ✓ | ✓ | ✓ |  |
+| `hankyu` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `osaka_monorail` | ✓ |  |  |  |  |
+| `osaka_metro` | ✓ | ✓ | ✓ |  |  |
+| `kyoto_subway` | ✓ |  |  |  |  |
+| `tosaden` | ✓ |  |  |  | ✓ |
+| `yuirail` | ✓ |  |  |  | ✓ |
+| `tra` | ✓ | ✓ |  |  | ✓ |
+| `thsr` | ✓ | ✓ |  |  | ✓ |
+| `taipei_metro` | ✓ | ✓ |  | ✓ |  |
+| `singapore_mrt` | ✓ |  |  |  | ✓ |
+| `db` | ✓ |  |  |  | ✓ |
+| `transilien` | ✓ | ✓ |  |  | ✓ |
+| `obb` | ✓ |  |  |  | ✓ |
+| `mta_subway` | ✓ | ✓ | ✓ |  | ✓ |
+| `yahoo` | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 ## 案内の取得範囲と適用時期
 
@@ -336,6 +389,7 @@ python -m examples.keio
 python -m examples.keisei
 python -m examples.kintetsu
 python -m examples.meitetsu
+python -m examples.nagoya_subway
 python -m examples.minatomirai
 python -m examples.nankai
 python -m examples.odakyu
@@ -345,6 +399,7 @@ python -m examples.seibu
 python -m examples.taipei_metro
 python -m examples.thsr
 python -m examples.tobu
+python -m examples.sapporo_subway
 python -m examples.toei
 python -m examples.tokyo_metro
 python -m examples.tokyu
