@@ -50,7 +50,7 @@ async def main() -> None:
 asyncio.run(main())
 ```
 
-`Tracker()` without arguments refreshes every source except the opt-in ones (Yahoo! and MTA). Network access happens only in `await tracker.refresh()`; reading attributes never fetches.
+`Tracker()` without arguments refreshes every source except the opt-in ones (Yahoo!, MTA, Odakyu and DB). Network access happens only in `await tracker.refresh()`; reading attributes never fetches.
 
 Want to see it first without touching any server? Run the local monitor with synthetic data:
 
@@ -66,12 +66,12 @@ python -m examples.visualizer --demo   # open http://127.0.0.1:8765
 | Region | Sources (`provider_id`) |
 | --- | --- |
 | Japan — JR | JR Hokkaido (`jrhokkaido`), JR East (`jreast`), JR Central (`jrcentral`), JR West (`jrw`), JR Shikoku (`jrshikoku`), JR Kyushu (`jrkyushu`) |
-| Japan — Kanto | Tokyo Metro (`tokyo_metro`), Toei Subway (`toei`), Tobu (`tobu`), Seibu (`seibu`), Keisei (`keisei`), Keio (`keio`), Odakyu (`odakyu`), Tokyu (`tokyu`), Keikyu (`keikyu`), Minatomirai Line (`minatomirai`), Hakone Tozan (`hakone_tozan`), Yurikamome (`yurikamome`), Rinkai Line (`rinkai`) |
+| Japan — Kanto | Tokyo Metro (`tokyo_metro`), Toei Subway (`toei`), Tobu (`tobu`), Seibu (`seibu`), Keisei (`keisei`), Keio (`keio`), Odakyu (`odakyu`) — opt-in, Tokyu (`tokyu`), Keikyu (`keikyu`), Minatomirai Line (`minatomirai`), Hakone Tozan (`hakone_tozan`), Yurikamome (`yurikamome`), Rinkai Line (`rinkai`) |
 | Japan — Chubu / Kansai | Meitetsu (`meitetsu`), Kintetsu (`kintetsu`), Nankai (`nankai`), Hanshin (`hanshin`), Keihan (`keihan`), Hankyu (`hankyu`), Osaka Monorail (`osaka_monorail`), Osaka Metro (`osaka_metro`) |
 | Japan — Shikoku / Okinawa | Tosaden Kotsu (`tosaden`), Yui Rail (`yuirail`) |
 | Taiwan | Taiwan Railway (`tra`), Taiwan High Speed Rail (`thsr`), Taipei Metro (`taipei_metro`) |
 | Singapore | MRT/LRT (`singapore_mrt`) |
-| Europe | DB Fernverkehr (`db`), SNCF Transilien (`transilien`), ÖBB (`obb`) |
+| Europe | DB Fernverkehr (`db`) — opt-in, SNCF Transilien (`transilien`), ÖBB (`obb`) |
 | United States | MTA New York City Subway (`mta_subway`) — opt-in |
 | Aggregator | Yahoo! Japan Transit (`yahoo`) — opt-in, 536 lines nationwide |
 

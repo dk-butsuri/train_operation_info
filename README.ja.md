@@ -70,14 +70,14 @@ async def main() -> None:
 asyncio.run(main())
 ```
 
-`Tracker()` は既定の取得元（Yahoo!鉄道情報とMTAを除く全取得元）を更新します。対象を絞る場合は `Tracker(enabled_providers=("jrw", "keihan", "nankai"))` のように指定します。属性の型は選択にかかわらず明示され、未更新のProviderは `UNKNOWN` のままです。集約一覧は選択したProviderのみを対象にします。
+`Tracker()` は既定の取得元（Yahoo!鉄道情報・MTA・小田急電鉄・DBを除く全取得元）を更新します。対象を絞る場合は `Tracker(enabled_providers=("jrw", "keihan", "nankai"))` のように指定します。属性の型は選択にかかわらず明示され、未更新のProviderは `UNKNOWN` のままです。集約一覧は選択したProviderのみを対象にします。
 
 公開APIは `train_operation_info` パッケージから読み込みます。共通モデルは `train_operation_info.models`、例外は `train_operation_info.exceptions`、各Providerは `train_operation_info.providers` にあります。
 以降のコード例は `async` 関数の中で実行する前提で、`import` を一部省略しています。
 
 ## 対応Provider
 
-`Tracker()` はYahoo!鉄道情報とMTAを除く全取得元を更新します。この2つは利用条件を確認したうえで、`enabled_providers` に明示した場合だけ通信します。
+`Tracker()` はYahoo!鉄道情報・MTA・小田急電鉄・DBを除く全取得元を更新します。この4つは利用条件を確認したうえで、`enabled_providers` に明示した場合だけ通信します。
 各Providerの属性一覧・状態の対応付け・対象外の情報・検証範囲は [docs/PROVIDERS.md](https://github.com/dk-butsuri/train_operation_info/blob/main/docs/PROVIDERS.md) にまとめています。
 
 ### 日本
@@ -94,7 +94,7 @@ asyncio.run(main())
 | 西武鉄道 | `tracker.seibu.shinjuku`、`tracker.seibu.ikebukuro_chichibu` | 公式XMLの11掲載単位（池袋線・西武秩父線は既存の共通IDに統合）。路線別の運転見合わせ・案内 |
 | 京成電鉄 | `tracker.keisei.main`、`tracker.keisei.matsudo` | 本線・スカイアクセス・押上・金町・千葉線／千原線・松戸の6掲載単位。原因・区間・詳細本文・期間限定告知 |
 | 京王電鉄 | `tracker.keio.main`、`tracker.keio.inokashira` | 京王線・新線・相模原線・高尾線・競馬場線・動物園線・井の頭線の7路線。公式XMLの全線一括の運行情報 |
-| 小田急電鉄 | `tracker.odakyu.odawara`、`tracker.odakyu.enoshima`、`tracker.odakyu.tama` | 小田原線・江ノ島線・多摩線。公式の区間別運行状態・案内本文・更新日時 |
+| 小田急電鉄（明示指定時のみ） | `tracker.odakyu.odawara`、`tracker.odakyu.enoshima`、`tracker.odakyu.tama` | 小田原線・江ノ島線・多摩線。公式の区間別運行状態・案内本文・更新日時 |
 | 東急電鉄 | `tracker.tokyu.toyoko`、`tracker.tokyu.den_en_toshi` | 東急9路線。公式JSONの路線別状態・案内文・対象未特定のお知らせ |
 | 京浜急行電鉄（京急） | `tracker.keikyu.main`、`tracker.keikyu.airport` | 本線・空港線・大師線・久里浜線・逗子線の5路線。公式の全線一括の案内本文・更新日時 |
 | みなとみらい線 | `tracker.minatomirai.main` | 横浜～元町・中華街の1路線。公式の運行案内・発生時刻・原因・遅延時間 |
@@ -122,7 +122,7 @@ asyncio.run(main())
 | Taiwan High Speed Rail（台湾高鉄） | `tracker.thsr.main` | 南港～左営の1路線。公式の現在の運行状態・原因・影響区間・本文 |
 | 台北MRT（Metro Taipei） | `tracker.taipei_metro.bannan`、`tracker.taipei_metro.tamsui_xinyi` | 公式掲載の6路線。環状線の運行会社は新北捷運 |
 | シンガポールMRT/LRT | `tracker.singapore_mrt.east_west`、`tracker.singapore_mrt.downtown` | MRT6路線・LRT3路線。運行会社は各Lineのプロパティ |
-| DB Verkehrslage（DB Fernverkehr） | `tracker.db.fernverkehr` | 長距離列車部門の当日運行案内1掲載単位。工事分類を除外。DB Regio・S-Bahn・列車別遅延は対象外 |
+| DB Verkehrslage（DB Fernverkehr、明示指定時のみ） | `tracker.db.fernverkehr` | 長距離列車部門の当日運行案内1掲載単位。工事分類を除外。DB Regio・S-Bahn・列車別遅延は対象外 |
 | SNCF Transilien | `tracker.transilien.rer_c`、`tracker.transilien.ligne_h` | SNCF運行のRER C/D/E・列車H/J/K/L/N/P/R/U/Vの12系統。現在の案内から工事分類を除外。全国のTGV・TER・Intercités、RER A/Bは対象外 |
 | ÖBB公式運行案内 | `tracker.obb.network` | 全国の編集型障害一覧1掲載単位。工事欄を除外。個別路線・列車別遅延は対象外 |
 | MTA New York City Subway（明示指定時のみ） | `tracker.mta_subway.route_f`、`tracker.mta_subway.route_6x` | GTFS-realtimeの29路線（運転系統）。計画工事は対象外 |
@@ -355,7 +355,7 @@ python -m examples.yurikamome
 python -m examples.all_providers
 ```
 
-`examples.all_providers` は既定の取得元を使うため、YahooとMTAには通信しません。Yahooの例は `python -m examples.yahoo` で実行できます。
+`examples.all_providers` は既定の取得元を使うため、Yahoo・MTA・小田急電鉄・DBには通信しません。Yahooの例は `python -m examples.yahoo` で実行できます。
 
 ## 開発
 

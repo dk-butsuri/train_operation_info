@@ -64,8 +64,10 @@ ProviderName: TypeAlias = Literal[
 _ALL_PROVIDERS: tuple[ProviderName, ...] = get_args(ProviderName)
 # Yahoo requires explicit selection; constructing Tracker() never fetches it.
 # MTA's feed terms forbid apps serving others directly from MTA servers: opt-in.
+# Odakyu and DB read an API key published in their own pages; opt-in until permitted.
+_OPT_IN_PROVIDERS: tuple[ProviderName, ...] = ("yahoo", "mta_subway", "odakyu", "db")
 _DEFAULT_PROVIDERS: tuple[ProviderName, ...] = tuple(
-    name for name in _ALL_PROVIDERS if name not in ("yahoo", "mta_subway")
+    name for name in _ALL_PROVIDERS if name not in _OPT_IN_PROVIDERS
 )
 
 _P = TypeVar("_P", bound=SnapshotProvider)

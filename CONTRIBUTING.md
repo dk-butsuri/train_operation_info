@@ -221,7 +221,7 @@ endpoints = (
 
 `_Slot` は読み取り専用の型付き属性で、`tracker.sample` の型は `SampleProvider` になります。構築・`rate_limit` の適用・`overrides` による差し替えは `Tracker.__init__` が全取得元に共通で行います。Providerは `client` と `snapshot_dir` のキーワード引数だけで構築できるようにしてください。`ProviderName` と `_Slot` の過不足や、属性名と `provider_id` の不一致はimport時に `RuntimeError` になります。`tests/test_tracker.py` は `ProviderName` から全取得元を検証するため、テストの一覧を更新する必要はありません。
 
-選択可能な取得元は `ProviderName` の全要素、既定の取得元は `_DEFAULT_PROVIDERS` です。Yahooは利用者が明示的に選択する方式のため既定から除外しています。登録・`overrides` に渡しただけでは有効化せず、`enabled_providers` で選ばれたProviderだけを更新します。
+選択可能な取得元は `ProviderName` の全要素、既定の取得元は `_DEFAULT_PROVIDERS` です。Yahoo・MTA・小田急電鉄・DBは利用者が明示的に選択する方式のため、`_OPT_IN_PROVIDERS` として既定から除外しています。登録・`overrides` に渡しただけでは有効化せず、`enabled_providers` で選ばれたProviderだけを更新します。
 
 これで `tracker.sample.midosuji` の属性補完・誤記検出と、`enabled_providers` による選択を両立できます。路線の集約では運行会社を階層キーにしません。
 

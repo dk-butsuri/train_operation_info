@@ -21,7 +21,7 @@ def test_every_provider_name_has_a_matching_slot() -> None:
 
 
 def test_default_selection_excludes_only_opt_in_providers() -> None:
-    assert {p.provider_id for p in Tracker().providers} == set(_NAMES) - {"yahoo", "mta_subway"}
+    assert {p.provider_id for p in Tracker().providers} == set(_NAMES) - {"yahoo", "mta_subway", "odakyu", "db"}
 
 
 @pytest.mark.parametrize("provider_name", _NAMES)
