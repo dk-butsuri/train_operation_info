@@ -1,9 +1,9 @@
 from setuptools import setup, find_packages
 
 NAME = "train_operation_info"
-DESCRIPTION = "Typed railway service alerts from 41 official sources, without guessing"
+DESCRIPTION = "Typed railway service alerts from 57 official sources, without guessing"
 AUTHOR = "dk-butsuri"
-VERSION = "1.0.0"
+VERSION = "1.1.0"
 INSTALL_REQUIRES = [
     "pydantic >= 2",
     "httpx",

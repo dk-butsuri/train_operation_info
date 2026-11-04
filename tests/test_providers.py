@@ -402,12 +402,16 @@ def test_every_provider_has_reviewed_typed_metadata() -> None:
         metadata = provider.metadata
         assert metadata.provider_id == provider.provider_id
         assert str(metadata.source_page_url).startswith("https://")
-        if provider.provider_id in (ProviderId("rinkai"), ProviderId("jrkyushu")):
+        if provider.provider_id in (
+            ProviderId("rinkai"), ProviderId("jrkyushu"), ProviderId("metro_trains_melbourne"),
+            ProviderId("tosakuro"),
+        ):
             # General website terms were not found. Conditions for separate
             # services do not establish a general terms URL for these feeds.
             assert metadata.terms_url is None
             assert metadata.usage_permission is UsagePermission.UNSPECIFIED
-            assert metadata.additional_terms_urls
+            if provider.provider_id != ProviderId("metro_trains_melbourne"):
+                assert metadata.additional_terms_urls
         else:
             assert metadata.terms_url is not None
         assert metadata.reviewed_at.utcoffset() is not None

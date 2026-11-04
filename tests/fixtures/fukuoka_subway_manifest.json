@@ -1,0 +1,84 @@
+[
+  {
+    "source_url": "https://subway.city.fukuoka.lg.jp/status/",
+    "fetched_at_utc": "2026-11-04T12:12:15.998475+00:00",
+    "original_sha256": "f050ade10ed97b75b0bded260901726827f807c775aedb0b113c0325693816cc",
+    "extraction": "Unmodified response bytes",
+    "archive_url": "https://web.archive.org/web/20230711012832id_/https://subway.city.fukuoka.lg.jp/status/",
+    "archive_timestamp_utc": "2023-07-11T01:28:32+00:00",
+    "fixture": "fukuoka_subway_20230711012832.html",
+    "fixture_sha256": "f050ade10ed97b75b0bded260901726827f807c775aedb0b113c0325693816cc"
+  },
+  {
+    "source_url": "https://subway.city.fukuoka.lg.jp/status/",
+    "fetched_at_utc": "2026-11-04T12:12:12.788731+00:00",
+    "original_sha256": "b0f07caac38d37be2870c5a08343f80144d00d97d71e83ba8947ff185cf9eb79",
+    "extraction": "Unmodified response bytes",
+    "archive_url": "https://web.archive.org/web/20240829161647id_/https://subway.city.fukuoka.lg.jp/status/",
+    "archive_timestamp_utc": "2024-08-29T16:16:47+00:00",
+    "fixture": "fukuoka_subway_20240829161647.html",
+    "fixture_sha256": "b0f07caac38d37be2870c5a08343f80144d00d97d71e83ba8947ff185cf9eb79"
+  },
+  {
+    "source_url": "https://subway.city.fukuoka.lg.jp/status/",
+    "fetched_at_utc": "2026-11-04T12:11:37.665369+00:00",
+    "original_sha256": "e18946910e01694b01cfb2d870feca74327cc62f5122dd7af7bec349686616f1",
+    "extraction": "Unmodified response bytes",
+    "archive_url": "https://web.archive.org/web/20241224075857id_/https://subway.city.fukuoka.lg.jp/status/",
+    "archive_timestamp_utc": "2024-12-24T07:58:57+00:00",
+    "fixture": "fukuoka_subway_20241224075857.html",
+    "fixture_sha256": "e18946910e01694b01cfb2d870feca74327cc62f5122dd7af7bec349686616f1"
+  },
+  {
+    "source_url": "https://subway.city.fukuoka.lg.jp/status/",
+    "fetched_at_utc": "2026-11-04T12:11:37.633124+00:00",
+    "original_sha256": "b031d86442d34dfb6853a3a94f89343d6cd92be95131180376a30604522355c1",
+    "extraction": "Unmodified response bytes",
+    "archive_url": "https://web.archive.org/web/20250501031503id_/https://subway.city.fukuoka.lg.jp/status/",
+    "archive_timestamp_utc": "2025-05-01T03:15:03+00:00",
+    "fixture": "fukuoka_subway_20250501031503.html",
+    "fixture_sha256": "b031d86442d34dfb6853a3a94f89343d6cd92be95131180376a30604522355c1"
+  },
+  {
+    "source_url": "https://subway.city.fukuoka.lg.jp/status/",
+    "fetched_at_utc": "2026-11-04T12:11:37.765299+00:00",
+    "original_sha256": "b5ffd9baf41e61c609e5edd85e9a5308c5516de264fd14c38aa1ca1b21a9996d",
+    "extraction": "Unmodified response bytes",
+    "archive_url": "https://web.archive.org/web/20260527005254id_/https://subway.city.fukuoka.lg.jp/status/",
+    "archive_timestamp_utc": "2026-05-27T00:52:54+00:00",
+    "fixture": "fukuoka_subway_20260527005254.html",
+    "fixture_sha256": "b5ffd9baf41e61c609e5edd85e9a5308c5516de264fd14c38aa1ca1b21a9996d"
+  },
+  {
+    "fetched_at_utc": "2026-11-04T12:11:10.182184+00:00",
+    "original_sha256": "878658330a05590331954e196d34e53269c98bd5c748267201caa389e2b322e8",
+    "extraction": "Unmodified response bytes",
+    "source_url": "https://subway.city.fukuoka.lg.jp/js/suspension_header.js"
+  },
+  {
+    "fetched_at_utc": "2026-11-04T12:10:28.096446+00:00",
+    "original_sha256": "b5ee38b3e0934036bd050533447af727ae3fda6a3f8659f64b2ad1798461a453",
+    "extraction": "Unmodified response bytes",
+    "source_url": "https://subway.city.fukuoka.lg.jp/status/",
+    "fixture": "fukuoka_subway_normal.html",
+    "fixture_sha256": "b5ee38b3e0934036bd050533447af727ae3fda6a3f8659f64b2ad1798461a453"
+  },
+  {
+    "fetched_at_utc": "2026-11-04T12:11:13.247729+00:00",
+    "original_sha256": "0dc9d1652d840bf3cb5efcac104f956610e0ea3680fb3af1330e8a02ff2c1126",
+    "extraction": "Unmodified response bytes",
+    "source_url": "https://subway.city.fukuoka.lg.jp/status/record.php"
+  },
+  {
+    "source_url": "https://subway.city.fukuoka.lg.jp/running.json",
+    "fetched_at_utc": "2026-11-04T12:11:37.023509+00:00",
+    "original_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "extraction": "Unmodified response bytes"
+  },
+  {
+    "source_url": "https://subway.city.fukuoka.lg.jp/utility/",
+    "fetched_at_utc": "2026-11-04T12:11:37.038925+00:00",
+    "original_sha256": "51bb117534fcff5a1f18e2a2262033e43cfed0e1758277aa6aab7f885ec73665",
+    "extraction": "Unmodified response bytes"
+  }
+]

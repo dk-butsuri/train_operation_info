@@ -1,0 +1,127 @@
+{
+  "investigation": "Public HTML/JavaScript inspection and archived normal HTML; no abnormal status panel obtained",
+  "documents": [
+    {
+      "source_url": "https://www.krtc.com.tw/",
+      "final_url": "https://www.krtc.com.tw/",
+      "retrieved_at_utc": "2026-11-04T13:08:14.027333+00:00",
+      "original_sha256": "faa58fbf3cc0e985b0c47a135991bc381dfb28df51791b9b95607757b334ee3b",
+      "http_status": 200,
+      "request_user_agent": "train_operation_info (+https://github.com/dk-butsuri/train_operation_info)",
+      "extraction": "BeautifulSoup html.parser serialisation of #RtStatus and #RtStatusMobile, wrapped in html/body. Status labels and marker classes unchanged; unrelated content omitted.",
+      "fixture": "kaohsiung_metro_normal_20261104.html",
+      "fixture_sha256": "f6781233c6cfe91587a3f58036665e0cf20c323df15f61ba7c6d1b2fb24388c1"
+    },
+    {
+      "source_url": "https://web.archive.org/web/20261101000000id_/https://www.krtc.com.tw/",
+      "final_url": "https://web.archive.org/web/20261017100942id_/https://www.krtc.com.tw/",
+      "retrieved_at_utc": "2026-11-04T13:07:32.491737+00:00",
+      "original_sha256": "6661825ac5a81358e99dddd99d6edc5a3d699c3cd31d7cc660885c220d00d938",
+      "http_status": 200,
+      "request_user_agent": "train_operation_info/1.0 (+https://github.com/dk-butsuri/train_operation_info)",
+      "extraction": "BeautifulSoup html.parser serialisation of #RtStatus and #RtStatusMobile, wrapped in html/body. Status labels and marker classes unchanged; unrelated content omitted.",
+      "fixture": "kaohsiung_metro_normal_20261017100942.html",
+      "fixture_sha256": "f6781233c6cfe91587a3f58036665e0cf20c323df15f61ba7c6d1b2fb24388c1"
+    },
+    {
+      "source_url": "https://web.archive.org/web/20241001111132id_/https://www.krtc.com.tw/",
+      "final_url": "https://web.archive.org/web/20241001111132id_/https://www.krtc.com.tw/",
+      "retrieved_at_utc": "2026-11-04T13:07:32.559515+00:00",
+      "original_sha256": "26dd434b4bdbee40bcb6997728ba193496a4e460c11af3fa00f81e1fe80d6050",
+      "http_status": 200,
+      "request_user_agent": "train_operation_info/1.0 (+https://github.com/dk-butsuri/train_operation_info)",
+      "extraction": "None; original response stays local in reports/kaohsiung_metro."
+    },
+    {
+      "source_url": "https://web.archive.org/web/20250701101831id_/https://www.krtc.com.tw/",
+      "final_url": "https://web.archive.org/web/20250701101831id_/https://www.krtc.com.tw/",
+      "retrieved_at_utc": "2026-11-04T13:08:14.390341+00:00",
+      "original_sha256": "d3cded01f0ea48862ba6cdadf57797ad2f96af87d06ae14b43c3174a2dd6dc96",
+      "http_status": 200,
+      "request_user_agent": "train_operation_info (+https://github.com/dk-butsuri/train_operation_info)",
+      "extraction": "None; original response stays local in reports/kaohsiung_metro."
+    },
+    {
+      "source_url": "https://web.archive.org/web/20260701152731id_/https://www.krtc.com.tw/",
+      "final_url": "https://web.archive.org/web/20260701152731id_/https://www.krtc.com.tw/",
+      "retrieved_at_utc": "2026-11-04T13:08:14.258345+00:00",
+      "original_sha256": "d31df3681a3e78f39f2c31572c6a01b278f92c1627ebcdd0a3e901982fe3c111",
+      "http_status": 200,
+      "request_user_agent": "train_operation_info (+https://github.com/dk-butsuri/train_operation_info)",
+      "extraction": "None; original response stays local in reports/kaohsiung_metro."
+    },
+    {
+      "source_url": "https://www.krtc.com.tw/scripts/common.js",
+      "final_url": "https://www.krtc.com.tw/scripts/common.js",
+      "retrieved_at_utc": "2026-11-04T13:06:59.616304+00:00",
+      "original_sha256": "ee60ea9f66537566e8d4b0d85a8df2cb41fc26c56cf832bdf245f6bd08527cce",
+      "http_status": 200,
+      "request_user_agent": "train_operation_info/1.0 (+https://github.com/dk-butsuri/train_operation_info)",
+      "extraction": "None; original response stays local in reports/kaohsiung_metro."
+    },
+    {
+      "source_url": "https://www.krtc.com.tw/cssStyle/layout.css?v=1007",
+      "final_url": "https://www.krtc.com.tw/cssStyle/layout.css?v=1007",
+      "retrieved_at_utc": "2026-11-04T13:06:59.616251+00:00",
+      "original_sha256": "8512840a486bd7b097f2f6ebe39a20c3ed8ee40fa9bf7eb31cdfbdf2eaea8810",
+      "http_status": 200,
+      "request_user_agent": "train_operation_info/1.0 (+https://github.com/dk-butsuri/train_operation_info)",
+      "extraction": "None; original response stays local in reports/kaohsiung_metro."
+    },
+    {
+      "source_url": "https://www.krtc.com.tw/WebService/privates",
+      "final_url": "https://www.krtc.com.tw/WebService/privates",
+      "retrieved_at_utc": "2026-11-04T13:06:59.864300+00:00",
+      "original_sha256": "d805c0f7e25413784eb328e28264d61b27aa53b30edb434408d51a84b192fa53",
+      "http_status": 200,
+      "request_user_agent": "train_operation_info/1.0 (+https://github.com/dk-butsuri/train_operation_info)",
+      "extraction": "None; original response stays local in reports/kaohsiung_metro."
+    },
+    {
+      "source_url": "https://www.krtc.com.tw/WebService/security",
+      "final_url": "https://www.krtc.com.tw/WebService/security",
+      "retrieved_at_utc": "2026-11-04T13:06:59.902199+00:00",
+      "original_sha256": "1ac7b71b585c3284fc469d2bb37086d9e1696cb901d8ceb8908a34cbc6c37a1d",
+      "http_status": 200,
+      "request_user_agent": "train_operation_info/1.0 (+https://github.com/dk-butsuri/train_operation_info)",
+      "extraction": "None; original response stays local in reports/kaohsiung_metro."
+    },
+    {
+      "source_url": "https://www.krtc.com.tw/Guide/guide_map",
+      "final_url": "https://www.krtc.com.tw/Guide/guide_map",
+      "retrieved_at_utc": "2026-11-04T13:07:00.071514+00:00",
+      "original_sha256": "81ee3b6674dd86c1dbc154786e9ab923ed6bfb94ccab0f6e1e587b7687601fab",
+      "http_status": 200,
+      "request_user_agent": "train_operation_info/1.0 (+https://github.com/dk-butsuri/train_operation_info)",
+      "extraction": "None; original response stays local in reports/kaohsiung_metro."
+    },
+    {
+      "source_url": "https://web.archive.org/cdx/search/cdx?url=www.krtc.com.tw/&output=json&filter=statuscode:200&filter=mimetype:text/html&from=2023&to=2026&collapse=timestamp:6&fl=timestamp,original&filter=!digest:-",
+      "final_url": "https://web.archive.org/cdx/search/cdx?url=www.krtc.com.tw/&output=json&filter=statuscode:200&filter=mimetype:text/html&from=2023&to=2026&collapse=timestamp:6&fl=timestamp,original&filter=!digest:-",
+      "retrieved_at_utc": "2026-11-04T13:07:00.317754+00:00",
+      "original_sha256": "7be87fc9136d627ebf4b1d4a71d42dc742aaa90ce8119ecf4d230a3159e93f25",
+      "http_status": 200,
+      "request_user_agent": "train_operation_info/1.0 (+https://github.com/dk-butsuri/train_operation_info)",
+      "extraction": "None; original response stays local in reports/kaohsiung_metro."
+    },
+    {
+      "source_url": "https://web.archive.org/cdx/search/cdx?url=www.krtc.com.tw/&output=json&filter=statuscode:200&filter=mimetype:text/html&from=20241002&to=20241005&fl=timestamp,original&collapse=timestamp:8",
+      "final_url": "https://web.archive.org/cdx/search/cdx?url=www.krtc.com.tw/&output=json&filter=statuscode:200&filter=mimetype:text/html&from=20241002&to=20241005&fl=timestamp,original&collapse=timestamp:8",
+      "retrieved_at_utc": "2026-11-04T13:07:32.041652+00:00",
+      "original_sha256": "fb3a8706860c3fe23259a958dcdb064829977e7d37dc7820deb14e8c0195644e",
+      "http_status": 200,
+      "request_user_agent": "train_operation_info/1.0 (+https://github.com/dk-butsuri/train_operation_info)",
+      "extraction": "None; original response stays local in reports/kaohsiung_metro."
+    },
+    {
+      "source_url": "https://web.archive.org/cdx/search/cdx?url=www.krtc.com.tw/&output=json&filter=statuscode:200&filter=mimetype:text/html&from=20250706&to=20250708&fl=timestamp,original&collapse=timestamp:8",
+      "final_url": "https://web.archive.org/cdx/search/cdx?url=www.krtc.com.tw/&output=json&filter=statuscode:200&filter=mimetype:text/html&from=20250706&to=20250708&fl=timestamp,original&collapse=timestamp:8",
+      "retrieved_at_utc": "2026-11-04T13:08:18.904273+00:00",
+      "original_sha256": "79413e352c45422a5a1aeee7e3d2a1b83850f2ec190f1d80eb832bbd4f5125a0",
+      "http_status": 200,
+      "request_user_agent": "train_operation_info (+https://github.com/dk-butsuri/train_operation_info)",
+      "extraction": "None; original response stays local in reports/kaohsiung_metro."
+    }
+  ],
+  "unverified": "Delay, suspension, partial suspension, explicit same-incident recovery, active timing, validity periods and individual MRT affected routes. Synthetic cases do not establish source semantics."
+}

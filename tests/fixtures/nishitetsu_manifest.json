@@ -1,0 +1,108 @@
+[
+  {
+    "source_url": "https://www.nishitetsu.jp/train/",
+    "fetched_at_utc": "2026-11-04T04:53:58.897969+00:00",
+    "original_sha256": "3ce968efe09dfa85014f955aa9a9550686357f478183b4ab6cf850cf4da1bc6e",
+    "extraction": "Unmodified response bytes"
+  },
+  {
+    "source_url": "https://www.nishitetsu.jp/traffic/top_inc.js",
+    "fetched_at_utc": "2026-11-04T04:54:13.540362+00:00",
+    "original_sha256": "238db00fcd21eac47c33d1f072ae68dd4f6218fa9abe9f3f6d4f59715bda3f77",
+    "extraction": "Unmodified response bytes"
+  },
+  {
+    "source_url": "https://www.nishitetsu.jp/assets/js/emergency.js",
+    "fetched_at_utc": "2026-11-04T04:54:15.158662+00:00",
+    "original_sha256": "edf1bba6ea1d7d5ee2cf9192895a6e8b08e26191e222dc39141d26b2967a8f7d",
+    "extraction": "Unmodified response bytes"
+  },
+  {
+    "source_url": "https://www.nishitetsu.jp/nnr/site-kitei/",
+    "fetched_at_utc": "2026-11-04T04:54:34.382134+00:00",
+    "original_sha256": "32f9bec5c97f2f41c9c4781dc44c8b6aa55e1764c4d40b2cd69fd17f4144a4dc",
+    "extraction": "Unmodified response bytes"
+  },
+  {
+    "source_url": "https://jik.nishitetsu.jp/traffic/default.htm",
+    "fetched_at_utc": "2026-11-04T04:54:31.064089+00:00",
+    "original_sha256": "0c3a439c5bd6b235cc4b6c6309eecc4ad6f75481248ae8256bf0412dad055986",
+    "extraction": "Unmodified response bytes",
+    "fixture": "nishitetsu_normal.html",
+    "fixture_sha256": "0c3a439c5bd6b235cc4b6c6309eecc4ad6f75481248ae8256bf0412dad055986"
+  },
+  {
+    "source_url": "https://jik.nishitetsu.jp/traffic/default.htm",
+    "fetched_at_utc": "2026-11-04T04:56:41.017178+00:00",
+    "original_sha256": "45e6f5e76af8704843e5f55961c1dcae353c02bb8826d1289381e6ca2aa2fa8a",
+    "extraction": "Unmodified response bytes",
+    "fixture": "nishitetsu_20241003190025.html",
+    "fixture_sha256": "45e6f5e76af8704843e5f55961c1dcae353c02bb8826d1289381e6ca2aa2fa8a",
+    "archive_url": "https://web.archive.org/web/20241003190025id_/https://jik.nishitetsu.jp/traffic/default.htm",
+    "archive_timestamp_utc": "2024-10-03T19:00:25+00:00"
+  },
+  {
+    "source_url": "https://jik.nishitetsu.jp/traffic/default.htm",
+    "fetched_at_utc": "2026-11-04T04:56:41.072881+00:00",
+    "original_sha256": "9b5f391ff31653fd8faf348bb9d4a821d6a84e8ee57a9688a3edcaaa1c7bfcac",
+    "extraction": "Unmodified response bytes",
+    "fixture": "nishitetsu_20260728135357.html",
+    "fixture_sha256": "9b5f391ff31653fd8faf348bb9d4a821d6a84e8ee57a9688a3edcaaa1c7bfcac",
+    "archive_url": "https://web.archive.org/web/20260728135357id_/https://jik.nishitetsu.jp/traffic/default.htm",
+    "archive_timestamp_utc": "2026-07-28T13:53:57+00:00"
+  },
+  {
+    "source_url": "https://jik.nishitetsu.jp/traffic/default.htm",
+    "fetched_at_utc": "2026-11-04T04:56:37.606646+00:00",
+    "original_sha256": "9537b8eb0c4983547bcc199ed11aa49115127654e08285947dde8e7c90c4215b",
+    "extraction": "Unmodified response bytes",
+    "fixture": "nishitetsu_20260817152210.html",
+    "fixture_sha256": "9537b8eb0c4983547bcc199ed11aa49115127654e08285947dde8e7c90c4215b",
+    "archive_url": "https://web.archive.org/web/20260817152210id_/https://jik.nishitetsu.jp/traffic/default.htm",
+    "archive_timestamp_utc": "2026-08-17T15:22:10+00:00"
+  },
+  {
+    "source_url": "http://jik.nishitetsu.jp/traffic/default.htm",
+    "fetched_at_utc": "2026-11-04T04:57:12.127595+00:00",
+    "original_sha256": "6b8d8bf41a481f3339ced117130d3a6bde9b5180f43ab319bc5b19b299cdefc3",
+    "extraction": "Unmodified response bytes",
+    "fixture": "nishitetsu_20240829221823.html",
+    "fixture_sha256": "6b8d8bf41a481f3339ced117130d3a6bde9b5180f43ab319bc5b19b299cdefc3",
+    "archive_url": "https://web.archive.org/web/20240829221823id_/http://jik.nishitetsu.jp/traffic/default.htm",
+    "archive_timestamp_utc": "2024-08-29T22:18:23+00:00"
+  },
+  {
+    "source_url": "https://jik.nishitetsu.jp/traffic/default.htm",
+    "fetched_at_utc": "2026-11-04T04:57:13.366450+00:00",
+    "original_sha256": "9817a037a34b1b93181dad4e44df73de1af72fa28e155d45ac7964acce704724",
+    "extraction": "Unmodified response bytes",
+    "fixture": "nishitetsu_20240124024435.html",
+    "fixture_sha256": "9817a037a34b1b93181dad4e44df73de1af72fa28e155d45ac7964acce704724",
+    "archive_url": "https://web.archive.org/web/20240124024435id_/https://jik.nishitetsu.jp/traffic/default.htm",
+    "archive_timestamp_utc": "2024-01-24T02:44:35+00:00"
+  },
+  {
+    "source_url": "https://busnavi-railway.nnr.co.jp/tenjin_omuta/",
+    "fetched_at_utc": "2026-11-04T04:54:48.699169+00:00",
+    "original_sha256": "8719409160a85f8e0afd96ae2030ea9efc322b695373b4c9085812107ff1c2d1",
+    "extraction": "Unmodified response bytes"
+  },
+  {
+    "source_url": "https://busnavi-railway.nnr.co.jp/tenjin_omuta/common/js/script.js",
+    "fetched_at_utc": "2026-11-04T04:55:08.762797+00:00",
+    "original_sha256": "9f3930e95ab824ae1efac0d5ff1e93ffa777378ddc9055e9bf9882bfece6c85c",
+    "extraction": "Unmodified response bytes"
+  },
+  {
+    "source_url": "https://web.archive.org/cdx/search/cdx?url=jik.nishitetsu.jp/traffic/default.htm&output=json&filter=statuscode:200&collapse=digest&from=2024",
+    "fetched_at_utc": "2026-11-04T04:56:21.328121+00:00",
+    "original_sha256": "9fa59046490d614c84f6dd99b8b5f6fa425d635fe2a2688729dd3175e35926c4",
+    "extraction": "Unmodified response bytes"
+  },
+  {
+    "source_url": "https://web.archive.org/cdx/search/cdx?url=www.nishitetsu.jp/traffic/top_inc.js&output=json&filter=statuscode:200&collapse=digest",
+    "fetched_at_utc": "2026-11-04T04:56:21.465282+00:00",
+    "original_sha256": "15666518006696ed6797b7600d93b2904980f55bebe635541197534125fc9b16",
+    "extraction": "Unmodified response bytes"
+  }
+]

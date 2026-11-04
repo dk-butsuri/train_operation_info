@@ -1,0 +1,92 @@
+[
+  {
+    "fixture": "metro_north_alerts_20261104115626.pb",
+    "url": "https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/camsys%2Fmnr-alerts",
+    "captured_at": "2026-11-04T11:56:26.341339+00:00",
+    "original_sha256": "2b0fc7393d7b0b4bd2179bf19c9efda216de12acabd66e87c16dc0f123fefefe",
+    "fixture_sha256": "2b0fc7393d7b0b4bd2179bf19c9efda216de12acabd66e87c16dc0f123fefefe",
+    "method": "HTTP GET with providers.base.USER_AGENT; original response bytes, no transformation",
+    "content_type": "application/x-protobuf"
+  },
+  {
+    "fixture": "metro_north_routes.txt",
+    "url": "https://rrgtfsfeeds.s3.amazonaws.com/gtfsmnr.zip",
+    "captured_at": "2026-11-04T11:56:04.332058+00:00",
+    "original_sha256": "f863c9236b37a0918252e836fd374edb4c1defb77d3ef3f438e93ee20cedad53",
+    "fixture_sha256": "4d1374a9fdf168d52e1be6e8b24ac0896b144330ef5bb46b3556f771ea5db938",
+    "method": "Extracted routes.txt verbatim from official GTFS ZIP"
+  },
+  {
+    "fixture": "metro_north_agency.txt",
+    "url": "https://rrgtfsfeeds.s3.amazonaws.com/gtfsmnr.zip",
+    "captured_at": "2026-11-04T11:56:04.332058+00:00",
+    "original_sha256": "f863c9236b37a0918252e836fd374edb4c1defb77d3ef3f438e93ee20cedad53",
+    "fixture_sha256": "3d84077bee008f95c4718f49c269e7d1aa3ab8b1c9f2b820dfa3d9657bf87da5",
+    "method": "Extracted agency.txt verbatim from official GTFS ZIP"
+  },
+  {
+    "fixture": "metro_north_status_routes.json",
+    "url": "https://otp-mta-prod.camsys-apps.com/otp/routers/default/index/routes",
+    "captured_at": "2026-11-04T11:57:36.439831+00:00",
+    "original_sha256": "6f6b0fdc63ea008dd2645df40632760685da51e30f97e44f1a2e13fe7d7fc1b6",
+    "fixture_sha256": "0e9a2f76a5f6c31a837533321b726559506f31002a1d0a0db90fc1b763a9b5f2",
+    "method": "JSON projection: records whose id starts with MNR:, reserialized with indentation"
+  },
+  {
+    "fixture": "metro_north_route_excerpt.js",
+    "url": "https://consist.mta.info/vuejs/apps/common/index.min.js",
+    "captured_at": "2026-11-04T11:57:03.841267+00:00",
+    "original_sha256": "88b3733c584a25f39416a45d58628e9c38af85f55f561e1168864c0fef37adbc",
+    "fixture_sha256": "d00ed05d5d0dc84e5c58f6b803ff9be4877977afd97e6b3c38d5424fa8c55a65",
+    "method": "Extracted three verbatim statements: Wassaic definition and case-insensitive route matching; statements separated by blank lines"
+  },
+  {
+    "fixture": null,
+    "url": "https://api.mta.info/static/js/main.bc5d42b5.js",
+    "captured_at": "2026-11-04T11:56:00.755591+00:00",
+    "original_sha256": "ff8e08a9243356acc12f87e669176477fb2382afc7f462205182716e71c60804",
+    "method": "HTTP GET with providers.base.USER_AGENT; investigation only, original retained locally in reports/metro_north"
+  },
+  {
+    "fixture": null,
+    "url": "https://rrgtfsfeeds.s3.amazonaws.com/gtfsmnr.zip",
+    "captured_at": "2026-11-04T11:56:04.332058+00:00",
+    "original_sha256": "f863c9236b37a0918252e836fd374edb4c1defb77d3ef3f438e93ee20cedad53",
+    "method": "HTTP GET with providers.base.USER_AGENT; investigation only, original retained locally in reports/metro_north"
+  },
+  {
+    "fixture": null,
+    "url": "https://www.mta.info/document/90881",
+    "captured_at": "2026-11-04T11:56:04.881551+00:00",
+    "original_sha256": "0d734dde5f97cdd38372b8fb13a815ebe3db96b3fec73e10ce9955bd220cbd5b",
+    "method": "HTTP GET with providers.base.USER_AGENT; investigation only, original retained locally in reports/metro_north"
+  },
+  {
+    "fixture": null,
+    "url": "https://www.mta.info/developers/terms-and-conditions",
+    "captured_at": "2026-11-04T11:56:05.229698+00:00",
+    "original_sha256": "293bc1d5687073e0db8db006fb52aa05a4217b44a260d1d6224647c2a14d3195",
+    "method": "HTTP GET with providers.base.USER_AGENT; investigation only, original retained locally in reports/metro_north"
+  },
+  {
+    "fixture": null,
+    "url": "https://www.mta.info/doing-business-with-us/licensing-program",
+    "captured_at": "2026-11-04T11:56:05.580153+00:00",
+    "original_sha256": "9c9844b304aa3d48e0faa6c78275091abb53a475040a2d72cfced2789688055a",
+    "method": "HTTP GET with providers.base.USER_AGENT; investigation only, original retained locally in reports/metro_north"
+  },
+  {
+    "fixture": null,
+    "url": "https://consist.mta.info/vuejs/apps/common/index.min.js",
+    "captured_at": "2026-11-04T11:57:03.841267+00:00",
+    "original_sha256": "88b3733c584a25f39416a45d58628e9c38af85f55f561e1168864c0fef37adbc",
+    "method": "HTTP GET with providers.base.USER_AGENT; investigation only, original retained locally in reports/metro_north"
+  },
+  {
+    "fixture": null,
+    "url": "https://consist.mta.info/vuejs/apps/homepage/index.min.js",
+    "captured_at": "2026-11-04T11:57:04.614912+00:00",
+    "original_sha256": "9cdd8315781519631719fdae00a128057262d5737f4aa36d05a5dc4a9cafd967",
+    "method": "HTTP GET with providers.base.USER_AGENT; investigation only, original retained locally in reports/metro_north"
+  }
+]

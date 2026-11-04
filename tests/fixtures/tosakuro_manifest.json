@@ -1,0 +1,100 @@
+[
+  {
+    "source_url": "https://www.tosakuro.com/company-profile",
+    "original_file": "reports\\tosakuro\\company.html",
+    "saved_at_utc": "2026-11-04T12:11:51.485101+00:00",
+    "timestamp_basis": "Local file save time immediately after response receipt",
+    "original_sha256": "ac1ceec77905e6241693d5fed6942c6456e75b8c3221c6c6e625905e771d281a"
+  },
+  {
+    "source_url": "https://www.tosakuro.com/",
+    "original_file": "reports\\tosakuro\\home.html",
+    "saved_at_utc": "2026-11-04T12:11:08.839211+00:00",
+    "timestamp_basis": "Local file save time immediately after response receipt",
+    "original_sha256": "197f9ea64a45cda2c42a0cddaf3df01937caf9ebcc383f808bbdc05e23e7dfbd",
+    "fixture": "tosakuro_home.html",
+    "extraction": "BeautifulSoup html.parser: serialize #comp-m9tlcfob, retaining route lists and extra combined list.",
+    "fixture_sha256": "f07b43e4672cf6152da7a313fef58bdc458ef1a4b2638eb3ec1a7ea75c7ef5ab"
+  },
+  {
+    "source_url": "https://web.archive.org/web/20250104050205id_/https://www.tosakuro.com/",
+    "original_file": "reports\\tosakuro\\home_20250104050205.html",
+    "saved_at_utc": "2026-11-04T12:13:25.073308+00:00",
+    "timestamp_basis": "Local file save time immediately after response receipt",
+    "original_sha256": "2af33e735342f0fa2a02255e5f2adf56df0f4e4eebad12b487bb78883a5ccc68"
+  },
+  {
+    "source_url": "https://web.archive.org/web/20250805005554id_/https://www.tosakuro.com/",
+    "original_file": "reports\\tosakuro\\home_20250805005554.html",
+    "saved_at_utc": "2026-11-04T12:13:20.619704+00:00",
+    "timestamp_basis": "Local file save time immediately after response receipt",
+    "original_sha256": "885b1ed1388963d33a2e92e904a6b4b5ee6a71f811470919912784f8d9b9225f"
+  },
+  {
+    "source_url": "https://web.archive.org/web/20250902020512id_/https://www.tosakuro.com/",
+    "original_file": "reports\\tosakuro\\home_20250902020512.html",
+    "saved_at_utc": "2026-11-04T12:12:34.583931+00:00",
+    "timestamp_basis": "Local file save time immediately after response receipt",
+    "original_sha256": "d926a65b7088088c2fc28872c4b8e384ab3c8028c09694290a36d56eba1a352d"
+  },
+  {
+    "source_url": "https://web.archive.org/web/20260203070343id_/https://www.tosakuro.com/",
+    "original_file": "reports\\tosakuro\\home_20260203070343.html",
+    "saved_at_utc": "2026-11-04T12:12:29.540164+00:00",
+    "timestamp_basis": "Local file save time immediately after response receipt",
+    "original_sha256": "af231c28d11a3d7720469ee9ed55135a0c88f96165fd7a91c83c137eb7727c27",
+    "fixture": "tosakuro_home_20260203070343.html",
+    "extraction": "BeautifulSoup html.parser: serialize #comp-m9tlcfob, retaining route lists and extra combined list.",
+    "fixture_sha256": "3eb4ae729a745c22381c34d174e45c74457d00ba2f39c1ee41de31f90b71ef89"
+  },
+  {
+    "source_url": "https://web.archive.org/web/20260609203918id_/https://www.tosakuro.com/",
+    "original_file": "reports\\tosakuro\\home_20260609203918.html",
+    "saved_at_utc": "2026-11-04T12:13:22.804498+00:00",
+    "timestamp_basis": "Local file save time immediately after response receipt",
+    "original_sha256": "5c4ffdd688455cf82cc8f86f7ddbffd2a5341229b0c0e405cf440ffddd347c96",
+    "fixture": "tosakuro_home_20260609203918.html",
+    "extraction": "BeautifulSoup html.parser: serialize #comp-m9tlcfob, retaining route lists and extra combined list.",
+    "fixture_sha256": "ebdd0d97b7363204fe52426094c3c993b3f0977614b8f0dbb5cd6646360febbc"
+  },
+  {
+    "source_url": "https://web.archive.org/web/20260709051932id_/https://www.tosakuro.com/",
+    "original_file": "reports\\tosakuro\\home_20260709051932.html",
+    "saved_at_utc": "2026-11-04T12:12:30.929277+00:00",
+    "timestamp_basis": "Local file save time immediately after response receipt",
+    "original_sha256": "a57fd61fdce870e18acebb705bcf9a219f6e8f6e13d6526e793a1d2409234a76",
+    "fixture": "tosakuro_home_20260709051932.html",
+    "extraction": "BeautifulSoup html.parser: serialize #comp-m9tlcfob, retaining route lists and extra combined list.",
+    "fixture_sha256": "f07b43e4672cf6152da7a313fef58bdc458ef1a4b2638eb3ec1a7ea75c7ef5ab"
+  },
+  {
+    "source_url": "https://web.archive.org/web/20260825063025id_/https://www.tosakuro.com/",
+    "original_file": "reports\\tosakuro\\home_20260825063025.html",
+    "saved_at_utc": "2026-11-04T12:13:21.747850+00:00",
+    "timestamp_basis": "Local file save time immediately after response receipt",
+    "original_sha256": "6e8473afc74cbf5f7fc1df51700602a9677a2b49f9463efdc07072b9589dc4ac",
+    "fixture": "tosakuro_home_20260825063025.html",
+    "extraction": "BeautifulSoup html.parser: serialize #comp-m9tlcfob, retaining route lists and extra combined list.",
+    "fixture_sha256": "f07b43e4672cf6152da7a313fef58bdc458ef1a4b2638eb3ec1a7ea75c7ef5ab"
+  },
+  {
+    "source_url": "https://www.tosakuro.com/post/ごめん・なはり線-通常運転中",
+    "original_file": "reports\\tosakuro\\post_0.html",
+    "saved_at_utc": "2026-11-04T12:11:50.938741+00:00",
+    "timestamp_basis": "Local file save time immediately after response receipt",
+    "original_sha256": "61fd3f55705c48665a1799f5c79909a6d1313b870eb1589d8d182d8fa38fdcb3",
+    "fixture": "tosakuro_gomen.html",
+    "extraction": "BeautifulSoup html.parser: serialize article h1 and description section; remove style/class attributes only.",
+    "fixture_sha256": "323ef96c355ceeaadae7c871712f52b3ce0992fe9340ca20074abc73a5a0856b"
+  },
+  {
+    "source_url": "https://www.tosakuro.com/post/_平常運行",
+    "original_file": "reports\\tosakuro\\post_1.html",
+    "saved_at_utc": "2026-11-04T12:11:51.228210+00:00",
+    "timestamp_basis": "Local file save time immediately after response receipt",
+    "original_sha256": "507ebacfff1eea0d75ceb4f522c63531339e0f03f52e15fff0f09469088b62d6",
+    "fixture": "tosakuro_nakamura.html",
+    "extraction": "BeautifulSoup html.parser: serialize article h1 and description section; remove style/class attributes only.",
+    "fixture_sha256": "bcbab4b9af5c09ebd2a6e898a018d5eaef6ce12542d7921a7d2d06c2a70b3deb"
+  }
+]

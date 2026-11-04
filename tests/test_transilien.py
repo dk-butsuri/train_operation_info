@@ -10,20 +10,27 @@ from typing import Callable
 import httpx
 import pytest
 
+from train_operation_info import Tracker
 from train_operation_info.exceptions import FetchError, ParseError
-from train_operation_info.models import AlertEffect, AlertTiming, LineStatus, UsagePermission
+from train_operation_info.models import (
+    LINE_CATALOG, AlertEffect, AlertTiming, LineId, LineScope, LineStatus,
+    OperatorId, ProviderId, UsagePermission,
+)
 from train_operation_info.providers.transilien import TransilienProvider
 
 _FIXTURES = Path(__file__).parent / "fixtures"
 _BASE = "https://www.transilien.com/api/traffic/"
 _CODES = ("RER_C", "RER_D", "RER_E", "LIGNE_H", "LIGNE_J", "LIGNE_K",
-          "LIGNE_L", "LIGNE_N", "LIGNE_P", "LIGNE_R", "LIGNE_U", "LIGNE_V")
+          "LIGNE_L", "LIGNE_N", "LIGNE_P", "LIGNE_R", "LIGNE_U", "LIGNE_V",
+          "METRO_1", "METRO_2", "METRO_3", "METRO_3BIS", "METRO_4", "METRO_5",
+          "METRO_6", "METRO_7", "METRO_7BIS", "METRO_8", "METRO_9", "METRO_10",
+          "METRO_11", "METRO_12", "METRO_13", "METRO_14")
 
 
 def _fixture(request: httpx.Request) -> httpx.Response:
     assert request.method == "GET"
     if str(request.url) == _BASE + "infos":
-        name = "transilien_summary.json"
+        name = "transilien_metro_summary.json"
     else:
         assert dict(request.url.params) == {"lang": "fr"}
         code = request.url.path.removeprefix("/api/traffic/line/")
@@ -44,11 +51,19 @@ def _payload(notices: list[dict[str, str]]) -> bytes:
     return json.dumps({"currentDisruptions": notices}).encode()
 
 
+def _synthetic_entries() -> list[dict[str, str]]:
+    return [
+        {"code": code, "id": code, "fetchStatus": "FULL",
+         "mode": "METRO" if code.startswith("METRO_") else "RER" if code.startswith("RER_") else "TRAIN"}
+        for code in _CODES
+    ]
+
+
 async def _with_payload(payload: bytes) -> TransilienProvider:
     def handler(request: httpx.Request) -> httpx.Response:
         if "/line/" in request.url.path:
             return httpx.Response(200, content=payload)
-        return _fixture(request)
+        return httpx.Response(200, json={"allPerturbationsByLine": _synthetic_entries()})
 
     async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
         provider = TransilienProvider(client=client)
@@ -66,31 +81,131 @@ def test_official_current_notices_and_declared_scope() -> None:
     async def scenario() -> None:
         async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
             provider = TransilienProvider(client=client)
-            assert len(provider.unknown_lines) == 12
+            assert len(provider.unknown_lines) == 28
             await provider.refresh()
-            assert len(requests) == 13
-            assert len(provider.lines) == 12
-            assert len(provider.alerts) == 6
-            assert all(line.operator.name == "SNCF Voyageurs" for line in provider.lines)
+            assert len(requests) == 29
+            assert len(provider.lines) == 28
+            assert len(provider.alerts) == 7
+            assert all(line.operator.name == "SNCF Voyageurs" for line in provider.lines[:12])
+            assert all(line.operator.name == "RATP" for line in provider.lines[12:])
             assert provider.rer_d.status is LineStatus.ALERT
             assert len(provider.rer_d.alerts) == 4
             assert provider.rer_d.updated_at == datetime.fromisoformat("2026-11-03T03:07:27+00:00")
+            assert provider.metro_6.status is LineStatus.DELAYED
+            assert provider.metro_6.updated_at == datetime.fromisoformat("2026-11-04T12:32:54+00:00")
+            alert, = provider.metro_6.alerts
+            assert alert.effect is AlertEffect.DELAYS
+            assert alert.affected_line_ids == (LineId("fr:ratp:metro_6"),)
+            notice = json.loads((_FIXTURES / "transilien_metro_6.json").read_bytes())["currentDisruptions"][0]
+            assert alert.title == notice["title"]
+            assert "bagage oublié" in alert.description
             assert "plusieurs mois" in provider.rer_d.alerts[0].description
             assert "https://maligned.transilien.com/2026/08/21/reduction-de-loffre-rer-d-24-aout/" in provider.rer_d.alerts[0].description
             # Dedicated severity is UNKNOWN even though the prose describes cancellations.
-            assert all(alert.effect is AlertEffect.OTHER for alert in provider.alerts)
+            assert all(alert.effect is AlertEffect.OTHER for line in provider.lines[:12] for alert in line.alerts)
             assert all(alert.timing is AlertTiming.UNKNOWN for alert in provider.alerts)
             assert all(alert.language == "fr" for alert in provider.alerts)
             assert all(alert.active_from is None and alert.active_until is None for alert in provider.alerts)
             assert all(alert.affected_line_ids == (provider.rer_d.line_id,) for alert in provider.rer_d.alerts)
             # Current TRAVAUX and future engineering work cannot establish a traffic alert.
-            for line in (provider.ligne_l, provider.ligne_r, provider.ligne_n):
+            for line in (provider.ligne_l, provider.ligne_r, provider.ligne_n,
+                         provider.metro_8, provider.metro_12, provider.metro_13, provider.metro_7bis):
                 assert line.status is LineStatus.NORMAL and not line.alerts
                 assert line.updated_at is None
             assert all(line.fetched_at is not None and line.fetched_at.utcoffset() == timedelta(0)
                        for line in provider.lines)
             assert not client.is_closed
             assert provider.metadata.usage_permission is UsagePermission.PERMISSION_REQUIRED
+
+    asyncio.run(scenario())
+
+
+def test_metro_public_attributes_and_canonical_operator() -> None:
+    tracker = Tracker(enabled_providers=("transilien",))
+    provider = tracker.transilien
+    routes = (
+        ("1", provider.metro_1), ("2", provider.metro_2),
+        ("3", provider.metro_3), ("3bis", provider.metro_3bis),
+        ("4", provider.metro_4), ("5", provider.metro_5),
+        ("6", provider.metro_6), ("7", provider.metro_7),
+        ("7bis", provider.metro_7bis), ("8", provider.metro_8),
+        ("9", provider.metro_9), ("10", provider.metro_10),
+        ("11", provider.metro_11), ("12", provider.metro_12),
+        ("13", provider.metro_13), ("14", provider.metro_14),
+    )
+    assert len(tracker.lines) == 28
+    assert tuple(line for _, line in routes) == provider.lines[12:]
+    for suffix, line in routes:
+        assert line.line_id == LineId(f"fr:ratp:metro_{suffix}")
+        assert line.name == f"Métro {suffix}"
+        assert line.operator.operator_id == OperatorId("fr:ratp")
+        assert line.operator.name == "RATP"
+        assert line.operator is LINE_CATALOG[line.line_id].operator
+        assert line.provider_id == ProviderId("transilien")
+        assert line.scope is LineScope.LINE
+        assert line.status is LineStatus.UNKNOWN
+    assert provider.rer_c.line_id == LineId("fr:sncf:rer_c")
+    assert provider.ligne_v.line_id == LineId("fr:sncf:ligne_v")
+    assert all(line.scope is LineScope.GROUP for line in provider.lines[:12])
+
+
+@pytest.mark.parametrize("problem", ["missing", "duplicate", "id", "mode", "fetchStatus"])
+def test_synthetic_incomplete_metro_summary_never_fetches_details(problem: str) -> None:
+    entries = _synthetic_entries()
+    metro = next(entry for entry in entries if entry["code"] == "METRO_7BIS")
+    if problem == "missing":
+        entries.remove(metro)
+    elif problem == "duplicate":
+        entries.append(dict(metro))
+    else:
+        metro[problem] = {"id": "METRO_7", "mode": "TRAIN", "fetchStatus": "MISSING_CURRENT"}[problem]
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        assert str(request.url) == _BASE + "infos"
+        return httpx.Response(200, json={"allPerturbationsByLine": entries})
+
+    async def scenario() -> None:
+        async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
+            provider = TransilienProvider(client=client)
+            with pytest.raises(ParseError):
+                await provider.refresh()
+            assert len(provider.unknown_lines) == 28
+
+    asyncio.run(scenario())
+
+
+def test_synthetic_metro_recovery_and_http_failure_preserve_sncf_snapshot() -> None:
+    stage = "incident"
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path.endswith("/infos"):
+            return httpx.Response(200, json={"allPerturbationsByLine": _synthetic_entries()})
+        if request.url.path.endswith("/METRO_14") and stage == "failure":
+            return httpx.Response(503)
+        # A hypothetical SNCF update must not leak through a failed Metro refresh.
+        notices = ([_notice(severity="SLOWED_TRAFFIC")]
+                   if request.url.path.endswith("/METRO_6") and stage == "incident"
+                   or request.url.path.endswith("/RER_C") and stage == "failure" else [])
+        return httpx.Response(200, content=_payload(notices))
+
+    async def scenario() -> None:
+        nonlocal stage
+        async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
+            provider = TransilienProvider(client=client)
+            await provider.refresh()
+            assert provider.metro_6.status is LineStatus.DELAYED
+            assert provider.rer_c.status is LineStatus.NORMAL
+            previous = provider.lines
+            stage = "failure"
+            with pytest.raises(FetchError):
+                await provider.refresh()
+            assert provider.lines is previous
+            assert provider.metro_6.alerts
+            assert provider.rer_c.status is LineStatus.NORMAL
+            stage = "recovery"
+            await provider.refresh()
+            assert not provider.alerts
+            assert all(line.status is LineStatus.NORMAL for line in provider.lines)
 
     asyncio.run(scenario())
 
@@ -107,9 +222,10 @@ def test_synthetic_severity_preserves_impact_uncertainty(
     severity: str, status: LineStatus, effect: AlertEffect,
 ) -> None:
     provider = asyncio.run(_with_payload(_payload([_notice(severity=severity)])))
-    assert provider.rer_c.status is status
-    assert provider.rer_c.alerts[0].effect is effect
-    assert provider.rer_c.alerts[0].timing is AlertTiming.UNKNOWN
+    for line in (provider.rer_c, provider.metro_6):
+        assert line.status is status
+        assert line.alerts[0].effect is effect
+        assert line.alerts[0].timing is AlertTiming.UNKNOWN
 
 
 @pytest.mark.parametrize("description", [
@@ -167,6 +283,7 @@ def test_synthetic_empty_current_list_clears_old_notices() -> None:
     asyncio.run(scenario())
 
 
+@pytest.mark.parametrize("broken_code", ["LIGNE_V", "METRO_14"])
 @pytest.mark.parametrize("bad_payload", [
     b"{}", b'{"currentDisruptions":null}', b'{"currentDisruptions":{}}',
     b'{"currentDisruptions":[{"category":"TRAFIC"}]}',
@@ -175,11 +292,13 @@ def test_synthetic_empty_current_list_clears_old_notices() -> None:
     _payload([_notice(detail="<p></p>")]),
     _payload([_notice(), _notice()]),
 ])
-def test_synthetic_broken_last_route_preserves_entire_previous_snapshot(bad_payload: bytes) -> None:
+def test_synthetic_broken_route_preserves_entire_previous_snapshot(
+    bad_payload: bytes, broken_code: str,
+) -> None:
     broken = False
 
     def handler(request: httpx.Request) -> httpx.Response:
-        if broken and request.url.path.endswith("/LIGNE_V"):
+        if broken and request.url.path.endswith("/" + broken_code):
             return httpx.Response(200, content=bad_payload)
         return _fixture(request)
 
@@ -216,7 +335,7 @@ def test_synthetic_incomplete_or_ambiguous_summary_is_not_normal(
             provider = TransilienProvider(client=client)
             with pytest.raises(ParseError):
                 await provider.refresh()
-            assert len(provider.unknown_lines) == 12
+            assert len(provider.unknown_lines) == 28
 
     asyncio.run(scenario())
 
@@ -229,14 +348,15 @@ def test_http_failure_does_not_return_normal() -> None:
             provider = TransilienProvider(client=client)
             with pytest.raises(FetchError):
                 await provider.refresh()
-            assert len(provider.unknown_lines) == 12
+            assert len(provider.unknown_lines) == 28
 
     asyncio.run(scenario())
 
 
-def test_saved_fixture_hashes_match_manifest() -> None:
+@pytest.mark.parametrize("filename", ["transilien_manifest.json", "transilien_metro_manifest.json"])
+def test_saved_fixture_hashes_match_manifest(filename: str) -> None:
     # Validate recorded evidence independently of parser expectations.
-    manifest = json.loads((_FIXTURES / "transilien_manifest.json").read_text(encoding="utf-8"))
+    manifest = json.loads((_FIXTURES / filename).read_text(encoding="utf-8"))
     for record in manifest:
         assert sha256((_FIXTURES / record["fixture"]).read_bytes()).hexdigest() == record.get(
             "fixture_sha256", record["sha256"],

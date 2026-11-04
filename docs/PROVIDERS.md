@@ -4,6 +4,207 @@
 
 コード例は `async` 関数の中で実行する前提で、`from train_operation_info import Tracker` を省略しています。
 
+## 高雄MRT/LRT
+
+```python
+tracker = Tracker(enabled_providers=("kaohsiung_metro",))
+await tracker.refresh()
+print(tracker.kaohsiung_metro.metro.status)
+print(tracker.kaohsiung_metro.light_rail.status)
+```
+
+直接使う場合は
+`from train_operation_info.providers.kaohsiung_metro import KaohsiungMetroProvider`。
+サンプルは `python -m examples.kaohsiung_metro`。既定の取得対象にも含まれます。
+
+[公式トップ](https://www.krtc.com.tw/)のPC・モバイル向け専用状態欄を1回のGETで取得します。
+`metro` は紅線・橘線まとめて `GROUP`（`tw:krtc:metro`）、`light_rail` は
+環状輕軌の `LINE`（`tw:krtc:light_rail`）。会社は高雄捷運股份有限公司です。
+紅線・橘線別の障害状態や影響区間は取得できません。
+
+確認済みの緑色マーカーと完全一致の正常文のみ `NORMAL` とします。
+他の文言・色の組み合わせや追加の参照リンクは `UNKNOWN` として原文・マーカー・リンクを保持し、
+遅延・運休・現在有効を推測しません。`affected_line_ids=()`、`timing=UNKNOWN`、
+`updated_at`・適用開始終了は `None` です。必須構造の欠損・重複やPC／モバイルの不一致では
+更新全体を失敗させ、前回値を保持します。
+
+別枠のニュース・重要公告・将来計画・リンク先本文・時刻表・列車位置は対象外です。
+生応答の記録にはこれらの対象外部分も含まれます。`NORMAL` は専用状態欄の範囲だけを表します。
+正常表示はライブHTMLと2026-10-17の保存HTMLで確認し、異常時の状態欄は未取得です。
+未知状態・破損・復旧遷移は合成テストです。公式のプライバシー／情報セキュリティ方針と
+著作権表示を確認しましたが再利用許諾は見つからず、メタデータは `UNSPECIFIED` です。
+出典と未確認範囲は [KAOHSIUNG_METRO.md](../tests/fixtures/KAOHSIUNG_METRO.md)、
+取得日時・原本／抽出後ハッシュは
+[kaohsiung_metro_manifest.json](../tests/fixtures/kaohsiung_metro_manifest.json) に記録しています。
+
+## 埼玉高速鉄道（埼玉スタジアム線）
+
+```python
+tracker = Tracker(enabled_providers=("saitama_railway",))
+await tracker.refresh()
+print(tracker.saitama_railway.main.status)
+print(tracker.saitama_railway.main.alerts)
+```
+
+直接使う場合は `from train_operation_info.providers.saitama_railway import SaitamaRailwayProvider`。
+サンプルは `python -m examples.saitama_railway`。既定の取得対象に含まれ、
+公式公開JSONへ1回のGETを行います。赤羽岩淵～浦和美園の1路線で、Yahooに登録済みの
+共通ID `jp:operator_6792d0f7efc4:line_1b9213f482b7` を使います。
+
+公式運行情報ページと同じ `latest=true` の現在項目だけを解析します。
+`stdtxt` の平常アイコンと `message` の専用状態欄を根拠に平常・遅延・見合わせ／運休・
+一部運休を対応付けます。直通中止・再開・振替輸送等は `ALERT`、未知ラベル・typeは
+原文付き `UNKNOWN`。空配列・履歴のみも `UNKNOWN` です。複数現在項目の本文は
+すべて保持し、状態は共通の優先順位で集約します。
+
+発信日時を日本現地時刻として `updated_at` に採用し、外側の生成日時は使いません。
+`latest` は障害の適用時期を保証しないため `timing=UNKNOWN`、適用期間は未設定です。
+現在項目の長期案内を本文で除外しません。履歴、別枠のニュース・臨時ダイヤ、遅延証明書、
+振替輸送の詳細、他社線の状態は対象外ですが、生応答記録には履歴も含まれます。
+`NORMAL` は公式の掲載基準（15分以上の遅れ・見込み）とこの取得範囲内の状態です。
+
+平常JSONと公開JSを確認し、異常時・復旧は合成テストです。根拠・未確認範囲は
+[SAITAMA_RAILWAY.md](../tests/fixtures/SAITAMA_RAILWAY.md)、出典・ハッシュは
+[saitama_railway_manifest.json](../tests/fixtures/saitama_railway_manifest.json) に記録しています。
+[サイトポリシー](https://www.s-rail.co.jp/sitepolicy/) が情報の印刷・引用・転用に承諾を
+求めるため、利用許諾区分は `PERMISSION_REQUIRED` です。
+
+## TfL（Transport for London）
+
+```python
+tracker = Tracker(enabled_providers=("tfl",))
+await tracker.refresh()
+print(tracker.tfl.bakerloo.status)
+print(tracker.tfl.elizabeth.alerts)
+```
+
+直接使う場合は `from train_operation_info.providers.tfl import TflProvider`。
+サンプルは `python -m examples.tfl`。既定の取得対象に含まれ、APIキーなしで
+公式Unified APIへ1回のGETを行います。通常の30秒間隔制限が適用されます。
+
+| 系統 | 属性 | 共通ID / 運行会社 |
+| --- | --- | --- |
+| Tube 11路線 | `bakerloo`, `central`, `circle`, `district`, `hammersmith_city`, `jubilee`, `metropolitan`, `northern`, `piccadilly`, `victoria`, `waterloo_city` | `gb:london_underground:<属性>` / London Underground Limited |
+| Overground 6路線 | `liberty`, `lioness`, `mildmay`, `suffragette`, `weaver`, `windrush` | `gb:london_overground:<属性>` / First Rail London Limited |
+| Elizabeth line | `elizabeth` | `gb:elizabeth_line:main` / GTS Rail Operations Limited |
+| DLR | `dlr` | `gb:dlr:network` / KeolisAmey Docklands Limited |
+| Tram | `tram` | `gb:london_trams:network` / Tram Operations Limited |
+
+DLRとTramはネットワーク全体の `GROUP`、他は `LINE` です。取得元TfLと実際の
+運行会社を区別します。Overgroundは旧来の全体1項目に統合しません。
+
+公式の状態コードとラベルの組を検証し、10/18を `NORMAL`、6/9を `DELAYED`、
+1/2/16を `SUSPENDED`、3/5/7/11を `PARTIAL_SUSPENSION` とします。その他の
+確認済みコードは詳細な影響を補わず `ALERT`、未知または不一致の組は原文付きの
+`UNKNOWN` です。Planned Closureは現在の全面停止を断定せず `ALERT`、Service Closedも
+営業時間外と障害を区別できないため `ALERT` です。複数状態は既存の共通優先順位で
+集約し、各状態のアラートと本文はすべて保持します。本文中の代替輸送先を影響路線に
+追加しません。
+
+日付指定なしの現在状態 `lineStatuses` を取得します。`PlannedWork` は期間の長短を
+分類する項目ではなく、この一覧に長期専用の分離欄はないため混在する工事案内も保持します。
+`isNow=false` は将来予告を意味せず、日付や本文から除外しません。既知の非平常状態の
+専用 `isNow=true` のみ `timing=ACTIVE`、その他は `UNKNOWN`。明示された各有効期間を
+別アラートにし、離れた期間を一続きにしません。更新日時は確認できず `updated_at=None`。
+別の日付指定・将来一覧、駅・設備情報、バス、船、ケーブルカー、National Rail、到着予測は
+対象外です。平常はこの取得範囲内の意味です。
+
+商用・非商用再利用の条件と `Powered by TfL Open Data` の帰属表示、規約の登録条項、
+匿名アクセス枠の違いを `metadata` に記録しています。匿名通信が成功することだけで
+利用条件を満たすとは扱いません。再利用時は公式規約全文を確認してください。
+実データで平常・遅延・運休・一部運休・工事案内・複数状態を確認し、その他のコードと復旧・
+失敗ケースは合成テストです。出典と未確認範囲は [TFL.md](../tests/fixtures/TFL.md)、
+取得日時とハッシュは [tfl_manifest.json](../tests/fixtures/tfl_manifest.json) を参照。
+
+## 桃園MRT（桃園捷運）
+
+```python
+tracker = Tracker(enabled_providers=("taoyuan_metro",))
+await tracker.refresh()
+print(tracker.taoyuan_metro.airport.status)
+print(tracker.taoyuan_metro.airport.alerts)
+```
+
+`Tracker()` の既定の取得対象です。直接使う場合は
+`from train_operation_info.providers.taoyuan_metro import TaoyuanMetroProvider`。
+サンプルは `python -m examples.taoyuan_metro` です。
+[公式トップページ](https://www.tymetro.com.tw/tymetro-new/tw/)の専用運行表示から、
+桃園機場捷運を1路線として取得します。共通IDは `tw:tymetro:airport`、
+運行会社は `桃園大眾捷運股份有限公司` です。普通車と直達車は分割しません。
+
+保存HTMLで確認したラベルとCSSの組を根拠に、`green` + `正常營運` は `NORMAL`、
+`red` + `全線停駛` は `SUSPENDED`、`yellow` + `減速營運` は `ALERT` とします。
+減速運転から実際の遅延・減便を推測せず、影響は `OTHER` です。
+未知・矛盾するラベルとCSSの組は原文・CSSを保持して `UNKNOWN`、
+モバイル／デスクトップ表示の不一致・欠損は `ParseError` として前回値を保持します。
+
+取得範囲は専用運行表示のみです。別枠のニュース・将来の運転計画・工事予告・
+リンク先の詳細・列車位置・時刻表は対象外ですが、生HTTP記録には別枠の本文も含まれます。
+`NORMAL` はこの表示の範囲内の状態です。専用表示内の未知の案内を本文から除外しません。
+公式の更新時刻・適用期間は確認できず、`updated_at` と適用期間は `None`、
+適用時期は `UNKNOWN` とします。トップの時計を更新時刻には使いません。
+
+平常・全線停止・減速運転は公式の保存HTMLで検証しました。
+停止後の平常保存ページも確認しましたが、正確な再開時刻・同一事象への明示的な復旧案内は未確認です。
+遅延・一部運休の表示も未確認です。破損・未知表示・通信失敗のテストは合成です。
+出典とハッシュは [TAOYUAN_METRO.md](../tests/fixtures/TAOYUAN_METRO.md) と
+[taoyuan_metro_manifest.json](../tests/fixtures/taoyuan_metro_manifest.json) に記録しています。
+[公式利用条件](https://www.tymetro.com.tw/tymetro-new/tw/_pages/note/intellect.html)は
+合理的使用等を除く著作物の利用に同意・許諾を求めており、`PERMISSION_REQUIRED` としています。
+
+## Renfe Cercanías / Rodalies
+
+```python
+tracker = Tracker(enabled_providers=("renfe",))
+await tracker.refresh()
+print(tracker.renfe.cercanias.status)
+print(tracker.renfe.cercanias.updated_at)
+print(tracker.renfe.cercanias.alerts)
+```
+
+[公式障害データセット](https://data.renfe.com/es/dataset/incidencias-avisos)の
+GTFS-realtime JSONを取得します。`python -m examples.renfe` でも確認できます。
+共通IDは `es:renfe:cercanias`、運行会社は `Renfe Operadora`、掲載範囲は
+`GROUP` です。既定の取得対象に含まれます。
+
+フィードと現行static GTFSの対象IDに不整合があるため、個別路線への対応は未提供です。
+案内の `affected_line_ids=()`、ネットワーク状態は案内があれば `UNKNOWN`。
+検証済みの空FULL_DATASETだけが掲載範囲内の `NORMAL` になります。
+明示effectはアラートの影響へ直接対応しますが、本文や地域番号から状態を推定しません。
+工事・長期案内・復旧文・駅設備情報は同じ一覧に混在するため保持します。
+AVE・長距離列車・列車別の遅延・リンク先詳細は対象外です。
+
+元のentity IDが異なる対象一覧で重複する応答にも対応し、IDとselector集合のハッシュで
+両方を保持します。esラベルが重複する翻訳は非空の本文を原順序で空行連結し、
+言語を推測し直しません。見出しがない案内のtitleには元のentity IDを使います。
+`activePeriod`は掲載期間のため、障害期間や `ACTIVE` 判定に使いません。
+
+2026-11-04の実応答には69件があり、全件effectが未指定でした。フィードの更新時刻は
+2026-10-07T07:32:52Zと古いままです。`updated_at` と `fetched_at` を併せて確認してください。
+空一覧・復旧・明示effectの検証は合成データによるもので、実際の復旧応答は未確認です。
+出典と検証範囲は [RENFE.md](../tests/fixtures/RENFE.md) に記録しています。
+
+データセットはCC BY 4.0、[公式条件](https://data.renfe.com/es/legal)は商用・非商用の
+再利用を認めています。帰属表示 `Origen de los datos: Renfe Operadora`、原本の更新日・
+条件の保持、ライセンスへのリンク、変更の表示等の条件をメタデータに記録しています。
+
+## 香港MTR
+
+```python
+tracker = Tracker(enabled_providers=("mtr",))
+await tracker.refresh()
+print(tracker.mtr.tsuen_wan.status)
+print(tracker.mtr.airport_express.alerts)
+```
+
+`Tracker()`の既定の取得対象です。`python -m examples.mtr`でも実行できます。[MTR公式サイト](https://www.mtr.com.hk/en/customer/main/index.html)の公開状態XMLから、10路線を取得します。属性は`tsuen_wan`（荃湾線）、`kwun_tong`（観塘線）、`island`（港島線）、`south_island`（南港島線）、`tseung_kwan_o`（将軍澳線）、`tung_chung`（東涌線）、`disneyland_resort`（迪士尼線）、`airport_express`（機場快線）、`east_rail`（東鉄線）、`tuen_ma`（屯馬線）です。共通IDは`hk:mtr:...`、運行会社はMTR Corporation Limitedです。
+
+公式凡例の`green`は`NORMAL`、`yellow`（遅延または段階的復旧）は`DELAYED`、`red`・`pink`・`typhoon`は`ALERT`です。`red`は全線・一部の運休を確定しません。`grey`は非サービス時間で、運行アラート上は`NORMAL`とし、原コードを`source_status`に残します。未知コードは`UNKNOWN`、路線・必須項目の欠落や通信失敗時は前回の結果を保持します。同じ路線のメッセージ見出しとリンクを保持し、本文から障害種別・対象路線・適用期間を推測しません。平常色にもメッセージがあれば`ALERT`です。
+
+軽鉄・高速鉄道、別のTraffic Newsバナー、詳細ページ、別配信の特別・長期案内は取得しません。公式の掲載基準は継続的な追加行車時間20分超等で、`NORMAL`はこの範囲内の平常表示です。`lastBuildDate`のタイムゾーン等を確定する仕様は未確認のため`updated_at=None`、適用時期は`timing=UNKNOWN`です。
+
+実取得した平常XMLで確認し、異常・復旧は公開凡例に基づく合成テストで検証しています。出典と未確認範囲は[MTR.md](../tests/fixtures/MTR.md)に記録しています。利用条件のメタデータは[公式規約](https://www.mtr.com.hk/en/customer/main/terms_of_use.html)の個人・非商用利用制限に基づく`PRIVATE_USE_ONLY`です。
+
 ## 日本：JR
 
 ### JR北海道
@@ -114,7 +315,64 @@ XMLの案内ありなら `ALERT` とします。
 取得範囲、出典・ハッシュ、利用条件の確認範囲は [JRKYUSHU.md](../tests/fixtures/JRKYUSHU.md) を参照してください。
 再利用条件は未確認のため `UNSPECIFIED` としています。
 
+## 日本：関東（横浜市営地下鉄）
+
+```python
+tracker = Tracker(enabled_providers=("yokohama_subway",))
+await tracker.refresh()
+print(tracker.yokohama_subway.blue.status)
+print(tracker.yokohama_subway.green.alerts)
+```
+
+`YokohamaSubwayProvider` は既定の取得対象です。`python -m examples.yokohama_subway` で
+単独取得できます。両路線はYahooと既存の共通路線ID・会社情報を共有し、状態は独立しています。
+[公式運行情報](https://status.hamabus.city.yokohama.lg.jp/operation/list) が参照する
+日本語の地下鉄現在一覧JSONを取得し、公式画面と同じく路線ごとの項目が0件なら `NORMAL`。
+公式履歴と公開表示コードで確認した状態ID `2`・状態名「遅延」の組だけを `DELAYED`、
+他は `UNKNOWN` とし、各一覧レコードをJSONとして `alerts` に保持します。
+未知路線・路線名不一致・重複・必須構造破損は解析失敗として前回の2路線を保持します。
+
+`timing=UNKNOWN`、`active_from/active_until=None`、`updated_at=None`。
+一覧のサーバー時刻・案内期間・画面に表示されない状態更新時刻を代用しません。
+履歴・詳細画面だけの追加情報や振替路線・市バス・証明書・位置情報・別のニュースは取得範囲外。
+一覧に混在する案内は保持し、`NORMAL` はこの一覧の掲載範囲だけを表します。
+現在の異常時応答・運休コード・グリーンライン異常時・同一障害の復旧は未確認です。
+一般サイトポリシーのサブサイト/APIへの適用は未確認のため、利用条件は `UNSPECIFIED`。
+出典と合成テストの区別は [YOKOHAMA_SUBWAY.md](../tests/fixtures/YOKOHAMA_SUBWAY.md) を参照。
+
 ## 日本：北海道（地下鉄）
+
+### 仙台市交通局
+
+```python
+tracker = Tracker(enabled_providers=("sendai_subway",))
+await tracker.refresh()
+print(tracker.sendai_subway.namboku.status)
+print(tracker.sendai_subway.tozai.alerts)
+```
+
+取得元IDは `sendai_subway`、クラスは `SendaiSubwayProvider` です。
+`Tracker()` の既定の取得対象に含み、`python -m examples.sendai_subway` で単独取得できます。
+南北線・東西線は既存のYahooと同じ共通路線ID・運行会社を使用し、取得状態は独立しています。
+
+公式の南北線 `/unkou/nanbokusen/`、東西線 `/unkou/touzaisen/` のHTMLを取得します。
+専用状態欄の `ope_normal` と、証明書ボタンを除いた内容全体が確認済みの平常表示に
+完全一致するときだけ `NORMAL` です。他の表示・未知クラス・追加本文は `UNKNOWN` とし、
+案内本文とリンク先URLを保持します。本文やCSSクラス名から遅延・運休種別を推測しません。
+路線ごとのページから対象路線を特定し、本文の他路線名に影響を広げません。
+
+[公式の掲載基準](https://www.kotsu.city.sendai.jp/unkou/)は30分以上の遅れの発生・見込みです。
+`NORMAL` はこの取得範囲の平常表示であり、短時間の遅れも含めて全運行が平常という意味ではありません。
+`updated_at=None`、`timing=UNKNOWN`、`active_from/active_until=None` です。
+WordPressのページ更新日時を運行状態の更新時刻に転用しません。
+市バス、別のお知らせ、遅延証明書、X、リンク先本文は取得しません。
+路線ページ内に混在する長期案内を本文から除外せず、追加の詳細欄も保持します。
+2路線のどちらかの通信・解析が失敗した場合は、両路線の前回スナップショットを保持します。
+
+実際の平常HTMLと2026年4月の東西線の平常保存ページを検証に使用しています。
+異常時の現行形式は未確認で、未知表示・復旧・破損の検証は合成データです。
+調査根拠・出典・ハッシュは [SENDAI_SUBWAY.md](../tests/fixtures/SENDAI_SUBWAY.md) に記録しています。
+無断複製・転用を制限する公式方針に基づき、利用条件メタデータは `PERMISSION_REQUIRED` です。
 
 ### 札幌市営地下鉄
 
@@ -360,6 +618,23 @@ print(tracker.yurikamome.main.alerts)
 
 公式の掲載基準は概ね15分以上の遅れとその見込みです。区間・原因は本文に掲載された範囲で保持し、駅別状態・遅延証明書は取得しません。平常時と情報提供時間外は実データで確認し、異常時と復旧は公式JavaScriptのラベルに基づく合成テストで検証しています。出典・未確認範囲は [tests/fixtures/YURIKAMOME.md](../tests/fixtures/YURIKAMOME.md) に記録しています。
 
+### 相模鉄道
+
+```python
+tracker = Tracker(enabled_providers=("sotetsu",))
+await tracker.refresh()
+print(tracker.sotetsu.main.status)
+print(tracker.sotetsu.main.alerts)
+```
+
+`Tracker()` の既定の取得対象です。`python -m examples.sotetsu` でも確認できます。[公式運行情報](https://www.sotetsu.co.jp/train/status/)が参照する公開JSON `https://cdn.sotetsu.co.jp/unkou/dat/train_status1_v2.json` を取得します。属性 `main` は相鉄線全体の1掲載単位で、Yahooの相鉄線と既存共通ID `jp:sotetsu:line_bcfb80c3830e` を再利用し、取得結果は独立して保持します。本線・いずみ野線・新横浜線への分割は行いません。
+
+公式の公開JavaScriptが `IRREGULAR=false` を「相鉄線平常運転」、`true` を「相鉄線運行情報あり」と表示することを根拠に、`NORMAL`／`ALERT` に対応付けます。`MSG`（運行情報）と、空でない `MSG2`（振替輸送）を原文のまま保持します。遅延・運転見合わせ・一部運休を本文や英語の `E_STATUS` から推測しません。掲載基準は10分以上の遅れ・運転見合わせとその見込みです。`timing=UNKNOWN`、適用期間は未設定です。
+
+`DATE` の更新日時としての意味は未確認で、画面の「現在の情報です」はブラウザの時計なので、`updated_at=None` とします。必須項目の欠損・型不一致、空の本文、掲載項目の欠損・重複は `ParseError` とし前回値を保持します。`MSG2` の省略は公式の空文字へのフォールバックに合わせて許容します。別取得の `owabi.json`（お詫び）とmicroCMSの `train-alerts`（電車のお知らせ）は構造的に分離された別欄のため対象外です。遅延証明書・列車位置・他社線情報も取得しません。`NORMAL` はこの取得範囲内の状態です。
+
+ライブの平常JSONと、2023年7月17日の東横線方面との直通中止（目黒線方面は継続）、別時点の平常JSONを確認しました。同一障害の復旧・現在の異常JSON・実際の振替輸送欄の内容は未確認で、これらの動作検証は合成データです。出典とハッシュは [SOTETSU.md](../tests/fixtures/SOTETSU.md) を参照してください。公式の運行情報固有の転載・複写禁止に基づき、メタデータは `PERMISSION_REQUIRED` です。一般規約が留保する法令上の私的利用等も `usage_note` に記録しています。
+
 ### りんかい線
 
 ```python
@@ -462,7 +737,71 @@ print(tracker.nankai.semboku.updated_at)
 他のProviderの実データとアーカイブの出典は [tests/fixtures/SOURCES.md](../tests/fixtures/SOURCES.md) を参照してください。MRTと大阪モノレールの異常時は、公開コードの解析と合成データでの検証までです。
 公式の掲載基準外の小さな遅延まで検出するものではありません。公式ページに掲載された利用条件は利用者側で確認してください。
 
-## 日本：四国・沖縄
+## 日本：四国・九州・沖縄
+
+### 福岡市交通局
+
+```python
+tracker = Tracker(enabled_providers=("fukuoka_subway",))
+await tracker.refresh()
+print(tracker.fukuoka_subway.kuko.status)
+print(tracker.fukuoka_subway.hakozaki.status)
+print(tracker.fukuoka_subway.nanakuma.status)
+```
+
+`FukuokaSubwayProvider` は `Tracker()` の既定の取得対象です。
+`python -m examples.fukuoka_subway` で単独取得できます。
+[公式運行情報](https://subway.city.fukuoka.lg.jp/status/) の現在の運行案内欄を取得し、
+空港線・箱崎線・七隈線の既存共通IDを再利用します。
+
+平常定型文全体の一致だけを `NORMAL`、その他の掲載を `ALERT` として原文・リンクを保持します。
+実際の運転見合わせ予告でも平常時と同じアイコンが使われているため、アイコン・本文から
+遅延・運休や適用時期を推測しません。全体の案内を3路線に共有し、`affected_line_ids=()`、
+`timing=UNKNOWN`、適用期間は未設定です。各路線の障害を確認したという意味ではありません。
+
+専用の「更新」欄だけを `Asia/Tokyo` 付き `updated_at` に使い、空欄は `None`。
+ページ生成時の「現在」時刻は使いません。欠損・重複・空欄本文・不正な更新日時は `ParseError`。
+別欄の計画運休、履歴、遅延証明書、列車位置、乗り入れ先JR線、リンク先記事は対象外です。
+現在の運行欄に混在する予告は保持します。生応答記録には対象外のヘッダーやリンクも含まれます。
+
+平常・運転見合わせ予告の実保存HTMLと合成の破損・復旧ケースで検証します。
+出典と未確認範囲は [FUKUOKA_SUBWAY.md](../tests/fixtures/FUKUOKA_SUBWAY.md) を参照。
+公式の利用制限に基づく許諾区分は `PRIVATE_USE_ONLY` です。
+
+### 西日本鉄道
+
+```python
+tracker = Tracker(enabled_providers=("nishitetsu",))
+await tracker.refresh()
+print(tracker.nishitetsu.tenjin_omuta.status)
+print(tracker.nishitetsu.dazaifu.alerts)
+print(tracker.nishitetsu.amagi.status)
+print(tracker.nishitetsu.kaizuka.status)
+```
+
+`Tracker()` の既定の取得対象です。`python -m examples.nishitetsu` で取得例を実行できます。
+[公式電車ページ](https://www.nishitetsu.jp/train/)が参照する
+[運行状況](https://jik.nishitetsu.jp/traffic/default.htm)の `div.traffic` を取得します。
+4路線ともYahooと既存の共通IDを再利用し、取得結果は独立して保持します。
+
+専用見出し「天神大牟田線（太宰府線・甘木線含む）」の案内を `tenjin_omuta`・`dazaifu`・`amagi`、
+「貝塚線」の案内を `kaizuka` に `ALERT` として保持します。グループ掲載は個別の影響対象を
+確定しないため `affected_line_ids=()` です。復旧案内も同じ欄に残る実例があり、
+遅延・見合わせ・一部運休や現在有効かどうかを本文から推測しません。
+年のない「現在」の表示から更新日時を作らず、`updated_at=None`、`timing=UNKNOWN`、適用期間も未設定です。
+
+案内なしの定型段落、または既知のバス見出しだけなら `NORMAL`。
+この状態は緊急案内欄に鉄道の掲載がないことに限定し、通常運行や小規模な遅延がないことを保証しません。
+`高速バス`・`一般路線バス` は構造的に除外します。未知の見出しはバスと断定せず、
+全4路線を `UNKNOWN` にして原文と対象不明のアラートを保持します。
+空欄・重複・欠損・不正な見出し本文の組は `ParseError` とし、直前のスナップショットを保持します。
+
+別枠のニュース・X・リンク先記事・遅延証明書・列車位置は取得しません。
+鉄道欄内に長期案内が構造的に分離される根拠はなく、その欄の案内は保持します。
+HTTP応答の記録には対象外のバス本文やリンク一覧が含まれます。
+平常、鉄道案内、復旧、バスのみの実HTMLで解析を検証し、未知見出し・破損・掲載削除の連続更新は合成テストです。
+出典・ハッシュ・未確認範囲は [NISHITETSU.md](../tests/fixtures/NISHITETSU.md) を参照してください。
+公式サイト利用規定に基づくメタデータの許諾区分は `PERMISSION_REQUIRED` です。
 
 ### とさでん交通
 
@@ -577,10 +916,18 @@ tracker = Tracker(enabled_providers=("db", "transilien", "obb"))
 await tracker.refresh()
 print(tracker.db.alerts)
 print(tracker.transilien.rer_d.alerts)
+print(tracker.transilien.metro_6.status)
+print(tracker.transilien.metro_7bis.alerts)
 print(tracker.obb.alerts)
 ```
 
 DB・ÖBBの全国案内は、個別の影響路線を特定できません。案内があるときの掲載単位の状態は `UNKNOWN`、アラートの `affected_line_ids=()` とし、本文を保持します。障害種別や現在有効かどうかを本文から推測しません。空一覧の `NORMAL` は上記の取得範囲に案内がないことだけを示します。Transilienは公式APIの系統別リストと専用状態コードに基づいて対応します。3取得元とも `timing=UNKNOWN` です。調査根拠・実応答・合成テストの区別は [DB](../tests/fixtures/DB.md)、[Transilien](../tests/fixtures/TRANSILIEN.md)、[ÖBB](../tests/fixtures/OBB.md) に記録しています。利用条件は各Providerの `metadata` を参照してください。
+
+TransilienはSNCFのRER C/D/E・列車H/J/K/L/N/P/R/U/Vの12系統に加え、RATPのメトロ16路線を取得します。メトロの属性は `metro_1`〜`metro_14`、`metro_3bis`、`metro_7bis`、共通IDは `fr:ratp:metro_1` などです。メトロは `scope=LINE`、運行会社は `RATP` で、既存のSNCF系統は従来のID・属性と `scope=GROUP` を維持します。Providerは取得元を表すため、メトロも `tracker.transilien` に属します。RATPサイトへの直接取得は行いません。`python -m examples.transilien` で確認できます。
+
+取得先は共通一覧 `/api/traffic/infos` と路線別 `/api/traffic/line/{code}?lang=fr` です。メトロのコードは `METRO_1`〜`METRO_14`、`METRO_3BIS`、`METRO_7BIS`。全28路線・系統の `fetchStatus=FULL` を要求し、一覧1件と詳細28件の計29リクエストが成功した後にまとめて更新します。メトロを含む1路線でも取得・解析に失敗した場合、SNCF系統も含め直前のスナップショットを保持します。
+
+取得範囲は `currentDisruptions` のうち `category=TRAVAUX` を除く案内です。工事分類と別リストの将来予告は対象外で、RER A/B・トラム・バス・Orlyval・CDGVAL・ケーブルカーも取得しません。専用コード `SLOWED_TRAFFIC` / `HIGHLY_SLOWED_TRAFFIC` は `DELAYED`、既知のその他の障害コードは影響範囲を確定せず `ALERT`、未知のコード・分類は原文を保持して `UNKNOWN` です。`timing=UNKNOWN`、適用期間は `None`、`updated_at` は対象案内の `modifiedDate` の最大値です。`NORMAL` はこの取得範囲内に案内がないことを表します。利用条件は従来どおり `PERMISSION_REQUIRED` です。
 
 ### MTA New York City Subway（GTFS-realtime）
 
@@ -601,6 +948,27 @@ GTFS-realtimeの解析は共通モジュール `providers/gtfs_rt.py` が行い�
 - GTFS-rtの共通規則では、`NO_SERVICE` が路線全体（停留所・列車・方向の指定なし）を対象とするときだけ `SUSPENDED`、`SIGNIFICANT_DELAYS` なら `DELAYED`、その他の明示的な影響は `ALERT` です。
 - `active_period` は表示期間のため `active_from`/`active_until` に使わず、`timing` は `UNKNOWN` です。
 - 未登録の `route_id`、仕様外のエンティティID、破損したprotobufは `ParseError` として前回値を保持します。
+
+### Metro-North Railroad（GTFS-realtime）
+
+```python
+tracker = Tracker(enabled_providers=("metro_north",))
+await tracker.refresh()
+print(tracker.metro_north.hudson.status)
+print(tracker.metro_north.harlem.alerts)
+print(tracker.metro_north.port_jervis.alerts)
+```
+
+取得元IDは `metro_north`、クラスは `MetroNorthProvider` です。公式Service Alertsフィードを使い、列車位置・発着予測は取得しません。MTA Subwayと同じ利用条件により既定無効で、明示指定時だけ通信します。利用条件は `metadata`（`PERMISSION_REQUIRED`）を参照してください。サンプルは `python -m examples.metro_north` です。
+
+公開属性は `hudson`、`harlem`、`new_haven`、`new_canaan`、`danbury`、`waterbury`、`pascack_valley`、`port_jervis`、`wassaic` の9掲載単位です。共通IDは `us:metro_north:<属性名>`。静的GTFSの6路線に加え、公式画面の路線一覧で西岸2路線（50/51）、公開スクリプトでWassaic別掲載を確認しています。WassaicをHarlem全体へ統合せず、支線の案内を親路線へ伝播しません。西岸2路線のサービス事業者はMetro-North、運転実務はNJ Transitです。
+
+- `lmm:planned_work` の計画工事は除外。`NORMAL` は未計画アラートがないことだけを表します。
+- 取得した列車別遅延案内には `effect` がないため、本文を保持して路線状態・影響・適用時期は `UNKNOWN` とします。自由記述の `alert_type` や本文の遅延分数から状態を推測しません。
+- 明示的なeffectがある場合は既存GTFS-rt規則を使います。路線全体のNO_SERVICE→SUSPENDED、SIGNIFICANT_DELAYS→DELAYED。列車・停留所等に限定される場合はALERTです。
+- `active_period` は表示期間のため `active_from` / `active_until` に使用しません。未知の路線・事業者、仕様外ID、破損応答では `ParseError` として前回値を保持します。
+
+実際の列車別案内・計画工事を保存しています。復旧・各路線の未計画案内・明示effect・異常応答は合成テストです。取得元・路線対応・ハッシュ・未確認範囲は [METRO_NORTH.md](../tests/fixtures/METRO_NORTH.md) と [metro_north_manifest.json](../tests/fixtures/metro_north_manifest.json) に記録しています。
 
 ## 集約サイト（明示指定時のみ）
 
@@ -669,6 +1037,62 @@ print(tracker.delay_lines)
 
 掲載時刻は日本時間で、年を省略した表記は取得日時から補います。掲載時刻がない通常表示は `updated_at=None` です。本文から運休を推測せず、詳細の現在の状態ラベルを使います。実際の遅延・運転見合わせ・復旧のデータと、未確認・合成ケースの区別は [tests/fixtures/YAHOO.md](../tests/fixtures/YAHOO.md) に記録しています。
 
+#### つくばエクスプレス
+
+つくばエクスプレス線は既存のYahoo Providerで取得できます。関東を選択し、
+Yahooの路線ID `412/0` で参照します。取得元はYahoo、運行会社は首都圏新都市鉄道です。
+Yahooの利用条件と明示指定の扱いは上記のとおりです。
+
+```python
+from train_operation_info import Tracker
+from train_operation_info.providers.yahoo import YahooArea, YahooProvider, YahooRouteId
+
+yahoo = YahooProvider(areas=(YahooArea.KANTO,))
+tracker = Tracker(enabled_providers=("yahoo",), overrides=(yahoo,))
+await tracker.refresh()
+line = tracker.yahoo.get_source_line(YahooRouteId("412/0"))
+assert line is not None
+print(line.name, line.status, line.alerts)
+```
+
+2026年11月4日の確認時点で、[TX公式Webの運行情報](https://www.mir.co.jp/info/)は
+配信停止・メンテナンス中のため、専用の公式Providerは追加していません。
+配信停止の案内を列車の平常状態として扱いません。
+[ODPTのTX運行情報](https://ckan.odpt.org/dataset/r_train_status-mir)にはAPIキーが必要で、
+[APIキー必須の取得元を追加しない方針](../CONTRIBUTING.md#追加を見送る取得元)により対象外です。
+
+
+## Trenitalia
+
+```python
+tracker = Tracker(enabled_providers=("trenitalia",))
+await tracker.refresh()
+print(tracker.trenitalia.network.status)
+print(tracker.trenitalia.network.alerts)
+```
+
+[公式Infomobilità](https://www.trenitalia.com/it/informazioni/Infomobilita/notizie-infomobilita.html)
+の全国案内を、共通ID `it:trenitalia:network`、運行会社 `Trenitalia` の
+`GROUP` として取得します。個々の路線や列車の状態ではありません。
+`python -m examples.trenitalia` でも確認できます。
+
+2024年と2026年の公式保存ページで確認した、全国平常の見出し・分類・本文全体が
+定型形式に一致する場合だけ `NORMAL` とします。それ以外は `UNKNOWN` です。
+高速網だけの平常告知を全国平常へ拡張しません。他の案内は原文と分類・掲載日を
+保持し、影響は `OTHER`、対象路線は空、適用時期は `UNKNOWN` とします。
+赤の注意分類には復旧案内もあるため、色・本文中の単語から遅延・運休を推測しません。
+全国平常が明示されていても、併記された案内は消しません。
+
+`Programmazione` の予定分類は構造的に除外し、その本文は検証しません。
+他の分類に混在する工事情報は保持します。生HTTP記録には除外した案内も含まれます。
+掲載日は更新時刻や適用期間ではないため、`updated_at` と適用期間は `None` です。
+列車検索、リンク先の詳細・PDFは対象外です。ViaggiaTrenoは識別User-Agentに403を
+返したため取得しません。実際の平常・異常応答と合成テストの区別は
+[TRENITALIA.md](../tests/fixtures/TRENITALIA.md) に記録しています。
+
+[公式利用条件](https://www.trenitalia.com/it/informazioni/termini-e-condizioni-di-utilizzo-sito-trenitalia.html)
+は個人の非商用保存と再配布等を区別し、後者には事前同意を求めています。
+メタデータは `PERMISSION_REQUIRED`、取得は明示指定時のみです。
 
 ## 名古屋市営地下鉄
 
@@ -699,3 +1123,118 @@ Yahooの既存共通IDを再利用し、個別路線へ分割しません。
 ライブ取得は平常JSONのみで、異常時・複数案内・復旧のテストは合成です。
 出典・ハッシュ・未確認範囲は [NAGOYA_SUBWAY.md](../tests/fixtures/NAGOYA_SUBWAY.md) を参照。
 無断転載・複製を禁止する公式規約に基づき、メタデータは `PERMISSION_REQUIRED` です。
+
+
+## Metro Trains Melbourne
+
+```python
+tracker = Tracker(enabled_providers=("metro_trains_melbourne",))
+await tracker.refresh()
+print(tracker.metro_trains_melbourne.sunbury.status)
+print(tracker.metro_trains_melbourne.werribee.alerts)
+```
+
+`Tracker()`の既定の取得対象です。直接使う場合は
+`from train_operation_info.providers.metro_trains_melbourne import MetroTrainsMelbourneProvider`。
+サンプルは `python -m examples.metro_trains_melbourne` です。
+[公式ホームページ](https://www.metrotrains.com.au/)のHealthboard APIとネットワーク定義を取得します。
+属性は `alamein`、`belgrave`、`craigieburn`、`cranbourne`、`mernda`、`frankston`、
+`glen_waverley`、`hurstbridge`、`lilydale`、`pakenham`、`sandringham`、`stony_point`、
+`sunbury`、`upfield`、`werribee`、`williamstown`、`racecourse` の17路線です。
+共通IDは `au:metro_trains_melbourne:<属性名>`、会社はMetro Trains Melbourneです。
+
+固定の平常文字列／空通知配列と `good` / `good-service` は `NORMAL`、
+`minor` / `major` は `DELAYED`、`suspended` は `PARTIAL_SUSPENSION`。
+公式凡例のSuspendedは区間の見合わせを意味するため、全線の `SUSPENDED` は導出しません。
+工事・旅行案内・列車単位の運休／変更は `ALERT`、未知コード・文字列は `UNKNOWN`です。
+No Servicesは運転予定がない表示で、障害扱いにせず `NORMAL` として原文を保持します。
+複数通知を保持し、平常通知で別の障害を消しません。
+
+対象は路線の `alerts` と構造化された `disruptions` のみです。別枠の計画工事一覧・
+増発案内・昇降設備・全体バナーは対象外ですが、路線状態欄のworks通知は保持します。
+対象路線は公式ID・disruptionsのlinesから決定し、本文の別路線名・駅名から広げません。
+通知のUnix秒を `active_from` / `active_until` に保存し、適用時期は `UNKNOWN`、
+更新時刻は意味が未確認なので `updated_at=None`。工事予告を本文からACTIVEにしません。
+ネットワークは調査時の既定設定 `Aug26` を使い、路線ID・件数・名称の変更を検知します。
+
+ライブ取得で平常文字列・works通知・No Services条件を確認しました。
+遅延・見合わせ・非空disruptions・復旧は公開JavaScript／凡例に基づく合成テストです。
+出典と未確認範囲は [METRO_TRAINS_MELBOURNE.md](../tests/fixtures/METRO_TRAINS_MELBOURNE.md)。
+一般利用規約・再利用許諾は発見できず、メタデータは `UNSPECIFIED` / `terms_url=None` です。
+
+## 土佐くろしお鉄道
+
+```python
+tracker = Tracker(enabled_providers=("tosakuro",))
+await tracker.refresh()
+print(tracker.tosakuro.gomen_nahari.status)
+print(tracker.tosakuro.nakamura_sukumo.alerts)
+```
+
+`Tracker()` の既定の取得対象です。直接使う場合は
+`from train_operation_info.providers.tosakuro import TosaKuroshioProvider`。
+サンプルは `python -m examples.tosakuro` です。
+[公式トップページ](https://www.tosakuro.com/)の路線別運行情報欄から、
+ごめん・なはり線と中村・宿毛線の2記事を取得します。
+Yahooの同じ掲載単位の共通路線ID・会社情報を再利用し、取得結果は独立です。
+
+完全一致する平常見出し「平常運行」「平常運転」だけを `NORMAL`、
+未確認の見出しは `UNKNOWN` にします。遅延・見合わせ・一部運休は分類しません。
+`NORMAL` は公式記事の見出しの状態です。個別列車の運休案内が本文に併記される
+場合もあるため、平常時も全記事本文を `effect=OTHER` の情報アラートに保持します。
+そのため `NORMAL` でも `alerts` は空になりません。
+対象路線の掲載枠は影響区間の確定情報ではなく、`affected_line_ids=()` です。
+本文の日時・原因・運休表現から状態や適用時期を推定しません。
+`timing=UNKNOWN`、適用期間・`updated_at=None` を維持します。
+
+トップページの別のお知らせ／トピックス欄、時刻表、列車位置、SNS、
+記事中のリンク先PDF／画像の解析は対象外です。運行記事内に混在する長期・将来・
+復旧案内はそのまま保持します。本文のリンク・画像URLも残します。
+生HTTP記録には対象外のお知らせ欄が含まれます。
+
+平常表示はライブHTMLと2026年の保存HTMLで検証しました。
+異常時の安定した状態対応・同一事象の復旧データは未確認で、異常・破損・復旧は合成テストです。
+出典・取得日時・ハッシュ・未確認範囲は [TOSAKURO.md](../tests/fixtures/TOSAKURO.md) を参照。
+確認した公式トップページ・企業情報から適用可能な再利用規約は見つからず、
+メタデータは `UNSPECIFIED` / `terms_url=None` です。
+
+## SNCF TGV (`tgv`)
+
+```python
+tracker = Tracker(enabled_providers=("tgv",), rate_limit=120)
+await tracker.refresh()
+print(tracker.tgv.network.status)
+print(tracker.tgv.network.alerts)
+```
+
+[SNCFの公式Open Data](https://transport.data.gouv.fr/datasets/horaires-sncf)
+のNeTEx時刻表とSIRI SX Service Alertsを照合します。共通IDは
+`fr:sncf:tgv`、運行会社はSNCF Voyageurs、範囲は`GROUP`です。
+Transilienの近郊系統とは別の範囲です。`python -m examples.tgv`でも取得できます。
+
+NeTExの列車ブランド`OUI`・`TGVOUIGO`・`LYR`と`highSpeedRail`を用い、
+INOUI・OUIGO高速列車・Lyriaの案内を取り込みます。列車番号と運行主体で
+照合し、路線名・番号の桁数・本文の単語から列車種別を推測しません。
+TER・Intercités・OUIGO Train Classique・DBブランドと確定できた案内は
+対象外です。未登録列車、未知ブランド、対象駅だけの案内、曖昧な照合は
+未特定の案内として保持します。
+
+列車別の案内では系統全体の遅延・運休は断定できないため、案内ありは
+`UNKNOWN`、対象内および未特定の案内がなければ`NORMAL`です。
+`NORMAL`はこのフィードの公表範囲内での案内なしを意味し、全列車の定時運転を
+保証しません。本文・詳細HTML・列車番号・Progress・Severityを保持し、
+`effect=OTHER`、`timing=UNKNOWN`、`affected_line_ids=()`とします。
+Severityから運休・遅延を推測しません。ValidityPeriodは掲載期間として扱い、
+影響の開始・終了へ転用しません。`updated_at`はフィードのResponseTimestampです。
+工事・長期案内は同じ欄に混在するため、本文や日付で除外しません。
+
+毎回、全国NeTEx ZIPとSIRI SXを取得します。調査時のZIPは約32 MB、展開後XMLは
+約654 MBです。XMLは逐次解析し、解析はワーカースレッドで行います。
+取得負荷が大きいため既定では無効です。明示指定し、長めの更新間隔を設定してください。
+保存・再生に必要な両応答を毎回記録します。通信・構造の破損時は直前の状態を保持します。
+
+公式データセットのライセンスはODbL 1.0です。メタデータは
+`COMMERCIAL_ALLOWED`とし、帰属表示・ライセンス表示・該当する継承条件を記録しています。
+旅客向けページは識別User-Agentに403を返したため実行時には使用しません。
+Open Dataの独立した公開先を利用し、拒否の回避は行いません。
+調査根拠・未確認範囲は[fixture出典](../tests/fixtures/TGV.md)を参照してください。

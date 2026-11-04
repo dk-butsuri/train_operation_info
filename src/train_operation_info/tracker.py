@@ -12,6 +12,7 @@ from train_operation_info.exceptions import ProviderError, RefreshError
 from train_operation_info.models import AlertTiming, Line, ProviderId, ServiceAlert
 from train_operation_info.providers.base import AlertProvider, SnapshotProvider, validate_rate_limit
 from train_operation_info.providers.db import DbProvider
+from train_operation_info.providers.fukuoka_subway import FukuokaSubwayProvider
 from train_operation_info.providers.hakone_tozan import HakoneTozanProvider
 from train_operation_info.providers.hankyu import HankyuProvider
 from train_operation_info.providers.hanshin import HanshinProvider
@@ -21,6 +22,7 @@ from train_operation_info.providers.jrhokkaido import JrHokkaidoProvider
 from train_operation_info.providers.jrkyushu import JrKyushuProvider
 from train_operation_info.providers.jrshikoku import JrShikokuProvider
 from train_operation_info.providers.jrw import JrWestProvider
+from train_operation_info.providers.kaohsiung_metro import KaohsiungMetroProvider
 from train_operation_info.providers.keihan import KeihanProvider
 from train_operation_info.providers.keikyu import KeikyuProvider
 from train_operation_info.providers.keio import KeioProvider
@@ -29,46 +31,66 @@ from train_operation_info.providers.kintetsu import KintetsuProvider
 from train_operation_info.providers.kyoto_subway import KyotoSubwayProvider
 from train_operation_info.providers.meitetsu import MeitetsuProvider
 from train_operation_info.providers.minatomirai import MinatomiraiProvider
+from train_operation_info.providers.metro_north import MetroNorthProvider
 from train_operation_info.providers.mta_subway import MtaSubwayProvider
+from train_operation_info.providers.mtr import MtrProvider
+from train_operation_info.providers.metro_trains_melbourne import MetroTrainsMelbourneProvider
 from train_operation_info.providers.nagoya_subway import NagoyaSubwayProvider
 from train_operation_info.providers.nankai import NankaiProvider
+from train_operation_info.providers.nishitetsu import NishitetsuProvider
 from train_operation_info.providers.odakyu import OdakyuProvider
 from train_operation_info.providers.obb import ObbProvider
 from train_operation_info.providers.osaka_metro import OsakaMetroProvider
 from train_operation_info.providers.osaka_monorail import OsakaMonorailProvider
 from train_operation_info.providers.rinkai import RinkaiProvider
+from train_operation_info.providers.saitama_railway import SaitamaRailwayProvider
+from train_operation_info.providers.renfe import RenfeProvider
 from train_operation_info.providers.sapporo_subway import SapporoSubwayProvider
+from train_operation_info.providers.sendai_subway import SendaiSubwayProvider
 from train_operation_info.providers.seibu import SeibuProvider
+from train_operation_info.providers.sotetsu import SotetsuProvider
 from train_operation_info.providers.singapore_mrt import SingaporeMrtProvider
 from train_operation_info.providers.taipei_metro import TaipeiMetroProvider
+from train_operation_info.providers.taoyuan_metro import TaoyuanMetroProvider
 from train_operation_info.providers.thsr import ThsrProvider
+from train_operation_info.providers.tfl import TflProvider
 from train_operation_info.providers.tobu import TobuProvider
 from train_operation_info.providers.toei import ToeiProvider
 from train_operation_info.providers.tokyo_metro import TokyoMetroProvider
 from train_operation_info.providers.tokyu import TokyuProvider
 from train_operation_info.providers.tosaden import TosadenProvider
+from train_operation_info.providers.tosakuro import TosaKuroshioProvider
 from train_operation_info.providers.tra import TraProvider
 from train_operation_info.providers.transilien import TransilienProvider
+from train_operation_info.providers.trenitalia import TrenitaliaProvider
+from train_operation_info.providers.tgv import TgvProvider
 from train_operation_info.providers.yahoo import YahooProvider
+from train_operation_info.providers.yokohama_subway import YokohamaSubwayProvider
 from train_operation_info.providers.yuirail import YuiRailProvider
 from train_operation_info.providers.yurikamome import YurikamomeProvider
 
 # Adding a provider: import it, add its ID here, and add one _Slot line to Tracker.
 # A mismatch between this list and the slots fails at import time.
 ProviderName: TypeAlias = Literal[
-    "db", "obb", "transilien",
+    "tfl",
+    "yokohama_subway",
+    "sendai_subway",
+    "renfe",
+    "db", "fukuoka_subway", "obb", "transilien", "trenitalia", "tgv",
     "hakone_tozan", "hankyu", "hanshin", "jrcentral", "jreast", "jrhokkaido", "jrkyushu", "jrshikoku",
     "jrw", "keihan", "keikyu", "keio", "keisei", "kintetsu", "kyoto_subway", "meitetsu", "minatomirai", "nagoya_subway", "nankai", "odakyu",
-    "osaka_metro", "osaka_monorail", "rinkai", "sapporo_subway", "seibu", "tobu", "toei", "tokyo_metro", "tokyu",
-    "tosaden", "yahoo", "yuirail", "yurikamome",
-    "singapore_mrt", "taipei_metro", "thsr", "tra",
-    "mta_subway",
+    "osaka_metro", "osaka_monorail", "rinkai", "saitama_railway", "sapporo_subway", "seibu", "sotetsu", "tobu", "toei", "tokyo_metro", "tokyu",
+    "tosaden", "tosakuro", "yahoo", "yuirail", "yurikamome", "nishitetsu",
+    "singapore_mrt", "taipei_metro", "taoyuan_metro", "kaohsiung_metro", "thsr", "tra", "mtr",
+    "mta_subway", "metro_north", "metro_trains_melbourne",
 ]
 _ALL_PROVIDERS: tuple[ProviderName, ...] = get_args(ProviderName)
 # Yahoo requires explicit selection; constructing Tracker() never fetches it.
 # MTA's feed terms forbid apps serving others directly from MTA servers: opt-in.
 # Odakyu and DB read an API key published in their own pages; opt-in until permitted.
-_OPT_IN_PROVIDERS: tuple[ProviderName, ...] = ("yahoo", "mta_subway", "odakyu", "db")
+# Trenitalia restricts reuse/redistribution of website content: opt-in.
+# TGV joins the large national NeTEx archive on every refresh: opt-in.
+_OPT_IN_PROVIDERS: tuple[ProviderName, ...] = ("yahoo", "mta_subway", "metro_north", "odakyu", "db", "trenitalia", "tgv")
 _DEFAULT_PROVIDERS: tuple[ProviderName, ...] = tuple(
     name for name in _ALL_PROVIDERS if name not in _OPT_IN_PROVIDERS
 )
@@ -112,7 +134,15 @@ class _Factory(Protocol[_P_co]):
 
 
 class Tracker:
+    kaohsiung_metro = _Slot(KaohsiungMetroProvider)
+    tfl = _Slot(TflProvider)
+    yokohama_subway = _Slot(YokohamaSubwayProvider)
+    tgv = _Slot(TgvProvider)
+    sendai_subway = _Slot(SendaiSubwayProvider)
+    renfe = _Slot(RenfeProvider)
+    trenitalia = _Slot(TrenitaliaProvider)
     db = _Slot(DbProvider)
+    fukuoka_subway = _Slot(FukuokaSubwayProvider)
     obb = _Slot(ObbProvider)
     transilien = _Slot(TransilienProvider)
     hakone_tozan = _Slot(HakoneTozanProvider)
@@ -134,25 +164,33 @@ class Tracker:
     minatomirai = _Slot(MinatomiraiProvider)
     nagoya_subway = _Slot(NagoyaSubwayProvider)
     nankai = _Slot(NankaiProvider)
+    nishitetsu = _Slot(NishitetsuProvider)
     odakyu = _Slot(OdakyuProvider)
     osaka_metro = _Slot(OsakaMetroProvider)
     osaka_monorail = _Slot(OsakaMonorailProvider)
     rinkai = _Slot(RinkaiProvider)
+    saitama_railway = _Slot(SaitamaRailwayProvider)
     sapporo_subway = _Slot(SapporoSubwayProvider)
     seibu = _Slot(SeibuProvider)
+    sotetsu = _Slot(SotetsuProvider)
     tobu = _Slot(TobuProvider)
     toei = _Slot(ToeiProvider)
     tokyo_metro = _Slot(TokyoMetroProvider)
     tokyu = _Slot(TokyuProvider)
     tosaden = _Slot(TosadenProvider)
+    tosakuro = _Slot(TosaKuroshioProvider)
     yahoo = _Slot(YahooProvider)
     yuirail = _Slot(YuiRailProvider)
     yurikamome = _Slot(YurikamomeProvider)
     singapore_mrt = _Slot(SingaporeMrtProvider)
     taipei_metro = _Slot(TaipeiMetroProvider)
+    taoyuan_metro = _Slot(TaoyuanMetroProvider)
+    mtr = _Slot(MtrProvider)
     thsr = _Slot(ThsrProvider)
     tra = _Slot(TraProvider)
     mta_subway = _Slot(MtaSubwayProvider)
+    metro_trains_melbourne = _Slot(MetroTrainsMelbourneProvider)
+    metro_north = _Slot(MetroNorthProvider)
 
     def __init__(
         self,

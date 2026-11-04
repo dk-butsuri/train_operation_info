@@ -1,0 +1,78 @@
+{
+  "investigation": "Official documentation, live JSON/protobuf, static GTFS and public JavaScript; no archive or real empty/recovery capture verified",
+  "request_user_agent": "train_operation_info (+https://github.com/dk-butsuri/train_operation_info)",
+  "documents": [
+    {
+      "source_url": "https://gtfsrt.renfe.com/alerts.pb",
+      "retrieved_at_utc": "2026-11-04T11:56:41.866710+00:00",
+      "original_sha256": "9ead0de2d5ba7c48904a6f7948c693c44bb57e6e590644ff66276d99d7a615cc",
+      "http_status": 200,
+      "extraction": "None; unmodified official response preserved locally, not redistributed."
+    },
+    {
+      "source_url": "https://gtfsrt.renfe.com/alerts.json",
+      "retrieved_at_utc": "2026-11-04T11:56:42.439792+00:00",
+      "original_sha256": "54416f9c7058a1838e65de94cd4b4a83b29b490799460f631b908acd21792d90",
+      "http_status": 200,
+      "extraction": "None; unmodified official response preserved locally, not redistributed.",
+      "fixture": "renfe_alerts_20261104.json",
+      "fixture_sha256": "54416f9c7058a1838e65de94cd4b4a83b29b490799460f631b908acd21792d90"
+    },
+    {
+      "source_url": "https://ssl.renfe.com/ftransit/Fichero_CER_FOMENTO/fomento_transit.zip",
+      "retrieved_at_utc": "2026-11-04T11:57:21.295582+00:00",
+      "original_sha256": "1cf45a1e5751a70d6d24986a2ea50fc704b33962909aba0763ea2b3cac456b68",
+      "http_status": 200,
+      "extraction": "None; unmodified official response preserved locally, not redistributed."
+    },
+    {
+      "source_url": "https://data.renfe.com/es/legal",
+      "retrieved_at_utc": "2026-11-04T11:57:22.245220+00:00",
+      "original_sha256": "81f6fb191712ce50f98d920d955caf61d93e39d60995863db81c23f333f3d677",
+      "http_status": 200,
+      "extraction": "None; unmodified official response preserved locally, not redistributed."
+    },
+    {
+      "source_url": "https://data.renfe.com/es/dataset/incidencias-avisos",
+      "retrieved_at_utc": "2026-11-04T11:57:22.562098+00:00",
+      "original_sha256": "8e385b4ec5aeb80caac1674b614af71b8144a5d419327df459b39ceb2312036e",
+      "http_status": 200,
+      "extraction": "None; unmodified official response preserved locally, not redistributed."
+    },
+    {
+      "source_url": "https://tiempo-real.renfe.com/js/min/infoalerts.min.js?v=10",
+      "retrieved_at_utc": "2026-11-04T11:58:25.152681+00:00",
+      "original_sha256": "54e331d9cebc5b136a1408d0f1ccdfa1b812450e33c550fad27b49b260d7b9bb",
+      "http_status": 200,
+      "extraction": "None; unmodified official response preserved locally, not redistributed."
+    },
+    {
+      "source_url": "https://tiempo-real.renfe.com/js/min/renderlinesnucleos.min.js?v=10",
+      "retrieved_at_utc": "2026-11-04T11:58:25.435421+00:00",
+      "original_sha256": "5180cc610e8e9707af17ca40a9422a6cfdba96668693f216e44861055dd87b5b",
+      "http_status": 200,
+      "extraction": "None; unmodified official response preserved locally, not redistributed."
+    },
+    {
+      "source_url": "https://tiempo-real.renfe.com/js/min/main.min.js?v=10",
+      "retrieved_at_utc": "2026-11-04T11:58:25.717969+00:00",
+      "original_sha256": "0689519824716f4c6cf3c8e28ef078cb0beb795d46e1f846e5e1170a6c266a41",
+      "http_status": 200,
+      "extraction": "None; unmodified official response preserved locally, not redistributed."
+    },
+    {
+      "source_url": "https://tiempo-real.renfe.com/js/min/service.min.js?v=10",
+      "retrieved_at_utc": "2026-11-04T11:58:26.000516+00:00",
+      "original_sha256": "cbd3a52ea3b4eadc7877f88729d3f4a2f4272359db295a18ac14b0d2141e4ee7",
+      "http_status": 200,
+      "extraction": "None; unmodified official response preserved locally, not redistributed."
+    },
+    {
+      "source_url": "https://tiempo-real.renfe.com/js/min/layers.min.js?v=10",
+      "retrieved_at_utc": "2026-11-04T11:58:26.283321+00:00",
+      "original_sha256": "96063541a598f5c9aab3257ea73c720f9401bd770caf4de6c8a41b5cd4671ee2",
+      "http_status": 200,
+      "extraction": "None; unmodified official response preserved locally, not redistributed."
+    }
+  ]
+}

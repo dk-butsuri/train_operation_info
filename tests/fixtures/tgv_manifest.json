@@ -1,0 +1,67 @@
+[
+  {
+    "file": "gl.html",
+    "url": "https://www.sncf-voyageurs.com/fr/voyagez-avec-nous/horaires-et-itineraires/informations-trafic/gl/",
+    "retrieved_at": "2026-11-04T12:42:41.960221+00:00",
+    "status": 403,
+    "sha256": "8d842da17083123c30e44d7b76620fd014a3c9d2f8b56881af04c25d73a87c0a"
+  },
+  {
+    "file": "gtfs.zip",
+    "url": "https://eu.ftp.opendatasoft.com/sncf/plandata/Export_OpenData_SNCF_GTFS_NewTripId.zip",
+    "retrieved_at": "2026-11-04T12:43:59.156895+00:00",
+    "status": 200,
+    "sha256": "aa470183d27a4b440d4d4de80c3cde4859f3503002be3004a93c1297dfda1400"
+  },
+  {
+    "file": "licence.html",
+    "url": "https://data.sncf.com/pages/licence/",
+    "retrieved_at": "2026-11-04T12:44:02.533760+00:00",
+    "status": 200,
+    "sha256": "d5ef6695482929f56283e4c2526b83bc7fc9ba4ca9077da58ae7ec66973b80e7"
+  },
+  {
+    "file": "dataset_info.json",
+    "url": "https://ressources.data.sncf.com/api/explore/v2.1/catalog/datasets/temps-reel-siri-sx-lite",
+    "retrieved_at": "2026-11-04T12:44:03.694488+00:00",
+    "status": 200,
+    "sha256": "8696cb93bb455f31bbe86b8e40bc5edf9e6e4f080ec33951f1ddefbcd5206eda"
+  },
+  {
+    "file": "netex.zip",
+    "url": "https://eu.ftp.opendatasoft.com/sncf/plandata/export-opendata-sncf-netex.zip",
+    "retrieved_at": "2026-11-04T12:45:54.338957+00:00",
+    "status": 200,
+    "sha256": "a19337a286a62606c360c082818d776b76e2325bfc72a81b1a89ccfd79368031",
+    "fixture": "tgv_netex_20261104.zip"
+  },
+  {
+    "file": "terms.html",
+    "url": "https://data.sncf.com/pages/cgu/A1",
+    "retrieved_at": "2026-11-04T12:45:56.146714+00:00",
+    "status": 200,
+    "sha256": "d80de01a113dd89f03247e0246e6f8b98aaab471b954f6e8e128a1e6ed7b5311"
+  },
+  {
+    "file": "alerts.pb",
+    "url": "https://proxy.transport.data.gouv.fr/resource/sncf-gtfs-rt-service-alerts",
+    "retrieved_at": "2026-11-04T12:43:02.025147+00:00",
+    "status": 200,
+    "sha256": "02a691e4c89f3d27baa391ed9f2a26cb52eb0ad5aed0c18a0cd2c9ca4d72f970"
+  },
+  {
+    "file": "alerts.xml",
+    "url": "https://proxy.transport.data.gouv.fr/resource/sncf-siri-lite-situation-exchange",
+    "retrieved_at": "2026-11-04T12:43:04.316408+00:00",
+    "status": 200,
+    "sha256": "3c4876b7270a1cb9ded75ab65a60af16648f750d588bd44b69d4d20c04436577",
+    "fixture": "tgv_alerts_20261104.xml"
+  },
+  {
+    "file": "dataset.html",
+    "url": "https://ressources.data.sncf.com/explore/dataset/temps-reel-siri-sx-lite/",
+    "retrieved_at": "2026-11-04T12:43:06.419840+00:00",
+    "status": 200,
+    "sha256": "33030b830af12c74885bdd728dd3561081f54e247e178bfc0a29fb91ee8f1714"
+  }
+]

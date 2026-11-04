@@ -1,0 +1,70 @@
+[
+  {
+    "name": "train",
+    "source_url": "https://www.s-rail.co.jp/ticket/train/",
+    "retrieved_at": "2026-11-04T13:05:02.828379+00:00",
+    "status_code": 200,
+    "original_sha256": "dfa6d22e6d3256733e1a21870c7c9ae2a72b596178d4518a46803cd377f92b88",
+    "local_path": "reports\\saitama_railway\\train.html",
+    "transformation": "None; original response bytes"
+  },
+  {
+    "name": "home",
+    "source_url": "https://www.s-rail.co.jp/",
+    "retrieved_at": "2026-11-04T13:05:02.830035+00:00",
+    "status_code": 200,
+    "original_sha256": "42f9ebb0be89c2dfe9f3b4b0dc2da5fb2b6f0dbc1643e6f3b885415664b4ff0a",
+    "local_path": "reports\\saitama_railway\\home.html",
+    "transformation": "None; original response bytes"
+  },
+  {
+    "name": "normal",
+    "source_url": "https://www.s-rail.co.jp/service_status/status.json",
+    "retrieved_at": "2026-11-04T13:05:02.845616+00:00",
+    "status_code": 200,
+    "original_sha256": "2f0bbb01e5a79ef71e6303bd194c09665628a5512de90b679ad8716579389013",
+    "local_path": "reports\\saitama_railway\\normal.json",
+    "transformation": "None; original response bytes",
+    "fixture": "tests/fixtures/saitama_railway_normal.json",
+    "fixture_sha256": "2f0bbb01e5a79ef71e6303bd194c09665628a5512de90b679ad8716579389013"
+  },
+  {
+    "name": "terms",
+    "source_url": "https://www.s-rail.co.jp/sitepolicy/",
+    "retrieved_at": "2026-11-04T13:05:02.828039+00:00",
+    "status_code": 200,
+    "original_sha256": "61d142051123f1bf158ec628cbb42e762a3528ee09e3b13209c2dacd2cf5ed4b",
+    "local_path": "reports\\saitama_railway\\terms.html",
+    "transformation": "None; original response bytes"
+  },
+  {
+    "name": "common",
+    "source_url": "https://www.s-rail.co.jp/common/js/common.js",
+    "retrieved_at": "2026-11-04T13:05:03.310500+00:00",
+    "status_code": 200,
+    "original_sha256": "0840fae4b9e032d5914fce9a37434f33136f70b8f342d297013b05434b3f1290",
+    "local_path": "reports\\saitama_railway\\common.js",
+    "transformation": "None; original response bytes"
+  },
+  {
+    "name": "cdx",
+    "source_url": "https://web.archive.org/cdx/search/cdx?url=www.s-rail.co.jp/service_status/status.json*&output=json&filter=statuscode:200&collapse=digest&filter=mimetype:application/json",
+    "error": "The read operation timed out"
+  },
+  {
+    "name": "cdx_exact",
+    "source_url": "https://web.archive.org/cdx/search/cdx?url=www.s-rail.co.jp/service_status/status.json&output=json&filter=statuscode:200&collapse=digest&filter=!mimetype:warc/revisit&limit=30",
+    "retrieved_at": "2026-11-04T13:05:58.594219+00:00",
+    "status_code": 200,
+    "original_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "transformation": "None; original response bytes"
+  },
+  {
+    "name": "footer",
+    "source_url": "https://www.s-rail.co.jp/common/include/footer.html",
+    "retrieved_at": "2026-11-04T13:05:58.594780+00:00",
+    "status_code": 200,
+    "original_sha256": "d8a30095eac16afe886749c75a4821f7b5361f5005f174d0532b4e0ace202fbb",
+    "transformation": "None; original response bytes"
+  }
+]

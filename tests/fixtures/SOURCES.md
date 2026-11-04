@@ -1,9 +1,23 @@
 # Additional provider evidence
 
+## 高雄MRT/LRT
+
+[KAOHSIUNG_METRO.md](KAOHSIUNG_METRO.md) に公式HTML・JavaScriptと保存HTMLの
+調査範囲、紅橘線GROUP／輕軌LINE、確認済み正常表示、未確認状態、利用条件を記録。
+[kaohsiung_metro_manifest.json](kaohsiung_metro_manifest.json) に原URL・最終URL・
+UTC取得日時・原本と抽出後のSHA-256・DOM抽出方法を記録しています。
+実応答は正常表示のみで、未知状態・破損・復旧遷移は合成テストです。
+
+## TfL
+
+[TfL Unified API](TFL.md): current rail/tram statuses, official severity metadata,
+Swagger schema, operator evidence and licence/access conditions;
+[capture manifest](tfl_manifest.json). Real and synthetic cases are distinguished.
+
 ## European service notices
 
 - [DB Verkehrslage / DB Fernverkehr](DB.md): public HTML/JavaScript and abnormal live JSON, source scope and expiry rules; [manifest](db_manifest.json).
-- [SNCF Transilien](TRANSILIEN.md): 12 SNCF-operated route groups, public JavaScript and complete live JSON; [manifest](transilien_manifest.json).
+- [Transilien](TRANSILIEN.md): 12 SNCF-operated route groups and 16 RATP Paris Métro lines, public JavaScript and complete live JSON; [SNCF manifest](transilien_manifest.json), [Métro manifest](transilien_metro_manifest.json).
 - [ÖBB editorial incident notices](OBB.md): official JavaScript, archived incident HTML and the live incident-free listing; [manifest](obb_manifest.json).
 
 These providers preserve unknown effects, timing and affected lines rather than deriving them from incident prose. Their dedicated documents distinguish real captures from synthetic cases and explain structurally excluded construction/future notices.
@@ -376,6 +390,12 @@ original/fixture hashes and synthetic-test limits are documented in
 根拠、未確認範囲は [KEIKYU.md](KEIKYU.md) と [keikyu_manifest.json](keikyu_manifest.json) を参照。
 
 
+# Metro-North Railroad（GTFS-realtime）
+
+2026-11-04 UTCに公式Service Alerts、静的GTFS、画面用路線一覧と公開JavaScriptを取得。
+取得元URL・UTC取得時刻・加工方法・原本／fixtureのSHA-256・実応答と合成テストの区別は
+[METRO_NORTH.md](METRO_NORTH.md) と [metro_north_manifest.json](metro_north_manifest.json) を参照。
+
 # MTA New York City Subway（GTFS-realtime）
 
 公式GTFS-realtimeアラートフィード（APIキー不要）を2回ライブ取得した無加工のprotobuf応答。
@@ -416,9 +436,94 @@ original/fixture hashes and synthetic-test limits are documented in
 [sapporo_subway_manifest.json](sapporo_subway_manifest.json) を参照。
 
 
+# 西日本鉄道
+
+公式電車ページ・運行状況HTML・公開JavaScript・利用条件とWayback保存HTMLを調査。
+4路線の共通ID再利用、掲載単位と影響対象の区別、平常・鉄道案内・復旧・バスのみの実応答、
+未知見出しと合成テストの範囲は [NISHITETSU.md](NISHITETSU.md) を参照。
+保存URL・UTC取得日時・原本と無加工fixtureのSHA-256は
+[nishitetsu_manifest.json](nishitetsu_manifest.json) に記録しています。
+
 # 名古屋市営地下鉄
 
 公式JSONの平常応答、公開HTML・JavaScript、利用条件、Wayback CDXの空の結果を取得。
 URL・UTC取得日時・SHA-256・状態コードの根拠・共通IDの再利用・未確認範囲は
 [NAGOYA_SUBWAY.md](NAGOYA_SUBWAY.md) と
 [nagoya_subway_manifest.json](nagoya_subway_manifest.json) を参照。
+
+# 相模鉄道
+
+公式の公開運行情報JSON・HTML・表示JavaScript・利用規約と、Waybackの直通中止／平常JSONを調査。
+原本は無加工でローカルに保存し、第三者の案内本文はGitに含めません。
+URL・UTC取得日時・SHA-256・状態フラグの根拠・未確認範囲・合成テストとの区別は
+[SOTETSU.md](SOTETSU.md) と [sotetsu_manifest.json](sotetsu_manifest.json) を参照。
+
+# 香港MTR
+
+公式状態XML・凡例・公開JavaScript・利用規約の調査は [MTR.md](MTR.md)、取得日時・原本ハッシュは [mtr_manifest.json](mtr_manifest.json) を参照。
+
+
+# Renfe
+
+Renfeの出典・取得範囲・未確認範囲は [RENFE.md](RENFE.md)、原本のUTC取得日時・
+SHA-256は [renfe_manifest.json](renfe_manifest.json) を参照。
+
+# Metro Trains Melbourne
+
+公式HTML・公開JavaScriptの逆解析とライブの路線定義／Healthboard JSONを調査。
+標準User-Agentで取得し、第三者本文はローカルだけに保存しています。
+出典・対応根拠・未確認範囲・合成テストとの区別は
+[METRO_TRAINS_MELBOURNE.md](METRO_TRAINS_MELBOURNE.md)、UTC取得日時・原本ハッシュは
+[metro_trains_melbourne_manifest.json](metro_trains_melbourne_manifest.json) を参照。
+
+## Trenitalia
+
+Official live HTML, archived national normal bulletins, public JavaScript and terms: [TRENITALIA.md](TRENITALIA.md). Exact UTC retrieval times, URLs, original hashes and local capture names: [trenitalia_manifest.json](trenitalia_manifest.json). Third-party responses remain local; synthetic cases are identified in the evidence note.
+
+# 桃園MRT（桃園捷運）
+
+公式トップの専用運行表示・公開JavaScriptと、平常・全線停止・減速運転の保存HTMLを調査。
+出典・分類根拠・未確認範囲は [TAOYUAN_METRO.md](TAOYUAN_METRO.md)、
+UTC取得日時・保存URL・原本／抽出後のSHA-256は
+[taoyuan_metro_manifest.json](taoyuan_metro_manifest.json) を参照。
+第三者HTML・JavaScriptはローカルだけに保存し、Git・配布物には含めません。
+
+# 福岡市交通局
+
+公式運行情報HTML・公開JavaScriptと平常／運転見合わせ予告の保存HTMLを調査。
+出典・対応根拠・未確認範囲は [FUKUOKA_SUBWAY.md](FUKUOKA_SUBWAY.md)、
+取得日時・保存URL・原本SHA-256は [fukuoka_subway_manifest.json](fukuoka_subway_manifest.json) を参照。
+
+
+
+# Sendai City Subway
+
+Official route HTML, public CSS/JavaScript and normal Wayback captures: [SENDAI_SUBWAY.md](SENDAI_SUBWAY.md). Exact request URLs, UTC retrieval times, original and extracted SHA-256 values: [sendai_subway_manifest.json](sendai_subway_manifest.json). Third-party HTML stays local; incident/recovery/corruption tests are synthetic.
+
+## 横浜市営地下鉄
+
+公式の現在一覧・履歴APIと公開JavaScriptを調査しました。根拠・未確認範囲は
+[YOKOHAMA_SUBWAY.md](YOKOHAMA_SUBWAY.md)、元URL・UTC取得日時・原本SHA-256・
+無加工のfixtureコピーは [yokohama_subway_manifest.json](yokohama_subway_manifest.json) を参照。
+履歴を使う現在一覧のテストは合成エンベロープです。第三者応答はGitに含めません。
+
+## 土佐くろしお鉄道
+
+公式トップページ・運行記事・企業情報とWayback保存HTMLを調査しました。
+出典・構造・分類根拠・未確認範囲は [TOSAKURO.md](TOSAKURO.md)、
+元URL・UTC保存日時・原本と抽出後のSHA-256は
+[tosakuro_manifest.json](tosakuro_manifest.json) に記録しています。
+HTML・記事本文はローカルだけに保存し、Gitや配布物へ含めません。
+
+# SNCF TGV
+
+公式NeTEx・SIRI SXのライブ応答とOpen Dataメタデータを調査しました。
+照合根拠・状態の意味・未確認範囲は[TGV.md](TGV.md)、
+元URL・UTC取得日時・HTTP状態・原本SHA-256は
+[tgv_manifest.json](tgv_manifest.json)に記録しています。応答原本はローカルにのみ保存します。
+
+## 埼玉高速鉄道
+
+公式公開JSONと表示JavaScriptを調査しました。分類根拠・取得範囲・未確認状態は
+[SAITAMA_RAILWAY.md](SAITAMA_RAILWAY.md)、元URL・UTC取得日時・原本SHA-256は
+[saitama_railway_manifest.json](saitama_railway_manifest.json) を参照。応答原本はローカルのみ保存します。

@@ -234,7 +234,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="MAGI-inspired local railway service monitor")
     parser.add_argument("--port", type=int, default=8765)
     parser.add_argument("--demo", action="store_true", help="Start with synthetic data, without fetching")
-    parser.add_argument("--providers", nargs="+", choices=get_args(ProviderName), help="Sources to monitor (Yahoo, MTA, Odakyu and DB are opt-in)")
+    parser.add_argument("--providers", nargs="+", choices=get_args(ProviderName), help="Sources to monitor (Yahoo, MTA, Odakyu, DB, Trenitalia and TGV are opt-in)")
     parser.add_argument("--snapshot-dir", type=Path, help="Record HTTP responses for offline debugging")
     parser.add_argument("--system-certificates", action="store_true",
                         help="Verify HTTPS with the OS certificate store (install .[visualizer])")

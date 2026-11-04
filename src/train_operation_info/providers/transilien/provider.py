@@ -1,4 +1,4 @@
-"""SNCF Transilien's public traffic API, restricted to SNCF-operated lines.
+"""Transilien's public traffic API: SNCF route groups and RATP Paris Metro.
 
 Investigation: public HTML/JavaScript inspection and live abnormal JSON; no
 archived abnormal response was used. https://www.transilien.com/fr/ mounts
@@ -9,10 +9,11 @@ and future/weekly/monthly lists are separate; missing current data are displayed
 as unavailable (MISSING_CURRENT), never as an empty normal list. Require FULL
 summary retrieval before accepting a complete snapshot.
 
-Only RER C/D/E and train H/J/K/L/N/P/R/U/V are included. A/B's shared SNCF/RATP
-operation and all trams/metro/buses are outside this provider's scope. Route
-groups encompass their branches; a disruption identifies the group, not every
-branch or station. currentDisruptions entries classified TRAVAUX are excluded
+Includes SNCF RER C/D/E and trains H/J/K/L/N/P/R/U/V plus RATP Metro 1-14,
+3bis and 7bis. RER A/B, trams, buses, Orlyval, CDGVAL and the funicular are
+outside this provider's scope. SNCF route groups encompass their branches;
+a disruption identifies its route/group, not every branch or station.
+currentDisruptions entries classified TRAVAUX are excluded
 structurally, alongside the separate future lists. TRAFIC entries remain even
 when their prose describes months of reduced service, as the RER D live sample
 does. NORMAL means no included current traffic notice, not no engineering work.
@@ -27,8 +28,13 @@ Current-list membership is a display grouping, not proof of actual incident
 validity, so timing stays UNKNOWN. modifiedDate is an update timestamp;
 broadcastStartDate is publication, never active_from. No incident periods are
 inferred. Normal recovery, unknown codes and malformed JSON tests are synthetic.
+Live Metro JSON captured on 2026-11-04 confirms SLOWED_TRAFFIC on Metro 6
+and separate current TRAVAUX on Metro 8. No same-incident recovery was observed.
+Metro data come from Transilien, not the RATP website (a direct request was
+HTTP 403). All 28 routes update atomically.
 Evidence, hashes, retrieval times and terms: tests/fixtures/TRANSILIEN.md and
-transilien_manifest.json. Nationwide TGV/TER/Intercites are not covered.
+transilien_manifest.json / transilien_metro_manifest.json.
+Nationwide TGV/TER/Intercites are not covered.
 """
 
 from datetime import datetime
@@ -51,12 +57,34 @@ _URL: Final = "https://www.transilien.com/fr/#traffic-info-app"
 _SUMMARY: Final = "https://www.transilien.com/api/traffic/infos"
 _DETAIL: Final = "https://www.transilien.com/api/traffic/line/{code}?lang=fr"
 _LINES: Final = (
-    ("rer_c", "RER_C", "RER"), ("rer_d", "RER_D", "RER"),
-    ("rer_e", "RER_E", "RER"), ("ligne_h", "LIGNE_H", "TRAIN"),
-    ("ligne_j", "LIGNE_J", "TRAIN"), ("ligne_k", "LIGNE_K", "TRAIN"),
-    ("ligne_l", "LIGNE_L", "TRAIN"), ("ligne_n", "LIGNE_N", "TRAIN"),
-    ("ligne_p", "LIGNE_P", "TRAIN"), ("ligne_r", "LIGNE_R", "TRAIN"),
-    ("ligne_u", "LIGNE_U", "TRAIN"), ("ligne_v", "LIGNE_V", "TRAIN"),
+    ("rer_c", "RER_C", "RER", LineId("fr:sncf:rer_c")),
+    ("rer_d", "RER_D", "RER", LineId("fr:sncf:rer_d")),
+    ("rer_e", "RER_E", "RER", LineId("fr:sncf:rer_e")),
+    ("ligne_h", "LIGNE_H", "TRAIN", LineId("fr:sncf:ligne_h")),
+    ("ligne_j", "LIGNE_J", "TRAIN", LineId("fr:sncf:ligne_j")),
+    ("ligne_k", "LIGNE_K", "TRAIN", LineId("fr:sncf:ligne_k")),
+    ("ligne_l", "LIGNE_L", "TRAIN", LineId("fr:sncf:ligne_l")),
+    ("ligne_n", "LIGNE_N", "TRAIN", LineId("fr:sncf:ligne_n")),
+    ("ligne_p", "LIGNE_P", "TRAIN", LineId("fr:sncf:ligne_p")),
+    ("ligne_r", "LIGNE_R", "TRAIN", LineId("fr:sncf:ligne_r")),
+    ("ligne_u", "LIGNE_U", "TRAIN", LineId("fr:sncf:ligne_u")),
+    ("ligne_v", "LIGNE_V", "TRAIN", LineId("fr:sncf:ligne_v")),
+    ("metro_1", "METRO_1", "METRO", LineId("fr:ratp:metro_1")),
+    ("metro_2", "METRO_2", "METRO", LineId("fr:ratp:metro_2")),
+    ("metro_3", "METRO_3", "METRO", LineId("fr:ratp:metro_3")),
+    ("metro_3bis", "METRO_3BIS", "METRO", LineId("fr:ratp:metro_3bis")),
+    ("metro_4", "METRO_4", "METRO", LineId("fr:ratp:metro_4")),
+    ("metro_5", "METRO_5", "METRO", LineId("fr:ratp:metro_5")),
+    ("metro_6", "METRO_6", "METRO", LineId("fr:ratp:metro_6")),
+    ("metro_7", "METRO_7", "METRO", LineId("fr:ratp:metro_7")),
+    ("metro_7bis", "METRO_7BIS", "METRO", LineId("fr:ratp:metro_7bis")),
+    ("metro_8", "METRO_8", "METRO", LineId("fr:ratp:metro_8")),
+    ("metro_9", "METRO_9", "METRO", LineId("fr:ratp:metro_9")),
+    ("metro_10", "METRO_10", "METRO", LineId("fr:ratp:metro_10")),
+    ("metro_11", "METRO_11", "METRO", LineId("fr:ratp:metro_11")),
+    ("metro_12", "METRO_12", "METRO", LineId("fr:ratp:metro_12")),
+    ("metro_13", "METRO_13", "METRO", LineId("fr:ratp:metro_13")),
+    ("metro_14", "METRO_14", "METRO", LineId("fr:ratp:metro_14")),
 )
 _STATES: Final = {
     "SLOWED_TRAFFIC": LineStatus.DELAYED,
@@ -69,14 +97,14 @@ _STATES: Final = {
     "UNKNOWN": LineStatus.ALERT,
 }
 _METADATA: Final = ProviderMetadata(
-    provider_id=_ID, name="SNCF Transilien (12 SNCF-operated route groups)",
+    provider_id=_ID, name="Transilien (12 SNCF route groups and 16 RATP Metro lines)",
     source_page_url=HttpUrl(_URL),
     endpoints=(
         SourceEndpoint(url=_SUMMARY, method="GET", format=DataFormat.JSON,
-                       description="FULL retrieval status for each supported route group"),
+                       description="FULL retrieval status for each supported route/group"),
         SourceEndpoint(url=_DETAIL, method="GET", format=DataFormat.JSON,
                        is_template=True, description=(
-                           "code is RER_C/D/E or LIGNE_H/J/K/L/N/P/R/U/V; "
+                           "code is RER_C/D/E, LIGNE_H/J/K/L/N/P/R/U/V, or METRO_1-14/3BIS/7BIS; "
                            "currentDisruptions only, excluding category TRAVAUX"
                        )),
     ),
@@ -86,11 +114,12 @@ _METADATA: Final = ProviderMetadata(
         "Official intellectual-property terms reserve all website use rights and "
         "require prior express permission for reproduction or representation. "
         "No separate reuse grant was found for the public traffic API. "
-        "This provider covers only SNCF Transilien RER C/D/E and trains H/J/K/L/N/P/R/U/V, "
-        "not nationwide SNCF, RER A/B or other operators."
+        "Covers SNCF Transilien RER C/D/E and trains H/J/K/L/N/P/R/U/V plus "
+        "RATP Paris Metro 1-14, 3bis and 7bis via Transilien. "
+        "Nationwide SNCF, RER A/B and other modes are excluded."
     ),
     statuses=frozenset({LineStatus.NORMAL, LineStatus.DELAYED, LineStatus.ALERT}),
-    reviewed_at=datetime.fromisoformat("2026-11-03T03:38:01.234788+00:00"),
+    reviewed_at=datetime.fromisoformat("2026-11-04T12:44:11.004483+00:00"),
 )
 
 
@@ -180,15 +209,15 @@ class TransilienProvider(SnapshotProvider):
         snapshot_dir: str | Path | None = None,
     ) -> None:
         super().__init__(tuple(
-            LINE_CATALOG[LineId(f"fr:sncf:{key}")].create_line(_ID, _URL)
-            for key, _, _ in _LINES
+            LINE_CATALOG[identifier].create_line(_ID, _URL)
+            for _, _, _, identifier in _LINES
         ), client=client, snapshot_dir=snapshot_dir)
 
     async def _fetch_lines(self, client: httpx.AsyncClient) -> tuple[Line, ...]:
         response = await self._get(client, _SUMMARY)
         response.raise_for_status()
         summary = _Summary.model_validate_json(response.content)
-        for _, code, mode in _LINES:
+        for _, code, mode, _ in _LINES:
             entries = [entry for entry in summary.allPerturbationsByLine if entry.code == code]
             if len(entries) != 1 or entries[0].id != code or entries[0].mode != mode:
                 raise ParseError(f"Transilien route identity is missing or ambiguous: {code}")
@@ -196,7 +225,7 @@ class TransilienProvider(SnapshotProvider):
                 raise ParseError(f"Transilien route retrieval is incomplete: {code}")
         fetched_at = self._now()
         lines: list[Line] = []
-        for key, code, _ in _LINES:
+        for key, code, _, _ in _LINES:
             response = await self._get(client, _DETAIL.format(code=code))
             response.raise_for_status()
             lines.append(_parse(response.content, self._line(key), fetched_at))
@@ -249,3 +278,67 @@ class TransilienProvider(SnapshotProvider):
     @property
     def ligne_v(self) -> Line:
         return self._line("ligne_v")
+
+    @property
+    def metro_1(self) -> Line:
+        return self._line("metro_1")
+
+    @property
+    def metro_2(self) -> Line:
+        return self._line("metro_2")
+
+    @property
+    def metro_3(self) -> Line:
+        return self._line("metro_3")
+
+    @property
+    def metro_3bis(self) -> Line:
+        return self._line("metro_3bis")
+
+    @property
+    def metro_4(self) -> Line:
+        return self._line("metro_4")
+
+    @property
+    def metro_5(self) -> Line:
+        return self._line("metro_5")
+
+    @property
+    def metro_6(self) -> Line:
+        return self._line("metro_6")
+
+    @property
+    def metro_7(self) -> Line:
+        return self._line("metro_7")
+
+    @property
+    def metro_7bis(self) -> Line:
+        return self._line("metro_7bis")
+
+    @property
+    def metro_8(self) -> Line:
+        return self._line("metro_8")
+
+    @property
+    def metro_9(self) -> Line:
+        return self._line("metro_9")
+
+    @property
+    def metro_10(self) -> Line:
+        return self._line("metro_10")
+
+    @property
+    def metro_11(self) -> Line:
+        return self._line("metro_11")
+
+    @property
+    def metro_12(self) -> Line:
+        return self._line("metro_12")
+
+    @property
+    def metro_13(self) -> Line:
+        return self._line("metro_13")
+
+    @property
+    def metro_14(self) -> Line:
+        return self._line("metro_14")

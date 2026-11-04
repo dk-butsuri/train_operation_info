@@ -22,6 +22,15 @@ from train_operation_info.snapshots import SnapshotCapture, SnapshotReplayTransp
 
 _FIXTURES = Path(__file__).parent / "fixtures"
 _FILES = {
+    "kaohsiung_metro": "kaohsiung_metro_normal_20261104.html",
+    "tfl": "tfl_live_20261104.json",
+    "yokohama_subway": "yokohama_subway_normal.json",
+    "taoyuan_metro": "taoyuan_metro_suspended_20240403012130.html",
+    "fukuoka_subway": "fukuoka_subway_20240829161647.html",
+    "renfe": "renfe_alerts_20261104.json",
+    "trenitalia": "trenitalia_live_20261104.html",
+    "mtr": "mtr_normal.xml",
+    "nishitetsu": "nishitetsu_20260728135357.html",
     "kyoto_subway": "kyoto_subway_notice_20230815040858.html",
     "obb": "obb_20260717055055.html",
     "tra": "tra_20250707021531.html",
@@ -45,7 +54,10 @@ _FILES = {
     "keikyu": "keikyu_20220713030847.html",
     "keio": "keio_normal.xml",
     "mta_subway": "mta_subway_alerts_20261103033316.pb",
+    "metro_north": "metro_north_alerts_20261104115626.pb",
     "seibu": "seibu_normal.xml",
+    "sotetsu": "sotetsu_20230717075741.json",
+    "saitama_railway": "saitama_railway_normal.json",
 }
 
 
@@ -63,7 +75,14 @@ def _matches_endpoint(endpoint: SourceEndpoint, method: str, url: str) -> bool:
 
 def _fixture_response(provider: ProviderName, request: httpx.Request) -> httpx.Response:
     path = request.url.path
-    if provider == "db":
+    if provider == "tosakuro":
+        name = ("tosakuro_home.html" if path == "/" else "tosakuro_gomen.html"
+                if "ごめん" in path else "tosakuro_nakamura.html")
+        return httpx.Response(200, content=(_FIXTURES / name).read_bytes())
+    if provider == "sendai_subway":
+        name = ("sendai_subway_namboku_normal.html" if path.endswith("nanbokusen/")
+                else "sendai_subway_tozai_normal.html")
+    elif provider == "db":
         if path == "/api/views/disruptions":
             name = "db_listing.json"
         elif path == "/api/views/message":
@@ -82,9 +101,14 @@ def _fixture_response(provider: ProviderName, request: httpx.Request) -> httpx.R
             200, content=(_FIXTURES / name).read_bytes(),
             extensions={_REPLAY_TIME: datetime(2026, 11, 3, 3, 38, tzinfo=timezone.utc)},
         )
+    elif provider == "metro_trains_melbourne":
+        name = ("metro_trains_melbourne_network.json" if request.url.params["op"] == "get_network"
+                else "metro_trains_melbourne_healthboard.json")
+    elif provider == "tgv":
+        name = "tgv_netex_20261104.zip" if path.endswith(".zip") else "tgv_alerts_20261104.xml"
     elif provider == "transilien":
         code = path.rsplit("/", 1)[-1].lower()
-        name = "transilien_summary.json" if code == "infos" else f"transilien_{code}.json"
+        name = "transilien_metro_summary.json" if code == "infos" else f"transilien_{code}.json"
     elif provider == "odakyu":
         name = ("odakyu_normal.json" if path == "/service/status_detail" else
                 "odakyu_app_excerpt.js" if path.endswith(".js") else "odakyu_page.html")
@@ -140,6 +164,16 @@ def test_every_provider_roundtrips_http_bodies_and_parsed_state(
         assert transport.capture.provider_id == provider_name
         assert transport.capture.responses
         assert transport.capture.error is None
+        if provider_name == "transilien":
+            assert len(original) == 28
+            assert len(transport.capture.responses) == 29
+            assert {entry.url.rsplit("/", 1)[-1] for entry in transport.capture.responses
+                    if "/METRO_" in entry.url} == {
+                f"METRO_{code}?lang=fr" for code in (
+                    "1", "2", "3", "3BIS", "4", "5", "6", "7", "7BIS",
+                    "8", "9", "10", "11", "12", "13", "14",
+                )
+            }
         matched_endpoints: set[int] = set()
         for response in transport.capture.responses:
             matches = {

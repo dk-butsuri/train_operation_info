@@ -1,0 +1,162 @@
+[
+  {
+    "url": "https://www.transilien.com/api/traffic/infos",
+    "retrieved_at": "2026-11-04T12:42:56.480456+00:00",
+    "status": 200,
+    "sha256": "3ab0ec5d6f9284631582cecbadb8af9ba466aa349fbc9c2e17985cb36ac66721",
+    "fixture": "transilien_metro_summary.json",
+    "transformation": "None; complete unmodified HTTP response body"
+  },
+  {
+    "url": "https://www.transilien.com/api/traffic/line/METRO_1?lang=fr",
+    "retrieved_at": "2026-11-04T12:42:57.446619+00:00",
+    "status": 200,
+    "sha256": "96b9b03798eed37954ca939e450d56b0b285b64917465da436098c5e37787d1c",
+    "fixture": "transilien_metro_1.json",
+    "transformation": "None; complete unmodified HTTP response body"
+  },
+  {
+    "url": "https://www.transilien.com/api/traffic/line/METRO_2?lang=fr",
+    "retrieved_at": "2026-11-04T12:43:36.107208+00:00",
+    "status": 200,
+    "sha256": "96b9b03798eed37954ca939e450d56b0b285b64917465da436098c5e37787d1c",
+    "fixture": "transilien_metro_2.json",
+    "transformation": "None; complete unmodified HTTP response body"
+  },
+  {
+    "url": "https://www.transilien.com/api/traffic/line/METRO_3?lang=fr",
+    "retrieved_at": "2026-11-04T12:43:36.780736+00:00",
+    "status": 200,
+    "sha256": "96b9b03798eed37954ca939e450d56b0b285b64917465da436098c5e37787d1c",
+    "fixture": "transilien_metro_3.json",
+    "transformation": "None; complete unmodified HTTP response body"
+  },
+  {
+    "url": "https://www.transilien.com/api/traffic/line/METRO_4?lang=fr",
+    "retrieved_at": "2026-11-04T12:43:37.462579+00:00",
+    "status": 200,
+    "sha256": "96b9b03798eed37954ca939e450d56b0b285b64917465da436098c5e37787d1c",
+    "fixture": "transilien_metro_4.json",
+    "transformation": "None; complete unmodified HTTP response body"
+  },
+  {
+    "url": "https://www.transilien.com/api/traffic/line/METRO_5?lang=fr",
+    "retrieved_at": "2026-11-04T12:43:38.147941+00:00",
+    "status": 200,
+    "sha256": "96b9b03798eed37954ca939e450d56b0b285b64917465da436098c5e37787d1c",
+    "fixture": "transilien_metro_5.json",
+    "transformation": "None; complete unmodified HTTP response body"
+  },
+  {
+    "url": "https://www.transilien.com/api/traffic/line/METRO_6?lang=fr",
+    "retrieved_at": "2026-11-04T12:43:38.825715+00:00",
+    "status": 200,
+    "sha256": "a8724ed88fa55b6d9599f5e7b060c3c1545cc224409a8e4a4c3a90e597801b62",
+    "fixture": "transilien_metro_6.json",
+    "transformation": "None; complete unmodified HTTP response body"
+  },
+  {
+    "url": "https://www.transilien.com/api/traffic/line/METRO_7?lang=fr",
+    "retrieved_at": "2026-11-04T12:43:39.523382+00:00",
+    "status": 200,
+    "sha256": "96b9b03798eed37954ca939e450d56b0b285b64917465da436098c5e37787d1c",
+    "fixture": "transilien_metro_7.json",
+    "transformation": "None; complete unmodified HTTP response body"
+  },
+  {
+    "url": "https://www.transilien.com/api/traffic/line/METRO_8?lang=fr",
+    "retrieved_at": "2026-11-04T12:43:40.206160+00:00",
+    "status": 200,
+    "sha256": "b753876bbb0588f7430c3151294706a2a0522ba4ead5e76513996084d7ff7dcb",
+    "fixture": "transilien_metro_8.json",
+    "transformation": "None; complete unmodified HTTP response body"
+  },
+  {
+    "url": "https://www.transilien.com/api/traffic/line/METRO_9?lang=fr",
+    "retrieved_at": "2026-11-04T12:43:40.870345+00:00",
+    "status": 200,
+    "sha256": "96b9b03798eed37954ca939e450d56b0b285b64917465da436098c5e37787d1c",
+    "fixture": "transilien_metro_9.json",
+    "transformation": "None; complete unmodified HTTP response body"
+  },
+  {
+    "url": "https://www.transilien.com/api/traffic/line/METRO_10?lang=fr",
+    "retrieved_at": "2026-11-04T12:43:41.543881+00:00",
+    "status": 200,
+    "sha256": "96b9b03798eed37954ca939e450d56b0b285b64917465da436098c5e37787d1c",
+    "fixture": "transilien_metro_10.json",
+    "transformation": "None; complete unmodified HTTP response body"
+  },
+  {
+    "url": "https://www.transilien.com/api/traffic/line/METRO_11?lang=fr",
+    "retrieved_at": "2026-11-04T12:43:42.222911+00:00",
+    "status": 200,
+    "sha256": "96b9b03798eed37954ca939e450d56b0b285b64917465da436098c5e37787d1c",
+    "fixture": "transilien_metro_11.json",
+    "transformation": "None; complete unmodified HTTP response body"
+  },
+  {
+    "url": "https://www.transilien.com/api/traffic/line/METRO_12?lang=fr",
+    "retrieved_at": "2026-11-04T12:43:42.892790+00:00",
+    "status": 200,
+    "sha256": "264954e1803e8f3e4ec1a5ab0fbc4d020d70395b257f54b2dc6ba038b8812602",
+    "fixture": "transilien_metro_12.json",
+    "transformation": "None; complete unmodified HTTP response body"
+  },
+  {
+    "url": "https://www.transilien.com/api/traffic/line/METRO_13?lang=fr",
+    "retrieved_at": "2026-11-04T12:43:43.567796+00:00",
+    "status": 200,
+    "sha256": "fc3734036b0b7e11b7d72f741072fbf69d09a9cf23a1c4afe29d1dea1678dc1d",
+    "fixture": "transilien_metro_13.json",
+    "transformation": "None; complete unmodified HTTP response body"
+  },
+  {
+    "url": "https://www.transilien.com/api/traffic/line/METRO_14?lang=fr",
+    "retrieved_at": "2026-11-04T12:43:44.246660+00:00",
+    "status": 200,
+    "sha256": "96b9b03798eed37954ca939e450d56b0b285b64917465da436098c5e37787d1c",
+    "fixture": "transilien_metro_14.json",
+    "transformation": "None; complete unmodified HTTP response body"
+  },
+  {
+    "url": "https://www.transilien.com/api/traffic/line/METRO_3BIS?lang=fr",
+    "retrieved_at": "2026-11-04T12:43:44.930454+00:00",
+    "status": 200,
+    "sha256": "96b9b03798eed37954ca939e450d56b0b285b64917465da436098c5e37787d1c",
+    "fixture": "transilien_metro_3bis.json",
+    "transformation": "None; complete unmodified HTTP response body"
+  },
+  {
+    "url": "https://www.transilien.com/api/traffic/line/METRO_7BIS?lang=fr",
+    "retrieved_at": "2026-11-04T12:43:45.610890+00:00",
+    "status": 200,
+    "sha256": "8f16c78cf348c5efc7be41ba6af336a8f67f4c72a4abef5ead95863d0ef634ed",
+    "fixture": "transilien_metro_7bis.json",
+    "transformation": "None; complete unmodified HTTP response body"
+  },
+  {
+    "url": "https://www.transilien.com/fr/",
+    "retrieved_at": "2026-11-04T12:44:09.984323+00:00",
+    "status": 200,
+    "sha256": "538db1da9e69a62f0c5266b53a70d023e3b6d5a904cb4049244fa690be67d288",
+    "fixture": "transilien_metro_home.html",
+    "transformation": "None; complete unmodified HTTP response body"
+  },
+  {
+    "url": "https://www.transilien.com/tricharte/js/component-traffic-info.bundle.js?v=52612",
+    "retrieved_at": "2026-11-04T12:44:10.324599+00:00",
+    "status": 200,
+    "sha256": "7e44195072df9ed95e271c083b72155fa45003450a891434f9a8efb0413ba26c",
+    "fixture": "transilien_metro_bundle.js",
+    "transformation": "None; complete unmodified HTTP response body"
+  },
+  {
+    "url": "https://www.transilien.com/fr/page-editoriale/conditions-generales-dutilisation",
+    "retrieved_at": "2026-11-04T12:44:11.004483+00:00",
+    "status": 200,
+    "sha256": "4139babaedbb43fdb67dac397c0f3dfd703c10e050a181e014c4b8ebbe089025",
+    "fixture": "transilien_metro_terms.html",
+    "transformation": "None; complete unmodified HTTP response body"
+  }
+]

@@ -1,0 +1,95 @@
+{
+  "investigation": "Official HTML/JavaScript inspection and archived official normal, full suspension and reduced-speed panels; no exact reopening-time evidence",
+  "request_user_agent": "train_operation_info (+https://github.com/dk-butsuri/train_operation_info)",
+  "documents": [
+    {
+      "source_url": "https://www.tymetro.com.tw/tymetro-new/tw/",
+      "retrieved_at_utc": "2026-11-04T12:40:35.795143+00:00",
+      "original_sha256": "d7a91d6aceae5b3a11a4662ab9fd9f36bc3b8b550842b300077f5053361282dd",
+      "http_status": 200,
+      "fixture": "taoyuan_metro_normal_20261104.html",
+      "fixture_sha256": "1315ce3be43be7a5047c876dec165c8a903c432ffd9ea58028b5d89ee8d1e372",
+      "extraction": "BeautifulSoup html.parser serialisation of both .banner .operation panels; wrapped in html/body/.banner. Status text, classes and icons unchanged. Unrelated content omitted."
+    },
+    {
+      "source_url": "https://www.tymetro.com.tw/tymetro-new/js/template.js",
+      "retrieved_at_utc": "2026-11-04T12:38:11.904101+00:00",
+      "original_sha256": "0fc900955d2259e77a1ef48dbb368b6756eaea384566b937acf5334e4e46f85c",
+      "http_status": 200,
+      "extraction": "None; original response stays local in reports/taoyuan_metro."
+    },
+    {
+      "source_url": "https://www.tymetro.com.tw/tymetro-new/js/custom.js",
+      "retrieved_at_utc": "2026-11-04T12:38:11.947807+00:00",
+      "original_sha256": "534b02e032bf45253fbb5763d2babb6ac6dd6586dc3b7d09f53a7518e04c1472",
+      "http_status": 200,
+      "extraction": "None; original response stays local in reports/taoyuan_metro."
+    },
+    {
+      "source_url": "https://www.tymetro.com.tw/tymetro-new/js/web.min.js",
+      "retrieved_at_utc": "2026-11-04T12:38:11.992450+00:00",
+      "original_sha256": "c4be44dc1f9578cca0131623d6aaa01de6fc408e89b11e379696edd212833372",
+      "http_status": 200,
+      "extraction": "None; original response stays local in reports/taoyuan_metro."
+    },
+    {
+      "source_url": "https://www.tymetro.com.tw/tymetro-new/tw/_pages/note/intellect.html",
+      "retrieved_at_utc": "2026-11-04T12:38:42.327824+00:00",
+      "original_sha256": "6160dd0950101c20ed800acba6f8a8a392bbab17708de42999171ff226806206",
+      "http_status": 200,
+      "extraction": "None; original response stays local in reports/taoyuan_metro."
+    },
+    {
+      "source_url": "https://web.archive.org/cdx/search/cdx?url=www.tymetro.com.tw/tymetro-new/tw/&output=json&filter=statuscode:200&collapse=digest&filter=mimetype:text/html&from=2024&to=2026",
+      "retrieved_at_utc": "2026-11-04T12:38:43.449230+00:00",
+      "original_sha256": "68630ae53d90f9b14e466c7ee36a3dd6009c74a5d682f26a309f2bba474e5c53",
+      "http_status": 200,
+      "extraction": "None; original response stays local in reports/taoyuan_metro."
+    },
+    {
+      "source_url": "https://www.tymetro.com.tw/tymetro-new/tw/_pages/travel-guide/road.html",
+      "retrieved_at_utc": "2026-11-04T12:38:43.670205+00:00",
+      "original_sha256": "5af3c12c283a3009c63d02a6fdb19f5ee6a2a5c13c4251d1ed44c6108d734ee0",
+      "http_status": 200,
+      "extraction": "None; original response stays local in reports/taoyuan_metro."
+    },
+    {
+      "source_url": "https://web.archive.org/web/20240403012130id_/https://www.tymetro.com.tw/tymetro-new/tw/",
+      "retrieved_at_utc": "2026-11-04T12:39:27.855193+00:00",
+      "original_sha256": "62acfc6b2ccb88f6ed55818e1e4a893df2e2e7fe5db61d96adc99c1985285968",
+      "http_status": 200,
+      "final_url": "https://web.archive.org/web/20240403012130id_/https://www.tymetro.com.tw/tymetro-new/tw/",
+      "fixture": "taoyuan_metro_suspended_20240403012130.html",
+      "fixture_sha256": "51ef6c20c941d849c459f58b10189850c3474413597d81afc68b8d1e2eb89d57",
+      "extraction": "BeautifulSoup html.parser serialisation of both .banner .operation panels; wrapped in html/body/.banner. Status text, classes and icons unchanged. Unrelated content omitted."
+    },
+    {
+      "source_url": "https://web.archive.org/web/20241001015424id_/https://www.tymetro.com.tw/tymetro-new/tw/",
+      "retrieved_at_utc": "2026-11-04T12:39:28.896183+00:00",
+      "original_sha256": "c571e9091b55f06b1f9b5193e3f091bf1cad3bbfda3f0a4c57fb20cfab6ba08d",
+      "http_status": 200,
+      "final_url": "https://web.archive.org/web/20241001015424id_/https://www.tymetro.com.tw/tymetro-new/tw/",
+      "extraction": "None; original response stays local in reports/taoyuan_metro."
+    },
+    {
+      "source_url": "https://web.archive.org/web/20260711043649id_/https://www.tymetro.com.tw/tymetro-new/tw/",
+      "retrieved_at_utc": "2026-11-04T12:39:29.566462+00:00",
+      "original_sha256": "83da187e446eb99fae42a3acecc9a0eb9c53c0701a02b183b6d4e3036ff56b9b",
+      "http_status": 200,
+      "final_url": "https://web.archive.org/web/20260711043649id_/https://www.tymetro.com.tw/tymetro-new/tw/",
+      "fixture": "taoyuan_metro_slow_20260711043649.html",
+      "fixture_sha256": "3a5843071f405403b5b2598c85540d814319f4ee15b3322b42e8e60002bf0d3b",
+      "extraction": "BeautifulSoup html.parser serialisation of both .banner .operation panels; wrapped in html/body/.banner. Status text, classes and icons unchanged. Unrelated content omitted."
+    },
+    {
+      "source_url": "https://web.archive.org/web/20240408100245id_/https://www.tymetro.com.tw/tymetro-new/tw/",
+      "retrieved_at_utc": "2026-11-04T12:39:30.271190+00:00",
+      "original_sha256": "809dd8e13d4749d613bbeb52aa6d28416a3cb92d1963310dfa01fc9ced3d6e2b",
+      "http_status": 200,
+      "final_url": "https://web.archive.org/web/20240408100245id_/https://www.tymetro.com.tw/tymetro-new/tw/",
+      "fixture": "taoyuan_metro_normal_20240408100245.html",
+      "fixture_sha256": "26f6fe9c85dfb0257eddb4c2031a80640f4bacb69fd309ce05a0a376e248e9d8",
+      "extraction": "BeautifulSoup html.parser serialisation of both .banner .operation panels; wrapped in html/body/.banner. Status text, classes and icons unchanged. Unrelated content omitted."
+    }
+  ]
+}

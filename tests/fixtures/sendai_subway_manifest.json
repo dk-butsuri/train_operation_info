@@ -1,0 +1,133 @@
+[
+  {
+    "url": "https://www.kotsu.city.sendai.jp/",
+    "final_url": "https://www.kotsu.city.sendai.jp/",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:10:48.222925+00:00",
+    "original_sha256": "789f71a7b28b3ecdd2adbb8685fcc238a5cc09b20b55d4e6e44c5c67fef40f7e",
+    "local_file": "home.html",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  },
+  {
+    "url": "https://www.kotsu.city.sendai.jp/unkou/",
+    "final_url": "https://www.kotsu.city.sendai.jp/unkou/",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:10:48.259601+00:00",
+    "original_sha256": "247f92ea6b2b97fd03d67e9998c1c9f6b53e01db180f62e9a8397eb56bbe7550",
+    "local_file": "index.html",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  },
+  {
+    "url": "https://www.kotsu.city.sendai.jp/unkou/nambokusen/",
+    "final_url": "https://www.kotsu.city.sendai.jp/unkou/nambokusen/",
+    "status": 404,
+    "retrieved_at_utc": "2026-11-04T12:10:48.717954+00:00",
+    "original_sha256": "6018897ed0ad75d0385b7dd9e1c88d79e7a9e5df4fecd3b53e8d7bdde0aa2eca",
+    "local_file": "namboku.html",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  },
+  {
+    "url": "https://www.kotsu.city.sendai.jp/unkou/touzaisen/",
+    "final_url": "https://www.kotsu.city.sendai.jp/unkou/touzaisen/",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:10:48.744696+00:00",
+    "original_sha256": "a3e3234c0be3d9b657316a05727664ee986d340b6e731fa63135b8d2c76d94d0",
+    "local_file": "tozai.html",
+    "fixture": "tests/fixtures/sendai_subway_tozai_normal.html",
+    "fixture_sha256": "4d3b3e50b8824a6bfa8acaa0fc05f81e750a8a03fd36617a0a53728199995295",
+    "transformation": "BeautifulSoup html.parser serialization of #mainarea in a minimal UTF-8 document"
+  },
+  {
+    "url": "https://www.kotsu.city.sendai.jp/menseki/",
+    "final_url": "https://www.kotsu.city.sendai.jp/menseki/",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:10:48.773685+00:00",
+    "original_sha256": "ec65d3add53ab8eca47e2079d76cce44acc3c75ba2d4b5e3fbdcf0bb21aac6c0",
+    "local_file": "terms.html",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  },
+  {
+    "url": "https://www.kotsu.city.sendai.jp/unkou/nanbokusen/",
+    "final_url": "https://www.kotsu.city.sendai.jp/unkou/nanbokusen/",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:11:34.037076+00:00",
+    "original_sha256": "f0e998e15d4db316b2538ff5a53ebb21df9408dfb4d9d2e7fa8b746bd2fa7f7f",
+    "local_file": "nanboku.txt",
+    "fixture": "tests/fixtures/sendai_subway_namboku_normal.html",
+    "fixture_sha256": "21c069e088c09d19139082fe89bee84371bd006b0a2c07793c4dea3c362300bb",
+    "transformation": "BeautifulSoup html.parser serialization of #mainarea in a minimal UTF-8 document"
+  },
+  {
+    "url": "https://www.kotsu.city.sendai.jp/wp-content/themes/sendai_theme/css/unkou.css",
+    "final_url": "https://www.kotsu.city.sendai.jp/wp-content/themes/sendai_theme/css/unkou.css",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:11:34.058186+00:00",
+    "original_sha256": "9b527e1a923136a8bdce5cbad458f9030de0b82fb3aa7292c311cb54ff5965be",
+    "local_file": "unkou_css.txt",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  },
+  {
+    "url": "https://www.kotsu.city.sendai.jp/wp-content/themes/sendai_theme/js/navigation.js?ver=1.0.0",
+    "final_url": "https://www.kotsu.city.sendai.jp/wp-content/themes/sendai_theme/js/navigation.js?ver=1.0.0",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:11:34.077586+00:00",
+    "original_sha256": "4f5cae0ba90fd633e411009efe47444bac6942a381e0a633771e7baf2b5805dd",
+    "local_file": "navigation.txt",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  },
+  {
+    "url": "https://web.archive.org/cdx/search/cdx?url=www.kotsu.city.sendai.jp/unkou/*&output=json&filter=statuscode:200&filter=mimetype:text/html&collapse=digest&limit=25",
+    "final_url": "https://web.archive.org/cdx/search/cdx?url=www.kotsu.city.sendai.jp/unkou/*&output=json&filter=statuscode:200&filter=mimetype:text/html&collapse=digest&limit=25",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:11:57.690116+00:00",
+    "original_sha256": "1ce96d3cb27928115953b0b96a8e53fef3a9632c135c66329db9d89cebd6b262",
+    "local_file": "cdx.txt",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  },
+  {
+    "url": "https://web.archive.org/cdx/search/cdx?url=www.kotsu.city.sendai.jp/unkou/*&from=2026&output=json&filter=statuscode:200&filter=mimetype:text/html&collapse=digest&limit=80",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:12:45.017020+00:00",
+    "original_sha256": "36a6123b7a2614df8f6ee0e6de8695494985ee14a7bf0a9b0f23cb1ad8e19c16",
+    "local_file": "cdx_2026.json",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  },
+  {
+    "url": "https://web.archive.org/web/20260412141736id_/https://www.kotsu.city.sendai.jp/unkou/touzaisen/",
+    "final_url": "https://web.archive.org/web/20260412141736id_/https://www.kotsu.city.sendai.jp/unkou/touzaisen/",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:14:24.110553+00:00",
+    "original_sha256": "4b35a83cf0e606bbab475984938f078fcaecceb7d275abcf19eaca3f4be175d3",
+    "local_file": "tozai_20260412141736.html",
+    "fixture": "tests/fixtures/sendai_subway_tozai_20260412141736.html",
+    "fixture_sha256": "fda82479a11dad6cd66ec54efb01ac58483b913769c35de9e0deec81eb324f4a",
+    "transformation": "BeautifulSoup html.parser serialization of #mainarea in a minimal UTF-8 document"
+  },
+  {
+    "url": "https://web.archive.org/web/20260712033444id_/https://www.kotsu.city.sendai.jp/unkou/",
+    "final_url": "https://web.archive.org/web/20260712033444id_/https://www.kotsu.city.sendai.jp/unkou/",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:14:24.753378+00:00",
+    "original_sha256": "2ca19724d51e44039938c956732a590fd535b49f65a4b402eec3096fdeb8fc9d",
+    "local_file": "index_20260712033444.html",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  }
+]

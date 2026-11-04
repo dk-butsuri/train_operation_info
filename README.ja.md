@@ -10,7 +10,7 @@
 
 > **非公式ライブラリです。** 各鉄道事業者・情報提供元とは関係がなく、承認も受けていません。運行情報の権利は各取得元に帰属します。利用前に [免責事項](#免責事項) と [責任ある利用](#責任ある利用) を確認してください。
 
-- 国内外41の取得元に対応し、国・地域を限定せずProviderを追加できます。
+- 国内外57の取得元に対応し、国・地域を限定せずProviderを追加できます。
 - 共通モデルはPydanticのstrict・frozenなモデルで、公開APIはmypy strictで検証しています。`py.typed` を同梱しています。
 - アドホックで不確実な推論をしません。取得元の仕様・公開コード・保存応答で裏付けた対応だけを採用し、未確認の値は `UNKNOWN` として原文ごと保持します。詳細は [判定方針](https://github.com/dk-butsuri/train_operation_info/blob/main/CONTRIBUTING.md#全provider共通の判定方針) を参照してください。
 - 取得元ごとのレート制限、HTTP応答の保存とオフライン再生、ローカルの監視画面を備えています。
@@ -70,15 +70,17 @@ async def main() -> None:
 asyncio.run(main())
 ```
 
-`Tracker()` は既定の取得元（Yahoo!鉄道情報・MTA・小田急電鉄・DBを除く全取得元）を更新します。対象を絞る場合は `Tracker(enabled_providers=("jrw", "keihan", "nankai"))` のように指定します。属性の型は選択にかかわらず明示され、未更新のProviderは `UNKNOWN` のままです。集約一覧は選択したProviderのみを対象にします。
+`Tracker()` は既定の取得元（Yahoo!鉄道情報・MTA・小田急電鉄・DB・Trenitalia・TGVを除く全取得元）を更新します。対象を絞る場合は `Tracker(enabled_providers=("jrw", "keihan", "nankai"))` のように指定します。属性の型は選択にかかわらず明示され、未更新のProviderは `UNKNOWN` のままです。集約一覧は選択したProviderのみを対象にします。
 
 公開APIは `train_operation_info` パッケージから読み込みます。共通モデルは `train_operation_info.models`、例外は `train_operation_info.exceptions`、各Providerは `train_operation_info.providers` にあります。
 以降のコード例は `async` 関数の中で実行する前提で、`import` を一部省略しています。
 
 ## 対応Provider
 
-`Tracker()` はYahoo!鉄道情報・MTA・小田急電鉄・DBを除く全取得元を更新します。この4つは利用条件を確認したうえで、`enabled_providers` に明示した場合だけ通信します。
+`Tracker()` はYahoo!鉄道情報・MTA・小田急電鉄・DB・Trenitalia・TGVを除く全取得元を更新します。これらは利用条件を確認したうえで、`enabled_providers` に明示した場合だけ通信します。TGVは毎回大きな全国NeTEx ZIP（調査時約32 MB）を取得するため、例えば `Tracker(enabled_providers=("tgv",), rate_limit=120)` のように長めの更新間隔を指定してください。
 各Providerの属性一覧・状態の対応付け・対象外の情報・検証範囲は [docs/PROVIDERS.md](https://github.com/dk-butsuri/train_operation_info/blob/main/docs/PROVIDERS.md) にまとめています。
+
+東京モノレールにも対応しています。[東京モノレール公式サイトの運行情報リンク](https://www.tokyo-monorail.co.jp/guidance/)はJR東日本の運行情報ページを案内しているため、`jreast` Providerで取得し、`tracker.jreast.tokyo_monorail` で参照します。Providerは情報の取得元を表し、この路線の `line.operator.name` は `"東京モノレール"` です。
 
 ### 日本
 
@@ -92,16 +94,20 @@ asyncio.run(main())
 | JR九州 | `tracker.jrkyushu.fukuoka_kitakyushu`〜`tracker.jrkyushu.nishi_kyushu_shinkansen` | 公式XMLの8掲載単位。在来線6エリアと新幹線2路線。案内本文・XML案内の更新日時。分離された長期見合わせフラグは対象外 |
 | 東武鉄道 | `tracker.tobu.skytree`、`tracker.tobu.tojo` | 特急・ライナー・支線を含む公式の12掲載単位。運行案内の原文 |
 | 西武鉄道 | `tracker.seibu.shinjuku`、`tracker.seibu.ikebukuro_chichibu` | 公式XMLの11掲載単位（池袋線・西武秩父線は既存の共通IDに統合）。路線別の運転見合わせ・案内 |
+| 相模鉄道 | `tracker.sotetsu.main` | 公式JSONの相鉄線全体の1掲載単位。平常／運行情報ありと案内本文・振替輸送 |
+| 埼玉高速鉄道 | `tracker.saitama_railway.main` | 赤羽岩淵～浦和美園。公式JSONの現在項目の専用状態・本文・発信日時。履歴は対象外 |
 | 京成電鉄 | `tracker.keisei.main`、`tracker.keisei.matsudo` | 本線・スカイアクセス・押上・金町・千葉線／千原線・松戸の6掲載単位。原因・区間・詳細本文・期間限定告知 |
 | 京王電鉄 | `tracker.keio.main`、`tracker.keio.inokashira` | 京王線・新線・相模原線・高尾線・競馬場線・動物園線・井の頭線の7路線。公式XMLの全線一括の運行情報 |
 | 小田急電鉄（明示指定時のみ） | `tracker.odakyu.odawara`、`tracker.odakyu.enoshima`、`tracker.odakyu.tama` | 小田原線・江ノ島線・多摩線。公式の区間別運行状態・案内本文・更新日時 |
 | 東急電鉄 | `tracker.tokyu.toyoko`、`tracker.tokyu.den_en_toshi` | 東急9路線。公式JSONの路線別状態・案内文・対象未特定のお知らせ |
 | 京浜急行電鉄（京急） | `tracker.keikyu.main`、`tracker.keikyu.airport` | 本線・空港線・大師線・久里浜線・逗子線の5路線。公式の全線一括の案内本文・更新日時 |
 | みなとみらい線 | `tracker.minatomirai.main` | 横浜～元町・中華街の1路線。公式の運行案内・発生時刻・原因・遅延時間 |
+| 横浜市営地下鉄 | `tracker.yokohama_subway.blue`、`tracker.yokohama_subway.green` | 公式現在一覧JSON。掲載なしの平常と確認済みの遅延コード。未確認の状態は原文を保持 |
 | 箱根登山鉄道 | `tracker.hakone_tozan.main` | 小田原～強羅の1路線。箱根ナビ公式HTMLの路線別状態と案内原文 |
 | 東京メトロ | `tracker.tokyo_metro.ginza`、`tracker.tokyo_metro.tozai` | 公式JSONの9路線。路線別の状態・本文・影響区間・原因 |
 | 都営地下鉄 | `tracker.toei.asakusa`、`tracker.toei.oedo` | 公式HTMLの地下鉄4路線。状態・案内本文 |
 | 札幌市営地下鉄 | `tracker.sapporo_subway.namboku`、`tracker.sapporo_subway.tozai`、`tracker.sapporo_subway.toho` | 公式HTMLの3路線。10分以上の遅れなしの平常表示と未分類の案内原文 |
+| 仙台市交通局 | `tracker.sendai_subway.namboku`、`tracker.sendai_subway.tozai` | 南北線・東西線の公式HTML。30分以上の遅れ・見込みを掲載する範囲の平常表示と、未分類の案内原文 |
 | ゆりかもめ | `tracker.yurikamome.main` | 新橋～豊洲の1路線。公式運行情報の状態・本文・配信日時 |
 | りんかい線 | `tracker.rinkai.main` | 大崎～新木場の1路線。公式運行情報の案内本文・明示された更新日時 |
 | 名古屋市営地下鉄 | `tracker.nagoya_subway.higashiyama`、`tracker.nagoya_subway.meijo_meiko` | 公式JSONの5系統（名城線・名港線は合算）。状態コード・全案内の本文・区間・理由。市バスは対象外 |
@@ -115,20 +121,40 @@ asyncio.run(main())
 | 大阪メトロ | `tracker.osaka_metro.midosuji` | 地下鉄8路線・ニュートラム |
 | 京都市営地下鉄 | `tracker.kyoto_subway.karasuma`、`tracker.kyoto_subway.tozai` | 公式トップの緊急情報欄。掲載なし／対象・影響未特定の案内。Yahooと共通路線IDを使用 |
 | とさでん交通 | `tracker.tosaden.main` | 路面電車全体の1掲載単位。公式の運行状況本文・台風等の案内 |
+| 土佐くろしお鉄道 | `tracker.tosakuro.gomen_nahari`、`tracker.tosakuro.nakamura_sukumo` | ごめん・なはり線、中村・宿毛線の公式記事。平常見出しと本文を保持。平常時も情報アラートあり |
+| 西日本鉄道 | `tracker.nishitetsu.tenjin_omuta`、`tracker.nishitetsu.kaizuka` | 4路線。公式緊急案内欄の鉄道見出し別の掲載有無・本文 |
+| 福岡市交通局 | `tracker.fukuoka_subway.kuko`、`tracker.fukuoka_subway.hakozaki`、`tracker.fukuoka_subway.nanakuma` | 地下鉄3路線。公式の全体運行案内・専用更新日時。路線別の影響は未特定 |
 | ゆいレール（沖縄都市モノレール） | `tracker.yuirail.main` | 那覇空港～てだこ浦西の1路線。公式トップの運行情報テキスト |
 
 ### 海外
+
+TfLは `tracker.tfl.bakerloo`、`tracker.tfl.elizabeth`、`tracker.tfl.lioness` などで参照します。
+現在状態の公式APIを認証なしで1回取得し、20掲載単位をまとめて更新します。
+現在一覧に混在する工事案内も保持し、専用の `isNow=true` のみ現在有効の根拠とします。
+日付指定の将来一覧・駅設備・バス・National Rail等は対象外です。
+再利用時は[公式規約](https://tfl.gov.uk/corporate/terms-and-conditions/transport-data-service)の
+登録条項と帰属表示 `Powered by TfL Open Data` を含む条件を確認してください。
+サンプルは `python -m examples.tfl` です。
 
 | Provider | 路線アクセス例 | 取得範囲 |
 | --- | --- | --- |
 | 台湾鉄路（TRA） | `tracker.tra.eastern`、`tracker.tra.pingxi` | 公式の12路線・区間。通阻一覧の状態凡例・対象区間・本文・復旧見込み |
 | Taiwan High Speed Rail（台湾高鉄） | `tracker.thsr.main` | 南港～左営の1路線。公式の現在の運行状態・原因・影響区間・本文 |
 | 台北MRT（Metro Taipei） | `tracker.taipei_metro.bannan`、`tracker.taipei_metro.tamsui_xinyi` | 公式掲載の6路線。環状線の運行会社は新北捷運 |
+| 桃園MRT（桃園捷運） | `tracker.taoyuan_metro.airport` | 空港線の公式トップの専用運行表示。平常・全線停止・減速運転。別枠のニュース・将来の運転計画は対象外 |
+| 高雄MRT/LRT | `tracker.kaohsiung_metro.metro`、`tracker.kaohsiung_metro.light_rail` | 紅橘線まとめてGROUPと輕軌LINEの2単位。専用表示で確認した正常のみNORMAL、それ以外は原文付きUNKNOWN |
+| 香港MTR | `tracker.mtr.tsuen_wan`、`tracker.mtr.airport_express` | 公式状態XMLの10路線。軽鉄・高速鉄道は対象外 |
 | シンガポールMRT/LRT | `tracker.singapore_mrt.east_west`、`tracker.singapore_mrt.downtown` | MRT6路線・LRT3路線。運行会社は各Lineのプロパティ |
+| Metro Trains Melbourne | `tracker.metro_trains_melbourne.sunbury`、`tracker.metro_trains_melbourne.racecourse` | 公式Healthboardの17路線。別枠の計画工事一覧・全体バナーは対象外 |
+| TfL（ロンドン） | `tracker.tfl.bakerloo`、`tracker.tfl.elizabeth`、`tracker.tfl.windrush` | Tube 11路線、Overground 6路線、Elizabeth line、DLR、Tram。現在一覧に混在する工事案内も保持 |
 | DB Verkehrslage（DB Fernverkehr、明示指定時のみ） | `tracker.db.fernverkehr` | 長距離列車部門の当日運行案内1掲載単位。工事分類を除外。DB Regio・S-Bahn・列車別遅延は対象外 |
-| SNCF Transilien | `tracker.transilien.rer_c`、`tracker.transilien.ligne_h` | SNCF運行のRER C/D/E・列車H/J/K/L/N/P/R/U/Vの12系統。現在の案内から工事分類を除外。全国のTGV・TER・Intercités、RER A/Bは対象外 |
+| Transilien（SNCF・RATPメトロ） | `tracker.transilien.rer_c`、`tracker.transilien.ligne_h`、`tracker.transilien.metro_6`、`tracker.transilien.metro_3bis` | SNCFの12系統とRATPメトロ16路線（1〜14・3bis・7bis）。現在の案内から工事分類を除外。全国のTGV・TER・Intercités、RER A/B・トラム・バス・Orlyval・CDGVAL・ケーブルカーは対象外 |
+| Trenitalia（明示指定時のみ） | `tracker.trenitalia.network` | 全国Infomobilità案内。全国平常の検証済み定型告知のみ `NORMAL`、それ以外は `UNKNOWN`。列車別・路線別状態は対象外 |
+| SNCF TGV（明示指定時のみ） | `tracker.tgv.network` | NeTExとSIRI SXを列車番号・運行主体で照合。INOUI・OUIGO高速列車・Lyriaの案内。未特定の案内も保持し、案内ありは `UNKNOWN`、対象内・未特定の案内なしは取得範囲内の `NORMAL`。全体の遅延・運休や個別定時性は判定しない |
+| Renfe Cercanías / Rodalies | `tracker.renfe.cercanias` | 公式障害フィードをネットワーク1掲載単位で取得。個別路線の状態・AVE・長距離列車は対象外。案内ありは `UNKNOWN`、空一覧は取得範囲内の `NORMAL` |
 | ÖBB公式運行案内 | `tracker.obb.network` | 全国の編集型障害一覧1掲載単位。工事欄を除外。個別路線・列車別遅延は対象外 |
 | MTA New York City Subway（明示指定時のみ） | `tracker.mta_subway.route_f`、`tracker.mta_subway.route_6x` | GTFS-realtimeの29路線（運転系統）。計画工事は対象外 |
+| Metro-North Railroad（明示指定時のみ） | `tracker.metro_north.hudson`、`tracker.metro_north.port_jervis` | 本支線・西岸2路線・Wassaicの9掲載単位。計画工事は対象外 |
 
 SBBは公式リアルタイムAPIのトークンが必要なため、現在は未対応です。
 
@@ -186,10 +212,14 @@ except RefreshError as exc:
 | `jrshikoku` | ✓ |  |  |  | ✓ |
 | `jrkyushu` | ✓ |  |  |  | ✓ |
 | `sapporo_subway` | ✓ |  |  |  |  |
+| `sendai_subway` | ✓ |  |  |  |  |
+| `yokohama_subway` | ✓ | ✓ |  |  |  |
 | `tokyo_metro` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `toei` | ✓ |  |  |  | ✓ |
 | `tobu` | ✓ |  |  |  | ✓ |
 | `seibu` | ✓ |  | ✓ |  | ✓ |
+| `sotetsu` | ✓ |  |  |  | ✓ |
+| `saitama_railway` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `keisei` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `keio` | ✓ |  |  |  |  |
 | `odakyu` | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -210,15 +240,27 @@ except RefreshError as exc:
 | `osaka_metro` | ✓ | ✓ | ✓ |  |  |
 | `kyoto_subway` | ✓ |  |  |  |  |
 | `tosaden` | ✓ |  |  |  | ✓ |
+| `tosakuro` | ✓ |  |  |  |  |
+| `nishitetsu` | ✓ |  |  |  | ✓ |
+| `fukuoka_subway` | ✓ |  |  |  | ✓ |
 | `yuirail` | ✓ |  |  |  | ✓ |
 | `tra` | ✓ | ✓ |  |  | ✓ |
 | `thsr` | ✓ | ✓ |  |  | ✓ |
+| `mtr` | ✓ | ✓ |  |  | ✓ |
+| `metro_trains_melbourne` | ✓ | ✓ |  | ✓ | ✓ |
 | `taipei_metro` | ✓ | ✓ |  | ✓ |  |
+| `taoyuan_metro` | ✓ |  | ✓ |  | ✓ |
+| `kaohsiung_metro` | ✓ |  |  |  |  |
+| `tfl` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `singapore_mrt` | ✓ |  |  |  | ✓ |
 | `db` | ✓ |  |  |  | ✓ |
 | `transilien` | ✓ | ✓ |  |  | ✓ |
+| `renfe` | ✓ |  |  |  |  |
+| `trenitalia` | ✓ |  |  |  |  |
+| `tgv` | ✓ |  |  |  |  |
 | `obb` | ✓ |  |  |  | ✓ |
 | `mta_subway` | ✓ | ✓ | ✓ |  | ✓ |
+| `metro_north` | ✓ | ✓ | ✓ |  | ✓ |
 | `yahoo` | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 ## 案内の取得範囲と適用時期
@@ -269,7 +311,7 @@ print(metadata.reviewed_at)           # 規約確認日時（タイムゾーン�
 | `PERMISSION_REQUIRED` | 無断再利用を制限する明示的な記載がある |
 
 区分は公開された条件の記録で、個々のサイネージ用途の適法性を判定するものではありません。無記載を私的利用可・商用可とみなしません。一般規約と運行情報固有の記載が異なる場合は両方を残します。
-現時点の確認では阪急・阪神・ゆりかもめは法令上の利用範囲を留保し、台北MRTは公式の政府網站資料開放宣告に基づく出典表示付き再利用を `COMMERCIAL_ALLOWED` として記録しています。それ以外の取得元は運行情報またはサイト規約に無断再利用を制限する記載があります。参照した規約URLと根拠は各Providerのメタデータに記録しています。
+現時点の確認では阪急・阪神・ゆりかもめは法令上の利用範囲を留保し、台北MRTは公式の政府網站資料開放宣告に基づく出典表示付き再利用を `COMMERCIAL_ALLOWED` として記録しています。Metro Trains Melbourneは一般利用規約・再利用許諾を発見できず `UNSPECIFIED` としています。その他の多くの取得元には、運行情報またはサイト規約に無断再利用を制限する記載があります。参照した規約URLと根拠は各Providerのメタデータに記録しています。
 
 ## 構成
 
@@ -396,21 +438,35 @@ python -m examples.odakyu
 python -m examples.osaka_metro
 python -m examples.rinkai
 python -m examples.seibu
+python -m examples.saitama_railway
+python -m examples.sotetsu
+python -m examples.mtr
+python -m examples.metro_trains_melbourne
 python -m examples.taipei_metro
+python -m examples.taoyuan_metro
+python -m examples.kaohsiung_metro
 python -m examples.thsr
 python -m examples.tobu
 python -m examples.sapporo_subway
+python -m examples.sendai_subway
+python -m examples.yokohama_subway
 python -m examples.toei
 python -m examples.tokyo_metro
 python -m examples.tokyu
 python -m examples.tosaden
+python -m examples.tosakuro
+python -m examples.nishitetsu
+python -m examples.fukuoka_subway
 python -m examples.tra
 python -m examples.yuirail
 python -m examples.yurikamome
+python -m examples.renfe
+python -m examples.trenitalia
+python -m examples.tgv
 python -m examples.all_providers
 ```
 
-`examples.all_providers` は既定の取得元を使うため、Yahoo・MTA・小田急電鉄・DBには通信しません。Yahooの例は `python -m examples.yahoo` で実行できます。
+`examples.all_providers` は既定の取得元を使うため、Yahoo・MTA・小田急電鉄・DB・Trenitalia・TGVには通信しません。Yahooの例は `python -m examples.yahoo` で実行できます。
 
 ## 開発
 

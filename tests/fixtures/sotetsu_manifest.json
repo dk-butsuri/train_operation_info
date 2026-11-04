@@ -1,0 +1,98 @@
+[
+  {
+    "name": "sotetsu_20230717075741.json",
+    "source_url": "https://cdn.sotetsu.co.jp/unkou/dat/train_status1_v2.json",
+    "archive_url": "https://web.archive.org/web/20230717075741id_/https://cdn.sotetsu.co.jp/unkou/dat/train_status1_v2.json",
+    "retrieved_at": "2026-11-04T04:54:41.840462+00:00",
+    "status_code": 200,
+    "original_sha256": "d1c9d8c57cdfe987b40d671e01698e4d832e528948b6b526480cdfdee2ebe049",
+    "captured_at": "2023-07-17T07:57:41+00:00",
+    "fixture": "tests/fixtures/sotetsu_20230717075741.json",
+    "transformation": "None; original response bytes",
+    "fixture_sha256": "d1c9d8c57cdfe987b40d671e01698e4d832e528948b6b526480cdfdee2ebe049"
+  },
+  {
+    "name": "sotetsu_20230729083512.json",
+    "source_url": "https://cdn.sotetsu.co.jp/unkou/dat/train_status1_v2.json",
+    "archive_url": "https://web.archive.org/web/20230729083512id_/https://cdn.sotetsu.co.jp/unkou/dat/train_status1_v2.json",
+    "retrieved_at": "2026-11-04T04:54:42.450326+00:00",
+    "status_code": 200,
+    "original_sha256": "559035898253b05ae78266c9f73f504d30613b50d86687017fe4c8c05945b396",
+    "captured_at": "2023-07-29T08:35:12+00:00",
+    "fixture": "tests/fixtures/sotetsu_20230729083512.json",
+    "transformation": "None; original response bytes",
+    "fixture_sha256": "559035898253b05ae78266c9f73f504d30613b50d86687017fe4c8c05945b396"
+  },
+  {
+    "name": "sotetsu_20260519070818.json",
+    "source_url": "https://cdn.sotetsu.co.jp/unkou/dat/train_status1_v2.json",
+    "archive_url": "https://web.archive.org/web/20260519070818id_/https://cdn.sotetsu.co.jp/unkou/dat/train_status1_v2.json",
+    "retrieved_at": "2026-11-04T04:54:42.971806+00:00",
+    "status_code": 200,
+    "original_sha256": "df46f9f7bb0904a3dc25e678935e9f880230118947b8f84658a6f84267684eb4",
+    "captured_at": "2026-05-19T07:08:18+00:00",
+    "fixture": "tests/fixtures/sotetsu_20260519070818.json",
+    "transformation": "None; original response bytes",
+    "fixture_sha256": "df46f9f7bb0904a3dc25e678935e9f880230118947b8f84658a6f84267684eb4"
+  },
+  {
+    "name": "live_normal",
+    "source_url": "https://cdn.sotetsu.co.jp/unkou/dat/train_status1_v2.json",
+    "retrieved_at": "2026-11-04T04:53:59.442361+00:00",
+    "status_code": 200,
+    "original_sha256": "ff404363d6779ccb213b0c355b68eab6e7eb040e074c60788190f8570126ea03",
+    "fixture_sha256": "ff404363d6779ccb213b0c355b68eab6e7eb040e074c60788190f8570126ea03",
+    "fixture": "tests/fixtures/sotetsu_normal.json",
+    "transformation": "None; original response bytes"
+  },
+  {
+    "name": "page",
+    "source_url": "https://www.sotetsu.co.jp/train/status/",
+    "final_url": "https://www.sotetsu.co.jp/train/status/",
+    "retrieved_at": "2026-11-04T04:58:44.012477+00:00",
+    "status_code": 200,
+    "original_sha256": "639bea012ded4350f20bcf22bcd6c965cc01c8d86c94a4452fa98ed2aba7a44e",
+    "path": "reports\\sotetsu_review_page",
+    "transformation": "None; original response bytes"
+  },
+  {
+    "name": "normalizer",
+    "source_url": "https://www.sotetsu.co.jp/_nuxt/BG3P_7p2.js",
+    "final_url": "https://www.sotetsu.co.jp/_nuxt/BG3P_7p2.js",
+    "retrieved_at": "2026-11-04T04:58:44.026154+00:00",
+    "status_code": 200,
+    "original_sha256": "fa455b2359df55e2075dc5b640477ff0219ed971f3d7f12260f64770ed0a94ec",
+    "path": "reports\\sotetsu_review_normalizer",
+    "transformation": "None; original response bytes"
+  },
+  {
+    "name": "navigation",
+    "source_url": "https://www.sotetsu.co.jp/_nuxt/BB6XB0j6.js",
+    "final_url": "https://www.sotetsu.co.jp/_nuxt/BB6XB0j6.js",
+    "retrieved_at": "2026-11-04T04:58:44.052432+00:00",
+    "status_code": 200,
+    "original_sha256": "55400c0e1597393cfa14d60e1231eafdd27423ef7dff17a43787c8a9cd5001e1",
+    "path": "reports\\sotetsu_review_navigation",
+    "transformation": "None; original response bytes"
+  },
+  {
+    "name": "status_view",
+    "source_url": "https://www.sotetsu.co.jp/_nuxt/Cq7Xtqw3.js",
+    "final_url": "https://www.sotetsu.co.jp/_nuxt/Cq7Xtqw3.js",
+    "retrieved_at": "2026-11-04T04:58:44.066311+00:00",
+    "status_code": 200,
+    "original_sha256": "431b3d7efd230777995e5ecf7c0680a0eef6293e73a54c61ee4b64d4dd50b521",
+    "path": "reports\\sotetsu_review_status_view",
+    "transformation": "None; original response bytes"
+  },
+  {
+    "name": "terms",
+    "source_url": "https://www.sotetsu.co.jp/terms/",
+    "final_url": "https://www.sotetsu.co.jp/terms/",
+    "retrieved_at": "2026-11-04T04:58:44.079381+00:00",
+    "status_code": 200,
+    "original_sha256": "171cf73bf3d04e4a870d863ef028307054fc631c527d5613aac35e31f60cbcf5",
+    "path": "reports\\sotetsu_review_terms",
+    "transformation": "None; original response bytes"
+  }
+]

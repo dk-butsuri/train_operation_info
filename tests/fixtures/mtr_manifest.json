@@ -1,0 +1,65 @@
+[
+  {
+    "file": "reports/mtr/mtr_home.html",
+    "url": "https://www.mtr.com.hk/en/customer/main/index.html",
+    "retrieved_at_utc": "2026-11-04T07:56:09.437235+00:00",
+    "sha256": "31598cb87888b1d9d18e9bb3aed390c418956cdc4c7c2cbe68f5b56e534e8853",
+    "method": "GET with providers.base.USER_AGENT; raw bytes, no transformation"
+  },
+  {
+    "file": "reports/mtr/mtr_RYGfunc.js",
+    "url": "https://www.mtr.com.hk/share/customer/js/RYGfunc.js?v=0.2",
+    "retrieved_at_utc": "2026-11-04T07:56:31.418804+00:00",
+    "sha256": "92aa85b4b6c1b50a49399992c1fb76d94e4552df3673957eb73322305b7ca48c",
+    "method": "GET with providers.base.USER_AGENT; raw bytes, no transformation"
+  },
+  {
+    "file": "reports/mtr/mtr_legend.html",
+    "url": "https://www.mtr.com.hk/en/customer/main/service_status.html",
+    "retrieved_at_utc": "2026-11-04T07:56:31.540156+00:00",
+    "sha256": "ddf2cbe109a297ef7cc571f4cc7d1dd46460027d5c5f9c5f42a3a432ecdd8d5d",
+    "method": "GET with providers.base.USER_AGENT; raw bytes, no transformation"
+  },
+  {
+    "file": "reports/mtr/mtr_legend.xml",
+    "url": "https://www.mtr.com.hk/alert/legend_remarks_v2.xml",
+    "retrieved_at_utc": "2026-11-04T07:56:51.090002+00:00",
+    "sha256": "97834aadf71733db2453e851fa02bc5b4c3288d4d84de113a9f1c105d1496f8a",
+    "method": "GET with providers.base.USER_AGENT; raw bytes, no transformation"
+  },
+  {
+    "file": "tests/fixtures/mtr_normal.xml",
+    "url": "https://www.mtr.com.hk/alert/ryg_line_status_lite.xml",
+    "retrieved_at_utc": "2026-11-04T07:56:51.201191+00:00",
+    "sha256": "fd272ce89c650aa3ec567d847632ed0ca3df74486388ff6f75bbd1f9b4b052d4",
+    "method": "GET with providers.base.USER_AGENT; raw bytes, no transformation"
+  },
+  {
+    "file": "reports/mtr/mtr_common.js",
+    "url": "https://www.mtr.com.hk/share/customer/js/common_rpyg.js",
+    "retrieved_at_utc": "2026-11-04T07:56:51.273956+00:00",
+    "sha256": "b2095eeae0524e7d2b0b318afe796c3853ec04ce983faddd0cf0c4eb3126fd62",
+    "method": "GET with providers.base.USER_AGENT; raw bytes, no transformation"
+  },
+  {
+    "file": "reports/mtr/mtr_domain.txt",
+    "url": "https://www.mtr.com.hk/alert/getDomain.php",
+    "retrieved_at_utc": "2026-11-04T07:57:26.742560+00:00",
+    "sha256": "8a5edab282632443219e051e4ade2d1d5bbc671c781051bf1437897cbdfea0f1",
+    "method": "GET with providers.base.USER_AGENT; raw bytes, no transformation"
+  },
+  {
+    "file": "reports/mtr/mtr_terms_of_use.html",
+    "url": "https://www.mtr.com.hk/en/customer/main/terms_of_use.html",
+    "retrieved_at_utc": "2026-11-04T07:57:26.889274+00:00",
+    "sha256": "e29c160681a16aeac0b3eb269c47d4f47bda7c99d5c7eb4d99ca4f417dee01e9",
+    "method": "GET with providers.base.USER_AGENT; raw bytes, no transformation"
+  },
+  {
+    "file": "reports/mtr/mtr_cdx.json",
+    "url": "https://web.archive.org/cdx/search/cdx?url=www.mtr.com.hk/alert/ryg_line_status_lite.xml&output=json&filter=statuscode:200&filter=mimetype:text/xml&collapse=digest&limit=5",
+    "retrieved_at_utc": "2026-11-04T07:57:27.761446+00:00",
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "method": "GET with providers.base.USER_AGENT; raw bytes, no transformation"
+  }
+]

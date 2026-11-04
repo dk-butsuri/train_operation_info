@@ -1,0 +1,84 @@
+{
+  "captures": [
+    {
+      "file": "tfl_live_20261104.json",
+      "url": "https://api.tfl.gov.uk/Line/Mode/tube,dlr,overground,elizabeth-line,tram/Status",
+      "final_url": "https://api.tfl.gov.uk/Line/Mode/tube,dlr,overground,elizabeth-line,tram/Status",
+      "retrieved_at": "2026-11-04T12:55:48.059654+00:00",
+      "sha256": "e5affc3edb3a4e0f95b60eba5de29451721133609df2234944531c33a0121b78",
+      "transformation": "None; decoded HTTP response bytes"
+    },
+    {
+      "file": "tfl_severity_20261104.json",
+      "url": "https://api.tfl.gov.uk/Line/Meta/Severity",
+      "final_url": "https://api.tfl.gov.uk/Line/Meta/Severity",
+      "retrieved_at": "2026-11-04T12:55:48.465648+00:00",
+      "sha256": "410d083dbabee766e2b556abe5ceb74561f80639c35fa5f6f23d439163de9a91",
+      "transformation": "None; decoded HTTP response bytes"
+    },
+    {
+      "file": "tfl_swagger_20261104.json",
+      "url": "https://api.tfl.gov.uk/swagger/docs/v1",
+      "final_url": "https://api.tfl.gov.uk/swagger/docs/v1",
+      "retrieved_at": "2026-11-04T12:55:49.952437+00:00",
+      "sha256": "266abe0486b0abde0a4ec32c0dacdbd34b2629fa14ee4600db6934b5fa46a854",
+      "transformation": "None; decoded HTTP response bytes"
+    },
+    {
+      "file": "tfl_page_20261104.html",
+      "url": "https://tfl.gov.uk/tube-dlr-overground/status/",
+      "final_url": "https://tfl.gov.uk/tube-dlr-overground/status/",
+      "retrieved_at": "2026-11-04T12:55:51.979419+00:00",
+      "sha256": "59e313ff2031cdf3c3614a77ae0e61c620a08c376abf838958a160abb8d1b9b9",
+      "transformation": "None; decoded HTTP response bytes"
+    },
+    {
+      "file": "tfl_products_20261104.html",
+      "url": "https://api-portal.tfl.gov.uk/products",
+      "final_url": "https://api-portal.tfl.gov.uk/products",
+      "retrieved_at": "2026-11-04T12:55:53.454259+00:00",
+      "sha256": "b4587730ce60a0a9ea37358cc8573db8654192dd4afbf67222a6625ccb5f5da7",
+      "transformation": "None; decoded HTTP response bytes"
+    },
+    {
+      "file": "tfl_terms_20261104.html",
+      "url": "https://tfl.gov.uk/corporate/terms-and-conditions/transport-data-service",
+      "final_url": "https://tfl.gov.uk/corporate/terms-and-conditions/transport-data-service",
+      "retrieved_at": "2026-11-04T12:55:54.832596+00:00",
+      "sha256": "c984bc0debeb80029b0ea43d62958939a14ef2b6c24f441b0e92d016f9f10647",
+      "transformation": "None; decoded HTTP response bytes"
+    },
+    {
+      "file": "tfl_operators_20261104.html",
+      "url": "https://tfl.gov.uk/corporate/about-tfl/what-we-do",
+      "final_url": "https://tfl.gov.uk/corporate/about-tfl/what-we-do",
+      "retrieved_at": "2026-11-04T13:03:17.624543+00:00",
+      "sha256": "cadd1ff8cf1eb517331470e71d47f6133316dcd1ab50ed3a0acd678ededfc579",
+      "transformation": "None; decoded HTTP response bytes"
+    },
+    {
+      "file": "tfl_overground_operator_20261104.html",
+      "url": "https://tfl.gov.uk/corporate/transparency/freedom-of-information/foi-request-detail?referenceId=FOI-2069-2627",
+      "final_url": "https://tfl.gov.uk/corporate/transparency/freedom-of-information/foi-request-detail?referenceId=FOI-2069-2627",
+      "retrieved_at": "2026-11-04T13:03:18.046695+00:00",
+      "sha256": "82a22219fc087a1507f4ffba29b0c7709449b420f441b004b7991f13f589c7dd",
+      "transformation": "None; decoded HTTP response bytes"
+    },
+    {
+      "file": "tfl_elizabeth_operator_20261104.html",
+      "url": "https://tfl.gov.uk/travel-information/improvements-and-projects/improving-the-elizabeth-line?cid=elizabeth-line-improvements",
+      "final_url": "https://tfl.gov.uk/travel-information/improvements-and-projects/improving-the-elizabeth-line?cid=elizabeth-line-improvements",
+      "retrieved_at": "2026-11-04T13:03:18.448653+00:00",
+      "sha256": "48fc1f753e3df3ffd4dba9bcd1c15a897cdc2be13866de0b673fb1e6343e4d08",
+      "transformation": "None; decoded HTTP response bytes"
+    },
+    {
+      "file": "tfl_live_20261104_130510.json",
+      "url": "https://api.tfl.gov.uk/Line/Mode/tube,dlr,overground,elizabeth-line,tram/Status",
+      "final_url": "https://api.tfl.gov.uk/Line/Mode/tube,dlr,overground,elizabeth-line,tram/Status",
+      "retrieved_at": "2026-11-04T13:05:10.813758Z",
+      "sha256": "3768a5789f49f4f02c51e65ea7785ab50c79701e752e22c1eb90f8e537b49345",
+      "transformation": "Lossless gzip decompression of SnapshotRecorder response body; actual live Provider refresh"
+    }
+  ]
+}

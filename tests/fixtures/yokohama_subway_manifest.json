@@ -1,0 +1,263 @@
+[
+  {
+    "url": "https://status.hamabus.city.yokohama.lg.jp/operation/list",
+    "final_url": "https://status.hamabus.city.yokohama.lg.jp/operation/list",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:50:20.740614+00:00",
+    "original_sha256": "979723335d696a67dbd2168b22259911416d85bd2b545b3b2cbec08c9bb46bb0",
+    "local_file": "list",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  },
+  {
+    "url": "https://status.hamabus.city.yokohama.lg.jp/_nuxt/CpZcISDq.js",
+    "final_url": "https://status.hamabus.city.yokohama.lg.jp/_nuxt/CpZcISDq.js",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:50:20.852421+00:00",
+    "original_sha256": "aea8edd749e747959d11b7cda4530d8d90d4dc59637ebd5af98eec7681b08abf",
+    "local_file": "CpZcISDq.js",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  },
+  {
+    "url": "https://status.hamabus.city.yokohama.lg.jp/_nuxt/CERF70YX.js",
+    "final_url": "https://status.hamabus.city.yokohama.lg.jp/_nuxt/CERF70YX.js",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:50:20.726047+00:00",
+    "original_sha256": "44688d33e4711457fc354cfa770140c53f7ab4a00172d52a85bc325fb6e3117b",
+    "local_file": "CERF70YX.js",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  },
+  {
+    "url": "https://status.hamabus.city.yokohama.lg.jp/_nuxt/B76HVm0R.js",
+    "final_url": "https://status.hamabus.city.yokohama.lg.jp/_nuxt/B76HVm0R.js",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:50:20.739609+00:00",
+    "original_sha256": "5fcff8ae40aaa8701c5b090e4c50e8801ee62663e2fb78a52687f2297015294c",
+    "local_file": "B76HVm0R.js",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  },
+  {
+    "url": "https://status.hamabus.city.yokohama.lg.jp/_nuxt/CQdh4HMZ.js",
+    "final_url": "https://status.hamabus.city.yokohama.lg.jp/_nuxt/CQdh4HMZ.js",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:50:20.738213+00:00",
+    "original_sha256": "5f07833244338feb1e409f0dd7ecce0d726fbf6f30beb36821da6c3899427b5b",
+    "local_file": "CQdh4HMZ.js",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  },
+  {
+    "url": "https://status.hamabus.city.yokohama.lg.jp/_nuxt/0TzDV900.js",
+    "final_url": "https://status.hamabus.city.yokohama.lg.jp/_nuxt/0TzDV900.js",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:50:20.721312+00:00",
+    "original_sha256": "4c87bc9b54470c90780a6d2b38a54703a0cdecd4aa8c0a256eb596fe51df3ed4",
+    "local_file": "0TzDV900.js",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  },
+  {
+    "url": "https://status.hamabus.city.yokohama.lg.jp/_nuxt/DbABnKNi.js",
+    "final_url": "https://status.hamabus.city.yokohama.lg.jp/_nuxt/DbABnKNi.js",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:50:20.748794+00:00",
+    "original_sha256": "f199054236a209cb37185212bf2449e4238e2ae3bcccbf4d163c05145b58924c",
+    "local_file": "DbABnKNi.js",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  },
+  {
+    "url": "https://status.hamabus.city.yokohama.lg.jp/_nuxt/BRPRFiNW.js",
+    "final_url": "https://status.hamabus.city.yokohama.lg.jp/_nuxt/BRPRFiNW.js",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:50:20.729949+00:00",
+    "original_sha256": "d5b69f0c1f3238ddbcf64146cb948eabe278211d17503bc4cca69dd7e3a2c34e",
+    "local_file": "BRPRFiNW.js",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  },
+  {
+    "url": "https://status.hamabus.city.yokohama.lg.jp/_nuxt/CqGW2eWD.js",
+    "final_url": "https://status.hamabus.city.yokohama.lg.jp/_nuxt/CqGW2eWD.js",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:50:46.591632+00:00",
+    "original_sha256": "5c74db55a021b89dcfef0be1d794d599e931f7285d5753cfc6f9d68d5cb5f468",
+    "local_file": "CqGW2eWD.js",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  },
+  {
+    "url": "https://status.hamabus.city.yokohama.lg.jp/_nuxt/CoffiUX-.js",
+    "final_url": "https://status.hamabus.city.yokohama.lg.jp/_nuxt/CoffiUX-.js",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:50:46.569893+00:00",
+    "original_sha256": "ba36ec7a09af5c0257dde2b7d0aadbce581f2972f242eb3c47858e6a4997ee0c",
+    "local_file": "CoffiUX-.js",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  },
+  {
+    "url": "https://status.hamabus.city.yokohama.lg.jp/_nuxt/64qzAJ0R.js",
+    "final_url": "https://status.hamabus.city.yokohama.lg.jp/_nuxt/64qzAJ0R.js",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:50:46.597585+00:00",
+    "original_sha256": "d43aeb788ce4366515361b967a791d6448029420b5ed5fef0163a81df85b67e2",
+    "local_file": "64qzAJ0R.js",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  },
+  {
+    "url": "https://status.hamabus.city.yokohama.lg.jp/_nuxt/BdNvKNJQ.js",
+    "final_url": "https://status.hamabus.city.yokohama.lg.jp/_nuxt/BdNvKNJQ.js",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:50:46.584941+00:00",
+    "original_sha256": "1786aa535d0f02f2c6db7d5e2129114c0c1f4ee17c24ad4efb49a637118e81ce",
+    "local_file": "BdNvKNJQ.js",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  },
+  {
+    "url": "https://status.hamabus.city.yokohama.lg.jp/_nuxt/Bjix2mz5.js",
+    "final_url": "https://status.hamabus.city.yokohama.lg.jp/_nuxt/Bjix2mz5.js",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:50:46.595601+00:00",
+    "original_sha256": "28f4ce7d6fd3fcbd85306230c31825d03d69017076d92089be5b018d33a553ae",
+    "local_file": "Bjix2mz5.js",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  },
+  {
+    "url": "https://status.hamabus.city.yokohama.lg.jp/_nuxt/CUgBru-4.js",
+    "final_url": "https://status.hamabus.city.yokohama.lg.jp/_nuxt/CUgBru-4.js",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:50:46.585029+00:00",
+    "original_sha256": "7da885f5ccfe3723c9068d420754f53fbc152c5ad638525b94a49ec345dbae19",
+    "local_file": "CUgBru-4.js",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  },
+  {
+    "url": "https://status.hamabus.city.yokohama.lg.jp/_nuxt/Br3FGq2Z.js",
+    "final_url": "https://status.hamabus.city.yokohama.lg.jp/_nuxt/Br3FGq2Z.js",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:50:46.573711+00:00",
+    "original_sha256": "627e466ad05d7dc9c1835980cad7f16053289f9d44f9a0fb51e7986622378222",
+    "local_file": "Br3FGq2Z.js",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  },
+  {
+    "url": "https://status.hamabus.city.yokohama.lg.jp/_nuxt/VIBTlwdh.js",
+    "final_url": "https://status.hamabus.city.yokohama.lg.jp/_nuxt/VIBTlwdh.js",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:50:46.563753+00:00",
+    "original_sha256": "d9151afd004d1bba758ca534835dc49d10a44cf36fada297ed11905f540a7e92",
+    "local_file": "VIBTlwdh.js",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  },
+  {
+    "url": "https://cms.yokohama-operation.cld.navitime.jp/api/web/railroad/operations?lang=ja",
+    "final_url": "https://cms.yokohama-operation.cld.navitime.jp/api/web/railroad/operations?lang=ja",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:51:08.553414+00:00",
+    "original_sha256": "764ffa6d165e3f3a1a48d01a6566ca5a8691a3855f2c9393befb139b76164d04",
+    "local_file": "operations.json",
+    "fixture": "tests/fixtures/yokohama_subway_normal.json",
+    "fixture_sha256": "764ffa6d165e3f3a1a48d01a6566ca5a8691a3855f2c9393befb139b76164d04",
+    "transformation": "Byte-for-byte copy; no field or record modifications"
+  },
+  {
+    "url": "https://cms.yokohama-operation.cld.navitime.jp/api/web/railroad/operations/history?lang=ja",
+    "final_url": "https://cms.yokohama-operation.cld.navitime.jp/api/web/railroad/operations/history?lang=ja",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:51:08.598864+00:00",
+    "original_sha256": "3253eaf6678c9d5aada57aaabb7124c1b5301398c952410d5f9dfb6a060eebd9",
+    "local_file": "history.json",
+    "fixture": "tests/fixtures/yokohama_subway_history.json",
+    "fixture_sha256": "3253eaf6678c9d5aada57aaabb7124c1b5301398c952410d5f9dfb6a060eebd9",
+    "transformation": "Byte-for-byte copy; no field or record modifications"
+  },
+  {
+    "url": "https://www.city.yokohama.lg.jp/kotsu/",
+    "final_url": "https://www.city.yokohama.lg.jp/kotsu/",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:51:08.346533+00:00",
+    "original_sha256": "e90d592927c8f42f01232efa9528488d4f1d83607b3dd6539e8599822bd18a53",
+    "local_file": "city.html",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  },
+  {
+    "url": "https://web.archive.org/cdx/search/cdx?url=cms.yokohama-operation.cld.navitime.jp/api/web/railroad/operations*&output=json&filter=statuscode:200&collapse=digest&limit=20",
+    "error": "The read operation timed out",
+    "retrieved_at_utc": "2026-11-04T12:51:33.542246+00:00",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  },
+  {
+    "url": "https://www.city.yokohama.lg.jp/aboutweb/",
+    "final_url": "https://www.city.yokohama.lg.jp/aboutweb/",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:51:08.364020+00:00",
+    "original_sha256": "4ea88a7fac7a91436ff0298b97c0c3e45bd4f004f0568b44ae9519c50fdbd74c",
+    "local_file": "policy.html",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  },
+  {
+    "url": "https://cms.yokohama-operation.cld.navitime.jp/api/web/railroad/operation?operationGroupId=e30fdde&lang=ja",
+    "final_url": "https://cms.yokohama-operation.cld.navitime.jp/api/web/railroad/operation?operationGroupId=e30fdde&lang=ja",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:52:07.600185+00:00",
+    "original_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "local_file": "detail.json",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  },
+  {
+    "url": "https://www.city.yokohama.lg.jp/aboutweb/sitepolicy.html",
+    "final_url": "https://www.city.yokohama.lg.jp/aboutweb/sitepolicy.html",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:52:05.718065+00:00",
+    "original_sha256": "f8e769ff68005024a6e609d9cebf5bd8ec355c8cb7d0942f8ef5463b3efe0ebe",
+    "local_file": "sitepolicy.html",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  },
+  {
+    "url": "https://web.archive.org/cdx/search/cdx?url=status.hamabus.city.yokohama.lg.jp/operation/list&output=json&filter=statuscode:200&collapse=digest&limit=10",
+    "final_url": "https://web.archive.org/cdx/search/cdx?url=status.hamabus.city.yokohama.lg.jp/operation/list&output=json&filter=statuscode:200&collapse=digest&limit=10",
+    "status": 200,
+    "retrieved_at_utc": "2026-11-04T12:52:08.670603+00:00",
+    "original_sha256": "b40d3169941d8b36ea5c199d54f88ee27f05534be528f83f93e76e0548c54dba",
+    "local_file": "cdx_page.json",
+    "fixture": null,
+    "fixture_sha256": null,
+    "transformation": "Inspected locally; not a runtime fixture"
+  }
+]

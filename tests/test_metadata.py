@@ -20,12 +20,20 @@ def test_every_provider_declares_its_consumed_data_formats(provider_name: Provid
     provider = Tracker(enabled_providers=(provider_name,)).providers[0]
     metadata = provider.metadata
     expected = {
+        "tfl": {DataFormat.JSON},
+        "yokohama_subway": {DataFormat.JSON},
+        "taoyuan_metro": {DataFormat.HTML},
+        "kaohsiung_metro": {DataFormat.HTML},
+        "renfe": {DataFormat.JSON},
         "db": {DataFormat.HTML, DataFormat.JSON},
+        "trenitalia": {DataFormat.HTML},
+        "tgv": {DataFormat.XML},
         "transilien": {DataFormat.JSON},
         "tra": {DataFormat.HTML},
         "hakone_tozan": {DataFormat.HTML},
         "meitetsu": {DataFormat.HTML},
         "sapporo_subway": {DataFormat.HTML},
+        "sendai_subway": {DataFormat.HTML},
         "nagoya_subway": {DataFormat.JSON},
         "jrw": {DataFormat.JSON},
         "jrcentral": {DataFormat.JSON},
@@ -33,6 +41,8 @@ def test_every_provider_declares_its_consumed_data_formats(provider_name: Provid
         "jrkyushu": {DataFormat.XML},
         "tokyo_metro": {DataFormat.JSON},
         "kyoto_subway": {DataFormat.HTML},
+        "nishitetsu": {DataFormat.HTML},
+        "fukuoka_subway": {DataFormat.HTML},
         "yuirail": {DataFormat.JSON},
         "tokyu": {DataFormat.JSON},
         "odakyu": {DataFormat.HTML, DataFormat.JAVASCRIPT, DataFormat.JSON},
@@ -41,8 +51,13 @@ def test_every_provider_declares_its_consumed_data_formats(provider_name: Provid
         "keio": {DataFormat.XML},
         "keisei": {DataFormat.HTML, DataFormat.JAVASCRIPT},
         "seibu": {DataFormat.XML},
+        "sotetsu": {DataFormat.JSON},
+        "saitama_railway": {DataFormat.JSON},
         "singapore_mrt": {DataFormat.HTML, DataFormat.JSON},
         "mta_subway": {DataFormat.PROTOBUF},
+        "metro_north": {DataFormat.PROTOBUF},
+        "mtr": {DataFormat.XML},
+        "metro_trains_melbourne": {DataFormat.JSON},
     }.get(provider_name, {DataFormat.HTML})
     assert {endpoint.format for endpoint in metadata.endpoints} == expected
     assert metadata.endpoints

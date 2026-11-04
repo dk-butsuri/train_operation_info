@@ -1,0 +1,71 @@
+{
+  "investigation": "Official public HTML/JavaScript and archived official national normal bulletin; no refusal workaround",
+  "request_user_agent": "train_operation_info (+https://github.com/dk-butsuri/train_operation_info)",
+  "documents": [
+    {
+      "source_url": "https://www.trenitalia.com/it/informazioni/Infomobilita/notizie-infomobilita.html",
+      "retrieved_at_utc": "2026-11-04T11:54:50.251857+00:00",
+      "original_sha256": "b7d791f0d5facd22cf0b417b744e1977df5cdda2d34930fb8f7166fead0a51bf",
+      "http_status": 200,
+      "extraction": "None; original bytes remain local and are not redistributed.",
+      "fixture": "trenitalia_live_20261104.html"
+    },
+    {
+      "source_url": "https://web.archive.org/web/20260101154916id_/https://www.trenitalia.com/it/informazioni/Infomobilita/notizie-infomobilita.html",
+      "retrieved_at_utc": "2026-11-04T11:57:25.753098+00:00",
+      "original_sha256": "66f6de7fb74c1f8c77604f79f1ea2784fccf69820bb57101bc19a79efb03d6b3",
+      "http_status": 200,
+      "extraction": "None; original bytes remain local and are not redistributed.",
+      "fixture": "trenitalia_normal_20260101154916.html"
+    },
+    {
+      "source_url": "https://web.archive.org/web/20240102054440id_/https://www.trenitalia.com/it/informazioni/Infomobilita/notizie-infomobilita.html",
+      "retrieved_at_utc": "2026-11-04T11:57:24.344668+00:00",
+      "original_sha256": "5206a981024c4e34d94481a010dfd7a272149aeba474ebe116adf764cdaf321e",
+      "http_status": 200,
+      "extraction": "None; original bytes remain local and are not redistributed."
+    },
+    {
+      "source_url": "https://web.archive.org/web/20250111104707id_/https://www.trenitalia.com/it/informazioni/Infomobilita/notizie-infomobilita.html",
+      "retrieved_at_utc": "2026-11-04T11:57:24.997597+00:00",
+      "original_sha256": "9b17e1a6ded11673abec68ea911d40781e971290cb80068d417b9c170ec61e99",
+      "http_status": 200,
+      "extraction": "None; original bytes remain local and are not redistributed."
+    },
+    {
+      "source_url": "https://www.trenitalia.com/etc.clientlibs/trenitalia/clientlibs/clientlib-site.lc-584c8f4f06a92dd80c39fae09634d093-lc.min.js",
+      "retrieved_at_utc": "2026-11-04T11:55:48.464727+00:00",
+      "original_sha256": "3603e2cc69fc31ec2018ba6563717ef623e1771a574e2d9531170fca00eaec7c",
+      "http_status": 200,
+      "extraction": "None; original bytes remain local and are not redistributed."
+    },
+    {
+      "source_url": "https://www.trenitalia.com/it/informazioni/termini-e-condizioni-di-utilizzo-sito-trenitalia.html",
+      "retrieved_at_utc": "2026-11-04T11:55:48.813721+00:00",
+      "original_sha256": "675fc5841b4dce193f42e4554de5d0707f25d8c20cf1c579c3aa521d01a1c1e2",
+      "http_status": 200,
+      "extraction": "None; original bytes remain local and are not redistributed."
+    },
+    {
+      "source_url": "https://www.viaggiatreno.it/viaggiatrenonew/index.jsp",
+      "retrieved_at_utc": "2026-11-04T11:55:50.851622+00:00",
+      "original_sha256": "a0dd698b0c04fba9ebad3fa8f161709e6c3e9fe35ab77e8867a539658b02e423",
+      "http_status": 403,
+      "extraction": "None; original bytes remain local and are not redistributed."
+    },
+    {
+      "source_url": "https://www.trenitalia.com/it/informazioni/Infomobilita.html",
+      "retrieved_at_utc": "2026-11-04T11:56:52.467015+00:00",
+      "original_sha256": "959f36eeb7c0085b60e9e3cdee90d43776eb2bc7d20826b1e8f35946ae52111e",
+      "http_status": 200,
+      "extraction": "None; original bytes remain local and are not redistributed."
+    },
+    {
+      "source_url": "https://web.archive.org/cdx/search/cdx?url=www.trenitalia.com/it/informazioni/Infomobilita/notizie-infomobilita.html&output=json&filter=statuscode:200&filter=mimetype:text/html&collapse=timestamp:4&filter=timestamp:202[456]&limit=6",
+      "retrieved_at_utc": "2026-11-04T11:56:53.470577+00:00",
+      "original_sha256": "de166d44ce04a8f4fb259c684b43b09bdaabef20b0011ff3186bb0be9d92af33",
+      "http_status": 200,
+      "extraction": "None; original bytes remain local and are not redistributed."
+    }
+  ]
+}
