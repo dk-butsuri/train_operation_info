@@ -163,13 +163,14 @@ were serialized back to CP932. Outer page wrappers, scripts, service disclaimers
 and other-railway links were omitted; route/status/cause text and detail onclick
 links were not changed. Tests serve these CP932 bytes through MockTransport.
 The original HTML's server-clock JavaScript reads the HTTP Date header; it does
-not identify the last incident update. No detail page body is imported.
+not identify the last incident update. Historical summary tests use explicitly
+synthetic detail prose; no matching historical detail capture is available.
 
 Live summary, [route list](https://www.kintetsu.co.jp/station/) and
 [general terms](https://www.kintetsu.co.jp/toppage/annai.html) were inspected on
 2026-11-01 JST. The operation page also publishes its own reuse conditions.
-Archive timestamps below are UTC. Delay labels, malformed HTML and unknown
-statuses in tests are explicitly synthetic, not observed incidents.
+Archive timestamps below are UTC. The alternative delay label `遅れ`, malformed
+HTML and unknown statuses in tests are explicitly synthetic, not observed incidents.
 
 | Fixture | Source | SHA-256 of downloaded original |
 | --- | --- | --- |
@@ -180,11 +181,26 @@ statuses in tests are explicitly synthetic, not observed incidents.
 | [kintetsu_20260504000342.html](kintetsu_20260504000342.html) | [2026-05-04 00:03:42 UTC](https://web.archive.org/web/20260504000342id_/https://www.kintetsu.jp/unkou/unkou.html); Toba suspension, Shima/Yamada partial cancellation | `22b8754a3dcfc0853c750d50e4dd094348f37063f70da4ecb122f6e58c6fd2c7` |
 | [kintetsu_20260601231132.html](kintetsu_20260601231132.html) | [2026-06-01 23:11:32 UTC](https://web.archive.org/web/20260601231132id_/https://www.kintetsu.jp/unkou/unkou.html); typhoon notice | `f6f82134b026df9f9a047aa955f69e304b0023d1cce89556528215aa34f74280` |
 | [kintetsu_20250820134746.html](kintetsu_20250820134746.html) | [2025-08-20 13:47:46 UTC](https://web.archive.org/web/20250820134746id_/https://www.kintetsu.jp/unkou/unkou.html); extra limited-express service notice | `3490767495aac1e8434025968bc75f60b4bef0529d23660d227184de8535d1d2` |
+| [kintetsu_20261107.html](kintetsu_20261107.html) | [live official summary](https://www.kintetsu.jp/unkou/unkou.html), fetched 2026-11-07 14:58:00 UTC; Nagoya `遅延` | `3ce6c73be337958326bfd8a83163757a8b112db71d4b8ba71dbc43efb5b164a1` |
+| [kintetsu_detail_940571_20261107.html](kintetsu_detail_940571_20261107.html) | [live official detail](https://www.kintetsu.jp/unkou/files/940571.html), fetched 2026-11-07 14:58:00 UTC; Nagoya detail prose | `ebcf9a4ff4d2384b8ca3283374a640b536dafa10a6c6a82a89d524b796d7ed4f` |
+
+The 2026-11-07 pair is saved as unmodified HTTP response bytes, fetched with
+the library's User-Agent. Both pages declare Shift_JIS and are decoded as CP932.
+The detail page has one `#tran` marker inside its narrative table cell, after
+the navigation and map and before the disclaimer/service/other-railway tables.
+The provider takes that cell's text, converts `<br>` to newlines and removes
+formatting whitespace, scripts and styles. It retains the displayed timestamp,
+prose, affected-section and alternative-transport sections without interpreting
+them as structured dates, affected lines or state. The live summary explicitly
+labels this incident `遅延`; the detail describes earlier suspension and service
+resumption. The summary remains authoritative for status. These captures are
+local only and are not redistributed; synthetic tests cover body extraction,
+shared detail URLs, malformed/empty bodies and atomic failure/recovery.
 
 Recovery tests switch the actual partial-cancellation fixture to the actual
 no-delay fixture; this tests snapshot replacement and is not an archived
-timeline of the same incident. The live raw detail page inspected during
-research was not used as a fixture because the provider imports only summaries.
+timeline of the same incident. The raw detail page inspected during the initial
+2026-11-01 research was not used as a fixture; the 2026-11-07 detail is used above.
 
 ## Other providers
 

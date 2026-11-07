@@ -79,6 +79,12 @@ def _fixture_response(provider: ProviderName, request: httpx.Request) -> httpx.R
         name = ("tosakuro_home.html" if path == "/" else "tosakuro_gomen.html"
                 if "ごめん" in path else "tosakuro_nakamura.html")
         return httpx.Response(200, content=(_FIXTURES / name).read_bytes())
+    if provider == "kintetsu" and path.startswith("/unkou/files/"):
+        # Synthetic prose for the summary-only archive, not captured detail text.
+        return httpx.Response(200, content=(
+            '<div class="title">近鉄列車運行情報</div>'
+            '<table><tr><td><p id="tran">テストの詳細本文<br>テストの追加案内</td></tr></table>'
+        ).encode("cp932"))
     if provider == "sendai_subway":
         name = ("sendai_subway_namboku_normal.html" if path.endswith("nanbokusen/")
                 else "sendai_subway_tozai_normal.html")

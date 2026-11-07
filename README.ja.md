@@ -112,7 +112,7 @@ asyncio.run(main())
 | りんかい線 | `tracker.rinkai.main` | 大崎～新木場の1路線。公式運行情報の案内本文・明示された更新日時 |
 | 名古屋市営地下鉄 | `tracker.nagoya_subway.higashiyama`、`tracker.nagoya_subway.meijo_meiko` | 公式JSONの5系統（名城線・名港線は合算）。状態コード・全案内の本文・区間・理由。市バスは対象外 |
 | 名古屋鉄道（名鉄） | `tracker.meitetsu.nagoya_main`、`tracker.meitetsu.inuyama` | 公式HTMLの路線・区間別の見合わせ、遅延・一部運休、案内本文。既存共通IDの16掲載単位 |
-| 近鉄 | `tracker.kintetsu.osaka`、`tracker.kintetsu.nara`、`tracker.kintetsu.kyoto` | 本線・支線・ケーブルの23路線。公式運行情報の状況・原因・詳細リンク |
+| 近鉄 | `tracker.kintetsu.osaka`、`tracker.kintetsu.nara`、`tracker.kintetsu.kyoto` | 本線・支線・ケーブルの23路線。公式一覧の状況・詳細ページの案内本文とURL |
 | 南海電鉄 | `tracker.nankai.main`、`tracker.nankai.koya`、`tracker.nankai.semboku` | 本線・支線・高野山ケーブル・泉北線の10路線・区間 |
 | 阪神 | `tracker.hanshin.main`、`tracker.hanshin.namba` | 3路線。公式トップの全体サマリー |
 | 京阪 | `tracker.keihan.main`、`tracker.keihan.uji` | 本線・支線・大津線・ケーブルの8路線 |

@@ -6,16 +6,21 @@ https://www.kintetsu.co.jp/station/. Wayback captures 20260111081515,
 20260213065943, 20260305143142 and 20260504000342 verify partial cancellation,
 normal service, notices and suspension. Captures 20260601231132 and
 20250820134746 verify notices without identified affected routes. A live
-response on 2026-11-01 also verified Kyoto suspension. Only summary route,
-status, cause and detail link are imported; detail prose/times are not fetched.
+response on 2026-11-01 also verified Kyoto suspension. On 2026-11-07 the live
+summary and https://www.kintetsu.jp/unkou/files/940571.html verified delay and
+the detail body in the table cell containing #tran. That cell's prose, sections
+and displayed timestamp are preserved as text; navigation/disclaimers are not.
+Status is derived only from summary labels, never from the detail narrative.
+Detail timestamps/incident periods are not parsed; timing remains UNKNOWN.
 #servertime is the HTTP server's current clock, not an update timestamp.
 Unlisted routes are normal only with a validated incident table or explicit
 no-delay statement. The current publication threshold is 15 minutes; smaller
-delays are outside this source's coverage. Delay labels have synthetic tests
-only. Evidence and hashes: tests/fixtures/SOURCES.md.
+delays are outside this source's coverage. The alternative delay label and
+unknown labels have synthetic tests. Evidence and hashes: tests/fixtures/SOURCES.md.
 """
 
 import re
+from dataclasses import dataclass
 from datetime import datetime
 from typing import Final
 from unicodedata import normalize
@@ -25,6 +30,7 @@ from pathlib import Path
 
 import httpx
 from bs4 import BeautifulSoup, Tag
+from bs4.element import NavigableString
 from pydantic import HttpUrl
 
 from train_operation_info.exceptions import ParseError
@@ -54,6 +60,11 @@ _METADATA: Final = ProviderMetadata(
             url=_URL, method="GET", format=DataFormat.HTML,
             description='Route status summary',
         ),
+        SourceEndpoint(
+            url="https://www.kintetsu.jp/unkou/files/{filename}.html",
+            method="GET", format=DataFormat.HTML, is_template=True,
+            description="Detail filename from the summary row's window.open link",
+        ),
     ),
     provider_id=_ID, name="Kintetsu official", source_page_url=HttpUrl(_URL),
     terms_url=HttpUrl("https://www.kintetsu.co.jp/toppage/annai.html"),
@@ -80,7 +91,15 @@ def _summary(html: str) -> BeautifulSoup:
     raise ParseError("Kintetsu summary boundary is missing")
 
 
-def _parse(html: str, lines: tuple[Line, ...], fetched_at: datetime) -> tuple[Line, ...]:
+@dataclass(frozen=True)
+class _Summary:
+    # Route name -> (source status label, detail URL).
+    statuses: dict[str, tuple[str, str]]
+    normal_label: str
+    notices: tuple[str, ...]
+
+
+def _parse_summary(html: str, lines: tuple[Line, ...]) -> _Summary:
     summary = _summary(html)
     for script in summary.select("script, style"):
         script.decompose()
@@ -106,7 +125,7 @@ def _parse(html: str, lines: tuple[Line, ...], fetched_at: datetime) -> tuple[Li
             cells = row.select(":scope > td")
             if len(cells) != 4:
                 raise ParseError("Incomplete Kintetsu incident row")
-            name, label, cause = (cell.get_text(strip=True) for cell in cells[:3])
+            name, label = (cell.get_text(strip=True) for cell in cells[:2])
             if name not in {line.name for line in lines} or name in statuses or not label:
                 raise ParseError("Unknown or duplicate Kintetsu route, or missing status")
             button = cells[3].select_one("input[onclick]")
@@ -114,7 +133,7 @@ def _parse(html: str, lines: tuple[Line, ...], fetched_at: datetime) -> tuple[Li
             match = re.fullmatch(r"window\.open\('(?P<path>\./files/\d+\.html)'\);?", onclick) if isinstance(onclick, str) else None
             if match is None:
                 raise ParseError("Kintetsu detail link is missing or changed")
-            statuses[name] = label, f"{name}: {label}\n原因: {cause}\n詳細: {urljoin(_URL, match['path'])}"
+            statuses[name] = label, urljoin(_URL, match['path'])
         if not statuses:
             raise ParseError("Empty Kintetsu incident table")
         header_table = header.find_parent("table")
@@ -134,25 +153,54 @@ def _parse(html: str, lines: tuple[Line, ...], fetched_at: datetime) -> tuple[Li
         notices.append(table.get_text("\n", strip=True))
     if not statuses and normal_tag is None and not notices:
         raise ParseError("Kintetsu summary contains no recognized status or notice")
+    return _Summary(statuses, normal_label, tuple(notices))
+
+
+def _parse_detail(html: str) -> str:
+    soup = BeautifulSoup(html, "html.parser")
+    title = soup.select_one(".title")
+    if title is None or title.get_text(strip=True) != "近鉄列車運行情報":
+        raise ParseError("Kintetsu detail title is missing")
+    markers = soup.select("#tran")
+    if len(markers) != 1:
+        raise ParseError("Kintetsu detail body is missing or duplicated")
+    cell = markers[0].find_parent("td")
+    if not isinstance(cell, Tag) or cell.select_one(".caption") is not None:
+        raise ParseError("Kintetsu detail body cell changed")
+    for node in cell.select("script, style"):
+        node.decompose()
+    for br in cell.select("br"):
+        br.replace_with(NavigableString("\n"))
+    text = "\n".join(part.strip() for part in cell.get_text().splitlines() if part.strip())
+    if not text:
+        raise ParseError("Kintetsu detail body is empty")
+    return text
+
+
+def _parse(
+    summary: _Summary, details: dict[str, str], lines: tuple[Line, ...], fetched_at: datetime,
+) -> tuple[Line, ...]:
     shared = tuple(make_alert(
         lines[0], LineStatus.UNKNOWN, "近鉄: お知らせ", text, affected_line_ids=(),
-    ) for text in notices if text)
+    ) for text in summary.notices if text)
     result: list[Line] = []
     for line in lines:
-        label, description = statuses.get(line.name, (normal_label, ""))
+        label, detail_url = summary.statuses.get(line.name, (summary.normal_label, ""))
         status = {
             "運転見合わせ": LineStatus.SUSPENDED,
             "一部運休": LineStatus.PARTIAL_SUSPENSION,
             "遅れ": LineStatus.DELAYED,
             "遅延": LineStatus.DELAYED,
             "お知らせ": LineStatus.ALERT,
-        }.get(label, LineStatus.UNKNOWN) if description else (
+        }.get(label, LineStatus.UNKNOWN) if detail_url else (
             LineStatus.UNKNOWN if shared else LineStatus.NORMAL
         )
-        alerts = shared + (() if not description else (
-            make_alert(line, status, f"{line.name}: {label}", description),
+        alerts = shared + (() if not detail_url else (
+            make_alert(line, status, f"{line.name}: {label}", details[detail_url]).model_copy(
+                update={"source_url": detail_url},
+            ),
         ))
-        if shared and not description:
+        if shared and not detail_url:
             label = "お知らせ（対象路線未特定）"
         result.append(snapshot(line, status, label, fetched_at, alerts=alerts))
     return tuple(result)
@@ -171,7 +219,14 @@ class KintetsuProvider(SnapshotProvider):
     async def _fetch_lines(self, client: httpx.AsyncClient) -> tuple[Line, ...]:
         response = await self._get(client, _URL)
         response.raise_for_status()
-        return _parse(response.content.decode("cp932"), self.lines, self._now())
+        summary = _parse_summary(response.content.decode("cp932"), self.lines)
+        details: dict[str, str] = {}
+        for _, url in summary.statuses.values():
+            if url not in details:
+                response = await self._get(client, url)
+                response.raise_for_status()
+                details[url] = _parse_detail(response.content.decode("cp932"))
+        return _parse(summary, details, self.lines, self._now())
 
     @property
     def namba(self) -> Line:

@@ -704,7 +704,11 @@ print(tracker.kintetsu.kyoto.alerts)
 
 近鉄の属性は `namba`、`nara`、`kyoto`、`kashihara`、`keihanna`、`osaka`、`nagoya`、`minami_osaka`、`yoshino`、`ikoma`、`tenri`、`tawaramoto`、`shigi`、`yunoyama`、`suzuka`、`yamada`、`toba`、`shima`、`domyoji`、`nagano`、`gose`、`ikoma_cable`、`nishi_shigi_cable` です。
 
-近鉄公式の[運行情報ページ](https://www.kintetsu.jp/unkou/unkou.html)は15分以上の遅れを掲載対象とします。`NORMAL` はこの掲載基準による表示です。障害一覧を検証できた場合は、掲載されていない路線を `NORMAL` にします。対象路線を特定できない全体のお知らせは原文と `affected_line_ids=()` を保持し、状態を `UNKNOWN` にします。詳細ページ本文・区間・発生時刻は取得せず、アラートに原因と詳細リンクを含めます。画面の現在時刻は更新日時として使わず、`updated_at=None` とします。平常・運転見合わせ・一部運休・お知らせは公式ページの実データで、遅延ラベルと未知表示は合成データで検証しています。
+近鉄公式の[運行情報ページ](https://www.kintetsu.jp/unkou/unkou.html)は15分以上の遅れを掲載対象とします。`NORMAL` はこの掲載基準による表示です。障害一覧を検証できた場合は、掲載されていない路線を `NORMAL` にします。対象路線を特定できない全体のお知らせは原文と `affected_line_ids=()` を保持し、状態を `UNKNOWN` にします。
+
+路線別アラートの `description` は、一覧の詳細リンク先にある案内本文です。本文セルの改行を整え、掲載されている区間・時刻・振替輸送の案内も文章のまま保持します。`ServiceAlert.source_url` は詳細ページ、`Line.source_url` は一覧ページです。同じ詳細URLは1回の更新につき一度だけ取得します。詳細の取得・解析に失敗した場合も更新全体を失敗とし、前回の結果を保持します。従来の「路線名: 状態／原因: …／詳細: URL」という合成文は生成しません。
+
+状態は一覧の状況欄だけから判定し、詳細本文から推測しません。本文の時刻・区間は構造化せず、`updated_at=None`、`timing=UNKNOWN` を維持します。平常・運転見合わせ・一部運休・お知らせ・「遅延」と詳細本文は公式ページの実データで、別表記の「遅れ」と未知表示・詳細欠損等は合成データで検証しています。
 
 ### 南海電鉄
 
