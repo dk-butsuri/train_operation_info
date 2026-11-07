@@ -170,3 +170,91 @@ def test_saved_evidence_hashes() -> None:
     for record in manifest:
         assert sha256((_FIXTURES / record["fixture"]).read_bytes()).hexdigest() == record["fixture_sha256"]
         assert record["original_sha256"] == record["fixture_sha256"]
+
+
+@pytest.mark.parametrize("panel", ["その他・ホームライナーなど", "しなの"])
+def test_synthetic_excluded_blank_content_does_not_block_covered_delays(panel: str) -> None:
+    # Synthetic reproduction of empty content in known, excluded panels.
+    route = "東海道線(豊橋～米原)"
+    payload = {
+        "check": "1",
+        "events": [
+            {"no": "1", "imp_line": [{"lang": "ja", "name": route}],
+             "status_id": "0006", "status": [{"lang": "ja", "name": "遅れ／運休あり"}]},
+            {"no": "2", "imp_line": [{"lang": "ja", "name": panel}],
+             "status_id": "unused", "status": [{"lang": "ja", "name": ""}]},
+        ],
+        "message_info": [
+            {"trainline": [{"lang": "ja", "name": route}],
+             "delivery_msg": [{"lang": "ja", "message": "合成：対象路線の案内"}]},
+            {"trainline": [{"lang": "ja", "name": panel}],
+             "delivery_msg": [{"lang": "ja", "message": ""}]},
+            {"trainline": [{"lang": "ja", "name": panel}],
+             "delivery_msg": [{"lang": "ja", "message": ""}]},
+        ],
+    }
+
+    async def scenario() -> None:
+        async with httpx.AsyncClient(transport=httpx.MockTransport(
+            lambda request: httpx.Response(200, json=(
+                {"serviceJotai": "0"} if request.url.path.endswith("hp_service_jotai_kanri.json") else payload
+            )),
+        )) as client:
+            provider = JrCentralProvider(client=client)
+            await provider.refresh()
+            line = provider.tokaido_toyohashi_maibara
+            assert line.status is LineStatus.DELAYED
+            assert line.alerts[0].description == "合成：対象路線の案内"
+            assert len(provider.alerts) == 1
+            assert len(provider.lines) == 13
+            assert len(provider.delay_lines) == 1
+            assert len([line for line in provider.lines if line.status is LineStatus.NORMAL]) == 12
+
+    asyncio.run(scenario())
+
+
+@pytest.mark.parametrize("route, message, error", [
+    ("東海道線(豊橋～米原)", "", "Japanese message"),
+    ("合成：未知の路線", "", "Unregistered JR Central route"),
+])
+def test_synthetic_blank_message_is_not_ignored_for_covered_or_unknown_routes(
+    route: str, message: str, error: str,
+) -> None:
+    async def scenario() -> None:
+        data: dict[str, object] = {"check": "0", "events": None, "message_info": None}
+        async with httpx.AsyncClient(transport=httpx.MockTransport(
+            lambda request: httpx.Response(200, json=(
+                {"serviceJotai": "0"} if request.url.path.endswith("hp_service_jotai_kanri.json") else data
+            )),
+        )) as client:
+            provider = JrCentralProvider(client=client)
+            await provider.refresh()
+            previous = provider.lines
+            data.update(check="1", events=[], message_info=[{
+                "trainline": [{"lang": "ja", "name": route}],
+                "delivery_msg": [{"lang": "ja", "message": message}],
+            }])
+            with pytest.raises(ParseError, match=error):
+                await provider.refresh()
+            assert provider.lines is previous
+
+    asyncio.run(scenario())
+
+
+def test_live_capture_with_empty_excluded_liner_messages() -> None:
+    payload = (_FIXTURES / "jrcentral_operation_20261107T150825Z.json").read_bytes()
+
+    async def scenario() -> None:
+        async with httpx.AsyncClient(transport=httpx.MockTransport(
+            lambda request: _response(request, payload),
+        )) as client:
+            provider = JrCentralProvider(client=client)
+            await provider.refresh()
+            assert len(provider.lines) == 13
+            line = provider.tokaido_toyohashi_maibara
+            assert line.status is LineStatus.DELAYED
+            assert len(line.alerts) == 2
+            assert all(alert.description for alert in line.alerts)
+            assert all(alert.affected_line_ids == (line.line_id,) for alert in provider.alerts)
+
+    asyncio.run(scenario())

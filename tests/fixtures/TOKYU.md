@@ -55,3 +55,25 @@ prior permission for other copying, modification, redistribution and public
 display. Metadata records `PRIVATE_USE_ONLY`; it does not grant public signage
 or commercial reuse. The operation page was checked for source-specific
 conditions and states the publication threshold of 15 minutes or suspension.
+
+## 2026-11-07 UTC refusal and later success
+
+A live provider run at 15:08:34 UTC received HTTP 200 for `unten2.json` but
+HTTP 403 for `unten_additional.json`, using the shared library User-Agent.
+The refresh failed with `FetchError` and did not publish a partial snapshot.
+At 15:23:08 UTC the official operation page, additional JSON and information
+JSON all returned HTTP 200 with that same User-Agent. Their SHA-256 values
+match the originals listed above. At 15:25:41 UTC the page's referenced
+`main.js?tn94mu` also returned HTTP 200; its SHA-256 still matches the table,
+and its `hl()` still requests the same three `/unten/` JSON URLs. A fresh
+provider instance subsequently fetched all nine routes successfully without
+first visiting the operation page or changing headers.
+
+These observations establish refusal followed by success, not the cause of
+the earlier 403. No alternate URL, browser impersonation, fallback empty
+message or special retry is introduced. Additional and general notices are
+required because they can change otherwise normal routes to UNKNOWN.
+Synthetic regression tests return 403 at each notice endpoint after a
+successful suspended snapshot, verify that the entire previous snapshot is
+retained without retries, then verify that a later normal response clears
+the previous alerts. This is not a captured real-world incident timeline.

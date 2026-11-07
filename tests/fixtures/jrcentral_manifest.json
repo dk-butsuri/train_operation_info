@@ -110,5 +110,13 @@
     "original_sha256": "a493e05e43f57c33dbe2f92d8f18fcd9f2aa4d0babae652dabde3e4fc3947c01",
     "fixture_sha256": "a493e05e43f57c33dbe2f92d8f18fcd9f2aa4d0babae652dabde3e4fc3947c01",
     "extraction": "none; exact response bytes"
+  },
+  {
+    "fixture": "jrcentral_operation_20261107T150825Z.json",
+    "url": "https://traininfo.jr-central.co.jp/zairaisen/data/trainInfo/json/unkou.json",
+    "retrieved_at": "2026-11-07T15:08:25.428646+00:00",
+    "original_sha256": "4b5e67ef8461f500741bb9973b3499da89c007270b17470ab6e67495566cf67a",
+    "fixture_sha256": "4b5e67ef8461f500741bb9973b3499da89c007270b17470ab6e67495566cf67a",
+    "extraction": "none; exact response bytes from live snapshot capture"
   }
 ]

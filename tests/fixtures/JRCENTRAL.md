@@ -70,6 +70,22 @@ UNKNOWN, and `active_from`/`active_until` stay None, including for delay and
 suspension codes. Recovery/expiry is represented only by removal/replacement
 of source events, not by text/date heuristics.
 
+On 2026-11-07 15:08:25.428646 UTC, the live operation JSON (ono 61615)
+contained two conventional-line delay events/messages and empty Japanese
+messages for `その他・ホームライナーなど`. The exact response bytes are saved
+locally as `jrcentral_operation_20261107T150825Z.json`; its original and
+fixture SHA-256 is
+`4b5e67ef8461f500741bb9973b3499da89c007270b17470ab6e67495566cf67a`.
+The response was recorded through the provider's ordinary HTTP path with the
+shared library User-Agent, without modifying any route, status or message.
+Known excluded panels must be filtered after identifying/validating their
+route name and before checking status-label/message content. Empty content
+in those panels must not prevent the 13 covered panels from updating.
+Unknown route names and empty Japanese messages in covered panels still
+fail atomically. The capture is a regression test; synthetic tests also
+cover blank status labels and unmatched message counts in excluded panels,
+and rejection of blank messages in covered or unknown routes.
+
 Scope excludes express/liner panels (`senkuKbn=3/4`), separate
 `data/notice/json/oshirase.json` notices, transfers, recovery/supplement images,
 linked PDFs, delay certificates, train positions and timetables. Narratives

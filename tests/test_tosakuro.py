@@ -115,6 +115,15 @@ def test_synthetic_article_links_and_media_are_retained_without_fetching() -> No
     assert "https://example.com/advice.pdf" in text and "https://example.com/advice.png" in text
 
 
+def test_synthetic_article_source_urls_match_public_string_type() -> None:
+    provider = asyncio.run(_refresh(_home(), _article(), _article()))
+    for alert, slug in zip(provider.alerts, ("synthetic-gomen", "synthetic-nakamura"), strict=True):
+        assert isinstance(alert.source_url, str)
+        assert alert.source_url == _URL + "post/" + slug
+        assert alert.model_dump(mode="json", warnings="error")["source_url"] == alert.source_url
+        assert alert.source_url in alert.model_dump_json(warnings="error")
+
+
 @pytest.mark.parametrize("mutation", [
     "missing_panel", "duplicate_panel", "wrong_heading", "missing_title", "duplicate_title",
     "blank_title", "missing_link", "external_link", "invalid_path", "duplicated_post",

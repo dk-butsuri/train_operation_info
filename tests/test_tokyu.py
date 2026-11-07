@@ -226,3 +226,45 @@ def test_tracker_selection_default_and_failure_isolation() -> None:
             assert len(requests) == 4
 
     asyncio.run(scenario())
+
+
+@pytest.mark.parametrize("endpoint", ["unten_additional.json", "information.json"])
+def test_synthetic_notice_refusal_preserves_snapshot_and_allows_later_recovery(endpoint: str) -> None:
+    phase = 0
+    requests: list[str] = []
+    incident = _payload()
+    incident.update(check="1", check_ty="2,2", unten_ty="合成：運転見合わせの案内")
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        assert request.headers["User-Agent"] == USER_AGENT
+        requests.append(str(request.url))
+        if phase == 1 and request.url.path.endswith(endpoint):
+            return httpx.Response(403)
+        return _response(request, incident if phase == 0 else None)
+
+    async def scenario() -> None:
+        nonlocal phase
+        async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
+            provider = TokyuProvider(client=client)
+            await provider.refresh()
+            assert provider.toyoko.status is LineStatus.SUSPENDED
+            previous = provider.lines
+            requests.clear()
+            phase = 1
+            with pytest.raises(FetchError) as caught:
+                await provider.refresh()
+            assert isinstance(caught.value.__cause__, httpx.HTTPStatusError)
+            assert caught.value.__cause__.response.status_code == 403
+            assert provider.lines is previous
+            assert provider.toyoko.alerts
+            expected = [_BASE + "unten2.json", _BASE + "unten_additional.json"]
+            if endpoint == "information.json":
+                expected.append(_BASE + endpoint)
+            assert requests == expected  # No fallback or retry after refusal.
+            phase = 2
+            await provider.refresh()
+            assert all(line.status is LineStatus.NORMAL for line in provider.lines)
+            assert not provider.alerts
+            assert previous[0].status is LineStatus.SUSPENDED
+
+    asyncio.run(scenario())

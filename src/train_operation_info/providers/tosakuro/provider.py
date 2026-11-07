@@ -166,7 +166,7 @@ class TosaKuroshioProvider(SnapshotProvider):
         result: list[Line] = []
         for line, title, url, description in notices:
             alert = make_alert(line, LineStatus.ALERT, title, description, affected_line_ids=())
-            alert = alert.model_copy(update={"source_url": HttpUrl(url)})
+            alert = alert.model_copy(update={"source_url": str(HttpUrl(url))})
             result.append(snapshot(
                 line, LineStatus.NORMAL if title in _NORMAL else LineStatus.UNKNOWN,
                 title, fetched_at, alerts=(alert,),

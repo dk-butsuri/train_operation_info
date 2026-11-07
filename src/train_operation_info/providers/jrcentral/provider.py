@@ -13,7 +13,10 @@ index.js and train_information.js show no events as normal; serviceJotai
 other than 0 hides the UI (maintenance), so old data must not become normal.
 Only the 13 conventional panels (senkuKbn=1) are covered. Separate express
 services, notice/oshirase.json, transfers, images, PDFs and train positions
-are excluded. Mixed notices within message_info/events are retained.
+are excluded. Known excluded panels are skipped before validating their
+status/message content. A 2026-11-07 15:08 UTC live capture verified blank
+messages in the excluded liner panel alongside conventional-line delays.
+Mixed notices within covered message_info/events are retained.
 No dedicated applicability/validity fields were verified: timing UNKNOWN,
 active_from/active_until None. create_time is a date, not an update timestamp;
 the page header uses HTTP/current time. updated_at remains None.
@@ -162,11 +165,15 @@ def _parse(data: _Operation, lines: tuple[Line, ...], fetched_at: datetime) -> t
         numbers.add(event.no)
         name = _japanese(event.imp_line)
         _validate_route(name)
+        if name in _EXCLUDED:
+            continue
         _japanese(event.status)
         events.setdefault(name, []).append(event)
     for delivery in data.message_info or []:
         name = _japanese(delivery.trainline)
         _validate_route(name)
+        if name in _EXCLUDED:
+            continue
         messages.setdefault(name, []).append(_message(delivery.delivery_msg))
     result: list[Line] = []
     for name, line in zip(_ROUTES, lines):
