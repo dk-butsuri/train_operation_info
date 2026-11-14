@@ -1,0 +1,26 @@
+[
+  {
+    "url": "https://www.osaka-monorail.co.jp/",
+    "fetched_at": "2026-11-14T08:59:17.377311+00:00",
+    "sha256": "73b1c0de3f791b9c42317b8ff3134cf32a24875749d76bf49be4d63dd64982a2",
+    "fixture": "osaka_monorail_partial_20261114.html",
+    "fixture_sha256": "de7bd6271ff88867726dd30cc5320dd15e35e99f95173b97506db2457b5aff99",
+    "extraction": "BeautifulSoup html.parser serialization of .operationStatus only; no labels, station IDs or status classes changed"
+  },
+  {
+    "url": "https://www.osaka-monorail.co.jp/common/css/common.css?v=1788157719",
+    "fetched_at": "2026-11-14T08:59:38.546369+00:00",
+    "sha256": "2a0dd6fb1159cb51f2b601729e5299999c84c44e9b2c8aff68e1a517cc2c8bfc",
+    "fixture": "osaka_monorail_style.css",
+    "fixture_sha256": "2a0dd6fb1159cb51f2b601729e5299999c84c44e9b2c8aff68e1a517cc2c8bfc",
+    "extraction": "Original unmodified response bytes; reviewed for legend colors / reader clock only, not fetched at runtime"
+  },
+  {
+    "url": "https://www.osaka-monorail.co.jp/common/js/common.js",
+    "fetched_at": "2026-11-14T08:59:39.140975+00:00",
+    "sha256": "9a292368bbfd499c7ffa9f3e27cb85b75b909892a9303bdebf68db7c5e8607eb",
+    "fixture": "osaka_monorail_common.js",
+    "fixture_sha256": "9a292368bbfd499c7ffa9f3e27cb85b75b909892a9303bdebf68db7c5e8607eb",
+    "extraction": "Original unmodified response bytes; reviewed for legend colors / reader clock only, not fetched at runtime"
+  }
+]

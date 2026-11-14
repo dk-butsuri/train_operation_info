@@ -117,7 +117,7 @@ asyncio.run(main())
 | 阪神 | `tracker.hanshin.main`、`tracker.hanshin.namba` | 3路線。公式トップの全体サマリー |
 | 京阪 | `tracker.keihan.main`、`tracker.keihan.uji` | 本線・支線・大津線・ケーブルの8路線 |
 | 阪急 | `tracker.hankyu.kobe`、`tracker.hankyu.kyoto` | 公式発表の神戸線・宝塚線・京都線の3系統 |
-| 大阪モノレール | `tracker.osaka_monorail.main`、`tracker.osaka_monorail.saito` | 2路線。公式トップの全体サマリー |
+| 大阪モノレール | `tracker.osaka_monorail.main`、`tracker.osaka_monorail.saito` | 2路線。公式トップの全体サマリーと駅間別の運行状態図 |
 | 大阪メトロ | `tracker.osaka_metro.midosuji` | 地下鉄8路線・ニュートラム |
 | 京都市営地下鉄 | `tracker.kyoto_subway.karasuma`、`tracker.kyoto_subway.tozai` | 公式トップの緊急情報欄。掲載なし／対象・影響未特定の案内。Yahooと共通路線IDを使用 |
 | とさでん交通 | `tracker.tosaden.main` | 路面電車全体の1掲載単位。公式の運行状況本文・台風等の案内 |
@@ -236,7 +236,7 @@ except RefreshError as exc:
 | `hanshin` | ✓ |  |  |  |  |
 | `keihan` | ✓ | ✓ | ✓ | ✓ |  |
 | `hankyu` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `osaka_monorail` | ✓ |  |  |  |  |
+| `osaka_monorail` | ✓ | ✓ | ✓ | ✓ |  |
 | `osaka_metro` | ✓ | ✓ | ✓ |  |  |
 | `kyoto_subway` | ✓ |  |  |  |  |
 | `tosaden` | ✓ |  |  |  | ✓ |

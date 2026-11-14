@@ -205,7 +205,7 @@ timeline of the same incident. The raw detail page inspected during the initial
 ## Other providers
 
 HTML fixtures are excerpts of the original status DOM (serialized by BeautifulSoup); labels and status values are unchanged. XML fixtures retain original bytes. The older JR West JSON fixtures are projected to createdAt, maintenance flags, the route master, and daily data; unrelated history is omitted. Future days and incident version histories remain where present. The newer `jrw_announcements_20261102.json` retains the complete response, including area announcements.
-MRT abnormal cases in tests are synthetic. No abnormal archived POST response or abnormal Osaka Monorail snapshot has been verified.
+MRT abnormal cases in tests are synthetic; no abnormal archived POST response has been verified. Osaka Monorail live abnormal HTML, CSS/JavaScript evidence and capture hashes are documented in [OSAKA_MONORAIL.md](OSAKA_MONORAIL.md) and [osaka_monorail_manifest.json](osaka_monorail_manifest.json).
 Live responses were obtained on 2026-11-01 (Asia/Tokyo). Archive timestamps in filenames and source URLs are UTC; `monorail_normal.html` is also an archived response, as its source URL shows.
 
 | Fixture | Source | SHA-256 of downloaded original |

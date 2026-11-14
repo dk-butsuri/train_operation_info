@@ -40,7 +40,7 @@ _FILES = {
     "osaka_metro": "20240829220436.html", "jrw": "jrw_api_20261001234249.json",
     "jrshikoku": "jrshikoku_20260712052626.html", "hankyu": "hankyu_20250722023635.html",
     "hanshin": "hanshin_20240830120316.html", "nankai": "nankai_20250806220111.html",
-    "kintetsu": "kintetsu_20260504000342.html", "osaka_monorail": "monorail_normal.html",
+    "kintetsu": "kintetsu_20260504000342.html", "osaka_monorail": "osaka_monorail_partial_20261114.html",
     "taipei_metro": "taipei_metro_normal.html", "thsr": "thsr_20240403005339.html",
     "yurikamome": "yurikamome_normal.html",
     "yuirail": "yuirail_normal.json",

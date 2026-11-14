@@ -136,12 +136,12 @@ def test_unknown_is_implicit_and_never_declared(provider_name: ProviderName) -> 
 
 
 def test_undeclared_status_is_a_parse_error_and_keeps_snapshot() -> None:
-    class _Delayed(OsakaMonorailProvider):
+    class _Undeclared(OsakaMonorailProvider):
         async def _fetch_lines(self, client: httpx.AsyncClient) -> tuple[Line, ...]:
-            return tuple(line.model_copy(update={"status": LineStatus.DELAYED}) for line in self.lines)
+            return tuple(line.model_copy(update={"status": LineStatus.ALERT}) for line in self.lines)
 
-    provider = _Delayed(client=httpx.AsyncClient())
-    assert LineStatus.DELAYED not in provider.metadata.statuses
+    provider = _Undeclared(client=httpx.AsyncClient())
+    assert LineStatus.ALERT not in provider.metadata.statuses
     before = provider.lines
     with pytest.raises(ParseError, match="undeclared"):
         asyncio.run(provider.refresh())

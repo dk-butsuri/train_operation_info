@@ -84,6 +84,8 @@ Saitama Railway is available as `tracker.saitama_railway.main` (included by defa
 
 Tokyo Monorail is also supported through `tracker.jreast.tokyo_monorail`. The [Tokyo Monorail official website's service information link](https://www.tokyo-monorail.co.jp/guidance/) points to JR East's service information page, so select `enabled_providers=("jreast",)` to fetch it. Providers identify the information source; this line's `line.operator.name` is `"東京モノレール"` (Tokyo Monorail).
 
+Osaka Monorail (`tracker.osaka_monorail.main`, `.saito`) reads the official current station-to-station map when present. Explicit segment classes distinguish delays, full suspension and partial suspension for each line; unscoped abnormal summaries remain `UNKNOWN`. The live abnormal response was captured on 2026-11-14; other map states and recovery transitions use synthetic tests.
+
 Each source covers what its official page publishes, and no more. For per-line attributes, status mappings and exclusions, see the [provider tables](https://github.com/dk-butsuri/train_operation_info/blob/main/README.ja.md#対応provider) and [docs/PROVIDERS.md](https://github.com/dk-butsuri/train_operation_info/blob/main/docs/PROVIDERS.md) (Japanese).
 
 Transilien covers 12 SNCF route groups and 16 RATP Paris Métro lines (1–14, 3bis and 7bis). Use `tracker.transilien.metro_6.status`, `metro_3bis` or `metro_7bis`; the Métro lines' operator is `RATP`, and the data source is Transilien. Current engineering works and separate future lists are excluded. RER A/B, trams, buses, Orlyval, CDGVAL and the funicular are outside this scope. All 28 routes update atomically in 29 HTTP requests; a failed route retains the entire previous Transilien snapshot. Run `python -m examples.transilien` for an example.
@@ -152,7 +154,7 @@ Sources differ in which statuses they can tell apart. A source without a ✓ nev
 | `hanshin` | ✓ |  |  |  |  |
 | `keihan` | ✓ | ✓ | ✓ | ✓ |  |
 | `hankyu` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `osaka_monorail` | ✓ |  |  |  |  |
+| `osaka_monorail` | ✓ | ✓ | ✓ | ✓ |  |
 | `osaka_metro` | ✓ | ✓ | ✓ |  |  |
 | `kyoto_subway` | ✓ |  |  |  |  |
 | `tosaden` | ✓ |  |  |  | ✓ |

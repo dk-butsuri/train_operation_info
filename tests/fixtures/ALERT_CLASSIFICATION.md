@@ -9,6 +9,7 @@
 | JR西日本 | 当日 `dailyData` 内の `conditionName` を検証済みラベルに対応付ける | 遅延・見合わせ・一部運休のみ `ACTIVE` |
 | JR東日本 | 路線別行の状態ラベルとCSSクラスの組み合わせ | 遅延・見合わせ・一部運休のみ `ACTIVE` |
 | Yahoo | 路線別の専用状態欄 | 遅延・見合わせ・一部運休のみ `ACTIVE`。`その他` 等は `UNKNOWN` |
+| 大阪モノレール | 現在の運行状況図の駅間別 `normal` / `delay` / `stop`。凡例とCSSを確認 | 図から確定した遅延・見合わせ・一部見合わせのみ `ACTIVE`。図なし・未知状態は `UNKNOWN`。出典は [OSAKA_MONORAIL.md](OSAKA_MONORAIL.md) |
 | JR四国 | 地図・見出しは案内と対象区間を示すが、個々の案内の適用時期を確定しない | `UNKNOWN` |
 | DB Verkehrslage | 当日のDB Fernverkehr掲載単位。専用expiryによる掲載終了の除外は、残る案内の適用時期を確定しない | `UNKNOWN` |
 | SNCF Transilien | `currentDisruptions` の専用状態コード。現在表示欄への掲載だけで実際の適用期間を確定しない | `UNKNOWN` |
