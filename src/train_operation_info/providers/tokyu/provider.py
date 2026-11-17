@@ -149,7 +149,8 @@ def _parse(
     if information.check != "0":
         notices.append(information.message)
     if data.check not in ("0", "1", "2"):
-        notices.append(f"check={data.check}\n{data.unten}")
+        # The unknown check code is kept in source_status, not in display text.
+        notices.append(data.unten or "運行状況を判別できません")
     elif data.check != "0" and all(code == "0,0" for code, _ in data.records()):
         notices.append(data.unten)
     shared = tuple(make_alert(
@@ -177,7 +178,7 @@ def _parse(
         label = f"check={codes}\n{message}"
         description = message
         if data.kousin_jikoku:
-            description += f"\nkousin_jikoku: {data.kousin_jikoku}"
+            description += f"\n更新時刻：{data.kousin_jikoku}"
         alerts = shared
         if status is not LineStatus.NORMAL:
             title = {

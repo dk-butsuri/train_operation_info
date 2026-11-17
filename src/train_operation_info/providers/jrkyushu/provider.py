@@ -162,8 +162,9 @@ class JrKyushuProvider(SnapshotProvider):
                 for notice in area.notices
             ]
             if not known:
+                # The unknown sts code stays in source_status, not in display text.
                 alerts.append(make_alert(line, LineStatus.UNKNOWN, line.name,
-                                         f"sts={area.status}", affected_line_ids=affected))
+                                         f"{line.name}: 運行状況を判別できません", affected_line_ids=affected))
             summary = (f"sts={area.status}" if not known else
                        _NOTICE if area.status == "1" else _NORMAL)
             result.append(snapshot(

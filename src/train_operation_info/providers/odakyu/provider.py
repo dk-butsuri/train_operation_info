@@ -141,17 +141,18 @@ def _parse(data: _Payload, lines: tuple[Line, ...], now: datetime) -> tuple[Line
     summary = data.status[-1] if data.status else None
     summary_unknown = summary is not None and summary.status not in range(4, 15)
     unknown_blocks = any(code not in range(1, 29) for code in blocks)
+    # Alert text is the published wording only; codes and raw records stay in source_status.
     general: list[str] = []
     if summary is not None:
-        general.extend((f"status={summary.status}", summary.message, summary.description))
+        general.extend((summary.message, summary.description))
     if detail is not None:
         general.extend((detail.hp_title, detail.hp_status, detail.hp_transfer_info, detail.hp_remarks))
-    general.extend(item.model_dump_json() for item in data.occurrence_location_info)
+    general.extend(f"原因：{item.trouble_reason.strip()}" for item in data.occurrence_location_info
+                   if item.trouble_reason.strip())
     body = "\n".join(text for text in general if text)
     route_messages = detail.route_messages() if detail else ("", "", "")
     special = "\n".join(text for text in (
         detail.hp_influence_status_whole, detail.express_service_status_description,
-        f"chiyoda_stop_flg={detail.chiyoda_stop_flg}" if detail.chiyoda_stop_flg else "",
     ) if text) if detail else ""
     result: list[Line] = []
     route_states: list[LineStatus] = []
@@ -178,8 +179,7 @@ def _parse(data: _Payload, lines: tuple[Line, ...], now: datetime) -> tuple[Line
         unscoped = "\n".join(text for text in (body, special) if text)
     if scope_unknown:
         unscoped += "\n" + "\n".join(text for text in route_messages if text)
-        unscoped += "\n" + "\n".join(b.model_dump_json() for b in data.influence_block_state
-                                        if b.block_state not in range(1, 29))
+        unscoped = unscoped.strip("\n") or "運行状況を判別できません"
     shared: tuple[ServiceAlert, ...] = () if not unscoped else (make_alert(
         lines[0], LineStatus.UNKNOWN if scope_unknown else LineStatus.ALERT,
         "小田急線: 案内（対象路線未特定）", unscoped, affected_line_ids=(),

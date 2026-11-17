@@ -96,7 +96,8 @@ def test_synthetic_incident_codes_and_recovery(code: str, status: LineStatus, ef
             assert line.alerts[0].effect is effect
             assert line.alerts[0].affected_line_ids == (line.line_id,)
             assert "試験の運行案内。\n運転を再開しました。" in line.alerts[0].description
-            assert "synthetic unverified timestamp" in line.alerts[0].description
+            assert "更新時刻：synthetic unverified timestamp" in line.alerts[0].description
+            assert "check=" not in line.alerts[0].description
             assert code in (line.source_status or "")
             assert line.updated_at is None
             assert all(other.status is LineStatus.NORMAL for other in tracker.lines[1:])

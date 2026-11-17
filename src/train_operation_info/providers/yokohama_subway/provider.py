@@ -19,9 +19,9 @@ same-event recovery capture was verified. Incident/recovery/corruption tests
 are synthetic; using history items to exercise the current parser is explicitly
 a synthetic envelope, not evidence of a current incident.
 
-Runtime reads only the current list. Each validated list record is retained as
-JSON in alert.description, including sections, cause, maxDelayTime, period and
-the dedicated status. Detail-only additionalInfo/replacementTrains, histories,
+Runtime reads only the current list. Each validated list record is rendered in
+alert.description as display text: the dedicated status, sections, cause,
+maxDelayTime and period (Japan time). Detail-only additionalInfo/replacementTrains, histories,
 certificates, bus notices, positions, external links and news are not fetched.
 No long-term discriminator was verified inside this list; mixed notices remain.
 NORMAL concerns this list alone. timing=UNKNOWN and active periods=None: no
@@ -38,6 +38,7 @@ tests/fixtures/YOKOHAMA_SUBWAY.md and yokohama_subway_manifest.json.
 """
 
 from datetime import datetime
+from zoneinfo import ZoneInfo
 from pathlib import Path
 from typing import Annotated, Final
 
@@ -121,6 +122,23 @@ class _Feed(_Input):
     items: list[_Notice]
 
 
+def _describe(notice: _Notice) -> str:
+    """The list card's fields as display text, in the order the official view shows them."""
+
+    def clock(value: datetime) -> str:
+        local = value.astimezone(ZoneInfo("Asia/Tokyo"))
+        return f"{local.month}月{local.day}日 {local:%H:%M}"
+
+    period = clock(notice.period.begin) + "～" + (clock(notice.period.end) if notice.period.end else "")
+    return "\n".join(text for text in (
+        notice.operationStatus.name,
+        "区間：" + "、".join(notice.sections) if notice.sections else "",
+        f"原因：{notice.cause}" if notice.cause else "",
+        f"最大遅延：{notice.maxDelayTime}" if notice.maxDelayTime else "",
+        f"期間：{period}",
+    ) if text)
+
+
 def _parse(payload: bytes, lines: tuple[Line, ...], fetched_at: datetime) -> tuple[Line, ...]:
     feed = _Feed.model_validate_json(payload)
     names = {key: name for key, name, _ in _ROUTES}
@@ -142,7 +160,7 @@ def _parse(payload: bytes, lines: tuple[Line, ...], fetched_at: datetime) -> tup
             else LineStatus.UNKNOWN for n in notices
         )
         alerts = tuple(make_alert(
-            line, state, f"{name} 運行情報", notice.model_dump_json(),
+            line, state, f"{name} 運行情報", _describe(notice),
             alert_id=f"{_ID}:{line.line_id}:{notice.operationGroupId}",
         ) for notice, state in zip(notices, states))
         result.append(snapshot(

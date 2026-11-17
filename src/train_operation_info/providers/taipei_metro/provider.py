@@ -113,9 +113,10 @@ def _parse(html: str, lines: tuple[Line, ...], fetched_at: datetime) -> tuple[Li
         for element in panel.select(".realstatus__desc a[href], .abnormalpic img[src]")
         if isinstance(raw := element.get("href") or element.get("src"), str) and raw.strip()
     ))
-    details = "\n".join((description, *references))
+    # Display text carries the message only; link/diagram URLs are not signage text.
+    details = description or ("詳細は公式サイトをご確認ください。" if references else "")
     by_id = {line.line_id: line for line in lines}
-    states: dict[LineId, tuple[LineStatus, str]] = {}
+    states: dict[LineId, tuple[LineStatus, str, str]] = {}
     for item in panel.select(".realstatus__abnormalwrap .realstatusdetail__item"):
         codes = item.select(".linecode")
         names = item.select(".linetitletw")
@@ -136,12 +137,12 @@ def _parse(html: str, lines: tuple[Line, ...], fetched_at: datetime) -> tuple[Li
         marker = urlsplit(src).path.rsplit("/", 1)[-1]
         status = _LIGHTS.get(marker, LineStatus.UNKNOWN)
         label = label.strip()
-        if marker not in _LIGHTS:
-            label = f"{label} [{src}]"
+        # An unfamiliar image is identified in source_status, not in display text.
+        source_label = label if marker in _LIGHTS else f"{label} [{src}]"
         # Do not let a stale green/gray image silently hide a new source label.
         if status is LineStatus.NORMAL and label.removeprefix(line.name).strip() not in _NORMAL_MESSAGES:
             status = LineStatus.UNKNOWN
-        states[identifier] = (status, label)
+        states[identifier] = (status, label, source_label)
     if states.keys() != by_id.keys():
         raise ParseError("Metro Taipei route list is incomplete")
 
@@ -149,7 +150,7 @@ def _parse(html: str, lines: tuple[Line, ...], fetched_at: datetime) -> tuple[Li
     # When all lights are normal but a separate notice is present, the source
     # has not identified affected lines. Retain it once with an empty scope.
     unscoped: ServiceAlert | None = None
-    if all(status is LineStatus.NORMAL for status, _ in states.values()) and (
+    if all(status is LineStatus.NORMAL for status, _, _ in states.values()) and (
         description not in _NORMAL_MESSAGES or references
     ):
         unscoped = make_alert(
@@ -157,7 +158,7 @@ def _parse(html: str, lines: tuple[Line, ...], fetched_at: datetime) -> tuple[Li
             affected_line_ids=(), language="zh-Hant",
         )
     for line in lines:
-        status, label = states[line.line_id]
+        status, label, source_label = states[line.line_id]
         alerts: tuple[ServiceAlert, ...] = ()
         if unscoped is not None:
             status, alerts = LineStatus.UNKNOWN, (unscoped,)
@@ -166,7 +167,7 @@ def _parse(html: str, lines: tuple[Line, ...], fetched_at: datetime) -> tuple[Li
                 line, status, label, f"{label}\n{details}", language="zh-Hant",
             ),)
         result.append(snapshot(
-            line, status, label, fetched_at, updated_at=updated_at, alerts=alerts,
+            line, status, source_label, fetched_at, updated_at=updated_at, alerts=alerts,
         ))
     return tuple(result)
 

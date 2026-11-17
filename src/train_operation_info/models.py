@@ -113,10 +113,11 @@ class Operator(_Model):
 def display_text(text: str, *, single_line: bool = False) -> str:
     """Whitespace-normalized text that can be shown as is, e.g. on signage.
 
-    Line breaks between paragraphs are kept; ideographic spaces (U+3000), which
-    sources use for alignment, are kept. Wording is never changed.
+    Line breaks between paragraphs are kept; leading ideographic spaces (U+3000),
+    which sources use for indentation, are kept. Wording is never changed.
     """
-    lines = [re.sub(r"[ \t]+", " ", line).strip(" \t") for line in re.split(r"\r\n|\r|\n", text)]
+    lines = [re.sub(r"[ \t]+", " ", line).lstrip(" \t").rstrip(" \t\u3000")
+             for line in re.split(r"\r\n|\r|\n", text)]
     if single_line:
         return " ".join(line for line in lines if line)
     return re.sub(r"\n{3,}", "\n\n", "\n".join(lines)).strip("\n")

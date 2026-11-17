@@ -129,6 +129,7 @@ _AREA_URLS: Final[tuple[tuple[_AreaKey, str], ...]] = (
 
 _REMARK_1: Final = "運休・３０分以上の遅延・運転見合わせが発生"
 _REMARK_2: Final = "サービス時間外"
+_REMARK_OTHER: Final = "運行状況を判別できません"
 
 
 class _Eikyo(BaseModel):
@@ -372,7 +373,8 @@ class JrHokkaidoProvider(SnapshotProvider):
             else:
                 status = LineStatus.UNKNOWN
                 alerts = (make_alert(
-                    line, LineStatus.UNKNOWN, entry.official_name, f"status={code} ({_REMARK_2})",
+                    line, LineStatus.UNKNOWN, entry.official_name,
+                    f"{entry.official_name}: {_REMARK_2 if code == 2 else _REMARK_OTHER}",
                     affected_line_ids=default_affected,
                 ),)
                 updated_at = None

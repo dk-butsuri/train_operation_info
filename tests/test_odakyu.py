@@ -60,6 +60,12 @@ def test_official_archives_and_canonical_identity(filename: str, states: tuple[L
             else:
                 assert provider.odawara.updated_at is None
             assert all(alert.timing is AlertTiming.UNKNOWN for alert in provider.alerts)
+            # Display text: published wording only, no status codes or raw JSON records.
+            for alert in provider.alerts:
+                assert "status=" not in alert.description and "_flg=" not in alert.description
+                assert "{" not in alert.description
+            if filename == "odakyu_20250730090750.json":
+                assert any("原因：津波警報発表" in alert.description for alert in provider.alerts)
 
     asyncio.run(scenario())
 

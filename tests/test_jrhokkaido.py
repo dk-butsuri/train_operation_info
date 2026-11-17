@@ -125,7 +125,7 @@ def test_synthetic_unknown_code_outside_service_hours() -> None:
             assert line.status is LineStatus.UNKNOWN
             assert line.source_status == "2"
             assert len(line.alerts) == 1
-            assert "status=2" in line.alerts[0].description
+            assert line.alerts[0].description == "学園都市線: サービス時間外"
             assert line.alerts[0].affected_line_ids == (line.line_id,)
             # An unrelated normal line sharing the same response is unaffected.
             assert provider.hidaka.status is LineStatus.NORMAL

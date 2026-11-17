@@ -147,14 +147,20 @@ def _parse(html: str, lines: tuple[Line, ...], fetched_at: datetime) -> tuple[Li
                 uncertain.add(key)
     # A highlighted section without its own notice is uncertain, not a broken page:
     # e.g. the Sunrise Seto notice is headed 土讃線 while seto is highlighted too.
-    uncertain.update(key for key in active if not alerts[key])
+    orphans = {key for key in active if not alerts[key]}
+    uncertain.update(orphans)
     result: list[Line] = []
     for line in lines:
         key = next(key for key, identifier in _ROUTES.items() if identifier == line.line_id)
         status = (LineStatus.UNKNOWN if not known or key in uncertain else
                   LineStatus.ALERT if alerts[key] else LineStatus.NORMAL)
         if status is LineStatus.UNKNOWN:
-            alerts[key].append(make_alert(line, status, summary, f"{summary}; map={overlays[key]}", affected_line_ids=()))
+            # Explain in words; the raw map style stays out of display text.
+            reason = ("路線図でこの区間が強調表示されていますが、対応する案内は掲載されていません。" if key in orphans
+                      else "路線図の表示を判別できません。" if key in uncertain else "")
+            alerts[key].append(make_alert(
+                line, status, summary, "\n".join(filter(None, (summary, reason))), affected_line_ids=(),
+            ))
         result.append(snapshot(line, status, summary, fetched_at, alerts=tuple(alerts[key]),
                                updated_at=max(times[key]) if times[key] else None,
                                source_line_names=(line.name,)))

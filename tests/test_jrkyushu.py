@@ -139,7 +139,8 @@ def test_synthetic_unknown_codes_are_retained(code: str) -> None:
             await provider.refresh()
             line = provider.fukuoka_kitakyushu
             assert line.status is LineStatus.UNKNOWN
-            assert line.alerts[-1].description == f"sts={code}"
+            assert line.alerts[-1].description == f"{line.name}: 運行状況を判別できません"
+            assert line.source_status == f"sts={code}"
             assert line.alerts[0].description == "原文には運休と書かれています。"
             assert provider.oita.status is LineStatus.NORMAL
 

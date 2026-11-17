@@ -138,6 +138,23 @@ def test_synthetic_data_loading_light_with_empty_message_is_unknown_only_for_tha
     asyncio.run(scenario())
 
 
+def test_synthetic_unknown_light_path_stays_out_of_display_text() -> None:
+    html = _synthetic_light("lightread.gif", "營運資料擷取中")
+
+    async def scenario() -> None:
+        async with httpx.AsyncClient(transport=httpx.MockTransport(
+            lambda _: httpx.Response(200, text=html),
+        )) as client:
+            provider = TaipeiMetroProvider(client=client)
+            await provider.refresh()
+            alert, = provider.bannan.alerts
+            assert alert.title == "板南線營運資料擷取中"
+            assert "lightread.gif" not in alert.title + alert.description
+            assert provider.bannan.source_status is not None and "lightread.gif" in provider.bannan.source_status
+
+    asyncio.run(scenario())
+
+
 def test_synthetic_closed_hours_are_not_a_disruption() -> None:
     soup = BeautifulSoup(_normal(), "html.parser")
     for item in soup.select(".realstatusdetail__item"):
@@ -247,7 +264,7 @@ def test_fetch_failure_keeps_snapshot(failure: str) -> None:
     asyncio.run(scenario())
 
 
-def test_synthetic_unscoped_notice_keeps_message_links_and_empty_scope() -> None:
+def test_synthetic_unscoped_notice_keeps_message_and_empty_scope() -> None:
     soup = BeautifulSoup(_normal(), "html.parser")
     _element(soup, ".realstatus__text").string = "合成テスト：影響路線未指定"
     image = soup.new_tag("img", src="/2026/images/synthetic-map.png")
@@ -264,7 +281,8 @@ def test_synthetic_unscoped_notice_keeps_message_links_and_empty_scope() -> None
             assert len(tracker.unknown_lines) == 6
             alert, = tracker.alerts
             assert alert.affected_line_ids == ()
-            assert "影響路線未指定" in alert.description
-            assert "https://tpweb.metro.taipei/2026/images/synthetic-map.png" in alert.description
+            assert alert.description == "合成テスト：影響路線未指定"
+            # A diagram still marks the notice, but its URL is not display text.
+            assert "synthetic-map.png" not in alert.description
 
     asyncio.run(scenario())

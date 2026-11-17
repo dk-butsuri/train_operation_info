@@ -93,7 +93,11 @@ def test_official_history_records_in_explicitly_synthetic_current_envelope() -> 
                 assert alert.timing is AlertTiming.UNKNOWN
                 assert alert.affected_line_ids == (provider.blue.line_id,)
                 assert alert.active_from is None and alert.active_until is None
-                assert json.loads(alert.description) == original
+                # Display text with the card's fields, never the raw JSON record.
+                assert alert.description.startswith(original["operationStatus"]["name"])
+                assert f"原因：{original['cause']}" in alert.description
+                assert "区間：" + "、".join(original["sections"]) in alert.description
+                assert "{" not in alert.description
             assert not provider.active_alerts and provider.blue.updated_at is None
 
     asyncio.run(scenario())

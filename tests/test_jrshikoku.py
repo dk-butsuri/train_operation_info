@@ -162,7 +162,9 @@ def test_synthetic_unknown_display_retains_raw_text(mutation: str) -> None:
             provider = JrShikokuProvider(client=client)
             await provider.refresh()
             assert provider.yodo.status is LineStatus.UNKNOWN
-            assert any("unknown" in a.description or "未知" in a.title for a in provider.alerts)
+            assert any("判別できません" in a.description or "未知" in a.title or "未知" in a.description
+                       for a in provider.alerts)
+            assert not any("display:" in a.description for a in provider.alerts)
     asyncio.run(scenario())
 
 
@@ -180,6 +182,7 @@ def test_synthetic_highlight_without_notice_is_unknown_for_that_section() -> Non
             provider = JrShikokuProvider(client=client)
             await provider.refresh()
             assert provider.seto_ohashi.status is LineStatus.UNKNOWN
+            assert "対応する案内は掲載されていません" in provider.seto_ohashi.alerts[-1].description
             assert provider.yodo.status is LineStatus.ALERT
             assert all(line.status is LineStatus.NORMAL for line in provider.lines
                        if line not in (provider.seto_ohashi, provider.yodo))
