@@ -16,6 +16,8 @@ The region header says 現在 (page clock), not 配信: updated_at remains None.
 Status is never inferred from prose, including planned works in notices.
 Repeated rows and regions are combined without overwriting active alerts.
 Unknown labels/classes remain UNKNOWN; route/field loss aborts the snapshot.
+The 2:00-4:00 page has no route rows and only the 情報提供時間 warning; every
+route of that area is then UNKNOWN instead of a refresh failure (synthetic test).
 Recovery, unknown labels/classes and damaged HTML are synthetic tests.
 Evidence, hashes and canonical scope decisions: tests/fixtures/JREAST.md.
 Duration and future applicability are not inferred from prose. Current source
@@ -165,6 +167,7 @@ _BINDINGS: Final[dict[str, tuple[str, str, LineId]]] = {
 }
 
 _AREA_GIDS: Final = {"kanto": "1", "tohoku": "4", "shinetsu": "5"}
+_OUT_OF_HOURS: Final = "情報提供時間は4:00～翌2:00となっています。"
 _AREA_ROUTES: Final[dict[str, tuple[str, ...]]] = {
     'kanto': (
         'yamanoteline',
@@ -303,6 +306,15 @@ def _status(label: str, markers: tuple[str, ...]) -> LineStatus:
 def _parse_area(html: str, area: str) -> tuple[_Report, ...]:
     soup = BeautifulSoup(html, "html.parser")
     expected = _AREA_ROUTES[area]
+    if not soup.select(".traininfo-routes__table__item") and _OUT_OF_HOURS in [
+        tag.get_text(strip=True) for tag in soup.select(".u-text-warning")
+    ]:
+        # 2:00-4:00 the page drops every route row and shows only this notice.
+        url = urljoin(_URL, f"{area}.aspx")
+        return tuple(
+            _Report(source_id, _BINDINGS[source_id][1], "情報提供時間外", LineStatus.UNKNOWN, _OUT_OF_HOURS, url)
+            for source_id in expected
+        )
     seen: set[str] = set()
     reports: list[_Report] = []
     for item in soup.select(".traininfo-routes__table__item"):

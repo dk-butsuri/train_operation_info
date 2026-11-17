@@ -154,6 +154,28 @@ def test_synthetic_unknown_shinkansen_without_incident_prose_is_not_normal() -> 
     assert "new-marker" in report.description
 
 
+@pytest.mark.parametrize("notice", [True, False])
+def test_synthetic_out_of_hours_page_is_unknown_not_failure(notice: bool) -> None:
+    # Mirrors the 2:00-4:00 page: every route row is gone, one warning remains.
+    soup = BeautifulSoup(_fixture("kanto"), "html.parser")
+    for item in soup.select(".traininfo-routes__table__item"):
+        item.decompose()
+    body = soup.body
+    assert body is not None
+    # The live page also highlights the listing criteria with the same class.
+    for text in ("4時～翌2時", "30分以上") + ((" 情報提供時間は4:00～翌2:00となっています。",) if notice else ()):
+        warning = soup.new_tag("span", attrs={"class": "u-text-warning"})
+        warning.string = text
+        body.append(warning)
+    if not notice:
+        with pytest.raises(ParseError):
+            _parse_area(str(soup), "kanto")
+        return
+    reports = _parse_area(str(soup), "kanto")
+    assert {report.source_id for report in reports} == set(_AREA_ROUTES["kanto"])
+    assert all(report.status is LineStatus.UNKNOWN and report.label == "情報提供時間外" for report in reports)
+
+
 @pytest.mark.parametrize("damage", ["route", "name", "status", "description", "link", "gid", "unknown_route"])
 def test_synthetic_damage_preserves_entire_previous_snapshot(damage: str) -> None:
     broken = False
