@@ -170,6 +170,30 @@ def test_malformed_source_never_clears_previous_snapshot(name: str) -> None:
     asyncio.run(scenario())
 
 
+def test_jrw_whole_line_section_without_end_station() -> None:
+    # Synthetic: live feeds publish {"startStation": "全線"} without endStation.
+    data = json.loads((_FIXTURES / "jrw_api_20261001234249.json").read_bytes())
+    for area in data["areaTrafficInfos"]:
+        for day in area["dailyData"]:
+            for place in day["placeTrafficInfos"]:
+                for traffic in place.get("conventionalLineTrafficInfos") or []:
+                    if traffic["lineName"] in ("湖西線", "琵琶湖線"):
+                        for detail in traffic["conventionalLineTrafficInfoDetails"]:
+                            detail["sections"] = [{"conditionName": detail["conditionName"], "startStation": "全線"}]
+    content = json.dumps(data).encode()
+
+    async def scenario() -> None:
+        async with httpx.AsyncClient(transport=httpx.MockTransport(
+            lambda request: httpx.Response(200, content=content),
+        )) as client:
+            provider = JrWestProvider(client=client)
+            await provider.refresh()
+            assert provider.kosei.status is LineStatus.DELAYED
+            assert provider.biwako.status is LineStatus.SUSPENDED
+
+    asyncio.run(scenario())
+
+
 def test_jrw_rejects_naive_source_timestamp() -> None:
     text = (_FIXTURES / "jrw_status.json").read_text(encoding="utf-8").replace("+09:00", "", 1)
 

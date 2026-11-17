@@ -170,7 +170,8 @@ class _Version(_SourceModel):
 
 class _Section(_SourceModel):
     startStation: str
-    endStation: str
+    # A whole-line entry is published as startStation "全線" without endStation.
+    endStation: str | None = None
 
 
 class _Detail(_SourceModel):
@@ -223,13 +224,16 @@ class _CurrentIncident:
     version: _Version
 
 
+_WHOLE_LINE: Final = ("全線", None)
+
+
 @dataclass(frozen=True)
 class _Observation:
     source_id: int
     traffic_id: int
     updated_at: datetime
     status: LineStatus
-    sections: frozenset[tuple[str, str]]
+    sections: frozenset[tuple[str, str | None]]
 
 
 def _suspension_scope(
@@ -247,6 +251,8 @@ def _suspension_scope(
     if {item.source_id for item in suspended} != source_ids:
         return LineStatus.PARTIAL_SUSPENSION
     suspended_sections = frozenset().union(*(item.sections for item in suspended))
+    if _WHOLE_LINE in suspended_sections:
+        return status
     for item in observations:
         if item.status in (LineStatus.DELAYED, LineStatus.PARTIAL_SUSPENSION) and item.sections - suspended_sections:
             return LineStatus.PARTIAL_SUSPENSION
