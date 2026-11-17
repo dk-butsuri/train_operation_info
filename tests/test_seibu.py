@@ -282,3 +282,28 @@ def test_ikebukuro_chichibu_combines_both_official_segments() -> None:
             assert line.line_id == LineId("jp:seibu:line_45cb36b285e9")
 
     asyncio.run(scenario())
+
+
+def test_same_incident_on_both_ikebukuro_chichibu_segments_is_one_alert() -> None:
+    # Mirrors the live feed of 2026-11-15: both entries share one <txt> and label.
+    text = "西武秩父線は18時20分頃、横瀬駅での人身事故の影響により、飯能～西武秩父駅間の一部列車に遅れと運休がでています。"
+    incident = _normal_text().replace("<txt />", f"<txt>{text}</txt>", 1).replace(
+        '<dif all="0" />',
+        '<dif all="2">'
+        '<lif><lin><nm>池袋線</nm></lin><sts><nm>遅れと運休</nm></sts></lif>'
+        '<lif><lin><nm>西武秩父線</nm></lin><sts><nm>遅れと運休</nm></sts></lif>'
+        '</dif>',
+    )
+
+    async def scenario() -> None:
+        async with httpx.AsyncClient(transport=httpx.MockTransport(
+            lambda request: _response(request, incident),
+        )) as client:
+            provider = SeibuProvider(client=client)
+            await provider.refresh()
+            line = provider.ikebukuro_chichibu
+            alert, = line.alerts
+            assert alert.description == text
+            assert line.source_status == "遅れと運休"
+
+    asyncio.run(scenario())

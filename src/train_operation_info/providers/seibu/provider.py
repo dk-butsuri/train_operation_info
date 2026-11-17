@@ -179,7 +179,9 @@ def _parse(xml: bytes, lines: tuple[Line, ...], fetched_at: datetime) -> tuple[L
         for identifier in targets:
             statuses[identifier].append(status)
             labels[identifier].append(label)
-            per_line_alerts[identifier].append(alert)
+            # 池袋線 and 西武秩父線 entries share one canonical line and one <txt>.
+            if all(existing.alert_id != alert.alert_id for existing in per_line_alerts[identifier]):
+                per_line_alerts[identifier].append(alert)
 
     shared: tuple[ServiceAlert, ...] = ()
     if overall_text and not entries:
@@ -195,7 +197,7 @@ def _parse(xml: bytes, lines: tuple[Line, ...], fetched_at: datetime) -> tuple[L
         alerts = tuple(per_line_alerts[identifier]) + shared
         if status is LineStatus.NORMAL and shared:
             status = LineStatus.UNKNOWN
-        label = " / ".join(labels[identifier]) or "平常運行（15分以上の遅れ等の掲載なし）"
+        label = " / ".join(dict.fromkeys(labels[identifier])) or "平常運行（15分以上の遅れ等の掲載なし）"
         result.append(snapshot(
             line, status, label, fetched_at, updated_at=updated_at, alerts=alerts,
             source_line_names=_FRAGMENTS[identifier],
