@@ -103,7 +103,8 @@ def test_synthetic_unknown_notices_and_recovery(status: str, code: str, extra: s
             assert alert.affected_line_ids == (provider.namboku.line_id,)
             assert status in alert.description and "遅延証明書" not in alert.description
             if '/notice"' in extra:
-                assert "https://www.kotsu.city.sendai.jp/notice" in alert.description
+                assert alert.source_url == "https://www.kotsu.city.sendai.jp/notice"
+                assert "https://" not in alert.description
             if "長期案内" in extra:
                 assert "長期案内" in alert.description
             if "東西線に言及" in extra:

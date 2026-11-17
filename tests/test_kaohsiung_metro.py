@@ -86,7 +86,9 @@ def test_light_rail_unknown_does_not_change_mrt_and_links_are_retained() -> None
     html = _synthetic(rail='輕軌狀態確認中 <a href="/Information/notice?id=test">詳細</a>')
     metro, rail = _parse(html, KaohsiungMetroProvider().lines, _NOW)
     assert metro.status is LineStatus.NORMAL and rail.status is LineStatus.UNKNOWN
-    assert "https://www.krtc.com.tw/Information/notice?id=test" in rail.alerts[0].description
+    assert rail.alerts[0].source_url == "https://www.krtc.com.tw/Information/notice?id=test"
+    assert rail.alerts[0].description == "輕軌狀態確認中 詳細"
+    assert rail.source_status is not None and "[ci g]" in rail.source_status
     # Even a normal label with an additional reference is not silently discarded.
     html = _synthetic(metro='捷運全線正常營運<a href="/Information/notice"></a>')
     assert _parse(html, KaohsiungMetroProvider().lines, _NOW)[0].status is LineStatus.UNKNOWN

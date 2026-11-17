@@ -8,7 +8,7 @@ normal paragraph as live HTML. Archive 20240829161647id_ of that URL
 contains a typhoon suspension PLAN in the same panel, with the SAME st02
 icon as normal service. The icon is therefore not a disruption status code.
 Only the complete normal paragraph maps to NORMAL; other notices map to
-ALERT with original text/links and affected_line_ids=(). The panel has no
+ALERT with original text (first link as source_url) and affected_line_ids=(). The panel has no
 structured affected routes; all three lines carry the shared announcement.
 Neither prose nor icon determines delay/suspension or timing=ACTIVE.
 
@@ -43,7 +43,7 @@ from train_operation_info.models import (
     LINE_CATALOG, DataFormat, Line, LineId, LineStatus, ProviderId,
     ProviderMetadata, SourceEndpoint, UsagePermission,
 )
-from ..base import SnapshotProvider, make_alert, snapshot
+from ..base import SnapshotProvider, html_text, make_alert, snapshot, with_link
 
 _URL: Final = "https://subway.city.fukuoka.lg.jp/status/"
 _ID: Final = ProviderId("fukuoka_subway")
@@ -77,7 +77,7 @@ def _one(parent: BeautifulSoup | Tag, selector: str) -> Tag:
     return matches[0]
 
 
-def _notice(payload: bytes) -> tuple[str, datetime | None, bool]:
+def _notice(payload: bytes) -> tuple[str, tuple[str, ...], datetime | None, bool]:
     soup = BeautifulSoup(payload.decode("utf-8-sig"), "html.parser")
     section = _one(soup, "section#status")
     if _one(section, "h2.ttl_h2").get_text(strip=True) != "運行情報":
@@ -96,7 +96,7 @@ def _notice(payload: bytes) -> tuple[str, datetime | None, bool]:
         raise ParseError("Unexpected executable Fukuoka Subway notice content")
     for image in body.select("img"):
         image.replace_with(NavigableString(str(image.get("alt", ""))))
-    text = body.get_text("\n", strip=True)
+    text = html_text(body)
     if not text:
         raise ParseError("Empty Fukuoka Subway notice")
     links: list[str] = []
@@ -116,7 +116,7 @@ def _notice(payload: bytes) -> tuple[str, datetime | None, bool]:
             raise ParseError("Unexpected Fukuoka Subway update timestamp")
         year, month, day, hour, minute = (int(v) for v in match.groups())
         updated_at = datetime(year, month, day, hour, minute, tzinfo=ZoneInfo("Asia/Tokyo"))
-    return "\n".join((text, *dict.fromkeys(links))), updated_at, text == _NORMAL and not links
+    return text, tuple(dict.fromkeys(links)), updated_at, text == _NORMAL and not links
 
 
 class FukuokaSubwayProvider(SnapshotProvider):
@@ -133,11 +133,11 @@ class FukuokaSubwayProvider(SnapshotProvider):
     async def _fetch_lines(self, client: httpx.AsyncClient) -> tuple[Line, ...]:
         response = await self._get(client, _URL)
         response.raise_for_status()
-        text, updated_at, normal = _notice(response.content)
+        text, links, updated_at, normal = _notice(response.content)
         status = LineStatus.NORMAL if normal else LineStatus.ALERT
-        alerts = () if normal else (make_alert(
+        alerts = () if normal else (with_link(make_alert(
             self.kuko, status, "福岡市地下鉄 運行情報", text, affected_line_ids=(),
-        ),)
+        ), links),)
         fetched_at = self._now()
         return tuple(snapshot(
             line, status, text, fetched_at, updated_at=updated_at, alerts=alerts,

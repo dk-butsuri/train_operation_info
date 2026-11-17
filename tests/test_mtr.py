@@ -149,7 +149,8 @@ def test_synthetic_messages_preserve_scope_and_do_not_classify_prose(code: str) 
             assert len(provider.alerts) == 2
             assert "tomorrow" in provider.alerts[0].description
             assert "<br" not in provider.alerts[0].title
-            assert "https://www.mtr.com.hk/alert/synthetic.html" in provider.alerts[0].description
+            assert provider.alerts[0].source_url == "https://www.mtr.com.hk/alert/synthetic.html"
+            assert "https://" not in provider.alerts[0].description
             for alert in provider.alerts:
                 assert alert.language == "en"
                 assert alert.affected_line_ids == (LineId("hk:mtr:tsuen_wan"),)

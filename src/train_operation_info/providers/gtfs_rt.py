@@ -410,11 +410,11 @@ def lines_from_feed(
         routes = _routes(alert, scope)
         impact = alert.impact_periods[0] if len(alert.impact_periods) == 1 else None
         line_ids = tuple(dict.fromkeys(scope.routes[route] for route in routes))
+        # The dedicated url field is the alert's link, not part of its display text.
         service_alert = ServiceAlert(
-            alert_id=entity.entity_id, title=title,
-            description="\n".join(text for text in (details, link) if text),
+            alert_id=entity.entity_id, title=title, description=details or "",
             effect=alert_effect(alert.effect), timing=AlertTiming.UNKNOWN,
-            affected_line_ids=line_ids, source_url=source_url, language=scope.language,
+            affected_line_ids=line_ids, source_url=link or source_url, language=scope.language,
             active_from=None if impact is None else impact.start,
             active_until=None if impact is None else impact.end,
         )

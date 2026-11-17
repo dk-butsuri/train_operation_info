@@ -50,7 +50,7 @@ from train_operation_info.models import (
     LINE_CATALOG, DataFormat, Line, LineId, LineStatus, ProviderId,
     ProviderMetadata, ServiceAlert, SourceEndpoint, UsagePermission,
 )
-from ..base import SnapshotProvider, combined_status, make_alert, snapshot
+from ..base import SnapshotProvider, combined_status, html_text, make_alert, snapshot, with_link
 
 _ID: Final = ProviderId("transilien")
 _URL: Final = "https://www.transilien.com/fr/#traffic-info-app"
@@ -158,16 +158,17 @@ class _Current(BaseModel):
     currentDisruptions: list[_Works | _Disruption]
 
 
-def _description(raw: str) -> str:
+def _description(raw: str) -> tuple[str, tuple[str, ...]]:
+    """Laid-out text and linked destinations; the first link becomes source_url."""
     soup = BeautifulSoup(raw, "html.parser")
-    text = soup.get_text("\n", strip=True)
+    text = html_text(soup)
     if not text:
         raise ParseError("Transilien notice has no visible description")
     links = tuple(dict.fromkeys(
         href for anchor in soup.select("a[href]")
         if isinstance(href := anchor.get("href"), str) and href.strip()
     ))
-    return "\n".join((text, *links))
+    return text, links
 
 
 def _parse(payload: bytes, line: Line, fetched_at: datetime) -> Line:
@@ -188,10 +189,11 @@ def _parse(payload: bytes, line: Line, fetched_at: datetime) -> Line:
         states.append(state)
         labels.append(f"{notice.category}:{notice.severity}")
         dates.append(notice.modifiedDate)
-        alerts.append(make_alert(
-            line, state, notice.title, _description(notice.detail),
+        text, links = _description(notice.detail)
+        alerts.append(with_link(make_alert(
+            line, state, notice.title, text,
             alert_id=f"transilien:{line.line_id}:{notice.id}", language="fr",
-        ))
+        ), links))
     return snapshot(
         line, combined_status(tuple(states)),
         " | ".join(dict.fromkeys(labels)) if labels else "currentDisruptions: no traffic notices (TRAVAUX excluded)",

@@ -39,7 +39,7 @@ from pathlib import Path
 from typing import Final
 from urllib.parse import unquote, urlsplit
 
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, NavigableString
 from bs4.element import Tag
 import httpx
 from pydantic import HttpUrl
@@ -49,7 +49,7 @@ from train_operation_info.models import (
     LINE_CATALOG, DataFormat, Line, LineId, LineStatus, ProviderId,
     ProviderMetadata, SourceEndpoint, UsagePermission,
 )
-from ..base import SnapshotProvider, make_alert, snapshot
+from ..base import SnapshotProvider, html_text, make_alert, snapshot
 
 _URL: Final = "https://www.tosakuro.com/"
 _ID: Final = ProviderId("tosakuro")
@@ -123,22 +123,23 @@ def _article(payload: bytes, expected_title: str) -> str:
     body = _one(soup, 'section[data-hook="post-description"]')
     if body.select("script, style, iframe, template"):
         raise ParseError("Unexpected Tosa Kuroshio article content")
-    text = body.get_text("\n", strip=True)
-    if not text:
-        raise ParseError("Tosa Kuroshio service article is empty")
-    links: list[str] = []
+    # Links and media must still be well formed, but the alert's source_url is the
+    # article itself: display text carries the wording and image alternative text.
     for link in body.select("a"):
         href = link.get("href")
         if not isinstance(href, str):
             raise ParseError("Tosa Kuroshio article link missing URL")
-        links.append(str(HttpUrl(href)))
-    # Preserve media destinations too; their contents/meaning are not inferred.
+        HttpUrl(href)
     for media in body.select("img"):
         src = media.get("src")
         if not isinstance(src, str):
             raise ParseError("Tosa Kuroshio article image missing URL")
-        links.append(str(HttpUrl(src)))
-    return "\n".join((text, *dict.fromkeys(links)))
+        HttpUrl(src)
+        media.replace_with(NavigableString(str(media.get("alt") or "")))
+    text = html_text(body)
+    if not text:
+        raise ParseError("Tosa Kuroshio service article is empty")
+    return text
 
 
 class TosaKuroshioProvider(SnapshotProvider):

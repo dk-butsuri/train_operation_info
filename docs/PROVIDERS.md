@@ -23,7 +23,7 @@ print(tracker.kaohsiung_metro.light_rail.status)
 紅線・橘線別の障害状態や影響区間は取得できません。
 
 確認済みの緑色マーカーと完全一致の正常文のみ `NORMAL` とします。
-他の文言・色の組み合わせや追加の参照リンクは `UNKNOWN` として原文・マーカー・リンクを保持し、
+他の文言・色の組み合わせや追加の参照リンクは `UNKNOWN` として原文を本文に、マーカーを `source_status` に保持し（リンクは本文に含めず、最初のリンク先を `ServiceAlert.source_url` にします）、
 遅延・運休・現在有効を推測しません。`affected_line_ids=()`、`timing=UNKNOWN`、
 `updated_at`・適用開始終了は `None` です。必須構造の欠損・重複やPC／モバイルの不一致では
 更新全体を失敗させ、前回値を保持します。
@@ -199,7 +199,7 @@ print(tracker.mtr.airport_express.alerts)
 
 `Tracker()`の既定の取得対象です。`python -m examples.mtr`でも実行できます。[MTR公式サイト](https://www.mtr.com.hk/en/customer/main/index.html)の公開状態XMLから、10路線を取得します。属性は`tsuen_wan`（荃湾線）、`kwun_tong`（観塘線）、`island`（港島線）、`south_island`（南港島線）、`tseung_kwan_o`（将軍澳線）、`tung_chung`（東涌線）、`disneyland_resort`（迪士尼線）、`airport_express`（機場快線）、`east_rail`（東鉄線）、`tuen_ma`（屯馬線）です。共通IDは`hk:mtr:...`、運行会社はMTR Corporation Limitedです。
 
-公式凡例の`green`は`NORMAL`、`yellow`（遅延または段階的復旧）は`DELAYED`、`red`・`pink`・`typhoon`は`ALERT`です。`red`は全線・一部の運休を確定しません。`grey`は非サービス時間で、運行アラート上は`NORMAL`とし、原コードを`source_status`に残します。未知コードは`UNKNOWN`、路線・必須項目の欠落や通信失敗時は前回の結果を保持します。同じ路線のメッセージ見出しとリンクを保持し、本文から障害種別・対象路線・適用期間を推測しません。平常色にもメッセージがあれば`ALERT`です。
+公式凡例の`green`は`NORMAL`、`yellow`（遅延または段階的復旧）は`DELAYED`、`red`・`pink`・`typhoon`は`ALERT`です。`red`は全線・一部の運休を確定しません。`grey`は非サービス時間で、運行アラート上は`NORMAL`とし、原コードを`source_status`に残します。未知コードは`UNKNOWN`、路線・必須項目の欠落や通信失敗時は前回の結果を保持します。同じ路線のメッセージ見出しを保持し（リンクは本文に含めず、最初のリンク先を `ServiceAlert.source_url` にします）、本文から障害種別・対象路線・適用期間を推測しません。平常色にもメッセージがあれば`ALERT`です。
 
 軽鉄・高速鉄道、別のTraffic Newsバナー、詳細ページ、別配信の特別・長期案内は取得しません。公式の掲載基準は継続的な追加行車時間20分超等で、`NORMAL`はこの範囲内の平常表示です。`lastBuildDate`のタイムゾーン等を確定する仕様は未確認のため`updated_at=None`、適用時期は`timing=UNKNOWN`です。
 
@@ -361,7 +361,7 @@ print(tracker.sendai_subway.tozai.alerts)
 公式の南北線 `/unkou/nanbokusen/`、東西線 `/unkou/touzaisen/` のHTMLを取得します。
 専用状態欄の `ope_normal` と、証明書ボタンを除いた内容全体が確認済みの平常表示に
 完全一致するときだけ `NORMAL` です。他の表示・未知クラス・追加本文は `UNKNOWN` とし、
-案内本文とリンク先URLを保持します。本文やCSSクラス名から遅延・運休種別を推測しません。
+案内本文を保持します。リンクは本文に含めず、最初のリンク先を `ServiceAlert.source_url` にします。本文やCSSクラス名から遅延・運休種別を推測しません。
 路線ごとのページから対象路線を特定し、本文の他路線名に影響を広げません。
 
 [公式の掲載基準](https://www.kotsu.city.sendai.jp/unkou/)は30分以上の遅れの発生・見込みです。
@@ -774,7 +774,7 @@ print(tracker.fukuoka_subway.nanakuma.status)
 [公式運行情報](https://subway.city.fukuoka.lg.jp/status/) の現在の運行案内欄を取得し、
 空港線・箱崎線・七隈線の既存共通IDを再利用します。
 
-平常定型文全体の一致だけを `NORMAL`、その他の掲載を `ALERT` として原文・リンクを保持します。
+平常定型文全体の一致だけを `NORMAL`、その他の掲載を `ALERT` として原文を保持します。リンクは本文に含めず、最初のリンク先を `ServiceAlert.source_url` にします。
 実際の運転見合わせ予告でも平常時と同じアイコンが使われているため、アイコン・本文から
 遅延・運休や適用時期を推測しません。全体の案内を3路線に共有し、`affected_line_ids=()`、
 `timing=UNKNOWN`、適用期間は未設定です。各路線の障害を確認したという意味ではありません。
@@ -904,7 +904,7 @@ print(tracker.thsr.main.updated_at)
 
 台湾高鉄の[列車運行状況](https://www.thsrc.com.tw/ArticleContent/3ec1c04f-d3de-45b1-becc-cba412d55123)にある現在のカードを取得します。共通路線IDは `tw:thsr:main`、運行会社は台灣高速鐵路股份有限公司です。`全線正常營運` は `NORMAL`、`部份列車延誤` は `DELAYED`、`營運班表調整` は `ALERT` に対応します。ダイヤ変更だけから全線の遅延・運休を推測しません。折りたたまれた更新履歴は現在の状態に含めません。
 
-障害の原因・影響区間・本文・詳細リンクをアラートに保持し、更新日時は `Asia/Taipei` を付けます。正常表示に有効な更新日時がない場合は `updated_at=None` です。未知の表示は原文を持つ `UNKNOWN`、必須項目の欠損は `ParseError` とし、取得・解析失敗時は直前の結果を保持します。駅別・方向別の状態、独立した全線運休・一部運休ラベル、障害の有効期間は未確認です。遅延・ダイヤ変更・正常は公式の保存HTMLで検証し、復旧への更新と未知表示・欠損は合成テストで検証しています。出典は [tests/fixtures/SOURCES.md](../tests/fixtures/SOURCES.md) に記録しています。利用条件のメタデータは `PERMISSION_REQUIRED` です。
+障害の原因・影響区間・本文をアラートに保持し、詳細リンクを `ServiceAlert.source_url` にして、更新日時は `Asia/Taipei` を付けます。正常表示に有効な更新日時がない場合は `updated_at=None` です。未知の表示は原文を持つ `UNKNOWN`、必須項目の欠損は `ParseError` とし、取得・解析失敗時は直前の結果を保持します。駅別・方向別の状態、独立した全線運休・一部運休ラベル、障害の有効期間は未確認です。遅延・ダイヤ変更・正常は公式の保存HTMLで検証し、復旧への更新と未知表示・欠損は合成テストで検証しています。出典は [tests/fixtures/SOURCES.md](../tests/fixtures/SOURCES.md) に記録しています。利用条件のメタデータは `PERMISSION_REQUIRED` です。
 
 ### 台北MRT
 
@@ -1013,7 +1013,7 @@ print(tracker.kyoto_subway.alerts)
 
 緊急情報には市バス・災害等も混在し、路線別の状態・影響を示す専用項目がないため、
 掲載ありは両路線とも `UNKNOWN`、アラートの `affected_line_ids=()` とします。
-本文の路線名・運休表現から対象や運休種別を推測しません。案内は本文とリンク先URLを保持し、
+本文の路線名・運休表現から対象や運休種別を推測しません。案内は本文を保持し（リンクは本文に含めず、最初のリンク先を `ServiceAlert.source_url` にします）、
 Provider/Trackerの `alerts` では一件に集約します。`delay_lines` / `affected_lines` ではなく
 `alerts` / `unknown_lines` で参照してください。
 
@@ -1209,7 +1209,7 @@ Yahooの同じ掲載単位の共通路線ID・会社情報を再利用し、取�
 
 トップページの別のお知らせ／トピックス欄、時刻表、列車位置、SNS、
 記事中のリンク先PDF／画像の解析は対象外です。運行記事内に混在する長期・将来・
-復旧案内はそのまま保持します。本文のリンク・画像URLも残します。
+復旧案内はそのまま保持します。本文のリンク・画像URLは本文に含めず（画像は代替テキストを残します）、アラートの `source_url` は記事です。
 生HTTP記録には対象外のお知らせ欄が含まれます。
 
 平常表示はライブHTMLと2026年の保存HTMLで検証しました。

@@ -155,6 +155,11 @@ def html_text(markup: Tag | str) -> str:
     return "\n".join(line for line in lines if line)
 
 
+def with_link(alert: ServiceAlert, links: tuple[str, ...] | list[str]) -> ServiceAlert:
+    """Point the alert at its first linked notice; URLs are not put into display text."""
+    return alert.model_copy(update={"source_url": links[0]}) if links else alert
+
+
 def make_alert(
     line: Line,
     status: LineStatus,

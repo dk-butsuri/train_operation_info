@@ -8,7 +8,7 @@ The public theme's css/unkou.css defines ope_normal, ope_down and ope_lag
 icons and .unkou_detail_text; js/navigation.js controls menus, not a feed.
 Neither CSS class names nor narrative words establish disruption scope or
 applicability. Only the observed ope_normal + exact complete 平常運行 record
-maps to NORMAL; other notices remain UNKNOWN with their text and links.
+maps to NORMAL; other notices remain UNKNOWN with their text (first link as source_url).
 Wayback 20260412141736id_/https://www.kotsu.city.sendai.jp/unkou/touzaisen/
 and 20260712033444id_/https://www.kotsu.city.sendai.jp/unkou/ show normal
 records in the current layout. No abnormal current-layout response has been verified.
@@ -41,7 +41,7 @@ from train_operation_info.models import (
     LINE_CATALOG, DataFormat, Line, LineId, LineStatus, ProviderId,
     ProviderMetadata, SourceEndpoint, UsagePermission,
 )
-from ..base import SnapshotProvider, make_alert, snapshot
+from ..base import SnapshotProvider, html_text, make_alert, snapshot, with_link
 
 _ROOT: Final = "https://www.kotsu.city.sendai.jp"
 _URL: Final = f"{_ROOT}/unkou/"
@@ -107,7 +107,7 @@ def _parse(html: str, key: str, name: str, line: Line, fetched_at: datetime) -> 
         if not isinstance(alt, str) or not alt.strip():
             raise ParseError("Sendai Subway notice image has no alternative text")
         image.replace_with(NavigableString(alt))
-    body = inner.get_text("\n", strip=True)
+    body = html_text(inner)
     links: list[str] = []
     for link in inner.select("a"):
         href = link.get("href")
@@ -116,10 +116,12 @@ def _parse(html: str, key: str, name: str, line: Line, fetched_at: datetime) -> 
         target = urljoin(str(line.source_url), href)
         HttpUrl(target)
         links.append(target)
-    description = "\n".join((body, *dict.fromkeys(links)))
-    status = LineStatus.NORMAL if normal_code and description == _NORMAL else LineStatus.UNKNOWN
+    # A link is never part of the verified normal display; it becomes source_url.
+    description = body
+    status = (LineStatus.NORMAL if normal_code and description == _NORMAL and not links
+              else LineStatus.UNKNOWN)
     alerts = () if status is LineStatus.NORMAL else (
-        make_alert(line, status, f"{name} 運行情報", description),
+        with_link(make_alert(line, status, f"{name} 運行情報", description), tuple(dict.fromkeys(links))),
     )
     return snapshot(line, status, description, fetched_at, alerts=alerts, source_line_names=(name,))
 

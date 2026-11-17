@@ -87,7 +87,9 @@ def test_synthetic_links_preserved_and_separate_header_ignored() -> None:
         b'<section', '<div id="suspension">合成：計画運休</div><section'.encode(),
     )
     provider = asyncio.run(_refresh(page))
-    assert "https://subway.city.fukuoka.lg.jp/notice/example.html" in provider.alerts[0].description
+    # The link is kept as the alert's source_url; display text is the notice only.
+    assert provider.alerts[0].source_url == "https://subway.city.fukuoka.lg.jp/notice/example.html"
+    assert provider.alerts[0].description == "合成：ご案内"
     normal = asyncio.run(_refresh(_page().replace(
         b'<section', '<div id="suspension">合成：計画運休</div><section'.encode(),
     )))

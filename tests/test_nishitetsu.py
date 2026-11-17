@@ -53,7 +53,8 @@ def test_real_group_notice_preserves_text_without_inferred_impact() -> None:
     assert provider.kaizuka.status is LineStatus.NORMAL
     alert, = provider.alerts
     assert alert.title == _GROUP and "<地震によるダイヤ乱れ>" in alert.description
-    assert "https://busnavi-railway.nnr.co.jp/tenjin_omuta/" in alert.description
+    assert alert.source_url == "https://busnavi-railway.nnr.co.jp/tenjin_omuta/"
+    assert "https://" not in alert.description
     assert alert.effect is AlertEffect.OTHER and alert.timing is AlertTiming.UNKNOWN
     assert alert.affected_line_ids == ()
     assert provider.active_alerts == () and provider.delay_lines == ()

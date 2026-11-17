@@ -49,7 +49,7 @@ from train_operation_info.models import (
     LINE_CATALOG, DataFormat, Line, LineId, LineStatus, ProviderId,
     ProviderMetadata, ServiceAlert, SourceEndpoint, UsagePermission,
 )
-from ..base import SnapshotProvider, make_alert, snapshot
+from ..base import SnapshotProvider, html_text, make_alert, snapshot, with_link
 
 _URL: Final = "https://jik.nishitetsu.jp/traffic/default.htm"
 _ID: Final = ProviderId("nishitetsu")
@@ -87,7 +87,7 @@ def _one(parent: BeautifulSoup | Tag, selector: str) -> Tag:
     return matches[0]
 
 
-def _notices(payload: bytes) -> tuple[tuple[str, str], ...]:
+def _notices(payload: bytes) -> tuple[tuple[str, str, tuple[str, ...]], ...]:
     # The source uses literal Japanese <...> labels inside p, which HTML parsers
     # otherwise turn into unknown elements and erase. Escape these non-ASCII
     # pseudo-tags only; this is text preservation, never status classification.
@@ -105,7 +105,7 @@ def _notices(payload: bytes) -> tuple[tuple[str, str], ...]:
         return ()
     if not nodes or len(nodes) % 2:
         raise ParseError("Nishitetsu notice pairs missing or malformed")
-    notices: list[tuple[str, str]] = []
+    notices: list[tuple[str, str, tuple[str, ...]]] = []
     for index in range(0, len(nodes), 2):
         heading, body = nodes[index:index + 2]
         if (not isinstance(heading, Tag) or heading.name != "h3"
@@ -116,8 +116,8 @@ def _notices(payload: bytes) -> tuple[tuple[str, str], ...]:
             continue  # Bus bodies and their links are outside the railway scope.
         if heading.select("script, style, iframe, template") or body.select("script, style, iframe, template, h3, p"):
             raise ParseError("Unexpected Nishitetsu notice content")
-        text = body.get_text("\n", strip=True)
-        if not title or not text or any(title == old for old, _ in notices):
+        text = html_text(body)
+        if not title or not text or any(title == old for old, _, _ in notices):
             raise ParseError("Empty or duplicated Nishitetsu notice")
         links: list[str] = []
         for link in body.select("a"):
@@ -127,7 +127,7 @@ def _notices(payload: bytes) -> tuple[tuple[str, str], ...]:
             target = urljoin(_URL, href)
             HttpUrl(target)
             links.append(target)
-        notices.append((title, "\n".join((text, *dict.fromkeys(links)))))
+        notices.append((title, text, tuple(dict.fromkeys(links))))
     return tuple(notices)
 
 
@@ -148,7 +148,7 @@ class NishitetsuProvider(SnapshotProvider):
         notices = _notices(response.content)
         alerts: dict[LineId, list[ServiceAlert]] = {line.line_id: [] for line in self.lines}
         unknown = False
-        for title, text in notices:
+        for title, text, links in notices:
             affected: tuple[LineId, ...]
             if title == _GROUP:
                 targets, affected = self.lines[:3], ()
@@ -157,10 +157,10 @@ class NishitetsuProvider(SnapshotProvider):
             else:
                 unknown = True
                 targets, affected = self.lines, ()
-            alert = make_alert(
+            alert = with_link(make_alert(
                 targets[0], LineStatus.ALERT if title in (_GROUP, "貝塚線") else LineStatus.UNKNOWN,
                 title, text, affected_line_ids=affected,
-            )
+            ), links)
             for line in targets:
                 alerts[line.line_id].append(alert)
         fetched_at = self._now()

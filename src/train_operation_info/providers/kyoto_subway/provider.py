@@ -15,7 +15,7 @@ services running normally. Nonempty notices yield UNKNOWN on both lines,
 with affected_line_ids=(): neither route nor effect is structurally specified.
 No narrative matching, date inference or per-route suspension classification.
 timing=UNKNOWN; updated_at/active_from/active_until=None. Homepage summaries
-and their link destinations are retained; linked article bodies, separate news,
+and the first link is the alert's source_url; linked article bodies, separate news,
 planned service changes, certificates, timetables and bus feeds are not fetched.
 Separate news may be in the recorded HTML but is not parsed as current status.
 Missing/duplicate/reordered markers or panel structure raise ParseError.
@@ -39,7 +39,7 @@ from train_operation_info.models import (
     LINE_CATALOG, DataFormat, Line, LineId, LineStatus, ProviderId,
     ProviderMetadata, SourceEndpoint, UsagePermission,
 )
-from ..base import SnapshotProvider, make_alert, snapshot
+from ..base import SnapshotProvider, html_text, make_alert, snapshot, with_link
 
 _URL: Final = "https://www.city.kyoto.lg.jp/kotsu/"
 _ID: Final = ProviderId("kyoto_subway")
@@ -78,7 +78,7 @@ def _one(parent: Tag | BeautifulSoup, selector: str) -> Tag:
     return matches[0]
 
 
-def _notice(html: str) -> str | None:
+def _notice(html: str) -> tuple[str, tuple[str, ...]] | None:
     soup = BeautifulSoup(html, "html.parser")
     body = _one(soup, "body.ku_top")
     main = _one(body, "#main")
@@ -115,7 +115,7 @@ def _notice(html: str) -> str | None:
         extra.decompose()  # Standing disaster-portal link, present in the cleared archive too.
     for image in notice.select("img"):
         image.replace_with(NavigableString(str(image.get("alt", ""))))
-    text = notice.get_text("\n", strip=True)
+    text = html_text(notice)
     links: list[str] = []
     for link in notice.select("a"):
         href = link.get("href")
@@ -128,7 +128,7 @@ def _notice(html: str) -> str | None:
         return None
     if not text:
         raise ParseError("Kyoto Subway emergency panel is empty")
-    return "\n".join((text, *dict.fromkeys(links)))
+    return text, tuple(dict.fromkeys(links))
 
 
 class KyotoSubwayProvider(SnapshotProvider):
@@ -146,11 +146,12 @@ class KyotoSubwayProvider(SnapshotProvider):
     async def _fetch_lines(self, client: httpx.AsyncClient) -> tuple[Line, ...]:
         response = await self._get(client, _URL)
         response.raise_for_status()
-        description = _notice(response.content.decode("utf-8-sig"))
-        status = LineStatus.NORMAL if description is None else LineStatus.UNKNOWN
-        alerts = () if description is None else (make_alert(
-            self.lines[0], status, "京都市交通局 緊急情報", description, affected_line_ids=(),
-        ),)
+        notice = _notice(response.content.decode("utf-8-sig"))
+        description = None if notice is None else notice[0]
+        status = LineStatus.NORMAL if notice is None else LineStatus.UNKNOWN
+        alerts = () if notice is None else (with_link(make_alert(
+            self.lines[0], status, "京都市交通局 緊急情報", notice[0], affected_line_ids=(),
+        ), notice[1]),)
         fetched_at = self._now()
         return tuple(snapshot(
             line, status, "緊急情報欄に掲載なし" if description is None else "緊急情報欄に掲載あり",

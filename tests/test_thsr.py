@@ -178,7 +178,8 @@ def test_synthetic_multiple_current_incidents_and_links() -> None:
             assert provider.main.status is LineStatus.DELAYED
             assert len(provider.alerts) == 2
             assert provider.main.updated_at == datetime.fromisoformat("2025-02-27T13:49:00+08:00")
-            assert "https://www.thsrc.com.tw/ArticleContent/example" in provider.alerts[1].description
+            assert provider.alerts[1].source_url == "https://www.thsrc.com.tw/ArticleContent/example"
+            assert "https://" not in provider.alerts[1].description
 
     asyncio.run(scenario())
 

@@ -148,7 +148,8 @@ def test_synthetic_alert_text_periods_and_shared_identity() -> None:
     assert shared == c.alerts[0]
     assert shared.alert_id == "multi"
     assert shared.affected_line_ids == (LineId("us:nyct_subway:a"), LineId("us:nyct_subway:c"))
-    assert shared.description == "Synthetic description\nhttps://example.com/a"
+    assert shared.description == "Synthetic description"
+    assert shared.source_url == "https://example.com/a"  # The url field is the link.
     assert shared.effect is AlertEffect.DELAYS and shared.timing is AlertTiming.UNKNOWN
     assert shared.active_from == datetime.fromtimestamp(1793700000, timezone.utc)
     assert shared.active_until == datetime.fromtimestamp(1793710000, timezone.utc)

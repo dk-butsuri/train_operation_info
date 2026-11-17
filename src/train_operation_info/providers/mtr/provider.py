@@ -41,7 +41,7 @@ from train_operation_info.models import (
     LINE_CATALOG, DataFormat, Line, LineId, LineStatus, ProviderId,
     ProviderMetadata, ServiceAlert, SourceEndpoint, UsagePermission,
 )
-from ..base import SnapshotProvider, make_alert, snapshot
+from ..base import SnapshotProvider, make_alert, snapshot, with_link
 
 _PAGE: Final = "https://www.mtr.com.hk/en/customer/main/index.html"
 _URL: Final = "https://www.mtr.com.hk/alert/ryg_line_status_lite.xml"
@@ -138,10 +138,11 @@ def _parse(xml: bytes, lines: tuple[Line, ...], fetched_at: datetime) -> tuple[L
             # A green/grey light does not erase a separately supplied message.
             if status is LineStatus.NORMAL:
                 status = LineStatus.ALERT
-            alerts.append(make_alert(
-                line, status, title, "\n".join(part for part in (label, title, link) if part),
+            # The message's url_en becomes source_url; it is not display text.
+            alerts.append(with_link(make_alert(
+                line, status, title, "\n".join(part for part in (label, title) if part),
                 language="en",
-            ))
+            ), (link,) if link else ()))
         if status is not LineStatus.NORMAL and not alerts:
             alerts.append(make_alert(line, status, label, label, language="en"))
         parsed[identifier] = snapshot(

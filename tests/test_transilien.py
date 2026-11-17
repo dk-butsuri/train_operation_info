@@ -100,7 +100,8 @@ def test_official_current_notices_and_declared_scope() -> None:
             assert alert.title == notice["title"]
             assert "bagage oublié" in alert.description
             assert "plusieurs mois" in provider.rer_d.alerts[0].description
-            assert "https://maligned.transilien.com/2026/08/21/reduction-de-loffre-rer-d-24-aout/" in provider.rer_d.alerts[0].description
+            # Here the link text itself is the URL, so it stays as source wording.
+            assert provider.rer_d.alerts[0].source_url == "https://maligned.transilien.com/2026/08/21/reduction-de-loffre-rer-d-24-aout/"
             # Dedicated severity is UNKNOWN even though the prose describes cancellations.
             assert all(alert.effect is AlertEffect.OTHER for line in provider.lines[:12] for alert in line.alerts)
             assert all(alert.timing is AlertTiming.UNKNOWN for alert in provider.alerts)

@@ -112,7 +112,8 @@ def test_synthetic_article_links_and_media_are_retained_without_fetching() -> No
             '<img alt="合成画像" src="https://example.com/advice.png">')
     provider = asyncio.run(_refresh(_home(), _article(body=body), _article()))
     text = provider.gomen_nahari.alerts[0].description
-    assert "https://example.com/advice.pdf" in text and "https://example.com/advice.png" in text
+    # The article is the alert's source_url; embedded URLs are not display text.
+    assert "https://" not in text and "合成画像" in text
 
 
 def test_synthetic_article_source_urls_match_public_string_type() -> None:

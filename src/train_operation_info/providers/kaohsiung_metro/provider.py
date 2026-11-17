@@ -110,10 +110,12 @@ def _parse(html: str, lines: tuple[Line, ...], fetched_at: datetime) -> tuple[Li
             else LineStatus.UNKNOWN
         )
         raw = label if status is LineStatus.NORMAL else f"{label} [{' '.join(markers)}]"
+        # Display text is the published label; the marker stays in source_status and
+        # the first linked notice becomes the alert's source_url.
         alerts = () if status is LineStatus.NORMAL else (make_alert(
-            line, status, f"{line.name}營運狀態", "\n".join((raw, *references)),
+            line, status, f"{line.name}營運狀態", label,
             affected_line_ids=(), language="zh-Hant",
-        ),)
+        ).model_copy(update={"source_url": references[0]} if references else {}),)
         result.append(snapshot(line, status, raw, fetched_at, alerts=alerts))
     return tuple(result)
 

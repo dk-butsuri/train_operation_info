@@ -68,8 +68,10 @@ def test_real_captures_and_shared_yahoo_identity(fixture: str, expected: LineSta
                 assert alert.affected_line_ids == ()
                 assert alert.effect is AlertEffect.UNKNOWN and alert.timing is AlertTiming.UNKNOWN
                 assert alert.active_from is None and alert.active_until is None
-                assert "0000316308.html" in alert.description
-                assert "0000316290.html" in alert.description  # Bus notice is not a subway suspension.
+                # Each notice keeps its heading; the first link is the alert's source_url.
+                assert alert.source_url.endswith("0000316308.html")
+                assert "台風7号接近に伴う市バス運行のお知らせ" in alert.description  # Bus, not subway.
+                assert "https://" not in alert.description
                 assert not provider.active_alerts
 
     asyncio.run(scenario())

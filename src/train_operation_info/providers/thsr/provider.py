@@ -38,7 +38,7 @@ from train_operation_info.models import (
     LINE_CATALOG, Line, LineId, LineStatus, ProviderId, ProviderMetadata,
     ServiceAlert, UsagePermission,
 )
-from ..base import SnapshotProvider, combined_status, make_alert, snapshot
+from ..base import SnapshotProvider, combined_status, make_alert, snapshot, with_link
 
 _URL: Final = "https://www.thsrc.com.tw/ArticleContent/3ec1c04f-d3de-45b1-becc-cba412d55123"
 _ID: Final = ProviderId("thsr")
@@ -105,6 +105,7 @@ def _parse(html: str, line: Line, fetched_at: datetime) -> tuple[Line, ...]:
         if len(details) > 1:
             raise ParseError("THSR current incident detail is duplicated")
         title, description = label, label
+        links: tuple[str, ...] = ()
         if details:
             detail = details[0]
             title = _required_text(detail, ":scope > .thsr-h5")
@@ -127,14 +128,15 @@ def _parse(html: str, line: Line, fetched_at: datetime) -> tuple[Line, ...]:
                 for anchor in detail.select("a[href]")
                 if isinstance(href := anchor.get("href"), str) and href.strip() and not href.startswith("#")
             ))
-            description = "\n".join((label, title, *remarks, body, *links))
+            # The linked article becomes source_url; URLs are not display text.
+            description = "\n".join((label, title, *remarks, body))
             if status is LineStatus.NORMAL:
                 # A green card with an incident is contradictory, not an all-clear.
                 status = LineStatus.UNKNOWN
         elif status in (LineStatus.DELAYED, LineStatus.ALERT):
             raise ParseError("THSR current incident detail is missing")
         if status is not LineStatus.NORMAL:
-            alerts.append(make_alert(line, status, title, description, language="zh-Hant"))
+            alerts.append(with_link(make_alert(line, status, title, description, language="zh-Hant"), links))
         statuses.append(status)
         labels.append(label)
     return (snapshot(
