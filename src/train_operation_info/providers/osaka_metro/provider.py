@@ -131,10 +131,13 @@ def _parse(html: str, fetched_at: datetime) -> tuple[Line, ...]:
                 LineStatus.SUSPENDED: AlertEffect.NO_SERVICE,
                 LineStatus.UNKNOWN: AlertEffect.UNKNOWN,
             }[status]
+            # The alt text reads "アイコン" + display name; show only the name. A bare
+            # "アイコン" (live 2026-11-11, empty status image) has no name at all.
+            shown = label.removeprefix("アイコン").strip() or "公式の状態表示が空です"
             alerts = (ServiceAlert(
                 alert_id=f"{_PROVIDER_ID}:{initial.line_id}:{status.value}",
-                title=f"{definition.name}: {label.removeprefix('アイコン')}",
-                description=label,
+                title=f"{definition.name}: {shown}",
+                description=f"{definition.name}: {shown}",
                 effect=effect,
                 affected_line_ids=(initial.line_id,),
                 source_url=_SOURCE_URL,

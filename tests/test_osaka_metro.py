@@ -62,6 +62,7 @@ def test_initial_state_is_unknown_and_properties_do_not_fetch() -> None:
         ("アイコン遅延など", LineStatus.DELAYED, AlertEffect.DELAYS),
         ("アイコン運転見合わせ", LineStatus.SUSPENDED, AlertEffect.NO_SERVICE),
         ("未知の新しい表示", LineStatus.UNKNOWN, AlertEffect.UNKNOWN),
+        ("アイコン", LineStatus.UNKNOWN, AlertEffect.UNKNOWN),
     ],
 )
 def test_status_alerts_and_lists(
@@ -97,6 +98,9 @@ def test_status_alerts_and_lists(
                 assert line.alerts[0].effect is expected_effect
                 assert line.alerts[0].affected_line_ids == (line.line_id,)
                 assert line.alerts[0].active_from is None
+                # Display text never carries the alt prefix or an empty name.
+                assert "アイコン" not in line.alerts[0].title + line.alerts[0].description
+                assert not line.alerts[0].title.endswith(":")
             assert (line in tracker.delay_lines) == (expected_status is LineStatus.DELAYED)
             assert (line in tracker.affected_lines) == (
                 expected_status in (LineStatus.DELAYED, LineStatus.SUSPENDED)
