@@ -5,7 +5,8 @@ plus normal Wayback capture 20250811060448. Sources: https://www.osaka-monorail.
 /common/css/common.css?v=1788157719 and /common/js/common.js on the same host.
 The station map's explicit normal/delay/stop segment classes share the colors of
 the normal/delayed/suspended legend. Complete route topology determines full versus
-partial suspension; current segment states establish ACTIVE timing. The live sample
+partial suspension; current segment states establish ACTIVE timing. Alert text lists
+abnormal station ranges in the legend's words, e.g. 運転見合わせ：万博記念公園～門真市. The live sample
 contains partial main-line suspension and Saito delays. Full suspension, normal map
 segments, unknown classes, malformed maps and recovery transitions use synthetic tests.
 Without a map, preserve abnormal summaries as unscoped UNKNOWN. Exclude publication
@@ -44,6 +45,8 @@ _SEGMENT_STATES: Final = {
     "normal": LineStatus.NORMAL, "delay": LineStatus.DELAYED,
     "stop": LineStatus.SUSPENDED,
 }
+# Display wording follows the official legend (平常運転/遅延/運転見合わせ).
+_SEGMENT_LABELS: Final = {LineStatus.DELAYED: "遅延", LineStatus.SUSPENDED: "運転見合わせ"}
 
 
 _METADATA: Final = ProviderMetadata(
@@ -99,7 +102,8 @@ def _map_statuses(station_map: Tag, label: str, lines: tuple[Line, ...],
         if tuple(str(segment.get("id")) for segment in segments) != expected:
             raise ParseError("Osaka Monorail segment topology changed")
         states: list[LineStatus] = []
-        details: list[str] = []
+        # Consecutive segments with the same display become one station range.
+        runs: list[tuple[str | None, int, int]] = []
         for segment, a, b in zip(segments, stations, stations[1:]):
             if not isinstance(segment.parent, Tag) or segment.parent.get("id") != f"station_{b}":
                 raise ParseError("Osaka Monorail segment is attached to the wrong station")
@@ -108,7 +112,13 @@ def _map_statuses(station_map: Tag, label: str, lines: tuple[Line, ...],
             state = (_SEGMENT_STATES.get(classes[0], LineStatus.UNKNOWN)
                      if len(classes) == 1 else LineStatus.UNKNOWN)
             states.append(state)
-            details.append(f"{names[a]}～{names[b]}: {' '.join(classes)}")
+            shown = (None if state is LineStatus.NORMAL else _SEGMENT_LABELS.get(state)
+                     or f"不明な表示（{' '.join(classes) or '表示なし'}）")
+            if runs and runs[-1][0] == shown and runs[-1][2] == a:
+                runs[-1] = (shown, runs[-1][1], b)
+            else:
+                runs.append((shown, a, b))
+        details = [f"{shown}：{names[a]}～{names[b]}" for shown, a, b in runs if shown is not None]
         if LineStatus.UNKNOWN in states:
             status = LineStatus.UNKNOWN
         elif all(state is LineStatus.SUSPENDED for state in states):

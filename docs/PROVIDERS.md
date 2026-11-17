@@ -740,7 +740,7 @@ print(tracker.nankai.semboku.updated_at)
 
 ### 大阪モノレール
 
-`tracker.osaka_monorail.main`（本線）と `.saito`（彩都線）の2路線を扱います。[公式トップ](https://www.osaka-monorail.co.jp/)の運行状況サマリーと、表示される場合は駅間別の運行状態図を解析します。`NORMAL` は公式の掲載基準（おおむね20分以上の遅れ・見合わせ）内の状態です。図の `normal`・`delay`・`stop` は公式CSSの色と凡例で確認しました。全駅間が `stop` なら `SUSPENDED`、一部なら `PARTIAL_SUSPENSION`、見合わせがなく `delay` があれば `DELAYED`、全駅間が `normal` なら `NORMAL` です。未知のクラスを含む路線は `UNKNOWN` とし、図から遅延・見合わせを判定できた路線だけ `timing=ACTIVE` にします。
+`tracker.osaka_monorail.main`（本線）と `.saito`（彩都線）の2路線を扱います。[公式トップ](https://www.osaka-monorail.co.jp/)の運行状況サマリーと、表示される場合は駅間別の運行状態図を解析します。`NORMAL` は公式の掲載基準（おおむね20分以上の遅れ・見合わせ）内の状態です。図の `normal`・`delay`・`stop` は公式CSSの色と凡例で確認しました。全駅間が `stop` なら `SUSPENDED`、一部なら `PARTIAL_SUSPENSION`、見合わせがなく `delay` があれば `DELAYED`、全駅間が `normal` なら `NORMAL` です。未知のクラスを含む路線は `UNKNOWN` とし、図から遅延・見合わせを判定できた路線だけ `timing=ACTIVE` にします。アラート本文は公式の案内文に続けて、同じ状態が続く駅間をまとめた「運転見合わせ：万博記念公園～門真市」「遅延：大阪空港～万博記念公園」の形で異常区間を示します。
 
 アラートは路線ごとに分け、公式サマリーと駅間名・状態クラスを保持します。図のない異常サマリーは従来どおり原文と `affected_line_ids=()` を保持した `UNKNOWN` です。図が存在する場合の路線・駅間・駅名の欠損や重複は `ParseError` として全路線の直前の結果を維持します。本文による状態・対象路線の推測は行いません。`dispTime` は閲覧端末の時計なので更新日時に使わず、`updated_at` と適用期間は未設定です。一般のお知らせ・臨時列車・振替輸送の受託案内は取得対象外です。
 

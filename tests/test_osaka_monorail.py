@@ -41,12 +41,11 @@ def test_captured_partial_suspension_and_saito_delay() -> None:
                 assert line.fetched_at is not None and line.fetched_at.utcoffset() is not None
                 assert 'Service has' not in alert.description
                 assert 'dispTime' not in alert.description
-            # Preserve all segment states, including delays alongside partial suspension.
-            assert provider.main.source_status is not None
-            assert provider.main.source_status.count(': stop') == 7
-            assert provider.main.source_status.count(': delay') == 6
-            assert provider.saito.source_status is not None
-            assert provider.saito.source_status.count(': delay') == 4
+            # Every abnormal segment state is kept, as station ranges in the legend's words.
+            main_lines = provider.main.alerts[0].description.split("\n")[1:]
+            assert main_lines == ["遅延：大阪空港～万博記念公園", "運転見合わせ：万博記念公園～門真市"]
+            assert provider.saito.alerts[0].description.split("\n")[1:] == ["遅延：万博記念公園～彩都西"]
+            assert "stop" not in provider.main.alerts[0].description
 
     asyncio.run(scenario())
 
