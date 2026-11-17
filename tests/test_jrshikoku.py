@@ -93,7 +93,7 @@ def test_later_official_normal_clears_old_incident() -> None:
 @pytest.mark.parametrize("mutation", [
     "missing_map", "duplicate_map", "missing_body", "empty_body", "missing_time",
     "invalid_time", "missing_detail", "mismatched_id", "duplicate_id", "normal_conflict",
-    "orphan_overlay", "maintenance",
+    "maintenance",
 ])
 def test_synthetic_malformed_response_preserves_incident(mutation: str) -> None:
     html = _html("20260712052626")
@@ -128,10 +128,6 @@ def test_synthetic_malformed_response_preserves_incident(mutation: str) -> None:
             assert tag is not None
             tag.string = "現在、遅れ等の情報はありません。"
             tag["class"] = "nodelay"
-        else:
-            tag = soup.select_one(".ml_seto")
-            assert tag is not None
-            tag["style"] = "display:block;"
         broken = str(soup)
 
     async def scenario() -> None:
@@ -167,6 +163,26 @@ def test_synthetic_unknown_display_retains_raw_text(mutation: str) -> None:
             await provider.refresh()
             assert provider.yodo.status is LineStatus.UNKNOWN
             assert any("unknown" in a.description or "未知" in a.title for a in provider.alerts)
+    asyncio.run(scenario())
+
+
+def test_synthetic_highlight_without_notice_is_unknown_for_that_section() -> None:
+    # Mirrors 2026-11-14: a notice headed 土讃線 while seto was highlighted as well.
+    soup = BeautifulSoup(_html("20260712052626"), "html.parser")
+    tag = soup.select_one(".ml_seto")
+    assert tag is not None
+    tag["style"] = "display:block;"
+
+    async def scenario() -> None:
+        async with httpx.AsyncClient(transport=httpx.MockTransport(
+            lambda request: httpx.Response(200, text=str(soup)),
+        )) as client:
+            provider = JrShikokuProvider(client=client)
+            await provider.refresh()
+            assert provider.seto_ohashi.status is LineStatus.UNKNOWN
+            assert provider.yodo.status is LineStatus.ALERT
+            assert all(line.status is LineStatus.NORMAL for line in provider.lines
+                       if line not in (provider.seto_ohashi, provider.yodo))
     asyncio.run(scenario())
 
 

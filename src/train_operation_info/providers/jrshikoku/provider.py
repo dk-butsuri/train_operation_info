@@ -11,6 +11,7 @@ ALERT, never classified from narrative keywords. Named routes are narrowed
 by active map sections; unnamed notices retain affected_line_ids=(). Unknown
 summaries/headings/styles retain UNKNOWN and original text. Missing or
 contradictory structure raises ParseError and preserves the previous snapshot.
+A highlighted section with no notice of its own is UNKNOWN (live 2026-11-14).
 Pure-delay and same-incident recovery archives are unverified. A later normal
 page tests clearing; unknown/malformed cases are synthetic. Notice times are
 Japan local time; normal has no source timestamp. Train positions, certificates,
@@ -144,9 +145,9 @@ def _parse(html: str, lines: tuple[Line, ...], fetched_at: datetime) -> tuple[Li
             times[key].append(updated_at)
             if status is LineStatus.UNKNOWN:
                 uncertain.add(key)
-    for key in active:
-        if not alerts[key]:
-            raise ParseError(f"JR Shikoku highlighted section has no notice: {key}")
+    # A highlighted section without its own notice is uncertain, not a broken page:
+    # e.g. the Sunrise Seto notice is headed 土讃線 while seto is highlighted too.
+    uncertain.update(key for key in active if not alerts[key])
     result: list[Line] = []
     for line in lines:
         key = next(key for key, identifier in _ROUTES.items() if identifier == line.line_id)

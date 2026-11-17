@@ -285,7 +285,7 @@ print(tracker.jrshikoku.yodo.alerts)
 
 [公式運行情報](https://www.jr-shikoku.co.jp/info/index.html) は概ね30分以上の遅れ・運休とその見込みを掲載します。公式の概要・地図は遅延と運転見合わせを区別しないため、案内のある路線は `ALERT` とし、具体的な影響はアラート本文に保持します。`delay_lines` ではなく `affected_lines`・`alerts` で案内を参照してください。見出しが路線を特定しない案内は `affected_line_ids=()` とし全路線に添付します。予讃線・土讃線の区間を地図から特定できない場合は両区間を対象にします。
 
-未知の表示は `UNKNOWN`、構造欠損・矛盾は `ParseError` となり、取得・解析失敗時は前回の結果を保持します。平常表示に更新日時はなく `updated_at=None` です。注意事項欄の固定案内、リンク先PDF、列車走行位置、遅延証明書は取得しません。調査根拠と未確認範囲は [tests/fixtures/JRSHIKOKU.md](../tests/fixtures/JRSHIKOKU.md) に記録しています。
+未知の表示は `UNKNOWN`、構造欠損・矛盾は `ParseError` となり、取得・解析失敗時は前回の結果を保持します。地図で強調されているのに対応する案内がない区間は、その区間だけを `UNKNOWN` とします（例：「土讃線」見出しのサンライズ瀬戸の案内で瀬戸大橋線も強調された場合）。平常表示に更新日時はなく `updated_at=None` です。注意事項欄の固定案内、リンク先PDF、列車走行位置、遅延証明書は取得しません。調査根拠と未確認範囲は [tests/fixtures/JRSHIKOKU.md](../tests/fixtures/JRSHIKOKU.md) に記録しています。
 
 ### JR九州
 
