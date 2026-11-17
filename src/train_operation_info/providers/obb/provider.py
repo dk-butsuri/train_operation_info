@@ -50,7 +50,7 @@ from train_operation_info.models import (
     LINE_CATALOG, DataFormat, Line, LineId, LineStatus, ProviderId,
     ProviderMetadata, ServiceAlert, SourceEndpoint, UsagePermission,
 )
-from ..base import SnapshotProvider, make_alert, snapshot
+from ..base import SnapshotProvider, html_text, make_alert, snapshot
 
 _URL: Final = "https://www.unsereoebb.at/verkehrsmeldungen"
 _ID: Final = ProviderId("obb")
@@ -130,7 +130,8 @@ def _parse(html: bytes, line: Line, fetched_at: datetime) -> tuple[Line, ...]:
         body_node = _one(item, ".traffic-news__description")
         for hidden in body_node.select("script, style, template, noscript"):
             hidden.decompose()
-        body = body_node.get_text("\n", strip=True)
+        # Inline <strong>/<a> stay within their sentence; paragraphs break lines.
+        body = html_text(body_node)
         if not body:
             raise ParseError("ÖBB incident description empty")
         status = LineStatus.ALERT if category == "streckeninfo" else LineStatus.UNKNOWN

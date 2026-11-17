@@ -112,7 +112,7 @@ from train_operation_info.models import (
     LINE_CATALOG, DataFormat, Line, LineId, LineScope, LineStatus, ProviderId,
     ProviderMetadata, ServiceAlert, SourceEndpoint, UsagePermission,
 )
-from ..base import SnapshotProvider, make_alert, snapshot
+from ..base import SnapshotProvider, html_text, make_alert, snapshot
 
 _BASE: Final = "https://www3.jrhokkaido.co.jp/webunkou/"
 _ID: Final = ProviderId("jrhokkaido")
@@ -345,7 +345,8 @@ class JrHokkaidoProvider(SnapshotProvider):
             code = _FieldGetter(entry.field)(day.senkuStatus)
             default_affected = () if line.scope is LineScope.GROUP else (line.line_id,)
             notices = tuple(
-                (item.title, item.honbun, _parse_notice_time(item.time))
+                # honbun is published as an HTML fragment (<BR> line breaks).
+                (item.title, html_text(item.honbun), _parse_notice_time(item.time))
                 for item in day.gaikyo
                 if item.title.strip() and _eikyo_flag(item.eikyo, entry.area) == 1
             )

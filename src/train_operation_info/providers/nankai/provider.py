@@ -37,7 +37,7 @@ from train_operation_info.models import (
     Line, LineStatus, Operator, OperatorId, ProviderId, ProviderMetadata,
     ServiceAlert, UsagePermission,
 )
-from ..base import SnapshotProvider, initial_lines, make_alert, snapshot
+from ..base import SnapshotProvider, html_text, initial_lines, make_alert, snapshot
 
 _URL: Final = "https://www.traffic.nankai.co.jp/railinfo/01.html"
 _ID: Final = ProviderId("nankai")
@@ -135,7 +135,8 @@ def _parse_group(
     else:
         for detail in details:
             label = _one(detail, ".col-10.col-md-2").get_text(" ", strip=True)
-            message = _one(detail, ".col-12.col-md-9").get_text(" ", strip=True)
+            # Keep the statement and each transfer route (<br>) on their own lines.
+            message = html_text(_one(detail, ".col-12.col-md-9"))
             if not label or not message:
                 raise ParseError("Empty Nankai incident heading or description")
             key = _ROUTES.get(label)

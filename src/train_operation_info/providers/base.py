@@ -4,11 +4,13 @@ from collections.abc import Mapping
 from datetime import datetime, timezone
 from hashlib import sha256
 import math
+import re
 from pathlib import Path
 from time import monotonic
 from typing import ClassVar, Final
 from xml.etree.ElementTree import ParseError as XMLParseError
 
+from bs4 import BeautifulSoup, Comment, NavigableString, Tag
 import httpx
 from pydantic import ValidationError
 
@@ -109,6 +111,48 @@ def snapshot(
         status=status, source_status=source_status, alerts=alerts,
         fetched_at=fetched_at, updated_at=updated_at,
     )
+
+
+_BLOCK_TAGS: Final = frozenset((
+    "address", "article", "aside", "blockquote", "dd", "div", "dl", "dt", "fieldset",
+    "figcaption", "figure", "footer", "form", "h1", "h2", "h3", "h4", "h5", "h6",
+    "header", "hr", "li", "main", "nav", "ol", "p", "pre", "section", "table", "tbody",
+    "td", "tfoot", "th", "thead", "tr", "ul",
+))
+_HIDDEN_TAGS: Final = frozenset(("script", "style", "template", "noscript"))
+
+
+def html_text(markup: Tag | str) -> str:
+    """Text as a browser lays it out: blocks and <br> break lines, inline tags do not.
+
+    Source indentation and line wrapping are collapsed like HTML whitespace.
+    """
+    root = BeautifulSoup(markup, "html.parser") if isinstance(markup, str) else markup
+    parts: list[str] = []
+
+    def walk(node: Tag) -> None:
+        for child in node.children:
+            if isinstance(child, Comment):
+                continue
+            if isinstance(child, NavigableString):
+                parts.append(re.sub(r"[ \t\r\n\f]+", " ", str(child)))
+            elif isinstance(child, Tag):
+                name = child.name.lower()
+                if name in _HIDDEN_TAGS:
+                    continue
+                if name == "br":
+                    parts.append("\n")
+                    continue
+                block = name in _BLOCK_TAGS
+                if block:
+                    parts.append("\n")
+                walk(child)
+                if block:
+                    parts.append("\n")
+
+    walk(root)
+    lines = (re.sub(" {2,}", " ", line).strip(" ") for line in "".join(parts).split("\n"))
+    return "\n".join(line for line in lines if line)
 
 
 def make_alert(

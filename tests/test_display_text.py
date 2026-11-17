@@ -3,6 +3,7 @@
 import pytest
 
 from train_operation_info.models import AlertEffect, ServiceAlert, display_text
+from train_operation_info.providers.base import html_text
 
 
 @pytest.mark.parametrize(("raw", "expected"), [
@@ -32,3 +33,20 @@ def test_service_alert_applies_display_text() -> None:
     )
     assert alert.title == "題名 続き"
     assert alert.description == "本文\n\n終わり"
+
+
+@pytest.mark.parametrize(("markup", "expected"), [
+    # Nankai: statement block, then a transfer list separated by <br>.
+    ('<div><div class="text-danger">\n  停電のため運転を見合わせています。\n</div>'
+     '<div><p>振替輸送のご案内</p><div>JR西日本：JR難波～天王寺<br/>近鉄：大阪阿部野橋～河内長野</div></div></div>',
+     "停電のため運転を見合わせています。\n振替輸送のご案内\nJR西日本：JR難波～天王寺\n近鉄：大阪阿部野橋～河内長野"),
+    # ÖBB: inline <strong> stays within the sentence; source wrapping becomes a space.
+    ('<div><p>Derzeit ist zwischen\n  <strong>\n   Felixdorf\n  </strong>\n  und <a href="#">Bad Vöslau</a>'
+     ' kein Zugverkehr.</p><p>Aktualisiert: 11.11.2026</p></div>',
+     "Derzeit ist zwischen Felixdorf und Bad Vöslau kein Zugverkehr.\nAktualisiert: 11.11.2026"),
+    # JR Hokkaido: an HTML fragment string with upper-case <BR>.
+    ("一部列車に遅れが発生しています。<BR><BR>なお、経由を変更します。", "一部列車に遅れが発生しています。\nなお、経由を変更します。"),
+    ("本文<script>hidden()</script><style>.x{}</style><!-- note -->", "本文"),
+])
+def test_html_text_lays_out_blocks_and_breaks(markup: str, expected: str) -> None:
+    assert html_text(markup) == expected

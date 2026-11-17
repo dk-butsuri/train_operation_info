@@ -86,6 +86,31 @@ def test_real_capture_has_one_genuine_soya_suspension_and_rest_normal() -> None:
     asyncio.run(scenario())
 
 
+def test_notice_title_padding_and_br_markup_are_display_text() -> None:
+    # The real title is published padded with spaces; <BR> breaks are synthetic
+    # here but appear in live honbun (2026-11-08).
+    bodies = _default_bodies()
+    for area in ("02", "04"):
+        data = json.loads(bodies[area].decode("utf-8-sig"))
+        notice = data["today"]["gaikyo"][0]
+        assert notice["title"] != notice["title"].strip()
+        notice["honbun"] += "<BR><BR>なお、合成テストの追記です。"
+        bodies[area] = json.dumps(data, ensure_ascii=False).encode("utf-8")
+
+    async def scenario() -> None:
+        async with httpx.AsyncClient(transport=httpx.MockTransport(
+            lambda request: _response(bodies, request),
+        )) as client:
+            provider = JrHokkaidoProvider(client=client)
+            await provider.refresh()
+            alert, = provider.soya.alerts
+            assert alert.title == "【熊との衝突による列車への影響について】"
+            assert "<BR>" not in alert.description
+            assert alert.description.endswith("終日\nなお、合成テストの追記です。")
+
+    asyncio.run(scenario())
+
+
 def test_synthetic_unknown_code_outside_service_hours() -> None:
     bodies = _default_bodies()
     bodies["02"] = bodies["02"].replace(b'"gakuen":0', b'"gakuen":2', 1)
