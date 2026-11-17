@@ -1,7 +1,7 @@
 """Real normal HTML; incident, recovery and malformed responses are synthetic."""
 
 import asyncio
-from datetime import timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from bs4 import BeautifulSoup
@@ -13,6 +13,7 @@ from train_operation_info.exceptions import FetchError, ParseError, RefreshError
 from train_operation_info.models import LineStatus, ProviderId, UsagePermission
 from train_operation_info.providers.base import USER_AGENT
 from train_operation_info.providers.toei import ToeiProvider
+from train_operation_info.providers.toei.provider import _parse
 
 _FIXTURES = Path(__file__).parent / "fixtures"
 _URL = "https://www.kotsu.metro.tokyo.jp/subway/schedule/index.html"
@@ -114,6 +115,30 @@ def test_synthetic_incident_unknown_contradiction_and_recovery(
             assert previous.alerts == (alert,)
 
     asyncio.run(scenario())
+
+
+@pytest.mark.parametrize(("heading", "delay_class", "expected"), [
+    # Mirrors live captures (2026-11-08..16): summary 遅延情報 + caution <em> heading.
+    ("ダイヤ乱れ", True, LineStatus.ALERT),
+    ("一部見合わせ", True, LineStatus.PARTIAL_SUSPENSION),
+    ("一部列車運休", True, LineStatus.PARTIAL_SUSPENSION),
+    ("運転見合わせ", True, LineStatus.SUSPENDED),
+    ("未確認の見出し", True, LineStatus.UNKNOWN),
+    ("運転見合わせ", False, LineStatus.UNKNOWN),
+])
+def test_synthetic_current_summary_label_uses_record_heading(
+    heading: str, delay_class: bool, expected: LineStatus,
+) -> None:
+    soup = BeautifulSoup(_synthetic(
+        "遅延情報", f'<p class="caution"><em>{heading}<br/></em>三田線は、合成テストの案内です。</p>',
+    ), "html.parser")
+    entry = soup.select_one("dl.infoMita")
+    assert entry is not None
+    entry["class"] = "infoMita delay" if delay_class else "infoMita"
+    lines = _parse(str(soup), ToeiProvider().lines, datetime.now(timezone.utc))
+    mita = next(line for line in lines if line.name == "都営三田線")
+    assert mita.status is expected
+    assert all(line.status is LineStatus.NORMAL for line in lines if line is not mita)
 
 
 @pytest.mark.parametrize("mutation", [

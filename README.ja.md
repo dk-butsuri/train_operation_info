@@ -215,7 +215,7 @@ except RefreshError as exc:
 | `sendai_subway` | ✓ |  |  |  |  |
 | `yokohama_subway` | ✓ | ✓ |  |  |  |
 | `tokyo_metro` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `toei` | ✓ |  |  |  | ✓ |
+| `toei` | ✓ |  | ✓ | ✓ | ✓ |
 | `tobu` | ✓ |  |  |  | ✓ |
 | `seibu` | ✓ |  | ✓ |  | ✓ |
 | `sotetsu` | ✓ |  |  |  | ✓ |

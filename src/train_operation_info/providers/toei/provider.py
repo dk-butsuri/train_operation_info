@@ -9,6 +9,9 @@ header to display the current time, NOT an incident update: updated_at=None.
 The official /subway/schedule/{asakusa,mita,oedo}_log.html pages show
 平常運行 and ダイヤ乱れ, including same-event recovery on 2026-10-29.
 ダイヤ乱れ is ALERT; it does not establish a specific delay/suspension.
+Live captures (2026-11-08..16) show the summary label 遅延情報 (class delay)
+for every disruption, with the kind in the record's caution <em> heading:
+ダイヤ乱れ ALERT, 一部見合わせ/一部列車運休 PARTIAL_SUSPENSION, 運転見合わせ SUSPENDED.
 Unknown labels or contradictory normal/body combinations are UNKNOWN and
 retain the notice. Missing/duplicate records raise ParseError atomically.
 
@@ -46,6 +49,14 @@ _ROUTES: Final = (
     ("Oedo", "oedo", "大江戸線", LineId("jp:toei:line_e0cd13888da5")),
 )
 _NORMAL: Final = "現在、１５分以上の遅延はありません。"
+# With the summary label 遅延情報 (class "delay"), the record's <p class="caution">
+# <em> heading names the kind of disruption (live captures 2026-11-08..16).
+_HEADINGS: Final = {
+    "ダイヤ乱れ": LineStatus.ALERT,
+    "一部見合わせ": LineStatus.PARTIAL_SUSPENSION,
+    "一部列車運休": LineStatus.PARTIAL_SUSPENSION,
+    "運転見合わせ": LineStatus.SUSPENDED,
+}
 _METADATA: Final = ProviderMetadata(
     endpoints=(
         SourceEndpoint(
@@ -64,7 +75,7 @@ _METADATA: Final = ProviderMetadata(
         "This is not a public-signage licence. Information is published for delays "
         "of 15 minutes or more, including anticipated delays."
     ),
-    statuses=frozenset({LineStatus.NORMAL, LineStatus.ALERT}),
+    statuses=frozenset({LineStatus.NORMAL, LineStatus.SUSPENDED, LineStatus.PARTIAL_SUSPENSION, LineStatus.ALERT}),
     reviewed_at=datetime.fromisoformat("2026-11-02T05:40:02+00:00"),
 )
 
@@ -115,10 +126,14 @@ def _parse(html: str, lines: tuple[Line, ...], fetched_at: datetime) -> tuple[Li
         if not body or not label:
             raise ParseError(f"Empty Toei status: {key}")
         status = LineStatus.UNKNOWN
+        headings = record.select("dd.operation__info p.caution > em")
         if label == "平常運行" and body == _NORMAL:
             status = LineStatus.NORMAL
         elif label == "ダイヤ乱れ" and _NORMAL not in body:
             status = LineStatus.ALERT
+        elif (label == "遅延情報" and "delay" in entry.get_attribute_list("class")
+              and len(headings) == 1 and _NORMAL not in body):
+            status = _HEADINGS.get(_text(headings[0]), LineStatus.UNKNOWN)
         alerts = () if status is LineStatus.NORMAL else (
             make_alert(line, status, f"{name}：{label}", body),
         )

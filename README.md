@@ -133,7 +133,7 @@ Sources differ in which statuses they can tell apart. A source without a ✓ nev
 | `sendai_subway` | ✓ |  |  |  |  |
 | `yokohama_subway` | ✓ | ✓ |  |  |  |
 | `tokyo_metro` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `toei` | ✓ |  |  |  | ✓ |
+| `toei` | ✓ |  | ✓ | ✓ | ✓ |
 | `tobu` | ✓ |  |  |  | ✓ |
 | `seibu` | ✓ |  | ✓ |  | ✓ |
 | `sotetsu` | ✓ |  |  |  | ✓ |
