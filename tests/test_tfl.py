@@ -10,7 +10,7 @@ import pytest
 
 from train_operation_info import Tracker
 from train_operation_info.exceptions import FetchError, ParseError, RefreshError
-from train_operation_info.models import AlertEffect, AlertTiming, LINE_CATALOG, LineId, LineScope, LineStatus
+from train_operation_info.models import AlertEffect, AlertTiming, LINE_CATALOG, LineId, LineScope, LineStatus, display_text
 from train_operation_info.providers.base import USER_AGENT
 from train_operation_info.providers.tfl import TflProvider
 from train_operation_info.providers.tfl.provider import _parse
@@ -86,7 +86,7 @@ def test_real_current_statuses_and_scope() -> None:
                 assert line.updated_at is None
                 assert line.fetched_at is not None and line.fetched_at.utcoffset() is not None
                 for alert, status in zip(line.alerts, item["lineStatuses"]):
-                    assert alert.description == status["reason"]
+                    assert alert.description == display_text(status["reason"])
                     assert alert.affected_line_ids == (line.line_id,)
                     assert alert.language == "en"
                     assert alert.active_from is not None and alert.active_from.utcoffset() is not None

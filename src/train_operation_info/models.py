@@ -1,13 +1,14 @@
 """Shared immutable snapshots; operators are properties, never namespaces."""
 
 from enum import Enum
+import re
 from collections.abc import Mapping
 from types import MappingProxyType
 from string import Formatter
 from typing import Final, Literal, NewType
 from urllib.parse import urlsplit
 
-from pydantic import AwareDatetime, BaseModel, ConfigDict, Field, HttpUrl, model_validator
+from pydantic import AwareDatetime, BaseModel, ConfigDict, Field, HttpUrl, field_validator, model_validator
 
 LineId = NewType("LineId", str)
 OperatorId = NewType("OperatorId", str)
@@ -109,8 +110,24 @@ class Operator(_Model):
     name: str
 
 
+def display_text(text: str, *, single_line: bool = False) -> str:
+    """Whitespace-normalized text that can be shown as is, e.g. on signage.
+
+    Line breaks between paragraphs are kept; ideographic spaces (U+3000), which
+    sources use for alignment, are kept. Wording is never changed.
+    """
+    lines = [re.sub(r"[ \t]+", " ", line).strip(" \t") for line in re.split(r"\r\n|\r|\n", text)]
+    if single_line:
+        return " ".join(line for line in lines if line)
+    return re.sub(r"\n{3,}", "\n\n", "\n".join(lines)).strip("\n")
+
+
 class ServiceAlert(_Model):
-    """A source statement; unknown incident details are not inferred."""
+    """A source statement; unknown incident details are not inferred.
+
+    title is one line and description keeps paragraph breaks; both are
+    whitespace-normalized by display_text so they can be displayed directly.
+    """
 
     alert_id: str
     title: str
@@ -124,6 +141,16 @@ class ServiceAlert(_Model):
     # None means the source does not publish an incident validity period.
     active_from: AwareDatetime | None = None
     active_until: AwareDatetime | None = None
+
+    @field_validator("title")
+    @classmethod
+    def _display_title(cls, value: str) -> str:
+        return display_text(value, single_line=True)
+
+    @field_validator("description")
+    @classmethod
+    def _display_description(cls, value: str) -> str:
+        return display_text(value)
 
 
 class Line(_Model):

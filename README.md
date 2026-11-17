@@ -190,6 +190,7 @@ with `OTHER` effect and unknown timing/affected lines. Other headlines stay
 `UNKNOWN`; separate news lists are excluded.
 
 - **Aggregates**: `tracker.delay_lines`, `tracker.affected_lines`, `tracker.unknown_lines`, `tracker.alerts`, `tracker.active_alerts`.
+- **Display text**: `ServiceAlert.title` is a single trimmed line and `description` keeps paragraph breaks; markup, padding and stray whitespace are removed so both can be shown as is (e.g. on signage). The wording is the source's own.
 - **Failures**: a source that cannot be fetched raises `FetchError`; a changed page raises `ParseError`. `tracker.refresh()` updates every selected source, then raises `RefreshError` listing the failures. Failed sources keep their previous snapshot — show their age using `fetched_at`, and never treat a failure as normal service.
 - **Rate limit**: 30 seconds per source by default. Refreshing sooner returns the previous snapshot without network access. Set `Tracker(rate_limit=60)` to slow down; anything under 10 seconds is rejected.
 - **Time**: every datetime is timezone-aware. `fetched_at` is UTC; source times carry their published offset or local zone.

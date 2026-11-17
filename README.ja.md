@@ -175,6 +175,7 @@ SBBは公式リアルタイムAPIのトークンが必要なため、現在は�
 - `delay_lines` は `DELAYED`、`affected_lines` は遅延・運転見合わせ・一部運休・お知らせの路線、`unknown_lines` は状態不明の路線です。`ALERT` は詳細な影響を断定しないお知らせ、`PARTIAL_SUSPENSION` は一部運休・折返し運転を表します。
 - `tracker.alerts` / `provider.alerts` はアラートの一覧です。影響対象を特定できない全体のお知らせは `unknown_lines` と併せて参照してください。
 - 平常時の `alerts` は空ですが、空の一覧だけで平常とは判定せず `status` を参照してください。
+- `ServiceAlert.title` は前後の空白を除いた1行、`description` は段落の改行を保った本文です。HTMLのタグ・埋め草の空白・余分な改行を除き、サイネージなどにそのまま表示できます。文言は取得元の原文のままです。
 - 未知の表示は `UNKNOWN` として原文を保持します。
 - Provider単体の通信失敗は `FetchError`、HTML変更や型・必須項目の不一致は `ParseError` を送出します。どちらも `ProviderError` の派生です。失敗時は直前のスナップショットを保持します。
 - `tracker.refresh()` は選択した取得元を並行更新します。全取得元の処理後に、失敗があれば `RefreshError` を送出します。成功した取得元は更新され、失敗した取得元は以前の状態を保持します。失敗内訳は `exception.errors` と `tracker.refresh_errors` で参照できます。

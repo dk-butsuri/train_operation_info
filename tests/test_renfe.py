@@ -178,7 +178,7 @@ def test_es_labels_are_preserved_without_guessing_the_actual_language() -> None:
             provider = RenfeProvider(client=client)
             await provider.refresh()
             alert, = provider.alerts
-            assert alert.description == " Primer texto. \n\nSegon text."
+            assert alert.description == "Primer texto.\n\nSegon text."  # whitespace-normalized
             assert alert.language == "es" and alert.affected_line_ids == ()
             assert provider.cercanias.status is LineStatus.UNKNOWN
 
