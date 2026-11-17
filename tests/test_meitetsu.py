@@ -72,6 +72,22 @@ def test_real_single_line_suspension_does_not_assign_alternative_transport_route
     assert all(a.affected_line_ids == (hiromi.line_id,) for a in hiromi.alerts)
 
 
+def test_synthetic_route_direction_and_takehana_name_are_resolved() -> None:
+    # Mirrors live captures (2026-11-08): 名古屋本線 <span class="layTxt6">(名鉄岐阜方面)</span>, and 竹鼻線.
+    soup = BeautifulSoup(_html("20260908095207"), "html.parser")
+    items = {li.get_text(strip=True): li for li in soup.select("ul.emListLine > li")}
+    direction = soup.new_tag("span", attrs={"class": "layTxt6"})
+    direction.string = "(吉良吉田方面)"
+    items["西尾線"].append(direction)
+    items["各務原線"].string = "竹鼻線"
+    provider = MeitetsuProvider()
+    lines = {line.line_id: line for line in _parse(str(soup), provider.lines, _TIME)}
+    assert lines[provider.nishio.line_id].status is LineStatus.ALERT
+    assert lines[provider.takehana_hashima.line_id].status is LineStatus.ALERT
+    assert lines[provider.gamagori.line_id].status is LineStatus.NORMAL
+    assert not any(line.status is LineStatus.UNKNOWN for line in lines.values())
+
+
 @pytest.mark.parametrize("capture", ["20230815094730", "20220918035311", "20240831065722"])
 def test_real_free_prose_preserves_predictions_without_inventing_targets(capture: str) -> None:
     provider = MeitetsuProvider()

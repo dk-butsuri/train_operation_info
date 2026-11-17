@@ -19,6 +19,8 @@ Only the dedicated 路線 list / 区間 list supplies affected routes. Several s
 names map to one existing Yahoo canonical group; their original names and section
 text are retained. Unknown route names retain an unscoped alert, making otherwise
 normal routes UNKNOWN. Reasons/prose never determine affected routes or status.
+A trailing direction span in the 路線 list, e.g. (名鉄岐阜方面), is ignored for
+routing, and 竹鼻線 alone maps to 竹鼻・羽島線 (both seen live 2026-11).
 
 Runtime scope: main .layEm service blocks and .wrapFree prose. Alternative/bus
 transport blocks, map SVG/positions, delay certificates, linked articles and
@@ -70,7 +72,8 @@ _ROUTES: Final = (
     ("chikko", "line_21bd01e99894", ("築港線",)),
     ("kowa_chita", "line_a75b30817184", ("河和線", "知多新線")),
     ("tsushima_bisai", "line_3bd54d7ebaec", ("津島線", "尾西線")),
-    ("takehana_hashima", "line_12b330a48d24", ("竹鼻・羽島線",)),
+    # 竹鼻線 alone is also used in the route list (live 2026-11).
+    ("takehana_hashima", "line_12b330a48d24", ("竹鼻・羽島線", "竹鼻線")),
     ("inuyama", "line_316bf1c335dc", ("犬山線",)),
     ("hiromi", "line_67eaaa1a3dd4", ("広見線",)),
     ("komaki", "line_8c96a5064f5a", ("小牧線",)),
@@ -188,6 +191,12 @@ def _parse(html: bytes, lines: tuple[Line, ...], fetched_at: datetime) -> tuple[
                 value = _text(item)
                 if not value:
                     raise ParseError("Empty Meitetsu affected route")
+                # A route item may carry a direction, e.g. 名古屋本線 <span>(名鉄岐阜方面)</span>.
+                directions = item.select(":scope > span.layTxt6")
+                if field == "路線" and len(directions) == 1:
+                    direction = _text(directions[0])
+                    if direction.startswith("(") and direction.endswith("方面)"):
+                        value = value.removesuffix(direction).strip()
                 # A section item is route-name + whitespace + station interval.
                 name, separator, section = value.partition(" ")
                 if field == "区間" and (not separator or not section):
