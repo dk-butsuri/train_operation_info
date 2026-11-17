@@ -119,6 +119,25 @@ def test_synthetic_lights_preserve_scope_and_details(
     asyncio.run(scenario())
 
 
+def test_synthetic_data_loading_light_with_empty_message_is_unknown_only_for_that_route() -> None:
+    # Mirrors live captures (2026-11-12): lightread.gif + 營運資料擷取中 and an empty message list.
+    soup = BeautifulSoup(_synthetic_light("lightread.gif", "營運資料擷取中"), "html.parser")
+    message = _element(soup, ".realstatus__text")
+    message.clear()
+    message["class"] = "realstatus__text abnormal"
+
+    async def scenario() -> None:
+        async with httpx.AsyncClient(transport=httpx.MockTransport(
+            lambda _: httpx.Response(200, text=str(soup)),
+        )) as client:
+            provider = TaipeiMetroProvider(client=client)
+            await provider.refresh()
+            assert provider.bannan.status is LineStatus.UNKNOWN
+            assert all(line.status is LineStatus.NORMAL for line in provider.lines if line is not provider.bannan)
+
+    asyncio.run(scenario())
+
+
 def test_synthetic_closed_hours_are_not_a_disruption() -> None:
     soup = BeautifulSoup(_normal(), "html.parser")
     for item in soup.select(".realstatusdetail__item"):

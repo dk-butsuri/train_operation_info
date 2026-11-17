@@ -15,6 +15,8 @@ delay, partial obstruction, closed hours and recovery scenarios are synthetic
 mutations based on that published legend, not recorded incidents. Full suspension,
 separate branch statuses and incident validity times are unverified. Unknown
 lights are retained as UNKNOWN; missing/duplicate/unknown routes fail atomically.
+Live captures show lightread.gif (營運資料擷取中, data being retrieved) with an
+empty message list; that route is UNKNOWN and the others keep their lights.
 The Circular Line is operated by New Taipei Metro, although listed by this
 source. Evidence, original hashes and terms: tests/fixtures/SOURCES.md.
 """
@@ -100,8 +102,10 @@ def _parse(html: str, lines: tuple[Line, ...], fetched_at: datetime) -> tuple[Li
         tzinfo=ZoneInfo("Asia/Taipei"),
     )
     descriptions = panel.select(".realstatus__desc .realstatus__text")
-    if len(descriptions) != 1 or not descriptions[0].get_text(strip=True):
+    if len(descriptions) != 1:
         raise ParseError("Metro Taipei operating message is missing")
+    # While a route light reads 營運資料擷取中 the message list is published empty;
+    # the route lights still classify every line, so this is not a failure.
     description = descriptions[0].get_text("\n", strip=True)
     # Keep source links/diagrams available without guessing their incident details.
     references = tuple(dict.fromkeys(
