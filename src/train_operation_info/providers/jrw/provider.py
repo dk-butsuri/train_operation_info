@@ -168,11 +168,17 @@ class _Version(_SourceModel):
     updatedAt: AwareDatetime
 
 
+class _Section(_SourceModel):
+    startStation: str
+    endStation: str
+
+
 class _Detail(_SourceModel):
     trafficId: int
     conditionName: str
     publicationDate: AwareDatetime
     versionDetail: list[_Version] = Field(min_length=1)
+    sections: list[_Section] = Field(default_factory=list)
 
 
 class _Traffic(_SourceModel):
@@ -217,6 +223,36 @@ class _CurrentIncident:
     version: _Version
 
 
+@dataclass(frozen=True)
+class _Observation:
+    source_id: int
+    traffic_id: int
+    updated_at: datetime
+    status: LineStatus
+    sections: frozenset[tuple[str, str]]
+
+
+def _suspension_scope(
+    status: LineStatus, observations: list[_Observation], source_ids: frozenset[int],
+) -> LineStatus:
+    """Narrow SUSPENDED to PARTIAL_SUSPENSION using only the feed's own structure.
+
+    A canonical line merges several regional source lines. It is wholly
+    suspended only if every one of them carries a suspension and no delayed or
+    partially running incident is reported for a section outside the suspended ones.
+    """
+    if status is not LineStatus.SUSPENDED:
+        return status
+    suspended = [item for item in observations if item.status is LineStatus.SUSPENDED]
+    if {item.source_id for item in suspended} != source_ids:
+        return LineStatus.PARTIAL_SUSPENSION
+    suspended_sections = frozenset().union(*(item.sections for item in suspended))
+    for item in observations:
+        if item.status in (LineStatus.DELAYED, LineStatus.PARTIAL_SUSPENSION) and item.sections - suspended_sections:
+            return LineStatus.PARTIAL_SUSPENSION
+    return status
+
+
 def _parse(data: _Payload, lines: tuple[Line, ...], fetched_at: datetime) -> tuple[Line, ...]:
     if any(item.isMaintaining for item in data.maintenances):
         raise ParseError("JR West is announcing source maintenance")
@@ -240,7 +276,12 @@ def _parse(data: _Payload, lines: tuple[Line, ...], fetched_at: datetime) -> tup
         raise ParseError("JR West official route catalog changed or is incomplete")
     by_key = {line.line_id.rsplit(":", 1)[-1]: line for line in lines}
     by_id = {identifier: by_key[key] for identifier, key, _ in _CATALOG}
+    source_ids = {
+        by_key[key].line_id: frozenset(identifier for identifier, other, _ in _CATALOG if other == key)
+        for _, key, _ in _CATALOG
+    }
     events: dict[LineId, dict[int, _CurrentIncident]] = {line.line_id: {} for line in lines}
+    observations: dict[LineId, list[_Observation]] = {line.line_id: [] for line in lines}
     current_date = data.createdAt.astimezone(ZoneInfo("Asia/Tokyo")).date().isoformat()
     seen_areas: set[int] = set()
     for traffic_area in data.areaTrafficInfos:
@@ -276,6 +317,10 @@ def _parse(data: _Payload, lines: tuple[Line, ...], fetched_at: datetime) -> tup
                     previous = events[line.line_id].get(detail.trafficId)
                     state = japanese_status(detail.conditionName)
                     label = detail.conditionName
+                    observations[line.line_id].append(_Observation(
+                        traffic.id, detail.trafficId, version.updatedAt, state,
+                        frozenset((section.startStation, section.endStation) for section in detail.sections),
+                    ))
                     if previous is not None:
                         if previous.version.updatedAt > version.updatedAt:
                             continue
@@ -297,7 +342,14 @@ def _parse(data: _Payload, lines: tuple[Line, ...], fetched_at: datetime) -> tup
                 alert_id=f"jrw:{identifier}:{line.line_id}", timing=timing_from_status(incident.status),
             ))
         alerts = tuple(daily_alerts)
-        status = combined_status(tuple(incident.status for incident in incidents.values()))
+        status = _suspension_scope(
+            combined_status(tuple(incident.status for incident in incidents.values())),
+            [
+                item for item in observations[line.line_id]
+                if item.updated_at == incidents[item.traffic_id].version.updatedAt
+            ],
+            source_ids[line.line_id],
+        )
         label = " / ".join(dict.fromkeys(
             incident.label for incident in incidents.values()
         ))

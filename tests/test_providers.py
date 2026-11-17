@@ -64,7 +64,7 @@ def _response(name: str, fixture: str, request: httpx.Request) -> httpx.Response
     ("name", "fixture", "count", "delayed", "suspended", "partial", "unknown"),
     [
         ("jrw", "jrw_status.json", 61, 1, 0, 0, 0),
-        ("jrw", "jrw_api_20261001234249.json", 61, 3, 9, 1, 0),
+        ("jrw", "jrw_api_20261001234249.json", 61, 3, 5, 5, 0),
         ("jrw", "jrw_api_20261021235454.json", 61, 1, 0, 3, 0),
         ("keihan", "keihan_normal.xml", 8, 0, 0, 0, 0),
         ("keihan", "keihan_xml_20230911234517.xml", 8, 0, 3, 0, 0),
@@ -122,6 +122,17 @@ def test_official_fixtures(
             if fixture == "jrw_status.json":
                 ako = provider.get_line(LineId("jp:jr_west:ako"))
                 assert ako is not None and len(ako.alerts) == 1
+            if fixture == "jrw_api_20261001234249.json":
+                status = {line.line_id.rsplit(":", 1)[-1]: line.status for line in provider.lines}
+                # Suspended in every regional entry of the line: wholly suspended.
+                assert status["biwako"] is LineStatus.SUSPENDED
+                # Only Himeji-Kamigori / Aioi-Banshu-Ako of multi-area lines are suspended.
+                assert status["sanyo"] is LineStatus.PARTIAL_SUSPENSION
+                assert status["ako"] is LineStatus.PARTIAL_SUSPENSION
+                # Osaka-Shin-Sanda suspended while Shin-Sanda-Sasayamaguchi is only delayed.
+                assert status["takarazuka"] is LineStatus.PARTIAL_SUSPENSION
+                # Single entry, cancelled beyond Echizen-Ono, partly running before it.
+                assert status["etsumi_hoku"] is LineStatus.PARTIAL_SUSPENSION
             if fixture == "mrt_normal_with_unscoped_message.json":
                 assert all(line.status is LineStatus.NORMAL for line in provider.lines)
                 assert provider.alerts == ()
