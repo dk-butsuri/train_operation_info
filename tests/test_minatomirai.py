@@ -76,7 +76,7 @@ def test_official_fixtures_and_transition_to_normal(
 
 @pytest.mark.parametrize("mutation", [
     "missing_panel", "duplicate_panel", "missing_info", "duplicate_info", "empty_info",
-    "duplicate_table", "empty_table", "missing_value", "empty_value", "duplicate_key",
+    "duplicate_table", "empty_table", "missing_value", "duplicate_key",
 ])
 def test_synthetic_malformed_html_preserves_previous_snapshot(mutation: str) -> None:
     html = _html("20180122144419")
@@ -108,6 +108,46 @@ def test_synthetic_malformed_html_preserves_previous_snapshot(mutation: str) -> 
             with pytest.raises(ParseError):
                 await provider.refresh()
             assert provider.lines is previous
+
+    asyncio.run(scenario())
+
+
+_CURRENT_TEMPLATE_TABLE = """<table class="basic"><tbody>
+<tr><th>運行状況</th><td>一部の列車に運休</td></tr>
+<tr><th>原因</th><td><dl class="p-service-cause">
+<dt>発生時刻</dt><dd></dd><dt>場所</dt><dd>西武線</dd><dt>原因</dt><dd>線路内安全確認</dd>
+</dl></td></tr>
+<tr><th>運転再開見込み</th><td></td></tr>
+</tbody></table>"""
+
+
+@pytest.mark.parametrize("damage", [False, True])
+def test_synthetic_current_template_nested_causes_and_blank_fields(damage: bool) -> None:
+    # Mirrors the live table structure of 2026-11-14 (nested cause list, blank fields).
+    soup = BeautifulSoup(_html("20191012171120"), "html.parser")
+    table = soup.select_one("table.basic")
+    assert table is not None
+    table.replace_with(BeautifulSoup(_CURRENT_TEMPLATE_TABLE, "html.parser"))
+    if damage:
+        dd = soup.select_one(".p-service-cause dd")
+        assert dd is not None
+        dd.decompose()
+
+    async def scenario() -> None:
+        async with httpx.AsyncClient(transport=httpx.MockTransport(
+            lambda request: httpx.Response(200, text=str(soup)),
+        )) as client:
+            provider = MinatomiraiProvider(client=client)
+            if damage:
+                with pytest.raises(ParseError):
+                    await provider.refresh()
+                return
+            await provider.refresh()
+            assert provider.main.status is LineStatus.ALERT
+            alert, = provider.alerts
+            assert "場所：西武線" in alert.description
+            assert "原因：線路内安全確認" in alert.description
+            assert "発生時刻" not in alert.description and "運転再開見込み" not in alert.description
 
     asyncio.run(scenario())
 

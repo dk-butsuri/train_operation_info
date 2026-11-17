@@ -18,7 +18,9 @@ or partial suspension. Unknown CSS classes or contradictory normal notices
 are UNKNOWN. Missing/ambiguous structure raises ParseError atomically.
 
 The optional detail table is retained verbatim with labels, including incident
-occurrence time, cause and delay. Occurrence time is not an update timestamp;
+occurrence time, cause and delay. The current template (live 2026-11-14) nests
+発生時刻/場所/原因 as a dl inside 原因; each pair is expanded and blank fields
+are omitted. Occurrence time is not an update timestamp;
 updated_at is None. Current live normal HTML and all five captures are fixtures.
 Normal-after-incident tests use a separate normal capture, not same-event
 recovery evidence. Unknown/malformed cases are synthetic. Distinct suspension
@@ -101,10 +103,27 @@ def _parse(html: str, line: Line, fetched_at: datetime) -> tuple[Line, ...]:
             if len(headings) != 1 or len(values) != 1:
                 raise ParseError("Minatomirai detail row is malformed")
             key = headings[0].get_text(" ", strip=True)
-            value = values[0].get_text("\n", strip=True)
-            if not key or not value or key in details:
+            if not key:
                 raise ParseError("Minatomirai detail is empty or duplicated")
-            details[key] = value
+            # The current template nests 発生時刻/場所/原因 as a list inside 原因.
+            causes = values[0].select("dl")
+            pairs: list[tuple[str, str]] = []
+            for cause in causes:
+                terms, definitions = cause.select(":scope > dt"), cause.select(":scope > dd")
+                if not terms or len(terms) != len(definitions):
+                    raise ParseError("Minatomirai cause list is malformed")
+                pairs.extend(
+                    (term.get_text(" ", strip=True), definition.get_text("\n", strip=True))
+                    for term, definition in zip(terms, definitions)
+                )
+            if not causes:
+                pairs.append((key, values[0].get_text("\n", strip=True)))
+            for name, value in pairs:
+                if not name or name in details:
+                    raise ParseError("Minatomirai detail is empty or duplicated")
+                # The source leaves fields such as 発生時刻 blank while unknown.
+                if value:
+                    details[name] = value
 
     classes = set(notice.get_attribute_list("class"))
     if classes - {"info", "caution"}:
