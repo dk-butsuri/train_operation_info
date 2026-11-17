@@ -1242,7 +1242,8 @@ TER・Intercités・OUIGO Train Classique・DBブランドと確定できた案�
 列車別の案内では系統全体の遅延・運休は断定できないため、案内ありは
 `UNKNOWN`、対象内および未特定の案内がなければ`NORMAL`です。
 `NORMAL`はこのフィードの公表範囲内での案内なしを意味し、全列車の定時運転を
-保証しません。本文・詳細HTML・列車番号・Progress・Severityを保持し、
+保証しません。本文と詳細HTMLを文章にし、「Trains concernés : 8571」の形で列車番号を添えます。
+Progress・Severityは検証しますが本文には含めません。
 `effect=OTHER`、`timing=UNKNOWN`、`affected_line_ids=()`とします。
 Severityから運休・遅延を推測しません。ValidityPeriodは掲載期間として扱い、
 影響の開始・終了へ転用しません。`updated_at`はフィードのResponseTimestampです。

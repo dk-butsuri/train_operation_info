@@ -12,7 +12,8 @@ train-number ranges, route names or incident prose classify a service.
 
 TER/IC/ICN/OUIGO_TC/DBS brands are outside the declared scope; SNF, new brands,
 ambiguous joins and notices without a resolvable journey stay unclassified.
-Notice Summary/Description/Detail (French), Progress and Severity are kept.
+Notice Summary/Description/Detail (French) are kept as display text with the
+advertised train numbers; Progress and Severity are validated but not shown.
 Severity slight also occurs on cancellation notices: it is not an effect code.
 Individual-train notices cannot establish a whole-group delay or suspension:
 network UNKNOWN with OTHER alerts and affected_line_ids=(). NORMAL means only
@@ -41,7 +42,6 @@ from typing import Final
 import xml.etree.ElementTree as ET
 from zipfile import BadZipFile, ZipFile
 
-from bs4 import BeautifulSoup
 import httpx
 from pydantic import HttpUrl
 
@@ -50,7 +50,7 @@ from train_operation_info.models import (
     LINE_CATALOG, DataFormat, Line, LineId, LineStatus, ProviderId,
     ProviderMetadata, ServiceAlert, SourceEndpoint, UsagePermission,
 )
-from ..base import SnapshotProvider, make_alert, snapshot
+from ..base import SnapshotProvider, html_text, make_alert, snapshot
 
 _PAGE: Final = "https://transport.data.gouv.fr/datasets/horaires-sncf"
 _TIMETABLE: Final = "https://eu.ftp.opendatasoft.com/sncf/plandata/export-opendata-sncf-netex.zip"
@@ -217,28 +217,29 @@ def _parse(
         consequences = _one(notice, _S + "Consequences")
         journeys = consequences.findall(".//" + _S + "AffectedVehicleJourney")
         resolved: list[frozenset[bool | None]] = []
-        train_labels: list[str] = []
+        train_numbers: list[str] = []
         for journey in journeys:
             number = _text(_one(journey, _S + "VehicleJourneyRef"))
             operator = _text(_one(journey, _S + "Operator/" + _S + "OperatorRef"))
             resolved.append(scopes.get((operator, number), frozenset({None})))
-            train_labels.append(f"{operator}:{number}")
+            train_numbers.append(number)
         # Only an entirely proven out-of-scope target may be discarded.
         if resolved and all(value == frozenset({False}) for value in resolved):
             continue
         title = _french(notice, "Summary")
         description = _french(notice, "Description", required=False)
         detail = _french(notice, "Detail")
-        progress = _text(_one(notice, _S + "Progress"))
-        severity = _text(_one(notice, _S + "Severity"))
-        # Preserve source HTML (including links), alongside the plain description.
-        # There is no incident classification based on this text.
-        body = "\n\n".join(part for part in (
-            description, detail, "Trains: " + ", ".join(dict.fromkeys(train_labels))
-            if train_labels else "", f"Progress: {progress}; Severity: {severity}",
-        ) if part)
-        if not BeautifulSoup(detail, "html.parser").get_text(strip=True):
+        _text(_one(notice, _S + "Progress"))
+        _text(_one(notice, _S + "Severity"))
+        # Display text: the plain description and the HTML detail as laid-out text,
+        # then the advertised train numbers. There is no classification from it.
+        detail_text = html_text(detail)
+        if not detail_text:
             raise ParseError("TGV notice detail has no text")
+        body = "\n\n".join(part for part in (
+            "" if description and description in detail_text else description, detail_text,
+            "Trains concernés : " + ", ".join(dict.fromkeys(train_numbers)) if train_numbers else "",
+        ) if part)
         alerts.append(make_alert(
             line, LineStatus.ALERT, title, body, alert_id="tgv:" + identifier,
             affected_line_ids=(), language="fr",

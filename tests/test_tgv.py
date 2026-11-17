@@ -5,6 +5,7 @@ from datetime import datetime, timezone
 from hashlib import sha256
 from io import BytesIO
 import json
+import re
 from pathlib import Path
 from xml.sax.saxutils import escape
 from zipfile import ZipFile
@@ -265,5 +266,8 @@ def test_official_abnormal_capture_and_original_hashes() -> None:
     line, = _parse((_FIXTURES / "tgv_alerts_20261104.xml").read_bytes(), scopes, provider.network,
                    datetime(2026, 11, 4, 12, 43, 4, tzinfo=timezone.utc))
     assert line.status is LineStatus.UNKNOWN and line.alerts
-    assert any("1187:8571" in alert.description for alert in line.alerts)
+    assert any("Trains concernés : 8571" in alert.description for alert in line.alerts)
+    # "Le Havre <> Massy" is source wording; markup and internal fields are not.
+    assert not any(re.search(r"</?[a-zA-Z][^>]*>", alert.description) or "Severity" in alert.description
+                   for alert in line.alerts)
     assert all(alert.timing is AlertTiming.UNKNOWN for alert in line.alerts)
