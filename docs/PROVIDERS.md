@@ -238,7 +238,7 @@ print(tracker.jreast.tohoku_shinkansen.status)
 
 [公式運行情報](https://traininfo.jreast.co.jp/train_info/)の関東・東北・信越・新幹線の4ページから、86路線・系統の状態ラベルと本文を取得します。`yamanote`、`keihin_tohoku`、`chuo_rapid`、`chuo_sobu_local`、`saikyo`、`kawagoe`、`joban`、`joban_rapid`、`joban_local`、`koumi`、`tohoku_shinkansen` などを型付きプロパティで参照できます。全属性は `providers/jreast/provider.py` に静的に定義されています。東京モノレールは `tokyo_monorail`、BRTは `ofunato_brt`・`kesennuma_brt` です。運行会社は共通カタログの `Line.operator` を参照します。
 
-掲載基準は4時～翌2時の30分以上の遅れ・見込みで、BRTは長時間の運転見合わせが対象です。`NORMAL` はその基準による平常表示です。複数地域や同一路線の複数項目は統合し、平常の項目で別の障害を消しません。「一部運休」は `PARTIAL_SUSPENSION`、運転見合わせ中の「運転再開見込」は `SUSPENDED`、原文が運休に言及していても「お知らせ」は `ALERT` とします。取得元の区間別IDと範囲が異なる広域の項目は、既存のYahoo区間へ割り当てず別IDです。
+掲載基準は4時～翌2時の30分以上の遅れ・見込みで、BRTは長時間の運転見合わせが対象です。`NORMAL` はその基準による平常表示です。複数地域や同一路線の複数項目は統合し、平常の項目で別の障害を消しません。「一部運休」は `PARTIAL_SUSPENSION`、運転見合わせ中の「運転再開見込」と見合わせ表示の「運休」は `SUSPENDED`、遅延表示の「運転再開」（時刻付きを含む）は `DELAYED`、他線への「直通運転中止」は `ALERT`、原文が運休に言及していても「お知らせ」は `ALERT` とします。取得元の区間別IDと範囲が異なる広域の項目は、既存のYahoo区間へ割り当てず別IDです。
 
 地域ページの「現在」は配信日時ではないため `updated_at=None` とし、取得時刻は `fetched_at` に保持します。特急列車、路線一覧とは別の新幹線の列車別運休情報、別配信のお知らせ欄・PDF、詳細ページの更新履歴・配信時刻、遅延証明書は取得しません。未知の状態は原文付きの `UNKNOWN`、路線・必須項目の欠落は `ParseError` とし、失敗時は前回の結果を保持します。ただし2時～4時に路線一覧がすべて消え「情報提供時間は4:00～翌2:00となっています。」だけが表示されるページは、取得失敗ではなく、そのエリアの全路線を `UNKNOWN`（情報提供時間外）とします。
 

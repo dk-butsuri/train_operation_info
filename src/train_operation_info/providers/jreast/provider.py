@@ -294,11 +294,17 @@ def _status(label: str, markers: tuple[str, ...]) -> LineStatus:
             return LineStatus.DELAYED
         if text == "一部運休":
             return LineStatus.PARTIAL_SUSPENSION
-    if markers == ("adjust",) and re.fullmatch(
+        # Resumed, with the delay class: trains run late after the reopening.
+        if re.fullmatch(r"(?:\d{1,2}時(?:\d{1,2}分)?頃?)?運転再開", text):
+            return LineStatus.DELAYED
+    if markers == ("adjust",) and (text == "運休" or re.fullmatch(
         r"(?:\d{1,2}時(?:\d{1,2}分)?頃?)?(?:運転見合わせ|運転再開見込)", text,
-    ):
+    )):
         return LineStatus.SUSPENDED
     if markers == ("info",) and text == "お知らせ":
+        return LineStatus.ALERT
+    # Through service to another line is cancelled; the route itself still runs.
+    if markers == ("stopdirect",) and text == "直通運転中止":
         return LineStatus.ALERT
     return LineStatus.UNKNOWN
 

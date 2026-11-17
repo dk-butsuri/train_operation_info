@@ -127,8 +127,25 @@ def test_synthetic_recovery_clears_old_alerts_and_keeps_source_state_independent
     asyncio.run(scenario())
 
 
+@pytest.mark.parametrize(("label", "marker", "expected"), [
+    # Label/class pairs observed in live captures (2026-11-07..17).
+    ("運休", "adjust", LineStatus.SUSPENDED),
+    ("１８時１０分頃 運転再開", "delay", LineStatus.DELAYED),
+    ("運転再開", "delay", LineStatus.DELAYED),
+    ("直通運転中止", "stopdirect", LineStatus.ALERT),
+])
+def test_synthetic_observed_labels(label: str, marker: str, expected: LineStatus) -> None:
+    soup = BeautifulSoup(_fixture("kanto"), "html.parser")
+    status = _row(soup, "yokosukaline").select_one(".traininfo-routes__status")
+    assert status is not None
+    status["class"] = f"traininfo-routes__status {marker}"
+    status.string = label
+    report = next(row for row in _parse_area(str(soup), "kanto") if row.source_id == "yokosukaline")
+    assert report.status is expected
+
+
 @pytest.mark.parametrize(("label", "marker"), [
-    ("未知の表示", "delay"), ("遅延", "new-marker"),
+    ("未知の表示", "delay"), ("遅延", "new-marker"), ("運休", "delay"), ("直通運転中止", "info"),
     ("平常運転", "delay"), ("運転再開", "adjust"),
 ])
 def test_synthetic_unknown_status_keeps_original(label: str, marker: str) -> None:
